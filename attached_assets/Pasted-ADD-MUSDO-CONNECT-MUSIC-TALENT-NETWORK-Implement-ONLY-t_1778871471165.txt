@@ -1,0 +1,368 @@
+ADD MUSDO CONNECT — MUSIC TALENT NETWORK
+
+Implement ONLY this module:
+MUSDO Connect, a premium talent marketplace where artists, composers, producers, labels and managers can discover, filter, contact and request music professionals.
+
+Do NOT rebuild the whole app.
+Do NOT redesign the whole app.
+Do NOT delete existing pages.
+Use mock data first.
+Prepare Supabase-ready types/tables.
+Stop after the app compiles.
+Show changed files only.
+
+NAME:
+MUSDO Connect
+
+PURPOSE:
+MUSDO Connect helps users find and contact real music professionals for recording sessions, live performances, production, arrangements, mixing, mastering, songwriting, visual content and studio work.
+
+IMPORTANT LEGAL POSITION:
+MUSDO is a connection platform, not an employer, booking agency, payroll company, manager, label or legal representative.
+
+MUSDO does NOT guarantee:
+- work quality
+- payments
+- project completion
+- legal outcomes
+- hiring success
+- availability
+- delivery deadlines
+- copyright clearance
+- user agreements
+
+Users are responsible for:
+- contracts
+- payment terms
+- session expectations
+- project delivery
+- copyright ownership
+- written agreements
+- tax responsibilities
+- disputes between each other
+
+Add clear disclaimer:
+“Professional collaborations should use written agreements. MUSDO provides connection tools only and does not replace legal, financial or management advice.”
+
+━━━━━━━━━━━━━━━━━━━━
+TALENT TYPES
+━━━━━━━━━━━━━━━━━━━━
+
+Include talent categories:
+
+- Vocalist
+- Composer / Songwriter
+- Producer
+- Arranger
+- Mixing Engineer
+- Mastering Engineer
+- Guitarist
+- Pianist
+- Bassist
+- Drummer
+- Tambora Player
+- Percussionist
+- Trumpet Player
+- Saxophonist
+- Violinist
+- DJ
+- Background Vocalist
+- Session Musician
+- Studio Owner
+- Videographer
+- Cover Designer
+- Music Director
+- Live Band
+- Choir / Background Vocal Group
+- Beatmaker
+- Audio Editor
+
+━━━━━━━━━━━━━━━━━━━━
+TALENT PROFILE SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Talent profiles must include:
+
+Public fields:
+- professional/stage name
+- profile photo
+- bio
+- city/location
+- languages
+- instruments
+- skills
+- genres
+- years of experience
+- reads sheet music yes/no
+- plays by ear yes/no
+- remote available yes/no
+- studio available yes/no
+- live performance available yes/no
+- availability status
+- response time mock
+- portfolio links
+- demo audio/video links
+- social links
+- verified status
+- hourly rate optional
+- project rate optional
+- service packages optional
+
+Private fields:
+- real legal name
+- private email
+- private phone
+- verification documents
+- payment details placeholder
+
+RULE:
+Public profiles show professional/stage name only.
+Legal/private identity stays hidden.
+
+━━━━━━━━━━━━━━━━━━━━
+AVAILABILITY BADGES
+━━━━━━━━━━━━━━━━━━━━
+
+Add premium badges:
+
+- Available Now
+- In Studio Today
+- Remote Ready
+- Live Ready
+- Fast Response
+- Verified Musician
+- Reads Music
+- Plays By Ear
+- Touring Experience
+- Studio Certified
+
+━━━━━━━━━━━━━━━━━━━━
+DISCOVERY SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Create /talent page with search and filters:
+
+Search/filter by:
+- instrument
+- genre
+- location
+- verified status
+- remote availability
+- live availability
+- available now
+- experience years
+- language
+- rate range
+- service type
+- rating mock
+- response time
+
+Add:
+- featured talent section
+- recommended talent section
+- recently viewed mock
+- saved talent mock
+
+━━━━━━━━━━━━━━━━━━━━
+PAGES
+━━━━━━━━━━━━━━━━━━━━
+
+Create pages/routes:
+
+- /talent
+- /talent/:id
+- /talent/register
+- /talent-dashboard
+- /talent-requests
+- /saved-talent
+
+━━━━━━━━━━━━━━━━━━━━
+BOOKING / REQUEST FLOW
+━━━━━━━━━━━━━━━━━━━━
+
+Create lightweight request workflow.
+
+Artist can send:
+
+- collaboration request
+- studio session request
+- remote recording request
+- live performance request
+- beat request
+- arrangement request
+- mixing/mastering request
+- songwriting request
+
+Request form fields:
+- project type
+- instrument/service needed
+- budget
+- session date
+- session time
+- location or remote
+- project notes
+- demo attachment placeholder
+- deadline
+- contact preference
+
+Request status:
+- Draft
+- Sent
+- Viewed
+- Accepted
+- Declined
+- In Progress
+- Completed
+- Cancelled
+
+━━━━━━━━━━━━━━━━━━━━
+PAYMENT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━
+
+Do NOT build real payments yet.
+
+Create future-ready payment mock:
+
+- payment status mock
+- deposit placeholder
+- final payment placeholder
+- completion approval placeholder
+- invoice placeholder
+- payout placeholder
+- dispute placeholder
+
+Future payment architecture notes:
+- Stripe Connect compatible
+- escrow-compatible
+- deposit-ready
+- payout-ready
+- invoice-ready
+
+Suggested future workflow:
+1. Artist sends request.
+2. Talent accepts.
+3. Artist pays deposit.
+4. Work is completed.
+5. Artist approves delivery.
+6. Final payment is released.
+
+IMPORTANT:
+For MVP, show payment as mock only.
+
+━━━━━━━━━━━━━━━━━━━━
+CONTACT SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Add buttons:
+
+- Message
+- Request Session
+- Request Quote
+- Save Talent
+- View Portfolio
+
+Talent can choose contact mode:
+- in-app only
+- show email
+- show social links
+- show phone optional
+
+Default should be in-app contact for privacy.
+
+━━━━━━━━━━━━━━━━━━━━
+DESIGN
+━━━━━━━━━━━━━━━━━━━━
+
+Use MUSDO design language:
+
+- dark luxury
+- OLED black
+- premium talent cards
+- cinematic profile pages
+- elegant typography
+- glassmorphism
+- skill chips
+- availability badges
+- verified badges
+- mobile-first
+- fast contact workflow
+- no clutter
+- no freelancer-site chaos
+
+The experience should feel:
+- premium
+- musical
+- professional
+- fast
+- trustworthy
+- human
+
+━━━━━━━━━━━━━━━━━━━━
+SUPABASE READY TYPES / MOCK TABLES
+━━━━━━━━━━━━━━━━━━━━
+
+Prepare frontend types for:
+
+talent_profiles:
+- id
+- user_id
+- stage_name
+- legal_name_private
+- profile_photo
+- bio
+- location
+- languages
+- instruments
+- skills
+- genres
+- years_experience
+- reads_music
+- plays_by_ear
+- remote_available
+- studio_available
+- live_available
+- availability_status
+- response_time
+- portfolio_links
+- demo_links
+- social_links
+- verified_status
+- hourly_rate
+- project_rate
+- created_at
+
+talent_requests:
+- id
+- requester_id
+- talent_id
+- project_type
+- service_needed
+- budget
+- date
+- time
+- location
+- remote
+- notes
+- deadline
+- status
+- created_at
+
+saved_talent:
+- id
+- user_id
+- talent_id
+- created_at
+
+Use mock data if these tables do not exist yet.
+
+━━━━━━━━━━━━━━━━━━━━
+FINAL GOAL
+━━━━━━━━━━━━━━━━━━━━
+
+MUSDO Connect should feel like the fastest and most premium way for artists to find real musicians, producers, arrangers, engineers and creative professionals.
+
+It must be simple:
+Search → View profile → Request session → Connect.
+
+Do not overcomplicate.
+Stop after compile.

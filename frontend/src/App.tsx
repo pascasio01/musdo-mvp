@@ -39,6 +39,13 @@ import RiskDisclaimer from './pages/legal/RiskDisclaimer'
 import OwnerDashboard from './pages/owner/OwnerDashboard'
 import AdminDashboard from './pages/admin/AdminDashboard'
 
+import Talent from './pages/Talent'
+import TalentProfile from './pages/TalentProfile'
+import TalentRegister from './pages/TalentRegister'
+import TalentDashboard from './pages/TalentDashboard'
+import TalentRequests from './pages/TalentRequests'
+import SavedTalent from './pages/SavedTalent'
+
 export default function App() {
   return (
     <AuthProvider>
@@ -83,6 +90,14 @@ export default function App() {
             <Route path="/verify" element={<ProtectedRoute><Verify /></ProtectedRoute>} />
             <Route path="/security" element={<ProtectedRoute><SecurityCenter /></ProtectedRoute>} />
             <Route path="/audit-log" element={<ProtectedRoute><AuditLog /></ProtectedRoute>} />
+
+            {/* MUSDO Connect */}
+            <Route path="/talent" element={<Talent />} />
+            <Route path="/talent/register" element={<TalentRegister />} />
+            <Route path="/talent/:id" element={<TalentProfile />} />
+            <Route path="/talent-dashboard" element={<ProtectedRoute><TalentDashboard /></ProtectedRoute>} />
+            <Route path="/talent-requests" element={<ProtectedRoute><TalentRequests /></ProtectedRoute>} />
+            <Route path="/saved-talent" element={<ProtectedRoute><SavedTalent /></ProtectedRoute>} />
 
             {/* Owner-only */}
             <Route path="/owner" element={<ProtectedRoute requireOwner><OwnerDashboard /></ProtectedRoute>} />
