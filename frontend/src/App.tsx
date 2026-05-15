@@ -1,21 +1,40 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider } from './lib/auth'
+import { PlayerProvider } from './lib/player'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Player from './pages/Player'
+import Vault from './pages/Vault'
+import Upload from './pages/Upload'
+import Market from './pages/Market'
+import SongPassport from './pages/SongPassport'
+import Profile from './pages/Profile'
+import Dashboard from './pages/Dashboard'
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="backdrop-blur-xl bg-white/10 border border-white/10 rounded-3xl p-10 w-[90%] max-w-md shadow-2xl">
-        
-        <h1 className="text-4xl font-bold mb-4">
-          MUSDO
-        </h1>
-
-        <p className="text-zinc-400 mb-8">
-          Human music platform for composers.
-        </p>
-
-        <button className="w-full py-3 rounded-2xl bg-white text-black font-semibold hover:opacity-90 transition">
-          Enter Platform
-        </button>
-
-      </div>
-    </div>
+    <AuthProvider>
+      <PlayerProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/player/:id" element={<Player />} />
+            <Route path="/vault" element={<Vault />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/market" element={<Market />} />
+            <Route path="/song/:id" element={<Player />} />
+            <Route path="/passport/:id" element={<SongPassport />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </PlayerProvider>
+    </AuthProvider>
   )
 }

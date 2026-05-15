@@ -1,0 +1,174 @@
+EXTRAS CRÍTICOS QUE NO DEBEN OLVIDARSE:
+
+Actúa como Senior Full-Stack Architect, Senior Product Designer y Creative CTO.
+
+Construye MUSDO MVP, una plataforma musical premium creada por Pascasio Emmanuel Reynoso Reyes.
+
+NO quiero una plantilla básica.
+NO quiero diseño genérico.
+NO quiero copia visual de Spotify pero si hacerlo mejor y más moderna y actualizada.
+Quiero una app premium, elegante, moderna, mobile-first, con arquitectura real, código limpio y experiencia tipo app nativa.
+
+PROYECTO:
+MUSDO
+
+CONCEPTO:
+MUSDO es una plataforma musical superior donde oyentes descubren música, compositores protegen y venden letras/demos, y artistas pueden solicitar licencias de canciones humanas verificadas.
+
+STACK:
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- React Router
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Supabase Storage
+
+SUPABASE:
+VITE_SUPABASE_URL=https://ykueethgvubvpdqsuthp.supabase.co
+
+VITE_SUPABASE_ANON_KEY=TU_ANON_KEY_AQUI
+
+DISEÑO:
+- Dark luxury
+- Fondo negro OLED
+- Glassmorphism premium
+- Cards con blur suave
+- Bordes finos transparentes
+- Sombras elegantes
+- Animaciones suaves
+- Mobile-first
+- Nada verde Spotify
+- Nada parecido directamente a Spotify
+- Nada infantil
+- Nada básico
+- Estética: música premium + estudio creativo + marketplace moderno
+
+ARQUITECTURA:
+Usa estructura limpia:
+
+src/components
+src/pages
+src/layouts
+src/lib
+src/types
+src/data
+src/styles
+
+Crear:
+src/lib/supabase.ts
+
+Usar tablas existentes:
+- profiles
+- songs
+- licenses
+- comments
+- playlists
+
+PÁGINAS:
+- Landing
+- Login
+- Register
+- Home
+- Player
+- Vault
+- Upload
+- Marketplace
+- Song Passport
+- Profile
+- Dashboard
+
+FUNCIONES:
+- Auth real con Supabase
+- Upload de demos
+- Upload de covers
+- Marketplace de licencias
+- Human Verified badge
+- Mini player fijo abajo
+- Mobile navigation premium
+- Dashboard para compositores
+- Song Passport con ownership proof
+
+COMPONENTES:
+- AppShell
+- BottomNav
+- MusicCard
+- ComposerCard
+- PlayerBar
+- GlassCard
+- UploadForm
+- LicenseRequestModal
+- SongPassportCard
+
+RUTAS:
+/
+/login
+/register
+/home
+/player/:id
+/vault
+/upload
+/market
+/song/:id
+/passport/:id
+/profile
+/dashboard
+
+REGLAS:
+- No pongas todo en App.tsx
+- Usa TypeScript limpio
+- Usa componentes separados
+- No borres:
+README.md
+PROJECT.md
+ROADMAP.md
+UI-CONCEPT.md
+SYSTEM-ARCHITECTURE.md
+DATABASE-SCHEMA.md
+
+PRIORIDAD:
+1. Que compile sin errores
+2. Que se vea premium
+3. Que conecte con Supabase
+4. Que tenga Home, Vault, Upload, Market y Player funcionales
+5. Que parezca una startup real de music-tech creada por Pascasio Emmanuel Reynoso Reyes
+
+Construye el MVP completo ahora.
+No hagas demo escolar.
+No uses diseño genérico.
+No copies Spotify.
+
+1. MUSDO debe tener dos mundos conectados:
+- Listener Mode: escuchar, descubrir, playlists, library, player.
+- Creator Mode: compositores, demos, letras, licencias, Song Passport, Vault.
+
+2. La app debe incluir visión futura aunque no todo se programe ahora:
+- audio lossless futuro
+- Studio View
+- créditos completos
+- gráfico de colaboradores / credits graph
+- user-centric payouts
+- direct-to-composer economy
+- offline mode futuro
+- premium native mobile feeling
+
+3. No modificar canciones comerciales por defecto.
+El audio adaptativo futuro debe aplicarse solo a demos propios, previews o contenido con permiso.
+
+4. MUSDO debe posicionarse como:
+“The human music infrastructure where songs are protected, discovered and licensed.”
+
+5. El MVP debe priorizar:
+- Composer Vault
+- Upload Lyrics
+- Upload Demo
+- Song Passport
+- Marketplace
+- Request License
+- Profile
+- Player
+
+IMPORTANTE DE COSTO:
+Trabaja en una sola pasada estable. No entres en loops infinitos. No regeneres todo varias veces. Si hay un error, corrige solo lo necesario. Detente cuando el MVP compile y muéstrame los cambios realizados.
