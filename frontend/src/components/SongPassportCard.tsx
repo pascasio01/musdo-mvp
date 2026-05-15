@@ -1,5 +1,6 @@
-import { BadgeCheck, Shield, Clock, Fingerprint, QrCode } from 'lucide-react'
+import { Shield, Clock, Fingerprint, QrCode } from 'lucide-react'
 import type { Song } from '../types'
+import VerificationBadge, { VerificationBadgeRow } from './VerificationBadge'
 
 interface SongPassportCardProps {
   song: Song
@@ -30,15 +31,17 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
               : <div className="w-full h-full bg-gradient-to-br from-violet-900 to-zinc-800" />
             }
           </div>
-          <div>
+          <div className="flex-1 min-w-0">
             <h2 className="text-white font-bold text-2xl leading-tight">{song.title}</h2>
             <p className="text-zinc-400 text-sm mt-0.5">{song.artist_name}</p>
-            {song.human_verified && (
-              <div className="flex items-center gap-1.5 mt-2">
-                <BadgeCheck size={14} className="text-blue-400" />
-                <span className="text-xs font-semibold text-blue-400">Human Verified</span>
-              </div>
-            )}
+            <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+              {song.human_verified && (
+                <VerificationBadge type="human_verified" size="xs" showLabel />
+              )}
+              {song.verified_rights_holder && (
+                <VerificationBadge type="verified_rights_holder" size="xs" showLabel />
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -88,6 +91,18 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
             </div>
           </div>
         </div>
+
+        {(song.human_verified || song.verified_rights_holder) && (
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <p className="text-[10px] text-zinc-600 uppercase tracking-wider mb-3">Verification Badges</p>
+            <VerificationBadgeRow
+              human_verified={song.human_verified}
+              verified_rights_holder={song.verified_rights_holder}
+              size="sm"
+              className="flex-wrap gap-2"
+            />
+          </div>
+        )}
 
         <div className="rounded-2xl bg-violet-950/30 border border-violet-500/20 p-4 flex items-center gap-4">
           <QrCode size={40} className="text-violet-400 flex-shrink-0" />

@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause, SkipBack, SkipForward, Repeat, Shuffle, BadgeCheck, Shield } from 'lucide-react'
+import { ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause, SkipBack, SkipForward, Repeat, Shuffle, Shield } from 'lucide-react'
 import { usePlayer } from '../lib/player'
 import { mockSongs } from '../data/mockData'
 import { useEffect, useState } from 'react'
 import type { Song } from '../types'
+import VerificationBadge, { VerificationBadgeRow } from '../components/VerificationBadge'
 
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60)
@@ -68,9 +69,8 @@ export default function Player() {
               : <div className="w-full h-full bg-gradient-to-br from-violet-900 via-zinc-800 to-black" />
             }
             {song.human_verified && (
-              <div className="absolute top-4 right-4 flex items-center gap-1.5 text-xs font-bold text-blue-400 bg-black/60 backdrop-blur-sm border border-blue-400/30 rounded-full px-3 py-1.5">
-                <BadgeCheck size={13} />
-                Human Verified
+              <div className="absolute top-4 right-4">
+                <VerificationBadge type="human_verified" size="sm" showLabel />
               </div>
             )}
           </div>
@@ -78,7 +78,14 @@ export default function Player() {
           <div className="flex items-start justify-between mb-6">
             <div className="flex-1 min-w-0">
               <h1 className="text-white font-black text-3xl leading-tight truncate">{song.title}</h1>
-              <p className="text-zinc-400 mt-1">{song.artist_name}</p>
+              <div className="flex items-center gap-2 mt-1">
+                <p className="text-zinc-400">{song.artist_name}</p>
+                <VerificationBadgeRow
+                  verified_artist
+                  verified_composer={song.verified_rights_holder}
+                  size="xs"
+                />
+              </div>
               <div className="flex items-center gap-2 mt-2">
                 <span className="text-[11px] text-zinc-600 bg-white/5 rounded-full px-2.5 py-0.5 border border-white/10">{song.genre}</span>
                 {song.bpm && <span className="text-[11px] text-zinc-600">{song.bpm} BPM</span>}

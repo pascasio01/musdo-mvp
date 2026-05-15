@@ -1,14 +1,36 @@
-export interface Profile {
+export type AppRole = 'listener' | 'composer' | 'producer' | 'admin' | 'supreme_owner'
+
+export type VerificationStatus = 'none' | 'pending' | 'approved' | 'rejected'
+
+export type BadgeType =
+  | 'verified_artist'
+  | 'verified_composer'
+  | 'human_verified'
+  | 'verified_rights_holder'
+  | 'label_verified'
+
+export interface VerificationFields {
+  verified_artist?: boolean
+  verified_composer?: boolean
+  verified_rights_holder?: boolean
+  human_verified?: boolean
+  label_verified?: boolean
+  verification_status?: VerificationStatus
+  verification_level?: number
+}
+
+export interface Profile extends VerificationFields {
   id: string
   username: string
   email: string
-  role: 'listener' | 'composer' | 'producer' | 'admin'
+  role: AppRole
+  sub_role?: string
   avatar_url?: string
   bio?: string
-  created_at: string
+  created_at?: string
 }
 
-export interface Song {
+export interface Song extends VerificationFields {
   id: string
   title: string
   artist_name: string
@@ -20,7 +42,6 @@ export interface Song {
   artwork_url?: string
   owner_id: string
   created_at: string
-  human_verified?: boolean
 }
 
 export interface License {
@@ -58,4 +79,15 @@ export interface PlayerState {
   isPlaying: boolean
   progress: number
   volume: number
+}
+
+export interface VerificationRequest {
+  id: string
+  user_id: string
+  username: string
+  badge_type: BadgeType
+  status: VerificationStatus
+  submitted_at: string
+  reviewed_at?: string
+  notes?: string
 }

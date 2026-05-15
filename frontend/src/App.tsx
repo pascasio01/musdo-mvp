@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import ForgotPassword from './pages/ForgotPassword'
 import Home from './pages/Home'
 import Player from './pages/Player'
 import Vault from './pages/Vault'
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Legal */}
             <Route path="/legal" element={<Legal />} />

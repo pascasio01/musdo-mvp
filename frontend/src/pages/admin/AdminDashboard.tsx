@@ -1,7 +1,8 @@
-import { ArrowLeft, Users, BadgeCheck, Music, ShoppingBag, AlertTriangle, CheckCircle, XCircle, MoreVertical, Search } from 'lucide-react'
+import { ArrowLeft, Users, BadgeCheck, Music, ShoppingBag, AlertTriangle, MoreVertical, Search } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import AppShell from '../../layouts/AppShell'
+import AdminVerificationQueue from '../../components/AdminVerificationQueue'
 
 const mockUsers = [
   { id: 'u001', name: 'Pascasio Emmanuel', role: 'composer', status: 'active', verified: true },
@@ -9,12 +10,6 @@ const mockUsers = [
   { id: 'u003', name: 'Carlos Beats', role: 'producer', status: 'active', verified: true },
   { id: 'u004', name: 'user_4492', role: 'listener', status: 'suspended', verified: false },
   { id: 'u005', name: 'AnaBeats', role: 'composer', status: 'active', verified: false },
-]
-
-const pendingVerifications = [
-  { id: 'v001', name: 'Diego M.', role: 'Composer', submitted: '2d ago' },
-  { id: 'v002', name: 'Lucia R.', role: 'Recording Artist', submitted: '3d ago' },
-  { id: 'v003', name: 'SoundHouse DR', role: 'Label', submitted: '5d ago' },
 ]
 
 const tabs = ['Users', 'Verifications', 'Marketplace', 'Content']
@@ -121,30 +116,7 @@ export default function AdminDashboard() {
         )}
 
         {activeTab === 'Verifications' && (
-          <div className="space-y-3">
-            {pendingVerifications.map(v => (
-              <div key={v.id} className="rounded-2xl bg-white/5 border border-white/10 p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <p className="text-white font-semibold">{v.name}</p>
-                    <p className="text-zinc-500 text-xs">{v.role} · Submitted {v.submitted}</p>
-                  </div>
-                  <span className="text-amber-400 text-[10px] font-bold bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-1">PENDING</span>
-                </div>
-                <div className="flex gap-2">
-                  <button className="flex-1 py-2.5 rounded-xl bg-green-600/20 border border-green-500/30 text-green-400 text-xs font-bold flex items-center justify-center gap-1 hover:bg-green-600/30 transition-colors">
-                    <CheckCircle size={13} /> Approve
-                  </button>
-                  <button className="flex-1 py-2.5 rounded-xl bg-red-600/10 border border-red-500/20 text-red-400 text-xs font-bold flex items-center justify-center gap-1 hover:bg-red-600/20 transition-colors">
-                    <XCircle size={13} /> Reject
-                  </button>
-                  <button className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 text-xs font-bold hover:bg-white/10 transition-colors">
-                    Review
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <AdminVerificationQueue />
         )}
 
         {activeTab === 'Marketplace' && (

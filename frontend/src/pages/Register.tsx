@@ -25,12 +25,16 @@ export default function Register() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await signUp(email, password, username)
+    const { error } = await signUp(email, password, username, role)
     setLoading(false)
     if (error) {
       setError(error.message)
     } else {
-      navigate('/home')
+      if (role === 'composer' || role === 'producer') {
+        navigate('/vault')
+      } else {
+        navigate('/home')
+      }
     }
   }
 
@@ -117,7 +121,7 @@ export default function Register() {
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="composer@email.com"
+                  placeholder="you@email.com"
                   required
                   className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 transition-all"
                 />

@@ -1,0 +1,197 @@
+MUSDO PHASE — AUTH FIX + VERIFIED BADGE SYSTEM
+
+Implement ONLY these two systems:
+1. Real Supabase Authentication
+2. MUSDO Verified Badge System
+
+Do NOT rebuild the whole app.
+Do NOT redesign the whole app.
+Do NOT delete existing pages.
+Do NOT expose secrets.
+Do NOT expose owner identity publicly.
+Do NOT hardcode passwords.
+Do NOT use service_role key in frontend.
+Stop after the app compiles successfully.
+Show changed files only.
+
+━━━━━━━━━━━━━━━━━━━━
+PART 1 — FIX MUSDO AUTHENTICATION
+━━━━━━━━━━━━━━━━━━━━
+
+The current login UI may not be connected correctly to Supabase Auth.
+
+Tasks:
+- verify Supabase Auth integration
+- verify src/lib/supabase.ts
+- verify environment variables:
+  VITE_SUPABASE_URL
+  VITE_SUPABASE_ANON_KEY
+- verify login flow
+- verify register/signup flow
+- verify forgot password flow
+- verify logout flow
+- verify session restore on refresh
+- verify protected routes
+- verify redirect after login
+- verify auth persistence
+
+Create or fix:
+- AuthProvider
+- useAuth hook
+- ProtectedRoute
+- Login page
+- Register page
+- ForgotPassword page
+- Logout action
+- Profile sync logic
+
+Use:
+- Supabase Auth
+- real auth sessions
+- profiles table sync
+
+When a new user registers:
+- create Supabase Auth user
+- create profile row in profiles table
+- assign default role = listener
+- allow user to choose Listener Mode or Creator Mode during onboarding
+- save role and sub_role in profiles table if columns exist
+- if columns are missing, prepare code safely without breaking app
+
+OWNER ROLE LOGIC:
+If the authenticated user email is:
+pascasio01@gmail.com
+
+Assign internal role:
+supreme_owner
+
+IMPORTANT:
+- Do NOT expose owner email publicly in the UI.
+- Do NOT show owner legal name publicly.
+- Do NOT store passwords in code.
+- Owner logic should be internal only.
+- If profile row does not exist after login, create it automatically.
+- Preserve user email.
+- Assign role correctly.
+
+After login:
+- listener redirects to /home
+- creator redirects to /creator-dashboard or /vault
+- supreme_owner redirects to /owner
+
+━━━━━━━━━━━━━━━━━━━━
+PART 2 — MUSDO VERIFIED BADGE SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Create a premium verification badge system for MUSDO.
+
+VERIFIED BADGE VISUAL SYSTEM:
+Design MUSDO verification badges inspired by premium music platforms, but with original identity.
+
+Style:
+- minimal
+- premium
+- cinematic
+- dark luxury
+- elegant
+- subtle glow
+- clean typography
+- usable in small sizes
+
+DO NOT:
+- copy Spotify exactly
+- use cartoon badges
+- use gamer neon
+- use oversized glowing effects
+
+Badge colors:
+- Verified Artist → silver-blue
+- Verified Composer → platinum
+- Human Verified → soft emerald
+- Rights Holder Verified → gold
+- Label Verified → deep violet
+
+Badges:
+
+1. MUSDO Verified Artist
+- confirms artist identity
+- shown on public artist profiles
+- premium blue/silver check badge
+
+2. MUSDO Verified Composer
+- confirms songwriter/composer identity
+- shown on composer profiles and Song Passport
+
+3. Rights Holder Verified
+- confirms the user claims and provides proof of rights to sell/license music
+- required before publishing songs to licensing marketplace
+
+4. Human Verified
+- confirms the song/demo/lyrics passed human-creation review
+- shown on songs, player, marketplace and Song Passport
+
+5. Label Verified
+- confirms manager, label or publisher authorization
+- requires authorization proof
+
+Rules:
+- Do not show legal name publicly.
+- Public profiles show artist name + badge only.
+- Legal verification documents remain private.
+- Only owner/admin can approve verification.
+- Verification review does not guarantee legal ownership.
+- Rights Holder Verified is required for licensing marketplace.
+- Verification actions must be logged in audit logs when audit system exists.
+
+Badge behavior:
+- visible beside artist/composer name
+- visible on player
+- visible on profile header
+- visible on marketplace cards
+- visible on Song Passport
+- visible on creator dashboard
+
+Public display examples:
+Artist Name ✔
+MUSDO Verified Artist ✔
+Verified by MUSDO
+
+Keep subtitles subtle and elegant.
+
+Add hover/click state:
+- small verification modal/card
+- explains verification type
+- does not expose legal identity
+
+Add or update:
+- VerificationBadge component
+- VerificationTooltip component
+- VerificationStatusModal component
+- BadgeLegend component
+- VerificationStatusCard component
+- VerificationRequestPage
+- AdminVerificationQueue
+- verification mock data
+- verification status fields/types
+
+Suggested fields:
+- verification_status
+- verification_level
+- verified_artist
+- verified_composer
+- verified_rights_holder
+- human_verified
+- label_verified
+
+If database columns do not exist:
+- use safe mock fallback
+- do not break app
+- prepare Supabase-ready types/comments
+
+FINAL REQUIREMENTS:
+- App must compile.
+- Auth must use real Supabase Auth.
+- Badges must display cleanly across profile, marketplace, player and Song Passport.
+- No secrets exposed.
+- No passwords hardcoded.
+- Stop after successful build.

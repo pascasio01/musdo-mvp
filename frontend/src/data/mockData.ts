@@ -1,4 +1,4 @@
-import type { Song, License, Demo } from '../types'
+import type { Song, License, Demo, Profile, VerificationRequest } from '../types'
 
 export const mockSongs: Song[] = [
   {
@@ -13,6 +13,7 @@ export const mockSongs: Song[] = [
     owner_id: 'user-1',
     created_at: '2026-01-15T10:00:00Z',
     human_verified: true,
+    verified_rights_holder: true,
   },
   {
     id: '2',
@@ -26,6 +27,7 @@ export const mockSongs: Song[] = [
     owner_id: 'user-1',
     created_at: '2026-02-10T10:00:00Z',
     human_verified: true,
+    verified_rights_holder: true,
   },
   {
     id: '3',
@@ -39,6 +41,7 @@ export const mockSongs: Song[] = [
     owner_id: 'user-1',
     created_at: '2026-03-05T10:00:00Z',
     human_verified: false,
+    verified_rights_holder: false,
   },
   {
     id: '4',
@@ -52,6 +55,7 @@ export const mockSongs: Song[] = [
     owner_id: 'user-1',
     created_at: '2026-03-20T10:00:00Z',
     human_verified: true,
+    verified_rights_holder: true,
   },
   {
     id: '5',
@@ -65,6 +69,7 @@ export const mockSongs: Song[] = [
     owner_id: 'user-1',
     created_at: '2026-04-01T10:00:00Z',
     human_verified: false,
+    verified_rights_holder: false,
   },
 ]
 
@@ -135,5 +140,63 @@ export const mockDemos: Demo[] = [
     notes: 'Early idea, 60 BPM',
     visibility: 'private',
     created_at: '2026-04-10T10:00:00Z',
+  },
+]
+
+export const mockProfile: Profile = {
+  id: 'user-1',
+  username: 'Pascasio Emmanuel',
+  email: 'demo@musdo.com',
+  role: 'composer',
+  sub_role: 'songwriter',
+  bio: 'Compositor dominicano especializado en bachata moderna y Latin Pop.',
+  verified_artist: true,
+  verified_composer: true,
+  verified_rights_holder: true,
+  human_verified: false,
+  label_verified: false,
+  verification_status: 'approved',
+  verification_level: 3,
+  created_at: '2026-01-01T00:00:00Z',
+}
+
+export const mockVerificationQueue: VerificationRequest[] = [
+  {
+    id: 'vr1',
+    user_id: 'user-2',
+    username: 'ArtistAlpha',
+    badge_type: 'verified_artist',
+    status: 'pending',
+    submitted_at: '2026-05-10T08:00:00Z',
+    notes: 'Submitted ID and social proof.',
+  },
+  {
+    id: 'vr2',
+    user_id: 'user-3',
+    username: 'ComposerBeta',
+    badge_type: 'verified_composer',
+    status: 'pending',
+    submitted_at: '2026-05-12T14:30:00Z',
+    notes: 'PRO affiliation provided.',
+  },
+  {
+    id: 'vr3',
+    user_id: 'user-4',
+    username: 'ProducerGamma',
+    badge_type: 'verified_rights_holder',
+    status: 'approved',
+    submitted_at: '2026-05-05T09:00:00Z',
+    reviewed_at: '2026-05-07T11:00:00Z',
+    notes: 'Rights documents verified.',
+  },
+  {
+    id: 'vr4',
+    user_id: 'user-5',
+    username: 'LabelDelta',
+    badge_type: 'label_verified',
+    status: 'rejected',
+    submitted_at: '2026-05-01T10:00:00Z',
+    reviewed_at: '2026-05-03T16:00:00Z',
+    notes: 'Incomplete authorization documents.',
   },
 ]

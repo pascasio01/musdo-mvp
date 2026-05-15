@@ -16,12 +16,12 @@ export default function Login() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await signIn(email, password)
+    const { error, redirectTo } = await signIn(email, password)
     setLoading(false)
     if (error) {
       setError(error.message)
     } else {
-      navigate('/home')
+      navigate(redirectTo ?? '/home')
     }
   }
 
@@ -45,7 +45,7 @@ export default function Login() {
         </div>
 
         <h1 className="text-4xl font-black mb-2">Welcome<br />Back.</h1>
-        <p className="text-zinc-500 mb-10">Sign in to your composer account.</p>
+        <p className="text-zinc-500 mb-10">Sign in to your account.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -54,14 +54,19 @@ export default function Login() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="composer@email.com"
+              placeholder="you@email.com"
               required
               className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 focus:bg-white/8 transition-all"
             />
           </div>
 
           <div>
-            <label className="text-xs text-zinc-600 uppercase tracking-wider font-medium block mb-2">Password</label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-xs text-zinc-600 uppercase tracking-wider font-medium">Password</label>
+              <Link to="/forgot-password" className="text-xs text-zinc-500 hover:text-white transition-colors">
+                Forgot password?
+              </Link>
+            </div>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}

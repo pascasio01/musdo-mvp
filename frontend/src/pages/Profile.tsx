@@ -1,21 +1,24 @@
 import { useNavigate } from 'react-router-dom'
-import { Settings, BadgeCheck, Music, Shield, TrendingUp, LogOut } from 'lucide-react'
+import { Settings, Music, Shield, TrendingUp, LogOut } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import MusicCard from '../components/MusicCard'
-import { mockSongs } from '../data/mockData'
+import { VerificationBadgeRow, VerificationStatusCard } from '../components/VerificationBadge'
+import { mockSongs, mockProfile } from '../data/mockData'
 import { useAuth } from '../lib/auth'
 
 export default function Profile() {
   const navigate = useNavigate()
-  const { user, signOut } = useAuth()
+  const { user, profile: authProfile, signOut } = useAuth()
 
   const handleSignOut = async () => {
     await signOut()
     navigate('/')
   }
 
-  const displayName = user?.user_metadata?.username ?? 'Pascasio Emmanuel'
-  const email = user?.email ?? 'composer@musdo.com'
+  const displayName = authProfile?.username ?? user?.user_metadata?.username ?? mockProfile.username
+  const roleLabel = (authProfile?.role ?? mockProfile.role).replace('_', ' ').toUpperCase()
+
+  const verificationData = authProfile ?? mockProfile
 
   return (
     <AppShell>
@@ -34,7 +37,10 @@ export default function Profile() {
               >
                 <TrendingUp size={18} strokeWidth={1.5} />
               </button>
-              <button className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+              <button
+                onClick={() => navigate('/settings')}
+                className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+              >
                 <Settings size={18} strokeWidth={1.5} />
               </button>
             </div>
@@ -45,23 +51,29 @@ export default function Profile() {
               <span className="text-white text-3xl font-black">{displayName[0]?.toUpperCase()}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-white font-black text-2xl truncate">{displayName}</h2>
-                <BadgeCheck size={20} className="text-blue-400 flex-shrink-0" />
+                <VerificationBadgeRow
+                  verified_artist={verificationData.verified_artist}
+                  verified_composer={verificationData.verified_composer}
+                  label_verified={verificationData.label_verified}
+                  size="sm"
+                />
               </div>
-              <p className="text-zinc-500 text-sm truncate">{email}</p>
-              <div className="flex items-center gap-2 mt-2">
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
                 <span className="text-[11px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/25 rounded-full px-2.5 py-1">
-                  COMPOSER
+                  {roleLabel}
                 </span>
-                <span className="text-[11px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-2.5 py-1">
-                  VERIFIED
-                </span>
+                {verificationData.verification_status === 'approved' && (
+                  <span className="text-[11px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-2.5 py-1">
+                    VERIFIED
+                  </span>
+                )}
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 mb-8">
+          <div className="grid grid-cols-3 gap-3 mb-6">
             {[
               { value: '24', label: 'Songs', icon: Music },
               { value: '12.4K', label: 'Streams', icon: TrendingUp },
@@ -74,10 +86,14 @@ export default function Profile() {
             ))}
           </div>
 
-          <div className="rounded-2xl bg-white/5 border border-white/10 p-4 mb-8">
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4 mb-6">
             <p className="text-zinc-500 text-sm leading-relaxed">
-              Compositor dominicano especializado en bachata moderna y Latin Pop. Creador de música humana verificada en MUSDO.
+              {authProfile?.bio ?? mockProfile.bio}
             </p>
+          </div>
+
+          <div className="mb-6">
+            <VerificationStatusCard profile={verificationData} />
           </div>
 
           <div className="mb-6">

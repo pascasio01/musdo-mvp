@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Search, Filter, BadgeCheck, Zap, Globe, Music, FileText } from 'lucide-react'
+import { Search, Zap, Globe, Music, FileText } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import LicenseRequestModal from '../components/LicenseRequestModal'
+import VerificationBadge from '../components/VerificationBadge'
 import { mockLicenses } from '../data/mockData'
 import type { License } from '../types'
 
@@ -9,7 +10,7 @@ const licenseTypeConfig = {
   exclusive: { label: 'Exclusive', icon: Zap, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
   'non-exclusive': { label: 'Non-Exclusive', icon: Globe, color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
   sync: { label: 'Sync', icon: Music, color: 'text-violet-400', bg: 'bg-violet-500/10 border-violet-500/20' },
-  publishing: { label: 'Publishing', icon: FileText, color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  publishing: { label: 'Publishing', icon: FileText, color: 'text-slate-300', bg: 'bg-slate-400/10 border-slate-400/20' },
 }
 
 const filterOptions = ['All', 'Exclusive', 'Non-Exclusive', 'Sync', 'Publishing']
@@ -79,9 +80,14 @@ export default function Market() {
                     }
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       <h3 className="text-white font-bold truncate">{song?.title}</h3>
-                      {song?.human_verified && <BadgeCheck size={14} className="text-blue-400 flex-shrink-0" />}
+                      {song?.human_verified && (
+                        <VerificationBadge type="human_verified" size="xs" />
+                      )}
+                      {song?.verified_rights_holder && (
+                        <VerificationBadge type="verified_rights_holder" size="xs" />
+                      )}
                     </div>
                     <p className="text-zinc-500 text-sm truncate">{song?.artist_name}</p>
                     <p className="text-zinc-600 text-xs mt-0.5">{song?.genre}</p>

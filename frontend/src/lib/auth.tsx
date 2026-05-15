@@ -1,14 +1,79 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react'
 import type { User, Session } from '@supabase/supabase-js'
 import { supabase } from './supabase'
+import type { Profile, AppRole } from '../types'
+
+const OWNER_EMAIL = import.meta.env.VITE_OWNER_EMAIL as string | undefined
+
+function getRedirectPath(role: AppRole): string {
+  if (role === 'supreme_owner') return '/owner'
+  if (role === 'composer' || role === 'producer') return '/vault'
+  return '/home'
+}
+
+async function syncProfile(user: User): Promise<Profile | null> {
+  try {
+    const isOwner = !!OWNER_EMAIL && user.email?.toLowerCase() === OWNER_EMAIL.toLowerCase()
+    const role: AppRole = isOwner ? 'supreme_owner' : (user.user_metadata?.role as AppRole) ?? 'listener'
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+
+    if (error && error.code !== 'PGRST116') {
+      return buildLocalProfile(user, role)
+    }
+
+    if (!data) {
+      const newProfile: Partial<Profile> = {
+        id: user.id,
+        username: user.user_metadata?.username ?? user.email?.split('@')[0] ?? 'user',
+        email: user.email ?? '',
+        role,
+      }
+      const { data: created, error: insertErr } = await supabase
+        .from('profiles')
+        .insert(newProfile)
+        .select()
+        .single()
+
+      if (insertErr) return buildLocalProfile(user, role)
+      return created as Profile
+    }
+
+    if (isOwner && data.role !== 'supreme_owner') {
+      await supabase.from('profiles').update({ role: 'supreme_owner' }).eq('id', user.id)
+      return { ...data, role: 'supreme_owner' } as Profile
+    }
+
+    return data as Profile
+  } catch {
+    const isOwner = !!OWNER_EMAIL && user.email?.toLowerCase() === OWNER_EMAIL.toLowerCase()
+    return buildLocalProfile(user, isOwner ? 'supreme_owner' : 'listener')
+  }
+}
+
+function buildLocalProfile(user: User, role: AppRole): Profile {
+  return {
+    id: user.id,
+    username: user.user_metadata?.username ?? user.email?.split('@')[0] ?? 'user',
+    email: user.email ?? '',
+    role,
+  }
+}
 
 interface AuthContextType {
   user: User | null
   session: Session | null
+  profile: Profile | null
   loading: boolean
-  signIn: (email: string, password: string) => Promise<{ error: Error | null }>
-  signUp: (email: string, password: string, username: string) => Promise<{ error: Error | null }>
+  signIn: (email: string, password: string) => Promise<{ error: Error | null; redirectTo?: string }>
+  signUp: (email: string, password: string, username: string, role?: string) => Promise<{ error: Error | null }>
   signOut: () => Promise<void>
+  resetPassword: (email: string) => Promise<{ error: Error | null }>
+  refreshProfile: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -16,43 +81,69 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const loadProfile = useCallback(async (u: User | null) => {
+    if (!u) { setProfile(null); return }
+    const p = await syncProfile(u)
+    setProfile(p)
+  }, [])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
       setUser(session?.user ?? null)
-      setLoading(false)
+      loadProfile(session?.user ?? null).finally(() => setLoading(false))
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
+      await loadProfile(session?.user ?? null)
     })
 
     return () => subscription.unsubscribe()
-  }, [])
+  }, [loadProfile])
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    return { error }
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) return { error, redirectTo: undefined }
+    const p = await syncProfile(data.user)
+    setProfile(p)
+    return { error: null, redirectTo: getRedirectPath(p?.role ?? 'listener') }
   }
 
-  const signUp = async (email: string, password: string, username: string) => {
+  const signUp = async (email: string, password: string, username: string, role = 'listener') => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { username } },
+      options: { data: { username, role } },
     })
     return { error }
   }
 
   const signOut = async () => {
     await supabase.auth.signOut()
+    setProfile(null)
+  }
+
+  const resetPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/settings`,
+    })
+    return { error }
+  }
+
+  const refreshProfile = async () => {
+    if (user) {
+      const p = await syncProfile(user)
+      setProfile(p)
+    }
   }
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, session, profile, loading, signIn, signUp, signOut, resetPassword, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   )
