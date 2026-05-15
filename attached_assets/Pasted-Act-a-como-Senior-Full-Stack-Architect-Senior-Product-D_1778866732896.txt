@@ -1,0 +1,139 @@
+Actúa como Senior Full-Stack Architect, Senior Product Designer y Creative CTO.
+
+Construye MUSDO MVP, una plataforma musical premium creada por Pascasio Emmanuel Reynoso Reyes.
+
+NO quiero una plantilla básica.
+NO quiero diseño genérico.
+NO quiero copia visual de Spotify.
+Quiero una app premium, elegante, moderna, mobile-first, con arquitectura real, código limpio y experiencia tipo app nativa.
+
+PROYECTO:
+MUSDO
+
+CONCEPTO:
+MUSDO es una plataforma musical superior donde oyentes descubren música, compositores protegen y venden letras/demos, y artistas pueden solicitar licencias de canciones humanas verificadas.
+
+STACK:
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- React Router
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Supabase Storage
+
+SUPABASE:
+VITE_SUPABASE_URL=https://ykueethgvubvpdqsuthp.supabase.co
+
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrdWVldGhndnVidnBkcXN1dGhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NjQxNjUsImV4cCI6MjA5NDQ0MDE2NX0.2-YRc0JhV5dFLem6BC9m0SRnSw-5FqW9BWQjK3QITJk
+
+DISEÑO:
+- Dark luxury
+- Fondo negro OLED
+- Glassmorphism premium
+- Cards con blur suave
+- Bordes finos transparentes
+- Sombras elegantes
+- Animaciones suaves
+- Mobile-first
+- Nada verde Spotify
+- Nada parecido directamente a Spotify
+- Nada infantil
+- Nada básico
+- Estética: música premium + estudio creativo + marketplace moderno
+
+ARQUITECTURA:
+Usa estructura limpia:
+
+src/components
+src/pages
+src/layouts
+src/lib
+src/types
+src/data
+src/styles
+
+Crear:
+src/lib/supabase.ts
+
+Usar tablas existentes:
+- profiles
+- songs
+- licenses
+- comments
+- playlists
+
+PÁGINAS:
+- Landing
+- Login
+- Register
+- Home
+- Player
+- Vault
+- Upload
+- Marketplace
+- Song Passport
+- Profile
+- Dashboard
+
+FUNCIONES:
+- Auth real con Supabase
+- Upload de demos
+- Upload de covers
+- Marketplace de licencias
+- Human Verified badge
+- Mini player fijo abajo
+- Mobile navigation premium
+- Dashboard para compositores
+- Song Passport con ownership proof
+
+COMPONENTES:
+- AppShell
+- BottomNav
+- MusicCard
+- ComposerCard
+- PlayerBar
+- GlassCard
+- UploadForm
+- LicenseRequestModal
+- SongPassportCard
+
+RUTAS:
+/
+/login
+/register
+/home
+/player/:id
+/vault
+/upload
+/market
+/song/:id
+/passport/:id
+/profile
+/dashboard
+
+REGLAS:
+- No pongas todo en App.tsx
+- Usa TypeScript limpio
+- Usa componentes separados
+- No borres:
+README.md
+PROJECT.md
+ROADMAP.md
+UI-CONCEPT.md
+SYSTEM-ARCHITECTURE.md
+DATABASE-SCHEMA.md
+
+PRIORIDAD:
+1. Que compile sin errores
+2. Que se vea premium
+3. Que conecte con Supabase
+4. Que tenga Home, Vault, Upload, Market y Player funcionales
+5. Que parezca una startup real de music-tech creada por Pascasio Emmanuel Reynoso Reyes
+
+Construye el MVP completo ahora.
+No hagas demo escolar.
+No uses diseño genérico.
+No copies Spotify.
