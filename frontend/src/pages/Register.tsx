@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Music, ArrowLeft, Eye, EyeOff } from 'lucide-react'
+import { Music, ArrowLeft, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import { useAuth } from '../lib/auth'
 
 const roles = [
@@ -20,15 +20,18 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [confirming, setConfirming] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await signUp(email, password, username, role)
+    const { error, requiresConfirmation } = await signUp(email, password, username, role)
     setLoading(false)
     if (error) {
       setError(error.message)
+    } else if (requiresConfirmation) {
+      setConfirming(true)
     } else {
       if (role === 'composer' || role === 'producer') {
         navigate('/vault')
@@ -36,6 +39,35 @@ export default function Register() {
         navigate('/home')
       }
     }
+  }
+
+  if (confirming) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col px-6 py-10 max-w-md mx-auto">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-20%] left-[-20%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px]" />
+        </div>
+        <div className="relative flex flex-col items-center justify-center flex-1 text-center py-20">
+          <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle size={28} className="text-white" strokeWidth={1.5} />
+          </div>
+          <h1 className="text-3xl font-black mb-3">Check Your<br />Email.</h1>
+          <p className="text-zinc-500 text-sm leading-relaxed mb-2">
+            We sent a confirmation link to
+          </p>
+          <p className="text-white font-semibold mb-6">{email}</p>
+          <p className="text-zinc-600 text-xs leading-relaxed mb-10">
+            Click the link in that email to activate your account, then come back to sign in.
+          </p>
+          <Link
+            to="/login"
+            className="w-full py-4 rounded-2xl bg-white text-black font-bold text-base text-center hover:opacity-90 transition-opacity"
+          >
+            Go to Login
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
