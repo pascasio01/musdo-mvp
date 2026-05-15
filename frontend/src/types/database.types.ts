@@ -95,36 +95,43 @@ export interface Database {
         Row: DbProfile
         Insert: Omit<DbProfile, 'created_at' | 'updated_at'>
         Update: Partial<Omit<DbProfile, 'id' | 'created_at'>>
+        Relationships: []
       }
       songs: {
         Row: DbSong
         Insert: Omit<DbSong, 'id' | 'created_at' | 'updated_at'>
         Update: Partial<Omit<DbSong, 'id' | 'owner_id' | 'created_at'>>
+        Relationships: []
       }
       licenses: {
         Row: DbLicense
         Insert: Omit<DbLicense, 'id' | 'created_at'>
         Update: Partial<Pick<DbLicense, 'status' | 'price'>>
+        Relationships: []
       }
       demos: {
         Row: DbDemo
         Insert: Omit<DbDemo, 'id' | 'created_at'>
         Update: Partial<Omit<DbDemo, 'id' | 'composer_id' | 'created_at'>>
+        Relationships: []
       }
       lyrics: {
         Row: DbLyrics
         Insert: Omit<DbLyrics, 'id' | 'created_at'>
         Update: Partial<Pick<DbLyrics, 'title' | 'content'>>
+        Relationships: []
       }
       verification_requests: {
         Row: DbVerificationRequest
         Insert: Omit<DbVerificationRequest, 'id' | 'submitted_at'>
         Update: Partial<Pick<DbVerificationRequest, 'status' | 'reviewed_at' | 'reviewed_by' | 'rejection_reason'>>
+        Relationships: []
       }
       audit_logs: {
         Row: DbAuditLog
         Insert: Omit<DbAuditLog, 'id' | 'created_at'>
-        Update: never
+        Update: Record<string, never>
+        Relationships: []
       }
     }
     Views: Record<string, never>

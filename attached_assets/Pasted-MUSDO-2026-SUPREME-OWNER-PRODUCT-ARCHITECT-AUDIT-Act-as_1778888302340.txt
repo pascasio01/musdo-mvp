@@ -1,0 +1,439 @@
+MUSDO 2026 — SUPREME OWNER PRODUCT ARCHITECT AUDIT
+
+Act as the Supreme Product Owner, Principal Product Architect, Senior UX Systems Designer, Audio Experience Engineer, Security Architect, Performance Engineer, and Elite Full-Stack Developer for MUSDO.
+
+You are not a template generator.
+You are not building a generic music app.
+You are acting like the founding elite engineering/design team of a serious 2026 music-tech company.
+
+OWNER CONTEXT:
+MUSDO is owned internally by the supreme_owner.
+Do not expose owner identity publicly.
+Do not expose owner email publicly.
+Public branding must remain:
+- MUSDO
+- MUSDO Team
+- MUSDO Support
+- MUSDO Legal
+
+MISSION:
+Analyze the entire MUSDO ecosystem and evolve it into a premium, cinematic, emotionally intelligent music operating system.
+
+MUSDO must feel:
+- cinematic
+- emotionally intelligent
+- luxurious
+- atmospheric
+- music-first
+- human
+- immersive
+- premium
+- timeless
+- technically serious
+- scalable
+- secure
+
+DO NOT:
+- create generic startup UI
+- use cheap template components
+- copy Spotify, Apple Music, YouTube Music, SoundCloud or any platform directly
+- rebuild everything from zero
+- delete working code
+- break auth
+- expose secrets
+- hardcode colors
+- overuse blur/glow
+- create gamer RGB effects
+- add features without architecture
+- fake functionality without clear placeholder logic
+
+━━━━━━━━━━━━━━━━━━━━
+1. FULL SYSTEM AUDIT
+━━━━━━━━━━━━━━━━━━━━
+
+Inspect the actual codebase before making changes.
+
+Audit:
+
+- UX
+- UI
+- routing
+- auth
+- protected routes
+- Supabase integration
+- profile sync
+- owner/admin access
+- theme engine
+- semantic design tokens
+- light/dark contrast
+- adaptive aura system
+- player state
+- mini-player
+- Studio View
+- Search
+- Vault
+- Upload
+- Marketplace
+- Profile
+- Settings
+- Owner Dashboard
+- Security Center
+- Verification System
+- Talent Network
+- legal pages
+- accessibility
+- mobile layout
+- performance
+- animation quality
+- state duplication
+- unnecessary re-renders
+- hardcoded colors
+- TypeScript issues
+- broken imports
+- dead code
+- duplicated components
+- scalability risks
+
+━━━━━━━━━━━━━━━━━━━━
+2. PROFESSIONAL CODE STANDARD
+━━━━━━━━━━━━━━━━━━━━
+
+Refactor only where necessary.
+
+Use:
+
+- clean TypeScript
+- modular components
+- reusable hooks
+- semantic CSS variables
+- scalable folder structure
+- typed mock data
+- future Supabase-ready models
+- performance-safe animations
+- accessibility-safe contrast
+- mobile-first layout
+- lazy loading where appropriate
+- route-level organization
+- no massive App.tsx
+
+Recommended structure:
+
+src/components
+src/components/ui
+src/components/auth
+src/components/player
+src/components/music
+src/components/owner
+src/components/settings
+src/components/verification
+src/components/talent
+src/pages
+src/pages/auth
+src/pages/owner
+src/pages/legal
+src/layouts
+src/providers
+src/hooks
+src/lib
+src/types
+src/data
+src/styles
+
+━━━━━━━━━━━━━━━━━━━━
+3. 2026 PREMIUM DESIGN SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+MUSDO must use a real design system, not random Tailwind.
+
+Use semantic tokens:
+
+--background
+--surface
+--card
+--card-elevated
+--text-primary
+--text-secondary
+--text-muted
+--text-inverse
+--accent
+--accent-soft
+--border
+--border-soft
+--shadow
+--glow
+--blur
+--radius
+--motion-fast
+--motion-medium
+--motion-slow
+
+Themes must work globally:
+
+- OLED Black
+- Studio Mode
+- Bachata Amber
+- Neon Noir
+- Soft Light
+- Midnight Calm
+
+CRITICAL:
+Light mode must be readable.
+No white text on light backgrounds.
+No washed-out glass cards.
+No invisible icons.
+No hardcoded text-white/bg-black leaks.
+
+━━━━━━━━━━━━━━━━━━━━
+4. ADAPTIVE MUSIC AURA ENGINE
+━━━━━━━━━━━━━━━━━━━━
+
+Improve the aura system so MUSDO feels alive with the music.
+
+Aura reacts to:
+
+- genre
+- BPM
+- mood
+- energy
+- cover art colors
+- time of day
+- selected theme
+
+Apply aura to:
+
+- background
+- player glow
+- progress bar
+- lyric highlight
+- card shadow
+- ambient lighting
+- subtle particles
+
+Keep it premium:
+- no gamer RGB
+- no aggressive neon
+- no visual noise
+- respect prefers-reduced-motion
+- maintain readable contrast
+
+━━━━━━━━━━━━━━━━━━━━
+5. STUDIO PLAYER 2026
+━━━━━━━━━━━━━━━━━━━━
+
+Studio View must feel like premium music software.
+
+Add or improve:
+
+- floating cover art
+- waveform/equalizer mock
+- BPM
+- key
+- mood
+- genre
+- audio quality
+- credits
+- Song Passport shortcut
+- Request License button
+- Human Verified badge
+- Rights Holder badge
+- adaptive aura
+- mini-player sync
+- cinematic controls
+- smooth transitions
+
+Do not use copyrighted audio.
+Use safe demo/mock tracks unless licensed.
+
+━━━━━━━━━━━━━━━━━━━━
+6. EMOTIONAL DISCOVERY ENGINE
+━━━━━━━━━━━━━━━━━━━━
+
+MUSDO should not only search songs.
+MUSDO should search feelings.
+
+Create emotional discovery logic with prompts like:
+
+- “Describe the feeling…”
+- “Find the sound for tonight…”
+- “What do you want to feel?”
+
+Mood systems:
+
+- Rainy NYC Nights
+- Late Night Bachata
+- Heartbreak Healing
+- Guitar & Whiskey
+- Dominican Classics
+- Deep Lyrics
+- Romantic Rooftop
+- Emotional Drive
+- Studio Session
+- Soft Nostalgia
+
+AI output can be mock for now:
+
+- playlists
+- songs
+- creators
+- moods
+- atmosphere tags
+- emotional similarity
+
+━━━━━━━━━━━━━━━━━━━━
+7. CREATOR ECONOMY + VERIFICATION
+━━━━━━━━━━━━━━━━━━━━
+
+MUSDO must give creators prestige.
+
+Verify and improve:
+
+- Verified Artist
+- Verified Composer
+- Human Verified
+- Rights Holder Verified
+- Label Verified
+- Song Passport
+- Marketplace licensing
+- Creator Dashboard
+- Upload Lyrics
+- Upload Demo
+- Composer Vault
+
+Rules:
+
+- legal names stay private
+- public profiles show stage/professional name
+- only owner/admin can approve verification
+- Rights Holder Verified required for licensing marketplace
+- verification does not guarantee legal ownership
+- verification actions must be audit-ready
+
+━━━━━━━━━━━━━━━━━━━━
+8. OWNER COMMAND CENTER
+━━━━━━━━━━━━━━━━━━━━
+
+Owner area must feel like a private control room, not a normal dashboard.
+
+Improve:
+
+- owner navigation
+- AI command bar
+- analytics hierarchy
+- security alerts
+- verification queue
+- revenue mock cards
+- creator activity
+- system health
+- audit shortcuts
+- Supabase status
+- storage status
+- auth status
+- rollback placeholders
+- maintenance mode placeholders
+
+Owner navigation:
+
+- Command
+- Analytics
+- Security
+- AI
+- Settings
+
+Never expose owner identity publicly.
+
+━━━━━━━━━━━━━━━━━━━━
+9. SECURITY + LEGAL STRUCTURE
+━━━━━━━━━━━━━━━━━━━━
+
+Verify:
+
+- no service_role key in frontend
+- no passwords in code
+- no exposed secrets
+- protected owner routes
+- role-based access
+- audit-ready actions
+- legal pages exist
+- billing transparency exists
+- refund policy exists
+- risk disclaimer exists
+
+Legal pages should state:
+
+- MUSDO is a technology platform
+- users are responsible for uploaded content
+- MUSDO does not guarantee income
+- MUSDO does not guarantee copyright registration
+- MUSDO does not guarantee legal outcomes
+- licensing should be reviewed by legal professionals
+- liability limited to maximum extent permitted by law
+- policies require attorney review before public launch
+
+Do NOT say users can never sue.
+
+━━━━━━━━━━━━━━━━━━━━
+10. PERFORMANCE 2026 STANDARD
+━━━━━━━━━━━━━━━━━━━━
+
+Audit and improve:
+
+- heavy blur
+- stacked shadows
+- unnecessary animations
+- large images
+- repeated renders
+- route loading
+- mobile GPU pressure
+- skeleton loading
+- lazy routes
+- low-end device behavior
+- reduced motion mode
+
+MUSDO must feel premium AND fast.
+
+A premium app cannot lag.
+
+━━━━━━━━━━━━━━━━━━━━
+11. FINAL OUTPUT REQUIRED
+━━━━━━━━━━━━━━━━━━━━
+
+Return:
+
+1. What you audited
+2. What was weak
+3. What was broken
+4. What you fixed
+5. Files changed
+6. Remaining risks
+7. Next recommended phase
+8. Performance notes
+9. Security notes
+10. Design system notes
+
+━━━━━━━━━━━━━━━━━━━━
+EXECUTION RULES
+━━━━━━━━━━━━━━━━━━━━
+
+Do not rebuild blindly.
+Do not over-engineer.
+Do not add random dependencies.
+Do not create duplicate providers.
+Do not break existing routes.
+Do not remove documentation.
+Do not publish secrets.
+Do not make fake features look production-ready without labels.
+
+Work like a senior 2026 product engineering team:
+
+- inspect first
+- identify real issues
+- fix surgically
+- compile
+- verify
+- report clearly
+
+Stop after successful compile.
+Show changed files only.
+
+FINAL GOAL:
+MUSDO must become the emotional operating system for music creators and listeners — not another streaming clone.
