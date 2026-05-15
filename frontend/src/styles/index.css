@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #000000;
+    --surface: #0a0a0a;
+    --card: #111111;
+    --text: #ffffff;
+    --text-2: #71717a;
+    --accent: #7c3aed;
+    --accent-rgb: 124,58,237;
+    --border: rgba(255,255,255,0.08);
+    --glow-color: rgba(124,58,237,0.18);
+    --blur: 24px;
+    --radius: 18px;
+    --speed: 300ms;
+    --font-scale: 1;
+    --aura-primary: rgba(124,58,237,0.1);
+    --aura-secondary: rgba(37,99,235,0.07);
+    --aura-glow: rgba(124,58,237,0.14);
+    --aura-pulse: 4s;
+  }
+
   * {
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
@@ -10,16 +30,27 @@
 
   html {
     scroll-behavior: smooth;
+    font-size: calc(16px * var(--font-scale, 1));
   }
 
   body {
     margin: 0;
-    background: #000000;
-    color: #ffffff;
+    background: var(--bg, #000000);
+    color: var(--text, #ffffff);
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
+    transition: background 0.6s ease;
+  }
+
+  body.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body.cinematic {
+    --vignette: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%);
   }
 
   ::-webkit-scrollbar {
@@ -36,7 +67,6 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -46,16 +76,91 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(var(--blur, 24px));
+    -webkit-backdrop-filter: blur(var(--blur, 24px));
+    border: 1px solid var(--border, rgba(255,255,255,0.08));
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(var(--blur, 24px));
+    -webkit-backdrop-filter: blur(var(--blur, 24px));
+    border: 1px solid rgba(255,255,255,0.12);
   }
+
+  .glow-accent {
+    box-shadow: 0 0 24px var(--glow-color, rgba(124,58,237,0.18));
+  }
+
+  .aura-bg {
+    background: var(--aura-primary, transparent);
+  }
+
+  .page-enter {
+    animation: page-in var(--speed, 300ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .elastic-in {
+    animation: elastic-appear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .fade-up {
+    animation: fade-up var(--speed, 300ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .inertia-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes aura-breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1) translate(var(--tx, 0), var(--ty, 0)); }
+  50%       { opacity: 1;   transform: scale(1.08) translate(var(--tx, 0), var(--ty, 0)); }
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes elastic-appear {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 var(--aura-glow, rgba(124,58,237,0.3)); }
+  70%  { box-shadow: 0 0 0 8px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-2, #71717a) 0%, var(--text, #fff) 50%, var(--text-2, #71717a) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
 }

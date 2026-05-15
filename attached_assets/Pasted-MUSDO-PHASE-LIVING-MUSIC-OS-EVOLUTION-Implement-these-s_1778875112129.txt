@@ -1,0 +1,340 @@
+MUSDO PHASE — LIVING MUSIC OS EVOLUTION
+
+Implement these systems without rebuilding the whole app.
+
+DO NOT:
+- redesign the entire app
+- break existing auth
+- remove current routes
+- delete existing pages
+- expose secrets
+- create endless refactor loops
+- copy Spotify, Apple Music or SoundCloud directly
+
+GOAL:
+Transform MUSDO from a static premium music app into a living cinematic music operating system.
+
+━━━━━━━━━━━━━━━━━━━
+PART 1 — GLOBAL THEME ENGINE
+━━━━━━━━━━━━━━━━━━━
+
+Create a real global theme system.
+
+Build:
+- ThemeProvider
+- useTheme hook
+- theme store
+- dynamic CSS variables
+- localStorage persistence
+- future Supabase theme sync compatibility
+
+Use CSS variables:
+--background
+--surface
+--card
+--text-primary
+--text-secondary
+--accent
+--border
+--shadow
+--glow
+--blur
+--radius
+--motion-speed
+
+Themes:
+1. OLED Black
+2. Studio Mode
+3. Bachata Amber
+4. Neon Noir
+5. Soft Light
+6. Midnight Calm
+
+Create Appearance Settings page with:
+- theme switching
+- custom accent color
+- blur intensity
+- glow intensity
+- motion intensity
+- font scale
+- rounded UI level
+- ambient animation toggle
+- cinematic mode toggle
+- reduce motion mode
+
+Save settings locally first.
+Prepare Supabase sync later.
+
+━━━━━━━━━━━━━━━━━━━
+PART 2 — CLIENT ADAPTIVE MUSIC AURA
+━━━━━━━━━━━━━━━━━━━
+
+Create a client-side adaptive music aura system.
+
+When music plays, MUSDO should subtly adapt:
+- background aura
+- player glow
+- progress bar accent
+- lyric highlight color
+- card shadow
+- ambient lighting
+- subtle particle intensity
+
+Based on:
+- genre
+- BPM
+- mood
+- energy level
+- cover art dominant colors
+- time of day
+- selected theme
+
+Create:
+- MusicAuraProvider
+- useMusicAura hook
+- aura presets
+- aura CSS variables
+
+Variables:
+--aura-primary
+--aura-secondary
+--aura-glow
+--aura-motion
+--aura-pulse-speed
+
+Settings:
+- Adaptive Music Aura ON/OFF
+- Aura Intensity: low / medium / high
+- Use Cover Art Colors ON/OFF
+- Reduce Motion Mode
+
+Examples:
+Slow Bachata / Romantic:
+- warm amber
+- wine red
+- soft gold
+- slow breathing glow
+
+Sad Song:
+- deep blue
+- violet haze
+- low motion
+- soft blurred aura
+
+Salsa / Merengue:
+- warm orange
+- tropical gold
+- rhythmic pulse
+- brighter motion
+
+Urban / Energetic:
+- electric violet
+- deep crimson
+- sharper contrast
+- stronger pulse
+
+Acoustic:
+- wood amber
+- cream gold
+- soft matte atmosphere
+
+IMPORTANT:
+Do not make it flashy.
+Do not use gamer RGB.
+Keep text readable.
+Respect prefers-reduced-motion.
+
+━━━━━━━━━━━━━━━━━━━
+PART 3 — MUSDO AI DISCOVERY SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Create an emotional AI-powered discovery experience.
+
+Do NOT create a generic chatbot.
+
+MUSDO AI should feel:
+- cinematic
+- elegant
+- emotional
+- human
+- music-focused
+- atmospheric
+
+Create MUSDO AI Discovery Bar.
+
+Placeholder examples:
+- “Describe the feeling…”
+- “Find the sound for tonight…”
+- “What do you want to feel?”
+
+Do NOT use:
+- “Ask anything”
+
+Mood chips:
+- Rainy NYC Nights
+- Late Night Bachata
+- Heartbreak Healing
+- Guitar & Whiskey
+- Dominican Classics
+- Deep Lyrics
+- Romantic Rooftop
+- Emotional Drive
+- Studio Session
+- Soft Nostalgia
+
+Create Music Scenes™:
+1. Cabaret Bachata
+- warm amber aura
+- subtle smoke
+- requinto focus
+
+2. Rainy Night
+- soft blue haze
+- rain ambience
+- cinematic blur
+
+3. 2AM Studio Session
+- low blue lighting
+- minimal distractions
+- focus atmosphere
+
+AI prompt examples:
+- “dark emotional bachatas”
+- “romantic songs for driving at night”
+- “songs with deep guitar and heartbreak energy”
+
+AI returns mock:
+- playlists
+- songs
+- creators
+- moods
+- atmosphere tags
+- emotional similarities
+
+Use mock data for now.
+Prepare future AI integration.
+
+━━━━━━━━━━━━━━━━━━━
+PART 4 — DYNAMIC ARTIST HEADER SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Create a premium identity header.
+
+Header includes:
+- artist avatar
+- artist/composer name
+- verification badge
+- dynamic subtitle
+- optional emotional status
+- subtle ambient glow
+
+Dynamic subtitle by role:
+- Artist → Modern Bachata Artist
+- Composer → Emotional Songwriter
+- Producer → Producer • Arranger
+- Label → Verified Label
+
+Emotional status examples:
+- Currently creating...
+- In Studio
+- Inspired by NYC Nights
+- Late-night sessions
+
+Avatar Aura:
+- soft reactive glow
+- subtle breathing animation
+- premium border
+- optional music-reactive pulse
+
+Verification integration:
+- Verified Artist
+- Verified Composer
+- Human Verified
+- Rights Holder Verified
+
+Clicking name opens premium mini-profile modal.
+
+Do NOT overload UI.
+Keep it minimal and elegant.
+
+━━━━━━━━━━━━━━━━━━━
+PART 5 — OWNER COMMAND CENTER EVOLUTION
+━━━━━━━━━━━━━━━━━━━
+
+Owner panel must feel like a private music-tech command center.
+
+Replace owner navigation with:
+- Command
+- Analytics
+- Security
+- AI
+- Settings
+
+Add AI Command Bar:
+“Ask MUSDO AI…”
+
+Examples:
+- Analyze creator growth
+- Detect suspicious activity
+- Suggest featured artists
+- Review marketplace performance
+- Generate weekly report
+
+Add live intelligence cards:
+- verification queue alerts
+- suspicious login alerts
+- marketplace growth
+- trending genre detection
+- creator growth spikes
+- licensing activity increase
+
+Add animated charts:
+- revenue
+- active users
+- licensing growth
+- creator growth
+- marketplace activity
+- verification requests
+
+Charts must be:
+- glassmorphism style
+- subtle
+- mobile optimized
+- premium
+
+━━━━━━━━━━━━━━━━━━━
+PART 6 — ADVANCED VISUAL DEPTH
+━━━━━━━━━━━━━━━━━━━
+
+Add:
+- layered glass
+- atmospheric gradients
+- ambient glow
+- cinematic edge lighting
+- breathing UI
+- elastic transitions
+- inertia scrolling
+- smooth page animations
+
+Do NOT use:
+- gamer RGB
+- exaggerated neon
+- childish animation
+- visual clutter
+
+━━━━━━━━━━━━━━━━━━━
+FINAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━
+
+MUSDO must feel:
+- alive
+- intelligent
+- emotional
+- cinematic
+- premium
+- breathable
+
+The interface should whisper luxury.
+
+Stop after successful compile.
+Show changed files only.

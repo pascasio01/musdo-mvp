@@ -1,45 +1,47 @@
 import { useState } from 'react'
-import { Bell, Search } from 'lucide-react'
+import { Bell } from 'lucide-react'
 import MusicCard from '../components/MusicCard'
 import ComposerCard from '../components/ComposerCard'
 import AppShell from '../layouts/AppShell'
+import AIDiscoveryBar from '../components/AIDiscoveryBar'
 import { mockSongs } from '../data/mockData'
+import { useAuth } from '../lib/auth'
 
 const genres = ['All', 'Bachata', 'Latin Pop', 'Urban', 'Romantic', 'Fusion']
 
-export default function Home() {
-  const [activeGenre, setActiveGenre] = useState('All')
-  const [searchQuery, setSearchQuery] = useState('')
+function greeting() {
+  const h = new Date().getHours()
+  if (h < 12) return 'Good morning,'
+  if (h < 18) return 'Good afternoon,'
+  if (h < 22) return 'Good evening,'
+  return 'Late-night sessions,'
+}
 
-  const filteredSongs = mockSongs.filter(song => {
-    const matchesGenre = activeGenre === 'All' || song.genre.toLowerCase().includes(activeGenre.toLowerCase())
-    const matchesSearch = !searchQuery || song.title.toLowerCase().includes(searchQuery.toLowerCase()) || song.artist_name.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesGenre && matchesSearch
-  })
+export default function Home() {
+  const { profile } = useAuth()
+  const [activeGenre, setActiveGenre] = useState('All')
+
+  const filteredSongs = mockSongs.filter(song =>
+    activeGenre === 'All' || song.genre.toLowerCase().includes(activeGenre.toLowerCase())
+  )
+
+  const displayName = profile?.username ?? 'Emmanuel'
 
   return (
     <AppShell>
       <div className="px-5 pt-14 pb-4">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-zinc-500 text-sm">Good evening,</p>
-            <h1 className="text-white text-2xl font-black">Emmanuel</h1>
+            <p className="text-zinc-500 text-sm">{greeting()}</p>
+            <h1 className="text-white text-2xl font-black">{displayName}</h1>
           </div>
-          <button className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+          <button className="w-10 h-10 rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center text-zinc-400 hover:text-white transition-colors relative">
             <Bell size={18} strokeWidth={1.5} />
+            <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-violet-500" />
           </button>
         </div>
 
-        <div className="relative mb-6">
-          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search songs, composers..."
-            className="w-full pl-10 pr-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-600 text-sm outline-none focus:border-white/20 transition-colors"
-          />
-        </div>
+        <AIDiscoveryBar />
       </div>
 
       <div className="px-5 mb-6">
@@ -77,7 +79,7 @@ export default function Home() {
           ))}
           {filteredSongs.length === 0 && (
             <div className="py-12 text-center">
-              <p className="text-zinc-600">No songs found for "{searchQuery}"</p>
+              <p className="text-zinc-600">No songs for this genre yet.</p>
             </div>
           )}
         </div>
