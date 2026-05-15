@@ -23,7 +23,7 @@ export default function ProtectedRoute({ children, requireOwner = false }: Prote
   if (!user) return <Navigate to="/login" replace />
 
   if (requireOwner) {
-    const isOwner = !!OWNER_EMAIL && user.email === OWNER_EMAIL
+    const isOwner = !!OWNER_EMAIL && user.email?.toLowerCase() === OWNER_EMAIL.toLowerCase()
     if (!isOwner) return <Navigate to="/home" replace />
   }
 

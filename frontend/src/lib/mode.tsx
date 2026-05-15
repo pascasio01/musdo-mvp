@@ -13,7 +13,7 @@ const ModeContext = createContext<ModeContextType | undefined>(undefined)
 const OWNER_EMAIL = import.meta.env.VITE_OWNER_EMAIL as string | undefined
 
 export function ModeProvider({ children, userEmail }: { children: ReactNode; userEmail?: string }) {
-  const isOwner = !!OWNER_EMAIL && userEmail === OWNER_EMAIL
+  const isOwner = !!OWNER_EMAIL && userEmail?.toLowerCase() === OWNER_EMAIL.toLowerCase()
   const [mode, setMode] = useState<AppMode>('listener')
 
   return (
