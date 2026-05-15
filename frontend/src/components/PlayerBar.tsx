@@ -19,7 +19,7 @@ function PlayerBar() {
   }, [seek])
 
   const handleSkipBack = useCallback(() => skip(-1), [skip])
-  const handleSkipFwd = useCallback(() => skip(1), [skip])
+  const handleSkipFwd  = useCallback(() => skip(1),  [skip])
 
   if (!song) return null
 
@@ -30,13 +30,17 @@ function PlayerBar() {
       aria-label="Music player"
     >
       <div
-        className="max-w-md mx-auto rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
-        style={{ background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(var(--blur, 24px))' }}
+        className="max-w-md mx-auto rounded-2xl border border-theme shadow-theme overflow-hidden"
+        style={{
+          background: 'var(--card-elevated)',
+          backdropFilter: 'blur(var(--blur, 24px))',
+          WebkitBackdropFilter: 'blur(var(--blur, 24px))',
+        }}
       >
         <div
           className="h-0.5 w-full cursor-pointer"
           style={{
-            background: `linear-gradient(to right, rgba(255,255,255,0.85) ${progress}%, rgba(255,255,255,0.1) ${progress}%)`,
+            background: `linear-gradient(to right, var(--text-primary) ${progress}%, var(--border) ${progress}%)`,
           }}
           onClick={handleSeek}
           role="slider"
@@ -47,27 +51,29 @@ function PlayerBar() {
           tabIndex={0}
           onKeyDown={e => {
             if (e.key === 'ArrowRight') seek(Math.min(100, progress + 2))
-            if (e.key === 'ArrowLeft') seek(Math.max(0, progress - 2))
+            if (e.key === 'ArrowLeft')  seek(Math.max(0, progress - 2))
           }}
         />
+
         <div className="flex items-center gap-3 px-4 py-3">
           <div
-            className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-700 to-zinc-900 flex-shrink-0 overflow-hidden cursor-pointer"
+            className="w-10 h-10 rounded-xl flex-shrink-0 overflow-hidden cursor-pointer"
+            style={{ background: 'var(--glass-bg-strong)' }}
             onClick={handleExpand}
             aria-hidden
           >
             {song.artwork_url
               ? <img src={song.artwork_url} alt="" loading="lazy" className="w-full h-full object-cover" />
-              : <div className="w-full h-full bg-gradient-to-br from-violet-900 to-zinc-900" />
+              : <div className="w-full h-full bg-gradient-to-br from-violet-900 to-zinc-900" aria-hidden />
             }
           </div>
 
           <div className="flex-1 min-w-0 cursor-pointer" onClick={handleExpand}>
-            <p className="text-white text-sm font-semibold truncate">{song.title}</p>
-            <p className="text-zinc-400 text-xs truncate">{song.artist_name}</p>
+            <p className="text-primary text-sm font-semibold truncate">{song.title}</p>
+            <p className="text-secondary text-xs truncate">{song.artist_name}</p>
           </div>
 
-          <div className="flex items-center gap-1 text-zinc-500 text-[10px] tabular-nums mr-1" aria-label="Playback time">
+          <div className="flex items-center gap-1 text-muted text-[10px] tabular-nums mr-1" aria-label="Playback time">
             <span>{formatDuration(elapsed)}</span>
             <span>/</span>
             <span>{formatDuration(duration)}</span>
@@ -77,7 +83,7 @@ function PlayerBar() {
             <button
               onClick={handleSkipBack}
               aria-label="Previous song"
-              className="w-8 h-8 flex items-center justify-center text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+              className="w-8 h-8 flex items-center justify-center text-muted hover:text-primary transition-colors rounded-lg hover:bg-glass focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
             >
               <SkipBack size={16} strokeWidth={2} aria-hidden />
             </button>
@@ -85,7 +91,8 @@ function PlayerBar() {
             <button
               onClick={togglePlay}
               aria-label={isPlaying ? `Pause ${song.title}` : `Play ${song.title}`}
-              className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="w-9 h-9 rounded-full flex items-center justify-center hover:scale-105 transition-transform will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+              style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
             >
               {isPlaying
                 ? <Pause size={16} strokeWidth={2.5} aria-hidden />
@@ -96,7 +103,7 @@ function PlayerBar() {
             <button
               onClick={handleSkipFwd}
               aria-label="Next song"
-              className="w-8 h-8 flex items-center justify-center text-zinc-500 hover:text-white transition-colors rounded-lg hover:bg-white/5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+              className="w-8 h-8 flex items-center justify-center text-muted hover:text-primary transition-colors rounded-lg hover:bg-glass focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
             >
               <SkipForward size={16} strokeWidth={2} aria-hidden />
             </button>
@@ -105,7 +112,7 @@ function PlayerBar() {
           <button
             onClick={handleExpand}
             aria-label="Expand player"
-            className="w-8 h-8 flex items-center justify-center text-zinc-500 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded-lg"
+            className="w-8 h-8 flex items-center justify-center text-muted hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)] rounded-lg"
           >
             <ChevronUp size={18} aria-hidden />
           </button>

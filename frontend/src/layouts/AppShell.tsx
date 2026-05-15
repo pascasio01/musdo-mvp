@@ -15,7 +15,10 @@ export default function AppShell({ children }: AppShellProps) {
   const { settings } = useTheme()
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden" style={{ background: 'var(--bg, #000)' }}>
+    <div
+      className="min-h-screen relative overflow-hidden"
+      style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
+    >
       {auraSettings.enabled && !settings.reduceMotion && (
         <>
           <div
@@ -29,6 +32,7 @@ export default function AppShell({ children }: AppShellProps) {
                 ? 'aura-breathe var(--aura-pulse, 4s) ease-in-out infinite'
                 : 'none',
             }}
+            aria-hidden
           />
           <div
             className="fixed bottom-0 left-0 w-[320px] h-[320px] rounded-full pointer-events-none -z-0"
@@ -41,6 +45,7 @@ export default function AppShell({ children }: AppShellProps) {
                 ? 'aura-breathe var(--aura-pulse, 4s) ease-in-out infinite 2.2s'
                 : 'none',
             }}
+            aria-hidden
           />
         </>
       )}
@@ -52,6 +57,7 @@ export default function AppShell({ children }: AppShellProps) {
             background: 'radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,0.65) 100%)',
             zIndex: 0,
           }}
+          aria-hidden
         />
       )}
 
