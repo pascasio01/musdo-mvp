@@ -1,0 +1,285 @@
+MUSDO ELITE CODE AUDIT + PROFESSIONAL REFACTOR PASS
+
+Actúa como Senior Full-Stack Architect, Senior Frontend Engineer, Senior Product Designer, Security Engineer y Creative CTO.
+
+OBJETIVO:
+Analiza todo el proyecto MUSDO y corrige lo necesario para que funcione como una app profesional real, no como plantilla básica.
+
+NO quiero:
+- código genérico
+- componentes baratos
+- UI repetida de tutorial
+- todo metido en App.tsx
+- estilos hardcoded sin sistema
+- rutas rotas
+- diseño copiado de Spotify/Apple/SoundCloud
+- lógica falsa que parece funcional pero no conecta
+- cambios destructivos
+- borrar documentación
+
+QUIERO:
+- código limpio
+- arquitectura modular
+- TypeScript serio
+- componentes reutilizables
+- diseño premium original
+- mobile-first real
+- Supabase Auth funcionando
+- rutas protegidas funcionando
+- theme engine funcionando
+- owner/admin separado del usuario normal
+- UI consistente
+- navegación lógica
+- errores visibles
+- build sin errores
+
+━━━━━━━━━━━━━━━━━━
+PHASE 1 — FULL PROJECT AUDIT
+━━━━━━━━━━━━━━━━━━
+
+Revisa:
+
+- package.json
+- vite config
+- tsconfig
+- src/main.tsx
+- src/App.tsx
+- routes
+- layouts
+- providers
+- Supabase client
+- AuthProvider
+- ProtectedRoute
+- ThemeProvider
+- MusicAuraProvider
+- all pages
+- all components
+- imports
+- dead code
+- duplicated components
+- broken links
+- missing files
+- TypeScript errors
+- console errors
+- mobile layout problems
+
+Do not guess.
+Inspect the actual files before changing anything.
+
+━━━━━━━━━━━━━━━━━━
+PHASE 2 — ARCHITECTURE CLEANUP
+━━━━━━━━━━━━━━━━━━
+
+Keep this structure clean:
+
+src/components
+src/components/ui
+src/components/auth
+src/components/player
+src/components/music
+src/components/owner
+src/components/settings
+src/components/verification
+src/components/talent
+src/pages
+src/pages/auth
+src/pages/owner
+src/pages/legal
+src/layouts
+src/providers
+src/lib
+src/hooks
+src/types
+src/data
+src/styles
+
+Rules:
+- no massive App.tsx
+- no duplicated logic
+- no hardcoded repeated UI
+- no fake buttons without clear future placeholder
+- no broken route references
+
+━━━━━━━━━━━━━━━━━━
+PHASE 3 — DESIGN SYSTEM QUALITY
+━━━━━━━━━━━━━━━━━━
+
+Create/standardize professional UI primitives:
+
+- Button
+- GlassCard
+- Badge
+- VerificationBadge
+- Modal
+- Sheet
+- Input
+- Select
+- Toggle
+- Tabs
+- PageHeader
+- EmptyState
+- StatCard
+- ActionCard
+- SectionTitle
+- LoadingState
+- ErrorState
+
+Design style:
+- dark luxury
+- OLED black
+- cinematic glass
+- subtle glow
+- elegant spacing
+- premium typography
+- no gamer RGB
+- no childish effects
+- no cheap gradients
+
+Everything must feel original, premium and production-grade.
+
+━━━━━━━━━━━━━━━━━━
+PHASE 4 — AUTH + OWNER SECURITY CHECK
+━━━━━━━━━━━━━━━━━━
+
+Verify and fix:
+
+- Supabase Auth
+- signInWithPassword
+- signUp
+- forgot password
+- logout
+- session restore
+- protected routes
+- role redirects
+- profile sync
+- supreme_owner access
+
+Rules:
+- pascasio01@gmail.com must internally map to supreme_owner
+- do not expose owner email publicly
+- do not expose owner legal name publicly
+- never hardcode passwords
+- never use service_role in frontend
+- display clear auth errors
+
+━━━━━━━━━━━━━━━━━━
+PHASE 5 — THEME + AURA SYSTEM
+━━━━━━━━━━━━━━━━━━
+
+Verify and fix:
+
+- ThemeProvider
+- useTheme
+- Appearance Settings
+- CSS variables
+- localStorage persistence
+- MusicAuraProvider
+- useMusicAura
+- adaptive aura presets
+- reduced motion support
+
+Themes:
+- OLED Black
+- Studio Mode
+- Bachata Amber
+- Neon Noir
+- Soft Light
+- Midnight Calm
+
+Make sure themes actually affect the app globally.
+
+━━━━━━━━━━━━━━━━━━
+PHASE 6 — OWNER COMMAND CENTER
+━━━━━━━━━━━━━━━━━━
+
+Owner dashboard must not feel like normal user dashboard.
+
+Improve:
+- owner navigation
+- command center hierarchy
+- AI command bar
+- analytics cards
+- security status
+- live intelligence alerts
+- quick actions
+- charts
+- audit shortcuts
+- system controls
+
+Owner navigation:
+- Command
+- Analytics
+- Security
+- AI
+- Settings
+
+━━━━━━━━━━━━━━━━━━
+PHASE 7 — USER EXPERIENCE CHECK
+━━━━━━━━━━━━━━━━━━
+
+Verify:
+- Home works
+- Market works
+- Vault works
+- Upload works
+- Player works
+- Profile works
+- Dashboard works
+- Owner works
+- Settings works
+- Auth works
+- Mobile layout works
+- Bottom nav does not cover content
+- Mini player spacing is correct
+- Forms submit or show clear mock success
+- Buttons either work or show clear placeholder
+
+━━━━━━━━━━━━━━━━━━
+PHASE 8 — PROFESSIONAL FINAL POLISH
+━━━━━━━━━━━━━━━━━━
+
+Add final polish only where needed:
+
+- smooth transitions
+- premium loading states
+- consistent spacing
+- readable contrast
+- clean empty states
+- better error states
+- no visual clutter
+- no broken cards
+- no unfinished looking UI
+- no random colors
+
+━━━━━━━━━━━━━━━━━━
+IMPORTANT EXECUTION RULES
+━━━━━━━━━━━━━━━━━━
+
+Do NOT rebuild the app from zero.
+Do NOT redesign everything.
+Do NOT break working code.
+Do NOT delete:
+README.md
+PROJECT.md
+ROADMAP.md
+UI-CONCEPT.md
+SYSTEM-ARCHITECTURE.md
+DATABASE-SCHEMA.md
+
+Work like a senior engineer:
+1. inspect
+2. identify real issues
+3. fix surgically
+4. compile
+5. report changed files
+
+Stop after successful compile.
+
+FINAL OUTPUT:
+Show:
+- what was audited
+- what was broken
+- what was fixed
+- files changed
+- remaining risks
+- next recommended phase

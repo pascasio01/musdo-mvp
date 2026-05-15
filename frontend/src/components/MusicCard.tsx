@@ -1,4 +1,4 @@
-import { Play, BadgeCheck } from 'lucide-react'
+import { Play, Pause, BadgeCheck } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { usePlayer } from '../lib/player'
 import type { Song } from '../types'

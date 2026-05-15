@@ -14,8 +14,11 @@ export default function ProtectedRoute({ children, requireOwner = false }: Prote
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg, #000)' }}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 rounded-full border-2 border-white/10 border-t-white/60 animate-spin" />
+          <p className="text-zinc-700 text-xs tracking-widest uppercase font-medium">Loading</p>
+        </div>
       </div>
     )
   }
