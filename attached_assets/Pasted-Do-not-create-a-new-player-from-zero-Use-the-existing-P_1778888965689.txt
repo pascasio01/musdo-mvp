@@ -1,0 +1,145 @@
+Do not create a new player from zero.
+
+Use the existing PlayerBar / StudioView / Player architecture and connect everything to a single global currentTrack system.
+
+FIRST:
+Audit the current implementation before changing anything.
+
+Inspect:
+- PlayerBar
+- StudioView
+- current player page
+- existing audio state
+- mini-player
+- aura integration
+- routing
+- current playback state handling
+
+IMPORTANT:
+Do NOT duplicate player components.
+Do NOT create multiple playback states.
+Do NOT rebuild existing UI.
+Do NOT break routes.
+
+GOAL:
+Transform the current player into a unified global playback system.
+
+REQUIRED FIXES:
+
+1. SEARCH → PLAYER CONNECTION
+When a user taps a search result:
+- load selected track into global currentTrack state
+- navigate to /studio/:id or /player/:id
+- preserve selected metadata globally
+
+2. GLOBAL CURRENT TRACK STATE
+Create or fix:
+- CurrentTrackProvider
+- useCurrentTrack hook
+
+Global state must include:
+- currentTrack
+- isPlaying
+- progress
+- duration
+- currentTime
+- auraPreset
+- queue mock
+- volume mock
+
+All player-related components must read from the same source of truth.
+
+3. STUDIO VIEW SYNC
+Studio View must automatically receive:
+- title
+- artist/composer
+- BPM
+- key
+- genre
+- mood
+- audio quality
+- cover art
+- verification badges
+- licensing status
+- aura preset
+
+based on currentTrack.
+
+4. MINI-PLAYER SYNC
+Mini-player must stay synchronized globally.
+
+Changing:
+- play/pause
+- track
+- progress
+
+must update everywhere instantly.
+
+5. PLAY/PAUSE GLOBALIZATION
+Play/pause state must be shared globally.
+
+If play is pressed in:
+- Studio View
+- mini-player
+- player page
+
+all interfaces update together.
+
+6. AURA CONNECTION
+Aura system must react to currentTrack metadata:
+- BPM
+- mood
+- genre
+- aura preset
+
+Use existing aura system.
+Do NOT rebuild it.
+
+7. ROUTING
+Verify:
+- /studio/:id
+- /player/:id
+
+work correctly.
+
+If route params exist:
+- fetch track from mock demoSongs
+- update currentTrack safely
+
+8. PERFORMANCE
+Avoid:
+- duplicate renders
+- duplicated providers
+- unnecessary useEffects
+- local playback state conflicts
+- prop drilling
+
+Use:
+- context/store architecture
+- memoization where needed
+- clean modular hooks
+
+9. FINAL REQUIREMENTS
+- app compiles
+- no duplicate players
+- no broken routes
+- search results open Studio View correctly
+- mini-player syncs globally
+- aura updates correctly
+- no auth breakage
+- no architecture rebuild
+
+Stop after successful compile.
+Show changed files only. Audit StudioView and MiniPlayer GPU/render performance.
+
+Identify:
+- heavy blur
+- unnecessary animations
+- expensive shadows
+- repaint-heavy effects
+- excessive re-renders
+
+Optimize for:
+- smooth 60fps mobile experience
+- low GPU pressure
+- premium feel without lag

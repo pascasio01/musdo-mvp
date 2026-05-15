@@ -1,0 +1,414 @@
+MUSDO PHASE — SEARCH + STUDIO PLAYER + CINEMATIC MUSIC OS FOUNDATION
+
+Act as a Principal Product Architect, Senior Frontend Engineer, Audio UX Engineer, and Elite Product Designer.
+
+Implement a premium Search screen and connect it to Studio View using safe MUSDO demo/mock data.
+
+IMPORTANT:
+Do NOT rebuild the whole app.
+Do NOT redesign existing auth or routing.
+Do NOT break existing architecture.
+Do NOT include copyrighted commercial audio files.
+Do NOT stream or embed third-party songs unless licensed.
+Do NOT copy Spotify, Apple Music, YouTube Music or SoundCloud.
+Do NOT use generic templates.
+Do NOT create crowded layouts.
+Do NOT hardcode colors.
+Use semantic theme tokens.
+
+MUSDO must feel like:
+an emotional luxury music operating system.
+
+Not a generic music app.
+
+━━━━━━━━━━━━━━━━━━━
+CORE EXPERIENCE
+━━━━━━━━━━━━━━━━━━━
+
+MUSDO should feel:
+- cinematic
+- atmospheric
+- emotionally reactive
+- elegant
+- minimal
+- immersive
+- music-first
+- premium
+- breathable
+- native on mobile
+
+The UI must whisper luxury instead of shouting technology.
+
+━━━━━━━━━━━━━━━━━━━
+DESIGN SYSTEM REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━
+
+Use existing semantic token architecture.
+
+Use CSS variables:
+
+--background
+--surface
+--card
+--card-elevated
+--text-primary
+--text-secondary
+--text-muted
+--text-inverse
+--accent
+--accent-soft
+--border
+--border-soft
+--shadow
+--glow
+--blur
+
+Themes must remain readable in:
+
+- OLED Black
+- Studio Mode
+- Bachata Amber
+- Neon Noir
+- Soft Light
+- Midnight Calm
+
+CRITICAL:
+- no white text on light backgrounds
+- no invisible icons
+- no washed-out glass cards
+- no hardcoded text-white/bg-black leaks
+- maintain accessibility-safe contrast
+
+━━━━━━━━━━━━━━━━━━━
+PART 1 — SEARCH SCREEN
+━━━━━━━━━━━━━━━━━━━
+
+Create or improve /search page.
+
+Interface:
+- premium mobile-first search
+- cinematic spacing
+- glass search bar
+- smooth focus state
+- adaptive aura-safe background
+- readable in all themes
+
+Search placeholder:
+“Search by song, creator, mood, BPM or key…”
+
+Add filter chips:
+- Songs
+- Composers
+- BPM
+- Mood
+- Human Verified
+- Licensing
+- Studio View
+
+Search should support filtering mock data by:
+- title
+- creator
+- genre
+- mood
+- BPM
+- key
+- verification
+- licensing status
+
+━━━━━━━━━━━━━━━━━━━
+PART 2 — SAFE MUSDO DEMO SONG DATA
+━━━━━━━━━━━━━━━━━━━
+
+Create safe MUSDO-owned/mock demo test data.
+
+Create or update:
+src/data/demoSongs.ts
+src/types/music.ts
+
+Demo tracks:
+
+1. Compréndeme
+Artist/Composer: Emmanuel Reyes
+Genre: Modern Bachata
+Mood: Romantic / Amargue
+BPM: 130
+Key: B minor
+Audio Quality: Demo WAV
+Aura: Bachata Amber
+Human Verified: true
+Licensing: Available
+
+2. Midnight Bachata
+Artist/Composer: Pascasio Emmanuel
+Genre: Modern Bachata
+Mood: Late Night / Emotional
+BPM: 128
+Key: D minor
+Audio Quality: Demo MP3
+Aura: Deep Amber
+Human Verified: true
+Licensing: Available
+
+3. Noches Sin Ti
+Artist/Composer: Emmanuel R.
+Genre: Romantic Bachata
+Mood: Sad / Nostalgic
+BPM: 126
+Key: F# minor
+Audio Quality: Demo WAV
+Aura: Blue Violet
+Human Verified: false
+Licensing: Private
+
+4. Salgo a la Calle
+Artist/Composer: Emmanuel Reyes
+Genre: Urban Bachata
+Mood: Street / Emotional
+BPM: 132
+Key: A minor
+Audio Quality: Demo MP3
+Aura: Neon Noir
+Human Verified: true
+Licensing: Available
+
+Do not use real copyrighted audio.
+Use placeholder audio paths only if needed.
+
+━━━━━━━━━━━━━━━━━━━
+PART 3 — SEARCH RESULT CARDS
+━━━━━━━━━━━━━━━━━━━
+
+Each result card must show:
+- cover art
+- title
+- artist/composer
+- verification badge
+- genre
+- mood
+- BPM
+- key
+- audio quality
+- licensing status
+
+Design:
+- compact premium card
+- glass surface
+- thin border
+- adaptive aura shadow
+- readable contrast in all themes
+- no visual clutter
+
+━━━━━━━━━━━━━━━━━━━
+PART 4 — GLOBAL CURRENT TRACK STATE
+━━━━━━━━━━━━━━━━━━━
+
+When user taps a song:
+
+- update global currentTrack state
+- open /player/:id or /studio/:id
+- Studio View must update dynamically
+
+If currentTrack context/store is missing, create one.
+
+Create or update:
+- CurrentTrackProvider
+- useCurrentTrack hook
+
+State must include:
+- selected track
+- play/pause mock state
+- progress mock state
+- aura preset
+- mini-player sync
+
+Do not duplicate state across pages.
+
+━━━━━━━━━━━━━━━━━━━
+PART 5 — STUDIO VIEW
+━━━━━━━━━━━━━━━━━━━
+
+Create or improve:
+src/pages/StudioView.tsx
+
+Studio View must display:
+- floating cover art
+- animated waveform/equalizer mock
+- title
+- artist/composer
+- BPM
+- key
+- genre
+- mood
+- audio quality
+- credits
+- Song Passport shortcut
+- Human Verified badge
+- Rights Holder / licensing status
+- Request License button when available
+- adaptive aura background
+
+Player controls:
+- play/pause
+- progress bar
+- mini-player sync
+- premium tactile buttons
+- cinematic glass styling
+
+Technical labels:
+- audio quality
+- BPM
+- musical key
+- producer/credits mock
+
+━━━━━━━━━━━━━━━━━━━
+PART 6 — CREDITS & ANALYTICS PANEL
+━━━━━━━━━━━━━━━━━━━
+
+Add expandable Credits & Analytics section.
+
+Display mock professional metadata:
+
+- composer
+- producer
+- arranger
+- engineers
+- instruments
+- tonal key
+- BPM
+- copyright owner
+- licensing status
+- royalty splits mock
+- emotional engagement mock
+- listening analytics mock
+
+Design:
+- expandable glass panel
+- clean hierarchy
+- premium metadata layout
+- not cluttered
+
+━━━━━━━━━━━━━━━━━━━
+PART 7 — MUSIC AURA SYSTEM INTEGRATION
+━━━━━━━━━━━━━━━━━━━
+
+Connect Studio View to Music Aura.
+
+Aura reacts to:
+- BPM
+- genre
+- mood
+- energy
+- cover art colors
+- time of day
+- selected theme
+
+Examples:
+
+Romantic Bachata:
+- amber glow
+- wine red aura
+- slow breathing pulse
+
+Sad Music:
+- deep blue haze
+- soft motion
+- blurred shadows
+
+Urban:
+- deeper contrast
+- sharper pulse
+- violet accents
+
+IMPORTANT:
+- no gamer RGB
+- no aggressive neon
+- keep text readable
+- respect prefers-reduced-motion
+
+━━━━━━━━━━━━━━━━━━━
+PART 8 — MUSDO AI DISCOVERY FOUNDATION
+━━━━━━━━━━━━━━━━━━━
+
+Create emotional discovery UI foundation.
+
+Do NOT create a generic chatbot.
+
+Add discovery prompt/search area with:
+
+“Describe the feeling…”
+“Find the sound for tonight…”
+“What do you want to feel?”
+
+Mood chips:
+- Rainy NYC Nights
+- Late Night Bachata
+- Heartbreak Healing
+- Guitar & Whiskey
+- Dominican Classics
+- Deep Lyrics
+- Romantic Rooftop
+- Emotional Drive
+- Studio Session
+- Soft Nostalgia
+
+For now, return mock filtered results.
+
+Future-ready for AI integration.
+
+━━━━━━━━━━━━━━━━━━━
+PART 9 — ANIMATION QUALITY
+━━━━━━━━━━━━━━━━━━━
+
+Add only subtle premium animations:
+
+- breathing UI
+- cinematic transitions
+- elastic touch feedback
+- ambient glow pulse
+- smooth focus states
+
+Do NOT use:
+- gamer RGB
+- childish animations
+- exaggerated neon
+- heavy motion
+
+Respect prefers-reduced-motion.
+
+━━━━━━━━━━━━━━━━━━━
+TECHNICAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━
+
+Create or update:
+
+- src/data/demoSongs.ts
+- src/types/music.ts
+- src/pages/Search.tsx
+- src/pages/StudioView.tsx
+- src/providers/CurrentTrackProvider.tsx
+- src/hooks/useCurrentTrack.ts
+- route registration for /search and /studio/:id if missing
+
+Use mock data if Supabase songs table is not ready.
+Prepare Supabase-ready structure.
+Keep code modular.
+Avoid duplicate providers.
+Avoid bloated dependencies.
+
+━━━━━━━━━━━━━━━━━━━
+FINAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━
+
+- App must compile.
+- Search must work with mock data.
+- Tapping a track must open Studio View.
+- Studio View must update based on selected track.
+- Mini-player/currentTrack state must stay synced.
+- Themes must stay readable.
+- Aura must feel premium and subtle.
+- No copyrighted audio.
+- No secrets exposed.
+- No routing breakage.
+
+Stop after successful compile.
+Show changed files only.

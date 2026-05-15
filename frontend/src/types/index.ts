@@ -30,6 +30,38 @@ export interface Profile extends VerificationFields {
   created_at?: string
 }
 
+export type MoodTag =
+  | 'romantic'
+  | 'amargue'
+  | 'late_night'
+  | 'emotional'
+  | 'sad'
+  | 'nostalgic'
+  | 'street'
+  | 'energetic'
+  | 'acoustic'
+  | 'cinematic'
+
+export type AudioQuality = 'demo_mp3' | 'demo_wav' | 'master_wav' | 'lossless_flac' | 'streaming_aac'
+
+export type LicensingStatus = 'available' | 'private' | 'sold' | 'pending' | 'licensing_only'
+
+export interface SongCredits {
+  composer?: string
+  producer?: string
+  arranger?: string
+  engineer?: string
+  instruments?: string[]
+  copyright_owner?: string
+  royalty_split?: { name: string; percent: number }[]
+}
+
+export interface SongAnalytics {
+  plays?: number
+  emotional_engagement?: number
+  avg_listen_time?: number
+}
+
 export interface Song extends VerificationFields {
   id: string
   title: string
@@ -42,6 +74,12 @@ export interface Song extends VerificationFields {
   artwork_url?: string
   owner_id: string
   created_at: string
+  mood?: MoodTag | string
+  audio_quality?: AudioQuality
+  licensing_status?: LicensingStatus
+  aura_preset?: string
+  credits?: SongCredits
+  analytics?: SongAnalytics
 }
 
 export interface License {

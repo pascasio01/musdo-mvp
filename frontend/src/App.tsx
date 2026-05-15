@@ -6,6 +6,7 @@ import { ThemeProvider } from './lib/theme'
 import { MusicAuraProvider } from './lib/aura'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import AuraConnector from './components/AuraConnector'
 
 // ─── Route Loading Fallback ───────────────────────────────────────────────────
 
@@ -49,6 +50,7 @@ const RiskDisclaimer     = lazy(() => import('./pages/legal/RiskDisclaimer'))
 
 // Open app routes
 const Home        = lazy(() => import('./pages/Home'))
+const Search      = lazy(() => import('./pages/Search'))
 const Player      = lazy(() => import('./pages/Player'))
 const SongPassport = lazy(() => import('./pages/SongPassport'))
 const Market      = lazy(() => import('./pages/Market'))
@@ -87,6 +89,7 @@ const Providers = memo(function Providers({ children }: { children: React.ReactN
       <MusicAuraProvider>
         <AuthProvider>
           <PlayerProvider>
+            <AuraConnector />
             {children}
           </PlayerProvider>
         </AuthProvider>
@@ -125,7 +128,9 @@ export default function App() {
 
               {/* ── Open App (mock data, no auth required) ── */}
               <Route path="/home" element={<Home />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/player/:id" element={<Player />} />
+              <Route path="/studio/:id" element={<Player />} />
               <Route path="/song/:id" element={<Player />} />
               <Route path="/passport/:id" element={<SongPassport />} />
               <Route path="/market" element={<Market />} />
