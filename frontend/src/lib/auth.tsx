@@ -1,4 +1,12 @@
-import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  ReactNode,
+} from 'react'
 import type { User, Session } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 import type { Profile, AppRole } from '../types'
@@ -27,7 +35,7 @@ async function syncProfile(user: User): Promise<Profile | null> {
     }
 
     if (!data) {
-      const newProfile: Partial<Profile> = {
+      const newProfile = {
         id: user.id,
         username: user.user_metadata?.username ?? user.email?.split('@')[0] ?? 'user',
         email: user.email ?? '',
@@ -106,15 +114,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe()
   }, [loadProfile])
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = useCallback(async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) return { error, redirectTo: undefined }
     const p = await syncProfile(data.user)
     setProfile(p)
     return { error: null, redirectTo: getRedirectPath(p?.role ?? 'listener') }
-  }
+  }, [])
 
-  const signUp = async (email: string, password: string, username: string, role = 'listener') => {
+  const signUp = useCallback(async (email: string, password: string, username: string, role = 'listener') => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -122,36 +130,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
     const requiresConfirmation = !error && !data.session
     return { error, requiresConfirmation }
-  }
+  }, [])
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await supabase.auth.signOut()
     setProfile(null)
-  }
+  }, [])
 
-  const resetPassword = async (email: string) => {
+  const resetPassword = useCallback(async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/settings`,
     })
     return { error }
-  }
+  }, [])
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     if (user) {
       const p = await syncProfile(user)
       setProfile(p)
     }
-  }
+  }, [user])
+
+  const value = useMemo<AuthContextType>(() => ({
+    user, session, profile, loading,
+    signIn, signUp, signOut, resetPassword, refreshProfile,
+  }), [user, session, profile, loading, signIn, signUp, signOut, resetPassword, refreshProfile])
 
   return (
-    <AuthContext.Provider value={{ user, session, profile, loading, signIn, signUp, signOut, resetPassword, refreshProfile }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (!context) throw new Error('useAuth must be used inside AuthProvider')
-  return context
+export function useAuth(): AuthContextType {
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be used inside AuthProvider')
+  return ctx
 }

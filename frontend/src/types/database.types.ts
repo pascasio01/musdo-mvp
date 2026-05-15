@@ -1,0 +1,133 @@
+import type { AppRole, VerificationStatus, BadgeType } from './index'
+
+export interface DbProfile {
+  id: string
+  username: string
+  email: string
+  role: AppRole
+  sub_role: string | null
+  avatar_url: string | null
+  bio: string | null
+  verified_artist: boolean | null
+  verified_composer: boolean | null
+  verified_rights_holder: boolean | null
+  human_verified: boolean | null
+  label_verified: boolean | null
+  verification_status: VerificationStatus | null
+  verification_level: number | null
+  created_at: string
+  updated_at: string | null
+}
+
+export interface DbSong {
+  id: string
+  title: string
+  artist_name: string
+  genre: string
+  bpm: number | null
+  key: string | null
+  duration: number | null
+  audio_url: string | null
+  artwork_url: string | null
+  owner_id: string
+  human_verified: boolean | null
+  verified_rights_holder: boolean | null
+  created_at: string
+  updated_at: string | null
+}
+
+export interface DbLicense {
+  id: string
+  song_id: string
+  owner_id: string
+  license_type: 'exclusive' | 'non-exclusive' | 'sync' | 'publishing'
+  price: number
+  status: 'available' | 'sold' | 'pending'
+  created_at: string
+}
+
+export interface DbDemo {
+  id: string
+  title: string
+  composer_id: string
+  demo_url: string | null
+  notes: string | null
+  visibility: 'private' | 'public' | 'licensing_only'
+  created_at: string
+}
+
+export interface DbLyrics {
+  id: string
+  title: string
+  content: string
+  composer_id: string
+  timestamp_proof: string | null
+  created_at: string
+}
+
+export interface DbVerificationRequest {
+  id: string
+  user_id: string
+  badge_type: BadgeType
+  status: VerificationStatus
+  submitted_at: string
+  reviewed_at: string | null
+  reviewed_by: string | null
+  notes: string | null
+  rejection_reason: string | null
+}
+
+export interface DbAuditLog {
+  id: string
+  actor_id: string
+  action: string
+  resource_type: string
+  resource_id: string | null
+  metadata: Record<string, unknown> | null
+  ip_address: string | null
+  created_at: string
+}
+
+export interface Database {
+  public: {
+    Tables: {
+      profiles: {
+        Row: DbProfile
+        Insert: Omit<DbProfile, 'created_at' | 'updated_at'>
+        Update: Partial<Omit<DbProfile, 'id' | 'created_at'>>
+      }
+      songs: {
+        Row: DbSong
+        Insert: Omit<DbSong, 'id' | 'created_at' | 'updated_at'>
+        Update: Partial<Omit<DbSong, 'id' | 'owner_id' | 'created_at'>>
+      }
+      licenses: {
+        Row: DbLicense
+        Insert: Omit<DbLicense, 'id' | 'created_at'>
+        Update: Partial<Pick<DbLicense, 'status' | 'price'>>
+      }
+      demos: {
+        Row: DbDemo
+        Insert: Omit<DbDemo, 'id' | 'created_at'>
+        Update: Partial<Omit<DbDemo, 'id' | 'composer_id' | 'created_at'>>
+      }
+      lyrics: {
+        Row: DbLyrics
+        Insert: Omit<DbLyrics, 'id' | 'created_at'>
+        Update: Partial<Pick<DbLyrics, 'title' | 'content'>>
+      }
+      verification_requests: {
+        Row: DbVerificationRequest
+        Insert: Omit<DbVerificationRequest, 'id' | 'submitted_at'>
+        Update: Partial<Pick<DbVerificationRequest, 'status' | 'reviewed_at' | 'reviewed_by' | 'rejection_reason'>>
+      }
+      audit_logs: {
+        Row: DbAuditLog
+        Insert: Omit<DbAuditLog, 'id' | 'created_at'>
+        Update: never
+      }
+    }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+  }
+}
