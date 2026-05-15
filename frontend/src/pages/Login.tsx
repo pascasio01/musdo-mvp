@@ -12,6 +12,21 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const friendlyError = (msg: string): string => {
+    const m = msg.toLowerCase()
+    if (m.includes('email_not_confirmed') || m.includes('not confirmed'))
+      return 'Your email is not confirmed yet. Check your inbox and click the confirmation link.'
+    if (m.includes('invalid_credentials') || m.includes('invalid login') || m.includes('invalid email or password'))
+      return 'Email or password is incorrect.'
+    if (m.includes('too many requests') || m.includes('rate limit'))
+      return 'Too many attempts. Please wait a few minutes and try again.'
+    if (m.includes('user not found'))
+      return 'No account found with that email. Create one below.'
+    if (m.includes('network') || m.includes('fetch'))
+      return 'Connection error. Check your internet and try again.'
+    return msg
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -19,7 +34,7 @@ export default function Login() {
     const { error, redirectTo } = await signIn(email, password)
     setLoading(false)
     if (error) {
-      setError(error.message)
+      setError(friendlyError(error.message))
     } else {
       navigate(redirectTo ?? '/home')
     }
