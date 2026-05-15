@@ -1,0 +1,638 @@
+MUSDO OS™ — MASTER IMPLEMENTATION PROMPT
+Version: Supreme Architecture Expansion
+
+Act as:
+- Senior Full-Stack Architect
+- Senior Product Designer
+- Security Architect
+- Creative CTO
+- SaaS Systems Architect
+- Music-Tech Product Strategist
+
+PROJECT:
+MUSDO
+
+CORE VISION:
+MUSDO is not a traditional streaming app.
+
+MUSDO is:
+“an emotional operating system for music.”
+
+The platform combines:
+- emotional immersion
+- premium cinematic UI
+- creator economy
+- licensing infrastructure
+- human music protection
+- artist intelligence
+- music storytelling
+- adaptive environments
+- creator verification
+- secure ownership architecture
+
+IMPORTANT IMPLEMENTATION RULES:
+- Do NOT rebuild the entire app.
+- Do NOT regenerate everything.
+- Do NOT delete existing pages.
+- Do NOT break working routes.
+- Do NOT remove documentation.
+- Do NOT expose secrets.
+- Do NOT expose owner identity publicly.
+- Do NOT use service_role in frontend.
+- Do NOT enter infinite refactor loops.
+- Use mock data where backend is not ready.
+- Prepare Supabase integration cleanly.
+- Stop after app compiles.
+- Show changed files only.
+
+━━━━━━━━━━━━━━━━━━━━
+I. PUBLIC BRANDING & OWNER PROTECTION
+━━━━━━━━━━━━━━━━━━━━
+
+PUBLIC BRANDING:
+Use only:
+- MUSDO
+- MUSDO Team
+- MUSDO Support
+- MUSDO Legal
+
+Never publicly expose:
+- owner legal name
+- owner email
+- owner IDs
+- admin endpoints
+- internal security data
+
+INTERNAL OWNER SYSTEM:
+Internal Owner:
+- Name: Pascasio Emmanuel Reynoso Reyes
+- Email: pascasio01@gmail.com
+- Role: supreme_owner
+
+RULES:
+- Only supreme_owner can access:
+  /owner
+  /admin
+  /security
+  /system-control
+  /ai-control
+  /audit-log
+
+- No admin can remove owner
+- No developer can remove owner
+- No AI can modify owner permissions
+- Critical changes require owner approval
+
+━━━━━━━━━━━━━━━━━━━━
+II. CORE MODES
+━━━━━━━━━━━━━━━━━━━━
+
+Create two primary platform modes:
+
+1. Listener Mode
+2. Creator Mode
+
+Add Mode Switcher:
+- Listener Mode
+- Creator Mode
+- Owner Mode (only supreme_owner)
+
+━━━━━━━━━━━━━━━━━━━━
+III. LISTENER MODE
+━━━━━━━━━━━━━━━━━━━━
+
+Listener features:
+- Home
+- Search
+- Library
+- Player
+- Profile
+- Playlists
+- Recently Played
+- Notifications
+- Dynamic recommendations
+- Lyrics
+- Emotional themes
+- Adaptive UI
+- Music discovery
+
+━━━━━━━━━━━━━━━━━━━━
+IV. CREATOR MODE
+━━━━━━━━━━━━━━━━━━━━
+
+Creator features:
+- Composer Vault
+- Upload Lyrics
+- Upload Demo
+- Upload Cover
+- Song Passport
+- Licensing Marketplace
+- Request License
+- Creator Dashboard
+- Analytics
+- Revenue tracking mock
+- Music DNA
+- Song Story
+- Human Verified system
+- Marketplace visibility
+
+━━━━━━━━━━━━━━━━━━━━
+V. CREATOR VERIFICATION SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Verification levels:
+- Listener
+- Creator Basic
+- Verified Creator
+- Verified Artist
+- Verified Rights Holder
+- Label / Manager
+
+Verification page fields:
+- legal name
+- artist name
+- creator role
+- country
+- email
+- phone
+- government ID upload placeholder
+- selfie/video verification placeholder
+- official social links
+- Spotify/Apple/YouTube/SoundCloud links
+- distributor name
+- UPC/ISRC fields
+- PRO affiliation:
+  BMI
+  ASCAP
+  SESAC
+  SOCAN
+  PRS
+  Other
+- copyright registration field
+- split sheet upload placeholder
+- rights declaration checkbox
+
+Creator roles:
+- Composer
+- Recording Artist
+- Producer
+- Beatmaker
+- Publisher
+- Label
+- Manager
+- Sync Buyer
+
+RULES:
+- Listeners can listen without verification.
+- Creator Basic can upload private drafts.
+- Only Verified Creators can publish to marketplace.
+- Only Verified Rights Holders can sell/license songs.
+- Legal identity remains private.
+- Public profiles show only:
+  artist name
+  badges
+  music
+  verified status
+
+Badges:
+- Human Verified
+- Artist Verified
+- Rights Holder Verified
+- Label Verified
+
+━━━━━━━━━━━━━━━━━━━━
+VI. SUBSCRIPTION & BILLING SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Create separate plans for listeners and creators.
+
+PLANS:
+
+1. Free Listener — $0/month
+Features:
+- basic listening
+- playlists
+- follow artists
+- basic lyrics
+- limited personalization
+
+2. Premium Listener — $7.99/month
+Features:
+- ad-free
+- premium cinematic player
+- adaptive emotional UI
+- advanced themes
+- Smart Lyric Focus
+- Deep Listening Mode
+- Night Drive Mode
+- offline mode placeholder
+- future Hi-Res/Lossless support
+- advanced personalization
+
+3. Creator Basic — $4.99/month
+Features:
+- Composer Vault
+- upload lyrics
+- upload demos
+- private song storage
+- basic Song Passport
+- creator profile
+- limited marketplace visibility
+- basic analytics
+
+4. Creator Pro — $14.99/month
+Features:
+- full licensing marketplace
+- Human Verified eligibility
+- advanced analytics
+- Creator Dashboard
+- revenue tracking
+- Studio View
+- Music DNA
+- Song Story
+- higher storage
+- public creator portfolio
+
+5. Label / Studio — $49.99/month
+Features:
+- multiple artist management
+- team roles
+- split management mock
+- organization dashboard
+- advanced analytics
+- priority verification queue
+
+ONE-TIME FEES:
+Verification Review:
+- $9.99 one-time
+- review fee only
+- does NOT guarantee approval
+
+MARKETPLACE FEES:
+- MUSDO takes 10%
+- creator keeps 90% before processor fees
+
+BILLING PAGES:
+- /pricing
+- /billing
+- /subscription
+- /receipts
+- /refund-policy
+- /upgrade
+- /creator-plans
+
+Add:
+- cancel subscription flow
+- payment history mock
+- receipts mock
+- refund request mock
+- billing transparency
+
+IMPORTANT:
+Do NOT integrate real payments yet.
+Prepare architecture for future Stripe integration.
+
+━━━━━━━━━━━━━━━━━━━━
+VII. OWNER / ADMIN COMMAND CENTER
+━━━━━━━━━━━━━━━━━━━━
+
+Protected routes:
+- /owner
+- /admin
+- /creator-dashboard
+- /ai-control
+- /security
+- /audit-log
+- /system-control
+
+OWNER DASHBOARD:
+Show:
+- total revenue
+- monthly revenue
+- licensing revenue
+- active users
+- active composers
+- total songs
+- total demos
+- total license requests
+- pending payouts
+- system health
+- storage status
+- auth status
+- database status
+- Supabase connection status
+
+CREATOR DASHBOARD:
+Show:
+- songs
+- demos
+- lyrics
+- license requests
+- streams
+- saves
+- profile views
+- marketplace visibility
+- estimated revenue
+- Human Verified status
+
+ADMIN DASHBOARD:
+Admins can:
+- manage users
+- manage composers
+- approve/reject Human Verified
+- moderate content
+- manage marketplace
+- manage metadata
+- suspend/restore accounts
+
+Admins cannot:
+- remove owner
+- access owner secrets
+- bypass RLS
+- delete audit logs
+
+━━━━━━━━━━━━━━━━━━━━
+VIII. AI CONTROL CENTER
+━━━━━━━━━━━━━━━━━━━━
+
+AI assistant can:
+- review performance
+- suggest UI improvements
+- suggest revenue ideas
+- detect broken pages
+- detect missing metadata
+- recommend featured songs
+- summarize licensing activity
+- generate marketing ideas
+- detect suspicious activity
+
+AI CANNOT:
+- auto-publish destructive changes
+- delete data
+- change owner permissions
+- remove audit logs
+- modify billing
+- modify legal pages without approval
+
+━━━━━━━━━━━━━━━━━━━━
+IX. SECURITY CENTER
+━━━━━━━━━━━━━━━━━━━━
+
+Create Security Center with:
+- login activity
+- failed login attempts mock
+- active sessions
+- role matrix
+- API key status
+- Supabase RLS status
+- Storage status
+- suspicious activity alerts
+- backup status
+- rollback history
+- developer access list
+- maintenance mode
+- revoke sessions mock
+- rotate keys checklist
+
+IMPORTANT:
+Do NOT claim MUSDO is impossible to hack.
+Use layered security architecture.
+
+━━━━━━━━━━━━━━━━━━━━
+X. SUPABASE SECURITY
+━━━━━━━━━━━━━━━━━━━━
+
+Prepare RLS policies for:
+- profiles
+- songs
+- licenses
+- comments
+- playlists
+- audit_logs
+- admin_actions
+- owner_settings
+- system_flags
+
+RULES:
+- Enable RLS
+- Users only access own private data
+- Public songs readable by everyone
+- Private songs only visible to owner/composer
+- Admin/owner actions logged
+- No destructive action without audit log
+
+SECRET MANAGEMENT:
+- Never expose service_role
+- Use anon key only in frontend
+- Create .env.example
+- Add security comments/checklist
+
+━━━━━━━━━━━━━━━━━━━━
+XI. LEGAL SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Create:
+- /terms
+- /privacy
+- /dmca
+- /creator-agreement
+- /licensing-disclaimer
+- /ai-disclaimer
+- /community-rules
+- /refund-policy
+- /risk-disclaimer
+- /legal
+
+LEGAL WORDING:
+- MUSDO is a technology platform.
+- Users are responsible for uploaded content.
+- MUSDO does not guarantee:
+  income
+  success
+  copyright validity
+  legal outcomes
+  royalty collection
+- MUSDO may remove violating content.
+- Licensing should be legally reviewed.
+- Platform tools provided as-is during MVP/beta.
+- Liability limited to maximum extent permitted by law.
+
+IMPORTANT:
+Do NOT say users can never sue.
+Add:
+“This is not legal advice. Policies should be reviewed by a qualified attorney before public launch.”
+
+━━━━━━━━━━━━━━━━━━━━
+XII. PREMIUM EMOTIONAL UI
+━━━━━━━━━━━━━━━━━━━━
+
+Design language:
+- OLED black
+- Ghost UI
+- cinematic luxury
+- glassmorphism
+- elegant typography
+- ambient glow
+- smooth transitions
+- premium spacing
+- soft shadows
+- mobile-first
+- native app feel
+
+Adaptive Emotional Environment:
+Adapt UI using:
+- album art
+- mood
+- genre
+- energy
+- time of day
+
+Examples:
+
+Sad Bachata:
+- amber glow
+- emotional haze
+- slow movement
+
+Dark Reggaeton:
+- black/purple contrast
+- pulse motion
+
+Romantic Bolero:
+- champagne gold
+- cinematic vignette
+
+Acoustic:
+- matte warmth
+- minimal particles
+
+No cheap gamer RGB aesthetics.
+
+━━━━━━━━━━━━━━━━━━━━
+XIII. PLAYER & MUSIC EXPERIENCE
+━━━━━━━━━━━━━━━━━━━━
+
+Upgrade player:
+- floating mini-player
+- premium full player
+- adaptive backgrounds
+- credits
+- BPM
+- key
+- licensing status
+- Song Passport shortcut
+- Human Verified badge
+- Request License button
+
+Smart Lyrics:
+- cinematic mode
+- karaoke mode
+- minimal mode
+- accessibility mode
+- highlighted emotional lines
+- subtle zoom
+- glow emphasis
+
+━━━━━━━━━━━━━━━━━━━━
+XIV. MUSIC DNA & SONG STORY
+━━━━━━━━━━━━━━━━━━━━
+
+Music DNA:
+- producers
+- composers
+- engineers
+- musicians
+- instruments
+- vocal chain
+- recording studio
+- emotional tags
+- BPM
+- key
+- energy curve
+- sonic fingerprint mock
+
+Song Story:
+- creation story
+- timeline
+- inspiration
+- commentary
+- voice notes mock
+- handwritten lyrics mock
+- memories behind the song
+
+━━━━━━━━━━━━━━━━━━━━
+XV. PERSONALIZATION
+━━━━━━━━━━━━━━━━━━━━
+
+Allow users to customize:
+- accent color
+- theme mode
+- lyric style
+- player style
+- blur level
+- glow level
+- typography
+- animation intensity
+- emotional intensity
+
+Create Settings page:
+- appearance
+- audio
+- privacy
+- security
+- sessions
+- notifications
+- creator visibility
+- licensing visibility
+
+━━━━━━━━━━━━━━━━━━━━
+XVI. IMPLEMENTATION STRUCTURE
+━━━━━━━━━━━━━━━━━━━━
+
+Maintain structure:
+
+src/components
+src/pages
+src/layouts
+src/lib
+src/types
+src/data
+src/styles
+
+Create or update:
+- OwnerDashboard
+- AdminDashboard
+- CreatorDashboard
+- AIControlCenter
+- SecurityCenter
+- AuditLog
+- LegalPages
+- Terms
+- Privacy
+- DMCA
+- RefundPolicy
+- BillingTransparency
+- Settings
+- MusicDNA
+- SongStory
+- AdvancedPlayer
+- ThemeCustomizer
+- CreatorVerification
+- PricingPage
+
+━━━━━━━━━━━━━━━━━━━━
+XVII. FINAL EXECUTION RULE
+━━━━━━━━━━━━━━━━━━━━
+
+Implement this as:
+- Phase 4
+- Phase 5
+
+ONLY.
+
+Do not rebuild the entire app.
+Do not redesign everything.
+Do not enter endless iterations.
+Fix only necessary errors.
+Stop when app compiles successfully.
+Show changed files only.
