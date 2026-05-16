@@ -134,10 +134,29 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     audio.addEventListener('error', () => {
       cancelAnimations()
       const { song } = stateRef.current
+      const mediaError = audio.error
+      if (import.meta.env.DEV) {
+        console.warn('[MUSDO Player] audio error', {
+          songId: song?.id,
+          title: song?.title,
+          src: audio.src,
+          code: mediaError?.code,
+          message: mediaError?.message,
+        })
+      }
       if (song) {
         const duration = song.duration ?? 180
-        setState({ isLoading: false, hasError: false, duration })
+        setState({ isLoading: false, hasError: true, duration })
         startSimulation(duration)
+      }
+    })
+
+    audio.addEventListener('stalled', () => {
+      if (import.meta.env.DEV) {
+        console.warn('[MUSDO Player] audio stalled', {
+          songId: stateRef.current.song?.id,
+          src: audio.src,
+        })
       }
     })
 
@@ -184,19 +203,49 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     })
 
     if (song.audio_url) {
-      audio.src = song.audio_url
-      audio.volume = stateRef.current.isMuted ? 0 : stateRef.current.volume
-      audio.load()
-      audio.play()
-        .then(() => {
-          setState({ isPlaying: true, isLoading: false })
-          startRAF(audio)
-        })
-        .catch(() => {
-          setState({ isPlaying: true, isLoading: false })
-          startSimulation(duration)
-        })
+      try {
+        audio.src = song.audio_url
+        audio.volume = stateRef.current.isMuted ? 0 : stateRef.current.volume
+        audio.load()
+        audio.play()
+          .then(() => {
+            setState({ isPlaying: true, isLoading: false, hasError: false })
+            startRAF(audio)
+          })
+          .catch((err: unknown) => {
+            if (import.meta.env.DEV) {
+              const name = err instanceof Error ? err.name : 'Unknown'
+              const message = err instanceof Error ? err.message : String(err)
+              console.warn('[MUSDO Player] audio.play() rejected — falling back to simulation', {
+                songId: song.id,
+                title: song.title,
+                src: song.audio_url,
+                errorName: name,
+                errorMessage: message,
+              })
+            }
+            setState({ isPlaying: true, isLoading: false, hasError: false })
+            startSimulation(duration)
+          })
+      } catch (err) {
+        if (import.meta.env.DEV) {
+          console.warn('[MUSDO Player] failed to assign audio src', {
+            songId: song.id,
+            title: song.title,
+            src: song.audio_url,
+            err,
+          })
+        }
+        setState({ isPlaying: true, isLoading: false, hasError: false })
+        startSimulation(duration)
+      }
     } else {
+      if (import.meta.env.DEV) {
+        console.info('[MUSDO Player] no audio_url — simulating playback', {
+          songId: song.id,
+          title: song.title,
+        })
+      }
       setState({ isPlaying: true, isLoading: false })
       startSimulation(duration)
     }
@@ -222,7 +271,11 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
             setState({ isPlaying: true })
             startRAF(audio)
           })
-          .catch(() => {
+          .catch((err: unknown) => {
+            if (import.meta.env.DEV) {
+              const message = err instanceof Error ? err.message : String(err)
+              console.warn('[MUSDO Player] resume play() rejected', { songId: song.id, message })
+            }
             setState({ isPlaying: true })
             startSimulation(duration, elapsed)
           })
