@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, ChevronRight, LogOut } from 'lucide-react'
+import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useAuth } from '../lib/auth'
 import { Toggle, ActionCard } from '../components/ui'
+import SafeListenPanel from '../components/audio/SafeListenPanel'
+import AudioTuningPanel from '../components/audio/AudioTuningPanel'
+import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
 
 export default function Settings() {
   const navigate = useNavigate()
@@ -75,6 +78,21 @@ export default function Settings() {
               <ActionCard label="Active Sessions" desc="Manage where you're logged in" icon={Shield} onClick={() => navigate('/security')} />
               <ActionCard label="Change Password" desc="Update your account password" icon={Shield} />
               <ActionCard label="Two-Factor Auth" desc="Coming soon" icon={Shield} />
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+            <div className="px-5 pt-5 pb-1 flex items-center gap-2">
+              <Headphones size={14} className="text-zinc-600" />
+              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Audio</p>
+            </div>
+            <div className="px-3 pb-3">
+              <SafeListenPanel />
+              <AudioTuningPanel />
+              <SpatialListeningPanel />
+              <p className="text-[10px] mt-3 px-2" style={{ color: 'var(--text-muted)' }}>
+                These panels also appear in the player. Settings sync across the app.
+              </p>
             </div>
           </div>
 

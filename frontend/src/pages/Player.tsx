@@ -10,6 +10,9 @@ import { mockSongs } from '../data/mockData'
 import type { Song, LicensingStatus } from '../types'
 import VerificationBadge, { VerificationBadgeRow } from '../components/VerificationBadge'
 import LyricsPanel from '../components/LyricsPanel'
+import SafeListenPanel from '../components/audio/SafeListenPanel'
+import AudioTuningPanel from '../components/audio/AudioTuningPanel'
+import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
 import { getLyricsForSong } from '../data/mockLyrics'
 import { formatDuration } from '../utils/format'
 
@@ -318,6 +321,11 @@ export default function Player() {
 
         {/* Cinematic lyrics — expandable, time-synced via global player */}
         <LyricsPanel track={getLyricsForSong(song.id)} elapsed={elapsedSec} />
+
+        {/* Audio intelligence — collapsed by default, never overloads the player */}
+        <SafeListenPanel />
+        <AudioTuningPanel />
+        <SpatialListeningPanel />
       </div>
     </div>
   )

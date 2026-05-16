@@ -1,0 +1,337 @@
+MUSDO PHASE — PREMIUM AUDIO INTELLIGENCE SYSTEM
+SafeListen™ + Smart EQ + Adaptive Spatial Listening™
+
+Act as a Principal Audio Experience Engineer, Senior Frontend Architect, Mobile Performance Engineer, and Premium UX Systems Designer.
+
+IMPORTANT:
+Do NOT rebuild the player.
+Do NOT duplicate audio state.
+Do NOT create a new playback engine.
+Do NOT break PlayerProvider.
+Do NOT force AudioContext before user interaction on iOS.
+Do NOT activate microphone in MVP.
+Do NOT record, upload, store, or analyze microphone audio without explicit permission.
+Do NOT add new dependencies unless absolutely necessary.
+
+Use the existing:
+- PlayerProvider
+- global audio engine
+- StudioView
+- Settings > Audio
+- currentTrack metadata
+- theme tokens
+- aura system
+
+Goal:
+Create a premium intelligent audio layer that makes MUSDO feel safer, smarter, cinematic, and more professional than a normal music app.
+
+━━━━━━━━━━━━━━━━━━━━
+PART 1 — MUSDO SafeListen™
+━━━━━━━━━━━━━━━━━━━━
+
+Create a listener-protection system.
+
+Features:
+- Safe Volume ON/OFF
+- Max Volume Limit: 60%, 70%, 80%, 90%
+- Night Listening Mode
+- Reduce Harsh Highs
+- Anti-Fatigue Mode
+- Normalize Volume ON/OFF
+- Prevent Sudden Loudness ON/OFF
+- Smooth Track Transitions ON/OFF
+
+Behavior:
+- prevent extreme loudness
+- avoid sudden volume jumps
+- gently reduce unsafe volume
+- show calm warnings after long high-volume listening
+- add ear rest reminder after long sessions
+
+Messages:
+- “Your ears may need a short rest.”
+- “Volume has been softened for safer listening.”
+
+Add subtle disclaimer:
+“MUSDO SafeListen helps manage listening comfort but does not replace medical advice or device-level hearing protection.”
+
+━━━━━━━━━━━━━━━━━━━━
+PART 2 — AMBIENT AWARENESS MODE
+━━━━━━━━━━━━━━━━━━━━
+
+Create awareness profiles:
+
+- Street Awareness
+- Conversation Awareness
+- Transit Mode
+- Gym Mode
+- Walk Mode
+
+MVP behavior:
+- use toggles only
+- lower mock volume/awareness settings
+- prepare architecture for future local speech detection
+- do not activate microphone
+- do not request mic permission yet unless explicitly needed
+- do not store audio
+
+Future placeholder:
+- detect speech locally
+- temporarily reduce music volume
+- restore volume smoothly after speech ends
+
+━━━━━━━━━━━━━━━━━━━━
+PART 3 — SMART VOLUME PROFILES
+━━━━━━━━━━━━━━━━━━━━
+
+Create listening profiles:
+
+- Quiet Room
+- Street
+- Subway
+- Car
+- Gym
+- Night
+- Studio Check
+
+Each profile controls:
+- volume limit
+- bass safety
+- treble softness
+- awareness level
+- compression mock
+- fatigue protection level
+
+━━━━━━━━━━━━━━━━━━━━
+PART 4 — SMART EQ SYSTEM
+━━━━━━━━━━━━━━━━━━━━
+
+Add Audio Tuning panel inside StudioView and Settings > Audio.
+
+Controls:
+- Bass
+- Low Mid
+- Mid
+- Presence
+- Treble
+- Stereo Width mock
+- Warmth mock
+- Vocal Clarity mock
+
+EQ Presets:
+- Studio Flat
+- Bachata Warm
+- Vocal Clarity
+- Night Drive
+- Deep Bass
+- Acoustic Room
+- Live Stage
+- Soft Romantic
+- Mastering Check
+
+Smart EQ Mode:
+- Smart EQ ON/OFF
+
+When ON, choose preset based on:
+- genre
+- mood
+- BPM
+- audio quality
+- headphones connected mock
+
+Examples:
+- Modern Bachata → Bachata Warm
+- Sad / Nostalgic → Soft Romantic
+- Urban Bachata → Deep Bass
+- Acoustic → Acoustic Room
+
+Add note:
+“Audio tuning changes playback color but does not replace professional mastering.”
+
+━━━━━━━━━━━━━━━━━━━━
+PART 5 — WEB AUDIO API READY ARCHITECTURE
+━━━━━━━━━━━━━━━━━━━━
+
+Prepare future-ready structure for real DSP later:
+
+- AudioContext
+- MediaElementSource
+- BiquadFilterNode
+- GainNode
+- StereoPannerNode if supported
+
+For now:
+- keep controls safe/mocked unless current audio engine is ready
+- do not break playback
+- do not create local audio states
+- sync with PlayerProvider volume state
+
+━━━━━━━━━━━━━━━━━━━━
+PART 6 — ADAPTIVE SPATIAL LISTENING™
+━━━━━━━━━━━━━━━━━━━━
+
+Create intelligent listening environments:
+
+- Quiet Room
+- NYC Street
+- Subway
+- Car Ride
+- Airplane
+- Gym
+- Studio Session
+- Night Listening
+- Rainy Night
+
+Each environment changes:
+- EQ softness
+- spatial width mock
+- vocal clarity
+- awareness level
+- bass intensity
+- dynamic compression mock
+
+Spatial modes:
+- Intimate
+- Wide
+- Cinematic
+- Studio
+- Live Room
+
+IMPORTANT:
+Do NOT simulate fake 8D audio.
+Keep it subtle, elegant, and premium.
+
+━━━━━━━━━━━━━━━━━━━━
+PART 7 — SMART HEADPHONE / DEVICE PREP
+━━━━━━━━━━━━━━━━━━━━
+
+Prepare architecture for:
+- AirPods
+- wired headphones
+- Bluetooth devices
+- speakers
+
+Behavior:
+- adapt profile automatically later
+- preserve safe listening levels
+- show connected device mock if available
+
+━━━━━━━━━━━━━━━━━━━━
+PART 8 — MOTION-AWARE LISTENING PREP
+━━━━━━━━━━━━━━━━━━━━
+
+Prepare future-ready motion awareness:
+
+Examples:
+- Walking → increase awareness
+- Sitting still → deeper immersion
+- Transit → soften fatigue frequencies
+
+Rules:
+- no invasive tracking
+- no GPS storage
+- no creepy behavior
+- mock only for MVP
+
+━━━━━━━━━━━━━━━━━━━━
+PART 9 — TRANSITION INTELLIGENCE
+━━━━━━━━━━━━━━━━━━━━
+
+When switching tracks:
+- smooth aura transition
+- smooth EQ transition
+- soft volume blending
+- cinematic crossfade feel mock
+- no harsh audio jumps
+
+━━━━━━━━━━━━━━━━━━━━
+PART 10 — UI REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━
+
+Create premium panels:
+
+- StudioView > SafeListen
+- StudioView > Audio Tuning
+- StudioView > Spatial Listening
+- Settings > Audio
+- Settings > Audio Safety
+
+Design:
+- dark luxury
+- cinematic
+- minimal
+- breathable
+- emotionally intelligent
+- calm safety language
+- premium toggles
+- simple sliders
+- no medical-looking UI
+- no gamer neon
+- no clutter
+
+Respect:
+- reduced motion
+- hearing sensitivity
+- accessibility-safe contrast
+- all current themes
+
+━━━━━━━━━━━━━━━━━━━━
+PART 11 — FILES
+━━━━━━━━━━━━━━━━━━━━
+
+Create or update:
+
+- src/components/audio/SafeListenPanel.tsx
+- src/components/audio/AudioTuningPanel.tsx
+- src/components/audio/SpatialListeningPanel.tsx
+- src/hooks/useSafeListen.ts
+- src/hooks/useAudioTuning.ts
+- src/hooks/useSpatialAudio.ts
+- src/types/audio.ts
+- src/types/audioSafety.ts
+- src/data/eqPresets.ts
+- src/data/listeningProfiles.ts
+- src/data/spatialProfiles.ts
+- src/data/listeningEnvironment.ts
+
+Integrate into:
+- StudioView
+- Settings > Audio
+- PlayerProvider volume state
+- existing aura system
+
+━━━━━━━━━━━━━━━━━━━━
+PERFORMANCE REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━
+
+Avoid:
+- continuous microphone processing
+- heavy background loops
+- excessive visualizers
+- constant rerenders
+- CPU-heavy fake DSP
+- expensive blur/shadow stacking
+
+Use:
+- lightweight hooks
+- lazy initialization
+- memoized profile calculations
+- existing global playback state
+
+━━━━━━━━━━━━━━━━━━━━
+FINAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━
+
+- App compiles
+- No duplicated audio state
+- No duplicated player
+- No broken playback
+- No microphone activation in MVP
+- No secrets exposed
+- No new dependencies unless justified
+- Works visually in StudioView and Settings
+- Uses existing theme tokens
+- Keeps mobile performance smooth
+
+Stop after successful compile.
+Show changed files only.
