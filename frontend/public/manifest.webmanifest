@@ -2,26 +2,29 @@
   "name": "MUSDO — Human Music Infrastructure",
   "short_name": "MUSDO",
   "description": "Discover human-verified music. Protect your demos. License songs through the MUSDO marketplace.",
-  "start_url": "/home",
+  "id": "/?source=pwa",
+  "start_url": "/home?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
   "background_color": "#000000",
   "theme_color": "#000000",
   "lang": "en",
   "dir": "ltr",
   "categories": ["music", "entertainment", "lifestyle"],
+  "prefer_related_applications": false,
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "/favicon.svg",          "sizes": "any",     "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/icons/icon-192.png",   "sizes": "192x192", "type": "image/png",     "purpose": "any" },
+    { "src": "/icons/icon-512.png",   "sizes": "512x512", "type": "image/png",     "purpose": "any" },
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Discover", "short_name": "Home", "url": "/home" },
-    { "name": "Vault", "short_name": "Vault", "url": "/vault" },
-    { "name": "Marketplace", "short_name": "Market", "url": "/market" }
-  ]
+    { "name": "Discover",     "short_name": "Home",   "url": "/home",   "description": "Browse human-verified music" },
+    { "name": "Composer Vault","short_name": "Vault", "url": "/vault",  "description": "Open your protected works" },
+    { "name": "Marketplace",  "short_name": "Market", "url": "/market", "description": "License songs from composers" }
+  ],
+  "screenshots": []
 }

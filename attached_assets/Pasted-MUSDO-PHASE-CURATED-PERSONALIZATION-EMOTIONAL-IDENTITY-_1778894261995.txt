@@ -1,0 +1,282 @@
+MUSDO PHASE — CURATED PERSONALIZATION + EMOTIONAL IDENTITY ENGINE
+
+Do NOT rebuild the app.
+Do NOT break playback architecture.
+Do NOT create chaotic customization.
+Extend the existing Theme Engine + Aura System + Player architecture only.
+
+GOAL:
+Transform MUSDO into a personalized emotional music operating system while preserving premium cinematic identity.
+
+IMPORTANT:
+MUSDO personalization must feel:
+- elegant
+- emotionally intelligent
+- cinematic
+- luxurious
+- minimal
+- curated
+- atmospheric
+
+NOT:
+- gamer RGB
+- rainbow UI
+- chaotic color pickers
+- childish themes
+- visual overload
+
+━━━━━━━━━━━━━━━━━━━
+PART 1 — CURATED PERSONALIZATION SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Create a premium personalization engine.
+
+Users can customize:
+- aura style
+- motion intensity
+- glow intensity
+- listening atmosphere
+- adaptive behavior
+
+BUT:
+All customization must remain inside MUSDO’s cinematic design language.
+
+━━━━━━━━━━━━━━━━━━━
+PART 2 — AURA PRESETS
+━━━━━━━━━━━━━━━━━━━
+
+Create curated premium aura presets:
+
+1. Bachata Amber
+- warm amber glow
+- emotional warmth
+- soft gold haze
+
+2. Midnight Noir
+- matte black
+- subtle violet glow
+- cinematic darkness
+
+3. Rainy NYC
+- cold blue haze
+- soft reflections
+- atmospheric blur
+
+4. Studio Gold
+- warm studio lighting
+- analog feeling
+- soft contrast
+
+5. Deep Crimson
+- dark wine tones
+- emotional intensity
+- elegant low saturation
+
+6. Blue Violet
+- nostalgic mood
+- cinematic softness
+- nighttime ambience
+
+7. Dominican Nights
+- tropical warmth
+- romantic amber
+- subtle nightlife energy
+
+━━━━━━━━━━━━━━━━━━━
+PART 3 — PERSONALIZATION SETTINGS
+━━━━━━━━━━━━━━━━━━━
+
+Create “Listening Atmosphere” section.
+
+Add controls:
+
+Aura Intensity:
+- Low
+- Medium
+- High
+- Cinematic
+
+Motion Style:
+- Minimal
+- Smooth
+- Atmospheric
+- Immersive
+
+Playback Atmosphere:
+- Intimate
+- Studio
+- Wide
+- Cinematic
+- Night Drive
+
+Cover Art Influence:
+Slider:
+0% → 100%
+
+Defines how much album artwork colors affect the UI aura.
+
+━━━━━━━━━━━━━━━━━━━
+PART 4 — DYNAMIC ADAPTIVE MODES
+━━━━━━━━━━━━━━━━━━━
+
+Add adaptive modes:
+
+- Static Theme
+- Adaptive by Song
+- Adaptive by Mood
+- Adaptive by Time
+- Full Cinematic
+
+Behavior:
+UI reacts intelligently to:
+- BPM
+- mood
+- genre
+- time of day
+- listening environment
+- current aura preset
+
+━━━━━━━━━━━━━━━━━━━
+PART 5 — LISTENING PERSONALITY PROFILES™
+━━━━━━━━━━━━━━━━━━━
+
+Create emotional listener identities.
+
+Examples:
+
+1. Warm Listener
+- softer highs
+- warm aura
+- intimate atmosphere
+
+2. Studio Listener
+- flatter UI
+- cleaner EQ
+- reduced motion
+
+3. Night Listener
+- darker surfaces
+- low brightness feel
+- slower breathing glow
+
+4. Cinematic Listener
+- immersive transitions
+- stronger atmospheric depth
+- smoother aura blending
+
+5. Dominican Nights
+- romantic warmth
+- tropical cinematic glow
+- emotional nightlife energy
+
+━━━━━━━━━━━━━━━━━━━
+PART 6 — EMOTIONAL ONBOARDING
+━━━━━━━━━━━━━━━━━━━
+
+Do NOT ask:
+“What genres do you like?”
+
+Instead ask:
+- “What atmosphere feels like you?”
+- “How do you usually listen at night?”
+- “What kind of musical environment do you enjoy?”
+- “Do you prefer intimate or cinematic listening?”
+
+Use onboarding answers to:
+- initialize aura profile
+- initialize motion profile
+- initialize listening personality
+
+━━━━━━━━━━━━━━━━━━━
+PART 7 — TECHNICAL ARCHITECTURE
+━━━━━━━━━━━━━━━━━━━
+
+Create or extend:
+
+- Theme Engine
+- Aura Engine
+- Preference Engine
+- Listening Personality system
+
+Structure:
+
+Theme Layer:
+- surfaces
+- typography
+- borders
+- shadows
+- blur
+
+Aura Layer:
+- gradients
+- ambient glow
+- breathing effects
+- motion behavior
+
+Track Layer:
+- BPM adaptation
+- mood adaptation
+- genre reaction
+- time-of-day adaptation
+
+User Layer:
+- personalization preferences
+- listening personality
+- adaptive overrides
+
+━━━━━━━━━━━━━━━━━━━
+PART 8 — ACCESSIBILITY
+━━━━━━━━━━━━━━━━━━━
+
+Respect:
+- reduced motion
+- safe contrast
+- readability in all themes
+- low brightness environments
+- hearing comfort settings
+
+Never allow customization to:
+- break readability
+- create visual fatigue
+- destroy premium consistency
+
+━━━━━━━━━━━━━━━━━━━
+PART 9 — PERFORMANCE
+━━━━━━━━━━━━━━━━━━━
+
+Avoid:
+- excessive rerenders
+- GPU-heavy effects
+- stacked blurs
+- unnecessary animations
+- infinite transitions
+
+Use:
+- lightweight aura transitions
+- memoized theme calculations
+- CSS variable updates
+- lazy aura adaptation
+
+━━━━━━━━━━━━━━━━━━━
+FINAL GOAL
+━━━━━━━━━━━━━━━━━━━
+
+MUSDO should feel:
+- emotionally alive
+- deeply personal
+- cinematic
+- luxurious
+- calm
+- immersive
+- timeless
+
+Users should feel:
+“MUSDO understands how I experience music.”
+
+WITHOUT losing:
+- elegance
+- visual consistency
+- premium identity
+
+Stop after compile.
+Show changed files only.

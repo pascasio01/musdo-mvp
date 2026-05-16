@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MUSDO — Offline</title>
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    :root { color-scheme: dark; }
+    html, body { margin: 0; padding: 0; background: #000; color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      height: 100%; -webkit-font-smoothing: antialiased; }
+    body { display: flex; align-items: center; justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+    .card { max-width: 22rem; padding: 2rem 1.5rem; text-align: center; }
+    .badge { display: inline-block; padding: .35rem .75rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12); font-size: .65rem; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 1.25rem; }
+    h1 { font-size: 1.5rem; font-weight: 800; margin: 0 0 .5rem; letter-spacing: -.02em; }
+    p { color: rgba(255,255,255,0.6); line-height: 1.55; margin: 0 0 1.5rem; font-size: .95rem; }
+    button { width: 100%; padding: .85rem 1rem; border-radius: 14px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-weight: 600; font-size: .9rem; cursor: pointer; transition: background .2s; }
+    button:hover { background: rgba(255,255,255,0.14); }
+    .muted { font-size: .75rem; color: rgba(255,255,255,0.35); margin-top: 1.25rem; font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">MUSDO</span>
+    <h1>You're offline</h1>
+    <p>Your connection dropped. MUSDO needs the network to stream verified music. We'll wait here with you.</p>
+    <button onclick="location.reload()">Try again</button>
+    <p class="muted">Human Music Infrastructure</p>
+  </div>
+</body>
+</html>
