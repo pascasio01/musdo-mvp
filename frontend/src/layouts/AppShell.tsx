@@ -22,12 +22,12 @@ export default function AppShell({ children }: AppShellProps) {
       {auraSettings.enabled && !settings.reduceMotion && (
         <>
           <div
-            className="fixed top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none -z-0"
+            className="fixed top-0 right-0 w-[360px] h-[360px] rounded-full pointer-events-none -z-0 will-change-transform"
             style={{
               background: 'var(--aura-primary, transparent)',
-              filter: 'blur(80px)',
-              opacity: 0.7,
-              transform: 'translate(35%, -35%)',
+              filter: 'blur(56px)',
+              opacity: 0.65,
+              transform: 'translate3d(35%, -35%, 0)',
               animation: settings.ambientAnimation
                 ? 'aura-breathe var(--aura-pulse, 4s) ease-in-out infinite'
                 : 'none',
@@ -35,12 +35,12 @@ export default function AppShell({ children }: AppShellProps) {
             aria-hidden
           />
           <div
-            className="fixed bottom-0 left-0 w-[320px] h-[320px] rounded-full pointer-events-none -z-0"
+            className="fixed bottom-0 left-0 w-[280px] h-[280px] rounded-full pointer-events-none -z-0 will-change-transform"
             style={{
               background: 'var(--aura-secondary, transparent)',
-              filter: 'blur(80px)',
-              opacity: 0.5,
-              transform: 'translate(-35%, 35%)',
+              filter: 'blur(56px)',
+              opacity: 0.45,
+              transform: 'translate3d(-35%, 35%, 0)',
               animation: settings.ambientAnimation
                 ? 'aura-breathe var(--aura-pulse, 4s) ease-in-out infinite 2.2s'
                 : 'none',
@@ -54,7 +54,7 @@ export default function AppShell({ children }: AppShellProps) {
         <div
           className="fixed inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,0.65) 100%)',
+            background: 'radial-gradient(ellipse at 50% 40%, transparent 40%, var(--overlay, rgba(0,0,0,0.65)) 100%)',
             zIndex: 0,
           }}
           aria-hidden

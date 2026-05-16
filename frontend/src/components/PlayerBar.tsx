@@ -64,7 +64,11 @@ function PlayerBar() {
           >
             {song.artwork_url
               ? <img src={song.artwork_url} alt="" loading="lazy" className="w-full h-full object-cover" />
-              : <div className="w-full h-full bg-gradient-to-br from-violet-900 to-zinc-900" aria-hidden />
+              : <div
+                  className="w-full h-full"
+                  style={{ background: 'linear-gradient(135deg, var(--accent-soft), var(--surface))' }}
+                  aria-hidden
+                />
             }
           </div>
 

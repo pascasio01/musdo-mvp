@@ -4,7 +4,7 @@ import {
   SkipBack, SkipForward, Repeat, Shuffle, Shield, FileText,
   ChevronRight, Sparkles,
 } from 'lucide-react'
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState, useMemo, useCallback, memo } from 'react'
 import { usePlayer } from '../lib/player'
 import { mockSongs } from '../data/mockData'
 import type { Song, LicensingStatus } from '../types'
@@ -225,7 +225,7 @@ export default function Player() {
           }}
         >
           <div
-            className="h-full rounded-full transition-[width]"
+            className="h-full rounded-full"
             style={{ width: `${progress}%`, background: 'var(--text-primary)' }}
           />
           <div
@@ -336,32 +336,45 @@ function Chip({ children, subtle }: { children: React.ReactNode; subtle?: boolea
 }
 
 /**
- * Decorative waveform/equalizer mock. Subtle, breathing pulse — no copyrighted audio.
- * Respects prefers-reduced-motion via CSS animation usage.
+ * Decorative waveform/equalizer mock. Single SVG element — GPU-cheap, no per-bar
+ * React diffing, no per-bar transitions. Repaints once per progress tick.
+ * Respects prefers-reduced-motion (no animation here).
  */
-function Waveform({ progress }: { progress: number }) {
-  const bars = 56
+const WAVEFORM_BARS = 56
+const WAVEFORM_HEIGHTS = Array.from({ length: WAVEFORM_BARS }, (_, i) => {
+  const seed = (Math.sin(i * 1.7) + 1) / 2
+  return 30 + seed * 70
+})
+
+const Waveform = memo(function Waveform({ progress }: { progress: number }) {
+  const filledIndex = Math.floor((progress / 100) * WAVEFORM_BARS)
   return (
-    <div className="flex items-end justify-between h-10 gap-[2px]" aria-hidden>
-      {Array.from({ length: bars }).map((_, i) => {
-        const seed = (Math.sin(i * 1.7) + 1) / 2
-        const baseH = 30 + seed * 70
-        const reached = (i / bars) * 100 < progress
+    <svg
+      viewBox={`0 0 ${WAVEFORM_BARS * 4} 40`}
+      preserveAspectRatio="none"
+      className="w-full h-10 block"
+      aria-hidden
+    >
+      {WAVEFORM_HEIGHTS.map((h, i) => {
+        const reached = i < filledIndex
+        const barH = (h / 100) * 36
+        const y = (40 - barH) / 2
         return (
-          <div
+          <rect
             key={i}
-            className="w-[2px] rounded-full transition-colors"
-            style={{
-              height: `${baseH}%`,
-              background: reached ? 'var(--text-primary)' : 'var(--border)',
-              opacity: reached ? 0.95 : 0.55,
-            }}
+            x={i * 4}
+            y={y}
+            width={2}
+            height={barH}
+            rx={1}
+            fill={reached ? 'var(--text-primary)' : 'var(--border)'}
+            opacity={reached ? 0.95 : 0.55}
           />
         )
       })}
-    </div>
+    </svg>
   )
-}
+})
 
 interface CreditsPanelProps {
   song: Song
