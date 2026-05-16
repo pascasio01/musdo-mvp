@@ -21,7 +21,7 @@ export default function TalentProfile() {
   const avail = availabilityConfig[talent.availability_status]
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-theme text-white">
       <div className="absolute top-0 left-0 right-0 h-72 overflow-hidden pointer-events-none">
         {talent.profile_photo && (
           <img src={talent.profile_photo} alt="" className="w-full h-full object-cover opacity-15 blur-xl scale-105" />

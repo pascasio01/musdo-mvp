@@ -27,7 +27,7 @@ export default function LicenseRequestModal({ license, onClose }: LicenseRequest
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 bg-theme/70 backdrop-blur-sm" onClick={onClose}>
       <div
         className="w-full max-w-md rounded-3xl bg-zinc-900 border border-white/10 overflow-hidden shadow-2xl"
         onClick={e => e.stopPropagation()}
@@ -85,7 +85,7 @@ export default function LicenseRequestModal({ license, onClose }: LicenseRequest
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Introduce yourself and describe how you plan to use this song..."
                 rows={4}
-                className="w-full p-4 rounded-2xl bg-black/40 border border-white/10 text-white placeholder-zinc-600 text-sm resize-none outline-none focus:border-white/20 transition-colors"
+                className="w-full p-4 rounded-2xl bg-theme/40 border border-white/10 text-white placeholder-zinc-600 text-sm resize-none outline-none focus:border-white/20 transition-colors"
               />
             </div>
 

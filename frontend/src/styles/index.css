@@ -6,15 +6,17 @@
 @layer base {
   :root {
     /* Existing tokens */
-    --bg: #000000;
-    --surface: #0a0a0a;
-    --card: #111111;
-    --text: #ffffff;
-    --text-2: #71717a;
+    --bg: #09090B;
+    --surface: #111113;
+    --card: #141418;
+    --card-elevated: #18181D;
+    --text: rgba(255,255,255,0.96);
+    --text-2: rgba(255,255,255,0.48);
     --accent: #7c3aed;
     --accent-rgb: 124,58,237;
     --border: rgba(255,255,255,0.08);
-    --glow-color: rgba(124,58,237,0.18);
+    --border-soft: rgba(255,255,255,0.06);
+    --glow-color: rgba(124,58,237,0.14);
     --blur: 24px;
     --radius: 18px;
     --speed: 300ms;
@@ -61,8 +63,8 @@
 
   body {
     margin: 0;
-    background: var(--bg, #000000);
-    color: var(--text-primary, #ffffff);
+    background: var(--bg, #09090B);
+    color: var(--text-primary, rgba(255,255,255,0.96));
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

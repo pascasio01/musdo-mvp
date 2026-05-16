@@ -1,0 +1,163 @@
+ADD MUSDO IDENTITY + SOCIAL LAYER SYSTEM
+
+Do NOT copy Spotify profiles directly.
+
+MUSDO profiles must feel:
+- cinematic
+- emotional
+- premium
+- human
+- atmospheric
+- identity-driven
+
+GOAL:
+Transform profiles into living musical identities instead of simple social accounts.
+
+━━━━━━━━━━━━━━━━━━━
+CORE SYSTEMS
+━━━━━━━━━━━━━━━━━━━
+
+Create:
+
+1. Creator Identity System™
+2. Public / Private Identity separation
+3. Follow system
+4. Playlist identity system
+5. Profile customization
+6. Privacy controls
+7. Emotional music identity layer
+
+━━━━━━━━━━━━━━━━━━━
+PUBLIC vs PRIVATE IDENTITY
+━━━━━━━━━━━━━━━━━━━
+
+IMPORTANT:
+Legal names must NEVER be exposed publicly by default.
+
+Create:
+
+Public Identity:
+- artist name
+- creator alias
+- public bio
+- profile aura
+- playlists
+- emotional tags
+
+Private Identity:
+- legal owner name
+- publishing data
+- licensing ownership
+- royalty information
+
+Private data visible ONLY in:
+- licensing
+- contracts
+- ownership verification
+- admin systems
+
+━━━━━━━━━━━━━━━━━━━
+PROFILE EXPERIENCE
+━━━━━━━━━━━━━━━━━━━
+
+Profiles should feel immersive.
+
+Add:
+- cinematic header
+- adaptive aura background
+- emotional identity section
+- creator mood signature
+- musical DNA
+- listening atmosphere
+
+NOT:
+generic social profile UI
+
+━━━━━━━━━━━━━━━━━━━
+FOLLOW SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Create:
+- follow/unfollow
+- followers count
+- following count
+- resonance system
+
+Use language like:
+- Resonating With
+- Shared Atmosphere
+- Night Listeners
+- Human Verified Listener
+
+━━━━━━━━━━━━━━━━━━━
+PLAYLIST SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Upgrade playlists from simple lists into:
+- cinematic collections
+- emotional archives
+- mood experiences
+
+Each playlist should support:
+- cover image
+- atmosphere tag
+- mood signature
+- visibility controls
+- animated hover glow
+- cinematic subtitle
+
+━━━━━━━━━━━━━━━━━━━
+PROFILE CUSTOMIZATION
+━━━━━━━━━━━━━━━━━━━
+
+Allow:
+- aura theme selection
+- accent color
+- profile atmosphere
+- header imagery
+- emotional status
+- listening mode
+
+━━━━━━━━━━━━━━━━━━━
+PRIVACY SYSTEM
+━━━━━━━━━━━━━━━━━━━
+
+Add:
+- private session
+- hide listening activity
+- hide recently played
+- private playlists
+- creator-only playlists
+- hidden identity mode
+
+━━━━━━━━━━━━━━━━━━━
+DATABASE
+━━━━━━━━━━━━━━━━━━━
+
+Prepare Supabase-ready schema:
+
+profiles
+follows
+playlist_visibility
+user_settings
+creator_identity
+public_identity
+
+━━━━━━━━━━━━━━━━━━━
+UI STYLE
+━━━━━━━━━━━━━━━━━━━
+
+Dark luxury.
+Breathable spacing.
+Soft cinematic gradients.
+Layered depth.
+No template social layouts.
+
+━━━━━━━━━━━━━━━━━━━
+FINAL GOAL
+━━━━━━━━━━━━━━━━━━━
+
+MUSDO should feel less like social media and more like a living emotional music identity ecosystem.
+
+Stop after compile.
+Show changed files only.

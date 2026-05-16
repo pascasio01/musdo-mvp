@@ -41,7 +41,7 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col px-6 py-10 max-w-md mx-auto">
+    <div className="min-h-screen bg-theme text-white flex flex-col px-6 py-10 max-w-md mx-auto">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] right-[-20%] w-[400px] h-[400px] rounded-full bg-violet-900/15 blur-[100px]" />
       </div>

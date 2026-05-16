@@ -27,7 +27,7 @@ function ToggleRow({ label, desc, value, onChange }: { label: string; desc?: str
         onClick={() => onChange(!value)}
         className={`w-11 h-6 rounded-full relative transition-colors duration-200 ${value ? 'bg-white' : 'bg-white/15'}`}
       >
-        <div className={`absolute top-1 w-4 h-4 rounded-full bg-black transition-all duration-200 ${value ? 'left-6' : 'left-1'}`} />
+        <div className={`absolute top-1 w-4 h-4 rounded-full bg-theme transition-all duration-200 ${value ? 'left-6' : 'left-1'}`} />
       </button>
     </div>
   )

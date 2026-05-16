@@ -43,7 +43,7 @@ export default function Register() {
 
   if (confirming) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col px-6 py-10 max-w-md mx-auto">
+      <div className="min-h-screen bg-theme text-white flex flex-col px-6 py-10 max-w-md mx-auto">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[-20%] left-[-20%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px]" />
         </div>
@@ -71,7 +71,7 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col px-6 py-10 max-w-md mx-auto">
+    <div className="min-h-screen bg-theme text-white flex flex-col px-6 py-10 max-w-md mx-auto">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-20%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px]" />
       </div>

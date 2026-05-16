@@ -232,7 +232,7 @@ export default function TalentRegister() {
                     onClick={() => item.set(v => !v)}
                     className={`w-10 h-6 rounded-full transition-all relative ${item.state ? 'bg-white' : 'bg-white/10'}`}
                   >
-                    <div className={`absolute top-1 w-4 h-4 rounded-full transition-all ${item.state ? 'bg-black right-1' : 'bg-zinc-600 left-1'}`} />
+                    <div className={`absolute top-1 w-4 h-4 rounded-full transition-all ${item.state ? 'bg-theme right-1' : 'bg-zinc-600 left-1'}`} />
                   </button>
                 </div>
               ))}
@@ -268,7 +268,7 @@ export default function TalentRegister() {
                     onClick={() => item.set(v => !v)}
                     className={`w-10 h-6 rounded-full transition-all relative ${item.state ? 'bg-white' : 'bg-white/10'}`}
                   >
-                    <div className={`absolute top-1 w-4 h-4 rounded-full transition-all ${item.state ? 'bg-black right-1' : 'bg-zinc-600 left-1'}`} />
+                    <div className={`absolute top-1 w-4 h-4 rounded-full transition-all ${item.state ? 'bg-theme right-1' : 'bg-zinc-600 left-1'}`} />
                   </button>
                 </div>
               ))}

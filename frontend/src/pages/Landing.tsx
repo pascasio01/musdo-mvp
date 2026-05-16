@@ -11,7 +11,7 @@ export default function Landing() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-theme text-white flex flex-col relative overflow-hidden">
       {/* Soft ambient aura — three lobes, lower opacity, longer blur for editorial feel */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-25%] left-[-15%] w-[560px] h-[560px] rounded-full bg-violet-900/15 blur-[160px]" />

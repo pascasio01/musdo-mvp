@@ -35,7 +35,7 @@ function MiniProfileModal({ profile, onClose }: { profile: Profile; onClose: () 
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-theme/70 backdrop-blur-sm" />
       <div
         className="relative w-full max-w-md border border-white/10 rounded-t-3xl p-6 pb-10"
         style={{ background: 'var(--card, #111)' }}

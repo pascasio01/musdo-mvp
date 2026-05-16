@@ -45,7 +45,7 @@ export default function RequestSessionModal({ talent, onClose, onSent }: Request
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-theme/70 backdrop-blur-sm">
       <div className="w-full max-w-md bg-zinc-950 border border-white/10 rounded-t-3xl max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-zinc-950 px-5 pt-5 pb-4 border-b border-white/10 flex items-center justify-between z-10">
           <div>

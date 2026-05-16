@@ -48,12 +48,12 @@ export default function TalentCard({ talent, saved = false, onSaveToggle, varian
           }
           <button
             onClick={handleSave}
-            className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center"
+            className="absolute top-2 right-2 w-7 h-7 rounded-full bg-theme/60 backdrop-blur-sm flex items-center justify-center"
           >
             <Heart size={13} className={isSaved ? 'text-red-400 fill-red-400' : 'text-zinc-400'} />
           </button>
           {talent.verified_status && (
-            <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-1.5 py-0.5">
+            <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-theme/60 backdrop-blur-sm rounded-full px-1.5 py-0.5">
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
               <span className="text-blue-300 text-[9px] font-bold">VERIFIED</span>
             </div>

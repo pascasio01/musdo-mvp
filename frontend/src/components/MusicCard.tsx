@@ -44,7 +44,7 @@ function MusicCard({ song, variant = 'default' }: MusicCardProps) {
           <button
             onClick={handlePlay}
             aria-label={isCurrentPlaying ? `Pause ${song.title}` : `Play ${song.title}`}
-            className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100"
+            className="absolute inset-0 flex items-center justify-center bg-theme/50 opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100"
           >
             {isCurrentPlaying
               ? <Pause size={14} className="text-white" aria-hidden />
@@ -169,7 +169,7 @@ function MusicCard({ song, variant = 'default' }: MusicCardProps) {
 
         {song.human_verified && (
           <div
-            className="absolute top-3 left-3 flex items-center gap-1 text-[10px] font-bold text-blue-400 bg-black/50 backdrop-blur-sm border border-blue-400/30 rounded-full px-2 py-0.5"
+            className="absolute top-3 left-3 flex items-center gap-1 text-[10px] font-bold text-blue-400 bg-theme/50 backdrop-blur-sm border border-blue-400/30 rounded-full px-2 py-0.5"
             aria-label="Human verified"
           >
             <BadgeCheck size={10} aria-hidden /> VERIFIED
