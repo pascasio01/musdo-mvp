@@ -1,12 +1,21 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent } from 'react'
 import { Upload as UploadIcon, Music, FileText, Image, Check, ArrowLeft, X } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
+import { useAuth } from '../lib/auth'
+import { useToast } from '../lib/toast'
+import { vaultService } from '../services/vault.service'
+import { haptic } from '../lib/haptics'
 
 type UploadMode = 'demo' | 'lyrics' | null
 
+const MAX_AUDIO_BYTES = 50 * 1024 * 1024 // 50 MB
+
 export default function Upload() {
   const navigate = useNavigate()
+  const { user } = useAuth()
+  const toast = useToast()
+
   const [mode, setMode] = useState<UploadMode>(null)
   const [title, setTitle] = useState('')
   const [genre, setGenre] = useState('')
@@ -18,6 +27,8 @@ export default function Upload() {
   const [coverFile, setCoverFile] = useState<File | null>(null)
   const [visibility, setVisibility] = useState<'private' | 'public' | 'licensing_only'>('private')
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [progress, setProgress] = useState(0)
   const audioRef = useRef<HTMLInputElement>(null)
   const coverRef = useRef<HTMLInputElement>(null)
 
@@ -28,9 +39,110 @@ export default function Upload() {
   const inputClass = 'w-full p-4 rounded-2xl border border-theme text-primary placeholder-zinc-600 outline-none transition-colors text-sm'
   const labelClass = 'text-xs text-muted uppercase tracking-wider font-medium block mb-2'
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const reset = () => {
+    setSubmitted(false); setMode(null)
+    setTitle(''); setGenre(''); setBpm(''); setKey('')
+    setNotes(''); setLyrics(''); setAudioFile(null); setCoverFile(null)
+    setVisibility('private'); setProgress(0)
+  }
+
+  const handleAudioChange = (file: File | null) => {
+    if (!file) { setAudioFile(null); return }
+    if (file.size > MAX_AUDIO_BYTES) {
+      toast.error('Audio file is too large (50 MB max).')
+      return
+    }
+    setAudioFile(file)
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    if (!user) {
+      toast.error('You must be signed in to upload.')
+      return
+    }
+    if (submitting) return
+
+    setSubmitting(true)
+    haptic('medium')
+
+    try {
+      if (mode === 'demo') {
+        if (!audioFile) {
+          toast.warning('Please attach an audio file.')
+          setSubmitting(false)
+          return
+        }
+
+        setProgress(20)
+        const upload = await vaultService.uploadDemoFile(user.id, audioFile)
+        if (upload.error || !upload.data) {
+          toast.error(`Upload failed: ${upload.error ?? 'unknown error'}`)
+          setSubmitting(false)
+          setProgress(0)
+          return
+        }
+
+        setProgress(70)
+        const meta = [
+          genre && `Genre: ${genre}`,
+          bpm && `BPM: ${bpm}`,
+          key && `Key: ${key}`,
+          notes && `Notes: ${notes}`,
+        ].filter(Boolean).join(' • ')
+
+        const insert = await vaultService.uploadDemo({
+          title: title.trim(),
+          composer_id: user.id,
+          demo_url: upload.data.url,
+          notes: meta || undefined,
+          visibility,
+        })
+
+        if (insert.error) {
+          // Best-effort rollback so we don't leave an orphan file in storage.
+          await vaultService.deleteDemoFile(upload.data.path)
+          toast.error(`Could not save demo metadata: ${insert.error}`)
+          setSubmitting(false)
+          setProgress(0)
+          return
+        }
+
+        setProgress(100)
+        haptic('success')
+        toast.success('Demo protected and saved to your Vault.')
+        setSubmitted(true)
+      } else if (mode === 'lyrics') {
+        if (!lyrics.trim()) {
+          toast.warning('Lyrics cannot be empty.')
+          setSubmitting(false)
+          return
+        }
+
+        setProgress(50)
+        const result = await vaultService.saveLyrics({
+          title: title.trim(),
+          content: lyrics,
+          composer_id: user.id,
+        })
+
+        if (result.error) {
+          toast.error(`Could not save lyrics: ${result.error}`)
+          setSubmitting(false)
+          setProgress(0)
+          return
+        }
+
+        setProgress(100)
+        haptic('success')
+        toast.success('Lyrics timestamped and saved.')
+        setSubmitted(true)
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Unexpected error during upload.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -58,7 +170,7 @@ export default function Upload() {
               Go to Vault
             </button>
             <button
-              onClick={() => { setSubmitted(false); setMode(null); setTitle('') }}
+              onClick={reset}
               className="w-full py-4 rounded-2xl border border-theme text-primary font-semibold hover:bg-glass-medium transition-colors"
               style={{ background: 'var(--glass-bg)' }}
             >
@@ -190,8 +302,14 @@ export default function Upload() {
               </div>
 
               <div>
-                <label className={labelClass}>Audio File</label>
-                <input ref={audioRef} type="file" accept="audio/*" onChange={e => setAudioFile(e.target.files?.[0] ?? null)} className="hidden" />
+                <label className={labelClass}>Audio File *</label>
+                <input
+                  ref={audioRef}
+                  type="file"
+                  accept="audio/*"
+                  onChange={e => handleAudioChange(e.target.files?.[0] ?? null)}
+                  className="hidden"
+                />
                 <button
                   type="button"
                   onClick={() => audioRef.current?.click()}
@@ -208,7 +326,7 @@ export default function Upload() {
                     <>
                       <UploadIcon size={24} className="text-muted" aria-hidden />
                       <span className="text-secondary text-sm">Tap to upload audio</span>
-                      <span className="text-muted text-xs">MP3, WAV, FLAC supported</span>
+                      <span className="text-muted text-xs">MP3, WAV, FLAC — up to 50 MB</span>
                     </>
                   )}
                 </button>
@@ -216,7 +334,13 @@ export default function Upload() {
 
               <div>
                 <label className={labelClass}>Cover Art (optional)</label>
-                <input ref={coverRef} type="file" accept="image/*" onChange={e => setCoverFile(e.target.files?.[0] ?? null)} className="hidden" />
+                <input
+                  ref={coverRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={e => setCoverFile(e.target.files?.[0] ?? null)}
+                  className="hidden"
+                />
                 <button
                   type="button"
                   onClick={() => coverRef.current?.click()}
@@ -292,12 +416,32 @@ export default function Upload() {
             </div>
           </div>
 
+          {submitting && progress > 0 && (
+            <div
+              className="h-1 w-full rounded-full overflow-hidden"
+              style={{ background: 'var(--glass-bg)' }}
+              role="progressbar"
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Upload progress"
+            >
+              <div
+                className="h-full transition-all duration-300"
+                style={{ width: `${progress}%`, background: 'var(--text-primary)' }}
+              />
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full py-4 rounded-2xl font-bold text-base hover:opacity-90 transition-opacity mt-2"
+            disabled={submitting}
+            className="w-full py-4 rounded-2xl font-bold text-base hover:opacity-90 transition-opacity mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
           >
-            {mode === 'demo' ? 'Protect & Upload Demo' : 'Save & Protect Lyrics'}
+            {submitting
+              ? (mode === 'demo' ? `Uploading… ${progress}%` : 'Saving…')
+              : (mode === 'demo' ? 'Protect & Upload Demo' : 'Save & Protect Lyrics')}
           </button>
         </form>
       </div>

@@ -339,6 +339,78 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setState(initialState)
   }, [cancelAnimations, setState])
 
+  // ─── Media Session API ──────────────────────────────────────────────
+  // Surfaces lockscreen/Bluetooth/AirPods/Android-notification controls.
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return
+    const ms = navigator.mediaSession
+    if (!state.song) {
+      ms.metadata = null
+      ms.playbackState = 'none'
+      return
+    }
+    try {
+      ms.metadata = new MediaMetadata({
+        title: state.song.title,
+        artist: state.song.artist_name ?? 'MUSDO',
+        album: state.song.genre ?? 'MUSDO',
+        artwork: state.song.artwork_url
+          ? [
+              { src: state.song.artwork_url, sizes: '256x256', type: 'image/jpeg' },
+              { src: state.song.artwork_url, sizes: '512x512', type: 'image/jpeg' },
+            ]
+          : [],
+      })
+      ms.playbackState = state.isPlaying ? 'playing' : 'paused'
+    } catch {
+      /* MediaMetadata may not be available in some browsers */
+    }
+  }, [state.song, state.isPlaying])
+
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return
+    const ms = navigator.mediaSession
+    const safeSet = (
+      action: MediaSessionAction,
+      handler: ((details: MediaSessionActionDetails) => void) | null,
+    ) => {
+      try { ms.setActionHandler(action, handler) } catch { /* unsupported */ }
+    }
+    // Explicit handlers — OS sends discrete play/pause, never toggle.
+    safeSet('play', () => {
+      if (!stateRef.current.isPlaying) togglePlay()
+    })
+    safeSet('pause', () => {
+      if (stateRef.current.isPlaying) togglePlay()
+    })
+    safeSet('previoustrack', () => { skip(-1) })
+    safeSet('nexttrack',     () => { skip(1)  })
+    safeSet('seekto', (details) => {
+      const audio = audioRef.current
+      if (audio && typeof details.seekTime === 'number' && isFinite(audio.duration) && audio.duration > 0) {
+        seek((details.seekTime / audio.duration) * 100)
+      }
+    })
+    return () => {
+      safeSet('play', null); safeSet('pause', null)
+      safeSet('previoustrack', null); safeSet('nexttrack', null); safeSet('seekto', null)
+    }
+  }, [togglePlay, skip, seek])
+
+  // Update position state for OS scrubbers
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return
+    if (typeof (navigator.mediaSession as unknown as { setPositionState?: unknown }).setPositionState !== 'function') return
+    if (!state.song || state.duration <= 0) return
+    try {
+      navigator.mediaSession.setPositionState({
+        duration: state.duration,
+        position: Math.min(state.elapsed, state.duration),
+        playbackRate: 1,
+      })
+    } catch { /* no-op */ }
+  }, [state.song, state.duration, state.elapsed])
+
   const contextValue = useMemo<PlayerContextType>(() => ({
     ...state,
     playSong,

@@ -59,7 +59,7 @@ export const vaultService = {
     }
   },
 
-  async uploadDemo(demo: { title: string; composer_id: string; notes?: string; visibility: Demo['visibility'] }): Promise<ServiceResult<Demo>> {
+  async uploadDemo(demo: { title: string; composer_id: string; demo_url?: string; notes?: string; visibility: Demo['visibility'] }): Promise<ServiceResult<Demo>> {
     try {
       const { data, error } = await db('demos')
         .insert(demo)
@@ -102,7 +102,7 @@ export const vaultService = {
     }
   },
 
-  async uploadDemoFile(composerId: string, file: File): Promise<ServiceResult<string>> {
+  async uploadDemoFile(composerId: string, file: File): Promise<ServiceResult<{ url: string; path: string }>> {
     try {
       const ext = file.name.split('.').pop()
       const path = `demos/${composerId}/${Date.now()}.${ext}`
@@ -111,9 +111,13 @@ export const vaultService = {
       if (error) return { data: null, error: error.message }
 
       const { data } = supabase.storage.from('demos').getPublicUrl(path)
-      return { data: data.publicUrl, error: null }
+      return { data: { url: data.publicUrl, path }, error: null }
     } catch (e) {
       return { data: null, error: String(e) }
     }
+  },
+
+  async deleteDemoFile(path: string): Promise<void> {
+    try { await supabase.storage.from('demos').remove([path]) } catch { /* best-effort */ }
   },
 }

@@ -4,9 +4,11 @@ import { AuthProvider } from './lib/auth'
 import { PlayerProvider } from './lib/player'
 import { ThemeProvider } from './lib/theme'
 import { MusicAuraProvider } from './lib/aura'
+import { ToastProvider } from './lib/toast'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import AuraConnector from './components/AuraConnector'
+import ToastContainer from './components/ToastContainer'
 
 // ─── Route Loading Fallback ───────────────────────────────────────────────────
 
@@ -34,6 +36,8 @@ const Landing       = lazy(() => import('./pages/Landing'))
 const Login         = lazy(() => import('./pages/Login'))
 const Register      = lazy(() => import('./pages/Register'))
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
+const ResetPassword  = lazy(() => import('./pages/ResetPassword'))
+const AuthCallback   = lazy(() => import('./pages/AuthCallback'))
 const Pricing       = lazy(() => import('./pages/Pricing'))
 
 // Legal group (rarely visited — load together)
@@ -86,14 +90,17 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const Providers = memo(function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
-      <MusicAuraProvider>
-        <AuthProvider>
-          <PlayerProvider>
-            <AuraConnector />
-            {children}
-          </PlayerProvider>
-        </AuthProvider>
-      </MusicAuraProvider>
+      <ToastProvider>
+        <MusicAuraProvider>
+          <AuthProvider>
+            <PlayerProvider>
+              <AuraConnector />
+              {children}
+              <ToastContainer />
+            </PlayerProvider>
+          </AuthProvider>
+        </MusicAuraProvider>
+      </ToastProvider>
     </ThemeProvider>
   )
 })
@@ -113,6 +120,8 @@ export default function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
 
               {/* ── Legal ── */}
               <Route path="/legal" element={<Legal />} />

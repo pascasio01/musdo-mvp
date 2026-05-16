@@ -3,6 +3,7 @@ import { Play, Pause, SkipForward, SkipBack, ChevronUp } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { usePlayer } from '../lib/player'
 import { formatDuration } from '../utils/format'
+import { haptic } from '../lib/haptics'
 
 function PlayerBar() {
   const { song, isPlaying, progress, elapsed, duration, togglePlay, seek, skip } = usePlayer()
@@ -18,8 +19,9 @@ function PlayerBar() {
     seek(ratio * 100)
   }, [seek])
 
-  const handleSkipBack = useCallback(() => skip(-1), [skip])
-  const handleSkipFwd  = useCallback(() => skip(1),  [skip])
+  const handleSkipBack = useCallback(() => { haptic('light'); skip(-1) }, [skip])
+  const handleSkipFwd  = useCallback(() => { haptic('light'); skip(1)  }, [skip])
+  const handleToggle   = useCallback(() => { haptic('medium'); togglePlay() }, [togglePlay])
 
   if (!song) return null
 
@@ -93,7 +95,7 @@ function PlayerBar() {
             </button>
 
             <button
-              onClick={togglePlay}
+              onClick={handleToggle}
               aria-label={isPlaying ? `Pause ${song.title}` : `Play ${song.title}`}
               className="w-9 h-9 rounded-full flex items-center justify-center hover:scale-105 transition-transform will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
               style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
