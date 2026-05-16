@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase'
+import { db } from './_db'
 import type { Demo, Lyrics } from '../types'
 import type { DbDemo, DbLyrics } from '../types/database.types'
 import type { ServiceResult } from './song.service'
@@ -60,8 +61,7 @@ export const vaultService = {
 
   async uploadDemo(demo: { title: string; composer_id: string; notes?: string; visibility: Demo['visibility'] }): Promise<ServiceResult<Demo>> {
     try {
-      const { data, error } = await supabase
-        .from('demos')
+      const { data, error } = await db('demos')
         .insert(demo)
         .select()
         .single()
@@ -75,8 +75,7 @@ export const vaultService = {
 
   async saveLyrics(lyrics: { title: string; content: string; composer_id: string }): Promise<ServiceResult<Lyrics>> {
     try {
-      const { data, error } = await supabase
-        .from('lyrics')
+      const { data, error } = await db('lyrics')
         .insert(lyrics)
         .select()
         .single()
@@ -90,8 +89,7 @@ export const vaultService = {
 
   async updateDemoVisibility(id: string, visibility: Demo['visibility']): Promise<ServiceResult<Demo>> {
     try {
-      const { data, error } = await supabase
-        .from('demos')
+      const { data, error } = await db('demos')
         .update({ visibility })
         .eq('id', id)
         .select()

@@ -88,18 +88,27 @@ export interface DbAuditLog {
   created_at: string
 }
 
+/**
+ * Marks every property whose type includes `null` as optional.
+ * Mirrors Postgres semantics: nullable columns can be omitted on INSERT
+ * (the DB substitutes NULL or the column DEFAULT).
+ */
+type NullableOptional<T> =
+  & { [K in keyof T as null extends T[K] ? never : K]: T[K] }
+  & { [K in keyof T as null extends T[K] ? K : never]?: T[K] }
+
 export interface Database {
   public: {
     Tables: {
       profiles: {
         Row: DbProfile
-        Insert: Omit<DbProfile, 'created_at' | 'updated_at'>
+        Insert: NullableOptional<Omit<DbProfile, 'created_at' | 'updated_at'>>
         Update: Partial<Omit<DbProfile, 'id' | 'created_at'>>
         Relationships: []
       }
       songs: {
         Row: DbSong
-        Insert: Omit<DbSong, 'id' | 'created_at' | 'updated_at'>
+        Insert: NullableOptional<Omit<DbSong, 'id' | 'created_at' | 'updated_at'>>
         Update: Partial<Omit<DbSong, 'id' | 'owner_id' | 'created_at'>>
         Relationships: []
       }
@@ -111,25 +120,25 @@ export interface Database {
       }
       demos: {
         Row: DbDemo
-        Insert: Omit<DbDemo, 'id' | 'created_at'>
+        Insert: NullableOptional<Omit<DbDemo, 'id' | 'created_at'>>
         Update: Partial<Omit<DbDemo, 'id' | 'composer_id' | 'created_at'>>
         Relationships: []
       }
       lyrics: {
         Row: DbLyrics
-        Insert: Omit<DbLyrics, 'id' | 'created_at'>
+        Insert: NullableOptional<Omit<DbLyrics, 'id' | 'created_at'>>
         Update: Partial<Pick<DbLyrics, 'title' | 'content'>>
         Relationships: []
       }
       verification_requests: {
         Row: DbVerificationRequest
-        Insert: Omit<DbVerificationRequest, 'id' | 'submitted_at'>
+        Insert: NullableOptional<Omit<DbVerificationRequest, 'id' | 'submitted_at'>>
         Update: Partial<Pick<DbVerificationRequest, 'status' | 'reviewed_at' | 'reviewed_by' | 'rejection_reason'>>
         Relationships: []
       }
       audit_logs: {
         Row: DbAuditLog
-        Insert: Omit<DbAuditLog, 'id' | 'created_at'>
+        Insert: NullableOptional<Omit<DbAuditLog, 'id' | 'created_at'>>
         Update: Record<string, never>
         Relationships: []
       }

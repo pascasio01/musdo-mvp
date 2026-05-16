@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase'
+import { db } from './_db'
 import type { License } from '../types'
 import type { DbLicense } from '../types/database.types'
 import type { ServiceResult } from './song.service'
@@ -50,8 +51,7 @@ export const licenseService = {
 
   async create(license: Omit<License, 'id' | 'created_at'>): Promise<ServiceResult<License>> {
     try {
-      const { data, error } = await supabase
-        .from('licenses')
+      const { data, error } = await db('licenses')
         .insert(license)
         .select()
         .single()
@@ -65,8 +65,7 @@ export const licenseService = {
 
   async updateStatus(id: string, status: License['status']): Promise<ServiceResult<License>> {
     try {
-      const { data, error } = await supabase
-        .from('licenses')
+      const { data, error } = await db('licenses')
         .update({ status })
         .eq('id', id)
         .select()

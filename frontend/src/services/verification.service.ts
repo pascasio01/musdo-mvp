@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase'
+import { db } from './_db'
 import type { VerificationRequest, BadgeType, VerificationStatus } from '../types'
 import type { DbVerificationRequest } from '../types/database.types'
 import type { ServiceResult } from './song.service'
@@ -49,9 +50,8 @@ export const verificationService = {
 
   async submit(userId: string, badgeType: BadgeType, notes?: string): Promise<ServiceResult<VerificationRequest>> {
     try {
-      const { data, error } = await supabase
-        .from('verification_requests')
-        .insert({ user_id: userId, badge_type: badgeType, status: 'pending', notes })
+      const { data, error } = await db('verification_requests')
+        .insert({ user_id: userId, badge_type: badgeType, status: 'pending', notes: notes ?? null })
         .select()
         .single()
 
@@ -69,8 +69,7 @@ export const verificationService = {
     rejectionReason?: string,
   ): Promise<ServiceResult<VerificationRequest>> {
     try {
-      const { data, error } = await supabase
-        .from('verification_requests')
+      const { data, error } = await db('verification_requests')
         .update({
           status: decision,
           reviewed_at: new Date().toISOString(),
@@ -92,8 +91,7 @@ export const verificationService = {
     try {
       const update: Record<string, boolean> = { [badgeType]: true }
 
-      const { error } = await supabase
-        .from('profiles')
+      const { error } = await db('profiles')
         .update({ ...update, verification_status: 'approved' as VerificationStatus })
         .eq('id', userId)
 

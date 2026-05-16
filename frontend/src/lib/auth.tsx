@@ -9,7 +9,9 @@ import {
 } from 'react'
 import type { User, Session } from '@supabase/supabase-js'
 import { supabase } from './supabase'
+import { db } from '../services/_db'
 import type { Profile, AppRole } from '../types'
+import type { DbProfile } from '../types/database.types'
 
 const OWNER_EMAIL = import.meta.env.VITE_OWNER_EMAIL as string | undefined
 
@@ -41,8 +43,7 @@ async function syncProfile(user: User): Promise<Profile | null> {
         email: user.email ?? '',
         role,
       }
-      const { data: created, error: insertErr } = await supabase
-        .from('profiles')
+      const { data: created, error: insertErr } = await db('profiles')
         .insert(newProfile)
         .select()
         .single()
@@ -51,12 +52,13 @@ async function syncProfile(user: User): Promise<Profile | null> {
       return created as Profile
     }
 
-    if (isOwner && data.role !== 'supreme_owner') {
-      await supabase.from('profiles').update({ role: 'supreme_owner' }).eq('id', user.id)
-      return { ...data, role: 'supreme_owner' } as Profile
+    const row = data as DbProfile
+    if (isOwner && row.role !== 'supreme_owner') {
+      await db('profiles').update({ role: 'supreme_owner' }).eq('id', user.id)
+      return { ...row, role: 'supreme_owner' } as Profile
     }
 
-    return data as Profile
+    return row as Profile
   } catch {
     const isOwner = !!OWNER_EMAIL && user.email?.toLowerCase() === OWNER_EMAIL.toLowerCase()
     return buildLocalProfile(user, isOwner ? 'supreme_owner' : 'listener')

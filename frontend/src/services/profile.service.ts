@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase'
+import { db } from './_db'
 import type { Profile } from '../types'
 import type { DbProfile } from '../types/database.types'
 import type { ServiceResult } from './song.service'
@@ -41,8 +42,7 @@ export const profileService = {
 
   async update(id: string, updates: Partial<Profile>): Promise<ServiceResult<Profile>> {
     try {
-      const { data, error } = await supabase
-        .from('profiles')
+      const { data, error } = await db('profiles')
         .update(updates)
         .eq('id', id)
         .select()
