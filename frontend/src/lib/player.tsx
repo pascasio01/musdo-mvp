@@ -132,23 +132,24 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     })
 
     audio.addEventListener('error', () => {
-      cancelAnimations()
       const { song } = stateRef.current
       const mediaError = audio.error
+      // MediaError code 4 with no song loaded fires on mount/cleanup when
+      // audio.src is empty — that's not a real error, just normal lifecycle.
+      if (!song || !audio.src || audio.src === window.location.href) return
+      cancelAnimations()
       if (import.meta.env.DEV) {
         console.warn('[MUSDO Player] audio error', {
-          songId: song?.id,
-          title: song?.title,
+          songId: song.id,
+          title: song.title,
           src: audio.src,
           code: mediaError?.code,
           message: mediaError?.message,
         })
       }
-      if (song) {
-        const duration = song.duration ?? 180
-        setState({ isLoading: false, hasError: true, duration })
-        startSimulation(duration)
-      }
+      const duration = song.duration ?? 180
+      setState({ isLoading: false, hasError: true, duration })
+      startSimulation(duration)
     })
 
     audio.addEventListener('stalled', () => {

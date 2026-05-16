@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Palette, Zap, Eye, Wind, Heart } from 'lucide-react'
+import { ArrowLeft, Palette, Zap, Eye, Wind } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useTheme, themes, type ThemeId } from '../lib/theme'
@@ -85,25 +85,10 @@ export default function Appearance() {
 
         <div className="space-y-5">
           {/* Curated Personalization — sits above raw theme controls because it
-              applies a holistic emotional identity in one tap. */}
-          <div className="rounded-2xl bg-white/5 border border-white/10 p-1">
-            <ListeningAtmospherePanel onLaunchOnboarding={() => setOnboardingOpen(true)} />
-          </div>
-
-          <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
-            <SectionTitle icon={Heart} label="Emotional Calibration" />
-            <p className="text-zinc-600 text-xs mb-3 leading-relaxed">
-              Four questions about how you experience music. We&rsquo;ll set MUSDO&rsquo;s
-              atmosphere to match — and you can change everything later.
-            </p>
-            <button
-              onClick={() => setOnboardingOpen(true)}
-              className="w-full py-3 rounded-xl text-sm font-semibold transition-colors"
-              style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
-            >
-              Calibrate my MUSDO
-            </button>
-          </div>
+              applies a holistic emotional identity in one tap. The panel ships
+              its own card chrome (border + radius), so no wrapper here. The
+              onboarding launcher lives inside the panel header. */}
+          <ListeningAtmospherePanel onLaunchOnboarding={() => setOnboardingOpen(true)} />
 
           <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
             <SectionTitle icon={Palette} label="Theme" />
