@@ -94,7 +94,7 @@ export default function Home() {
       <div className="px-5 mb-6">
         <h2 className="text-primary font-bold text-lg mb-4">Composers</h2>
         <div className="space-y-3">
-          <ComposerCard name="Pascasio Emmanuel" genre="Bachata · Latin Pop" songCount={24} streams="12.4K" verified avatarGradient="from-violet-600 to-blue-900" />
+          <ComposerCard name="Emmanuel R." genre="Bachata · Latin Pop" songCount={24} streams="12.4K" verified avatarGradient="from-violet-600 to-blue-900" />
           <ComposerCard name="María Fernanda R." genre="Romantic Bachata" songCount={11} streams="5.2K" verified={false} avatarGradient="from-rose-700 to-pink-900" />
           <ComposerCard name="Carlos Beats" genre="Urban · Fusion" songCount={18} streams="9.1K" verified avatarGradient="from-amber-700 to-zinc-900" />
         </div>

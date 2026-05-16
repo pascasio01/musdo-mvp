@@ -64,7 +64,7 @@ const resultSets: Record<string, AIResult[]> = {
   'Late Night Bachata': [
     { type: 'song', id: 's1', title: 'Entre Sombras', subtitle: 'Bachata · 78 BPM · Sensual', tags: ['requinto', 'romantic', 'deep'], gradient: 'from-amber-900 to-zinc-900' },
     { type: 'playlist', id: 'p1', title: 'Madrugada Bachata', subtitle: '14 songs · 52 min', tags: ['late night', 'emotional'], gradient: 'from-rose-900 to-zinc-900' },
-    { type: 'creator', id: 'c1', title: 'Pascasio Emmanuel', subtitle: 'Composer · Bachata Soul', tags: ['verified', 'Dominican'], gradient: 'from-violet-900 to-zinc-900' },
+    { type: 'creator', id: 'c1', title: 'Emmanuel R.', subtitle: 'Composer · Bachata Soul', tags: ['verified', 'Dominican'], gradient: 'from-violet-900 to-zinc-900' },
   ],
   'Heartbreak Healing': [
     { type: 'song', id: 's2', title: 'Cicatriz de Amor', subtitle: 'Romantic Ballad · 68 BPM', tags: ['heartbreak', 'acoustic', 'healing'], gradient: 'from-blue-900 to-zinc-900' },

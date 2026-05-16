@@ -36,7 +36,7 @@ export const mockSongs: Song[] = [
   {
     id: '1',
     title: 'Midnight Bachata',
-    artist_name: 'Pascasio Emmanuel',
+    artist_name: 'Emmanuel R.',
     genre: 'Modern Bachata',
     bpm: 128,
     key: 'Dm',
@@ -52,13 +52,13 @@ export const mockSongs: Song[] = [
     licensing_status: 'available',
     aura_preset: 'romantic',
     credits: {
-      composer: 'Pascasio Emmanuel',
+      composer: 'Emmanuel R.',
       producer: 'MUSDO Studios',
-      arranger: 'Pascasio Emmanuel',
+      arranger: 'Emmanuel R.',
       instruments: ['Requinto', 'Bongo', 'Bass', 'Vocals'],
-      copyright_owner: 'Pascasio Emmanuel / MUSDO',
+      copyright_owner: 'Emmanuel R. / MUSDO',
       royalty_split: [
-        { name: 'Pascasio Emmanuel', percent: 100 },
+        { name: 'Emmanuel R.', percent: 100 },
       ],
     },
     analytics: { plays: 8420, emotional_engagement: 87, avg_listen_time: 188 },
@@ -237,7 +237,7 @@ export const mockDemos: Demo[] = [
 
 export const mockProfile: Profile = {
   id: 'user-1',
-  username: 'Pascasio Emmanuel',
+  username: 'Emmanuel R.',
   email: 'demo@musdo.com',
   role: 'composer',
   sub_role: 'songwriter',

@@ -5,7 +5,7 @@ import { mockSongs } from '../data/mockData'
 
 const dnaData = {
   producers: ['Emmanuel Studios', 'BeatsByCarlos'],
-  composers: ['Pascasio Emmanuel Reynoso Reyes'],
+  composers: ['Emmanuel R.'],
   engineers: ['Studio Norte — Mix Engineer'],
   musicians: ['Guitar: Julio Martínez', 'Keys: Ana Díaz', 'Bass: Robert Pérez'],
   vocalChain: ['Neumann U87', 'API 312', 'SSL G-Bus', 'Waves SSL'],

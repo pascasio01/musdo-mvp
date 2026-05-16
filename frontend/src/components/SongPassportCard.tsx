@@ -116,7 +116,7 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
       <div className="px-6 pb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
         <p className="text-center text-[10px] text-zinc-600 font-mono">
-          MUSDO HUMAN MUSIC INFRASTRUCTURE · POWERED BY PASCASIO
+          MUSDO HUMAN MUSIC INFRASTRUCTURE · POWERED BY MUSDO LABS
         </p>
       </div>
     </div>
