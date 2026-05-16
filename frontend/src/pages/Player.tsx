@@ -9,6 +9,8 @@ import { usePlayer } from '../lib/player'
 import { mockSongs } from '../data/mockData'
 import type { Song, LicensingStatus } from '../types'
 import VerificationBadge, { VerificationBadgeRow } from '../components/VerificationBadge'
+import LyricsPanel from '../components/LyricsPanel'
+import { getLyricsForSong } from '../data/mockLyrics'
 import { formatDuration } from '../utils/format'
 
 function qualityLabel(q?: Song['audio_quality']): string {
@@ -84,11 +86,11 @@ export default function Player() {
 
   return (
     <div
-      className="min-h-screen flex flex-col relative overflow-hidden"
+      className="min-h-screen flex flex-col relative"
       style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
     >
       {/* ── Cinematic ambient cover backdrop ──────────────────────── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden>
         {song.artwork_url && (
           <img
             src={song.artwork_url}
@@ -313,6 +315,9 @@ export default function Player() {
 
         {/* Credits & Analytics expandable */}
         <CreditsPanel song={song} expanded={showCredits} onToggle={() => setShowCredits(v => !v)} />
+
+        {/* Cinematic lyrics — expandable, time-synced via global player */}
+        <LyricsPanel track={getLyricsForSong(song.id)} elapsed={elapsedSec} />
       </div>
     </div>
   )

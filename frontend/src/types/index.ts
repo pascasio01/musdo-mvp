@@ -82,6 +82,40 @@ export interface Song extends VerificationFields {
   analytics?: SongAnalytics
 }
 
+/* ── Cinematic Lyrics ────────────────────────────────────────── */
+
+export type LyricEmotion =
+  | 'longing' | 'tender' | 'bittersweet' | 'hopeful'
+  | 'aching' | 'release' | 'intimate' | 'reflective'
+
+export interface SyncedLyric {
+  /** seconds from start of track */
+  time: number
+  text: string
+  /** 0..1 — drives subtle aura/glow modulation. Optional, defaults to 0.4. */
+  intensity?: number
+  emotion?: LyricEmotion
+  /** soft section marker rendered as a quiet caption (verse/chorus/bridge) */
+  section?: string
+}
+
+export interface LyricsTranslation {
+  language: string
+  lines: { time: number; text: string }[]
+}
+
+export interface LyricsTrack {
+  song_id: string
+  language: string
+  /** raw plain-text fallback, line-separated */
+  plain: string
+  /** time-coded lines, sorted ascending by `time` */
+  synced?: SyncedLyric[]
+  translations?: LyricsTranslation[]
+  writer_notes?: string
+  emotional_tags?: LyricEmotion[]
+}
+
 export interface License {
   id: string
   song_id: string
