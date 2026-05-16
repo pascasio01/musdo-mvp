@@ -6,6 +6,7 @@ import { ThemeProvider } from './lib/theme'
 import { MusicAuraProvider } from './lib/aura'
 import { ToastProvider } from './lib/toast'
 import { AudioIntelligenceProvider } from './lib/audioIntelligence'
+import { PersonalizationProvider } from './lib/personalization'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import AuraConnector from './components/AuraConnector'
@@ -96,9 +97,11 @@ const Providers = memo(function Providers({ children }: { children: React.ReactN
           <AuthProvider>
             <PlayerProvider>
               <AudioIntelligenceProvider>
-              <AuraConnector />
-              {children}
-              <ToastContainer />
+                <PersonalizationProvider>
+                  <AuraConnector />
+                  {children}
+                  <ToastContainer />
+                </PersonalizationProvider>
               </AudioIntelligenceProvider>
             </PlayerProvider>
           </AuthProvider>

@@ -72,7 +72,7 @@ export function detectAuraPreset(song: Song | null): AuraPreset {
 
 export interface AuraSettings {
   enabled: boolean
-  intensity: 'low' | 'medium' | 'high'
+  intensity: 'low' | 'medium' | 'high' | 'cinematic'
   useCoverColors: boolean
 }
 
@@ -105,8 +105,9 @@ export function MusicAuraProvider({ children }: { children: ReactNode }) {
   const preset = auraSettings.enabled ? detectAuraPreset(activeSong) : 'default'
   const base = auraPresets[preset]
 
-  const alphaScale = { low: 0.5, medium: 1, high: 1.7 }
+  const alphaScale = { low: 0.5, medium: 1, high: 1.7, cinematic: 2.5 }
   const scale = alphaScale[auraSettings.intensity]
+  void scale // intensity scaling now applied by PersonalizationProvider when it owns aura output
 
   const config: AuraConfig = auraSettings.enabled
     ? { ...base, pulseSpeed: base.pulseSpeed }
