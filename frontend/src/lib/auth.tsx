@@ -101,11 +101,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      loadProfile(session?.user ?? null).finally(() => setLoading(false))
-    })
+    // Defensive boot guard: guarantee the loading flag is always cleared so the
+    // splash can never hang if getSession() rejects or the profile lookup stalls.
+    // This only flips `loading` — it does NOT change session, profile, role, or
+    // permission state, nor the login/logout flow.
+    let settled = false
+    const clearLoading = () => {
+      if (settled) return
+      settled = true
+      setLoading(false)
+    }
+    const safetyTimer = setTimeout(clearLoading, 8000)
+
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        setSession(session)
+        setUser(session?.user ?? null)
+        loadProfile(session?.user ?? null).finally(clearLoading)
+      })
+      .catch(clearLoading)
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session)
@@ -113,7 +127,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await loadProfile(session?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      clearTimeout(safetyTimer)
+      subscription.unsubscribe()
+    }
   }, [loadProfile])
 
   const signIn = useCallback(async (email: string, password: string) => {
