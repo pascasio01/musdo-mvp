@@ -65,9 +65,29 @@ Migration is gradual: build new modules in governance, leave legacy screens work
 
 ## Future Modules (architecture prepared, not yet implemented)
 
-Vault · Readiness Center · Ownership Confidence (+ Ownership Graph) · Recovery Center · Passport · AI Auditor · AI DJ.
+Vault · Readiness Center · Ownership Confidence (+ Ownership Graph) · Recovery Center · Passport · AI Core (see below) · AI DJ Complace.
 
-The AI never composes or makes legal decisions automatically — it audits, flags risks, suggests, and prepares documents, always requiring human confirmation.
+## MUSVORA AI Core (MANDATORY)
+
+AI must **support the creator, not replace the creator**. MUSVORA AI may only: **audit, organize, verify, protect, monetize**.
+
+MUSVORA AI must **NOT**: generate songs, generate lyrics, replace artists/composers, act as legal counsel, or pretend to legally certify ownership.
+
+These are the **only** AI modules approved for Phase 1 / Phase 2:
+
+1. **AI Catalog Auditor** — analyzes assets and detects catalog problems (missing metadata, contracts, split sheets, registrations; ownership risks; inconsistencies; readiness blockers). Output: *Issues Found · Priority Level · Recommended Actions · Readiness Impact*.
+2. **AI Metadata Assistant** — organizes/enriches metadata (BPM, key, genre, subgenre, mood, language, energy, commercial-use potential). Output: metadata corrections, missing metadata, catalog organization, readiness improvements (all as suggestions).
+3. **AI Contract Checker** — reviews uploaded documents for missing elements (royalty clauses, split definitions, ownership %, term duration, territory, signature fields). Output: *Potential Issue · Risk Level · Legal Review Recommended · Suggested Next Step*. **Never** say "legally valid" or "legally verified" — MUSVORA does not provide legal advice.
+4. **AI Licensing Match** — connects assets to licensing opportunities by genre, mood, energy, theme, lyrics, readiness score, ownership confidence (artist/sync/playlist/event/commercial matches). Output: *Licensing Readiness · Opportunity Match Score · Suggested Markets · Recommended Action*.
+
+**AI DJ Complace** — *future module, not a Phase 1 priority.* A **Contextual Event Music Director** for restaurants, weddings, birthdays, lounges, corporate events, and themed nights (Bachata / Salsa / Merengue). Never a Spotify clone, streaming replacement, or generic playlist generator.
+
+### Strict AI data rules
+
+Never show fake AI certainty. All AI output is **assistance, not legal determination**, and always requires human confirmation.
+
+- ✅ Use: *Pending Analysis · Potential Issue · Suggested Action · Requires Confirmation · Legal Review Recommended*
+- ❌ Avoid: *Certified Ownership · Guaranteed Recovery · Legally Verified · Final Legal Decision*
 
 ## Key Pages
 

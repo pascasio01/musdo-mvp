@@ -1,0 +1,182 @@
+UPDATE THE EXISTING MUSVORA PROMPT WITH THIS AI CORE SECTION.
+
+Do not rebuild.
+Do not redesign.
+Do not remove existing features.
+Do not touch Supabase.
+Do not touch backend.
+Do not break Auth.
+
+Replace the previous AI SYSTEM section with this one:
+
+====================================================
+MUSVORA AI CORE (MANDATORY)
+====================================================
+
+These are the ONLY AI modules approved for MUSVORA Phase 1 and Phase 2.
+
+AI must support the creator, not replace the creator.
+
+MUSVORA AI must:
+- Audit
+- Organize
+- Verify
+- Protect
+- Monetize
+
+MUSVORA AI must NOT:
+- Generate songs
+- Generate lyrics
+- Replace artists
+- Replace composers
+- Act as legal counsel
+- Pretend to certify ownership legally
+
+====================================================
+1. AI Catalog Auditor
+====================================================
+
+Purpose:
+Analyze music assets and detect catalog problems.
+
+Detect:
+- Missing metadata
+- Missing contracts
+- Missing split sheets
+- Ownership risks
+- Missing registrations
+- Catalog inconsistencies
+- Readiness blockers
+
+Output:
+- Issues Found
+- Priority Level
+- Recommended Actions
+- Readiness Impact
+
+====================================================
+2. AI Metadata Assistant
+====================================================
+
+Purpose:
+Automatically organize and enrich music metadata.
+
+Analyze:
+- BPM
+- Key
+- Genre
+- Subgenre
+- Mood
+- Language
+- Energy Level
+- Commercial Use Potential
+
+Suggest:
+- Metadata corrections
+- Missing metadata
+- Catalog organization
+- Readiness improvements
+
+====================================================
+3. AI Contract Checker
+====================================================
+
+Purpose:
+Review uploaded documents and identify missing elements.
+
+Important:
+MUSVORA does NOT provide legal advice.
+
+Check for:
+- Missing royalty clauses
+- Missing split definitions
+- Missing ownership percentages
+- Missing term duration
+- Missing territory definitions
+- Missing signature fields
+
+Output:
+- Potential Issue
+- Risk Level
+- Legal Review Recommended
+- Suggested Next Step
+
+Language:
+Use “Potential Issue” and “Legal Review Recommended”.
+Never say “legally valid” or “legally verified”.
+
+====================================================
+4. AI Licensing Match
+====================================================
+
+Purpose:
+Connect music assets with licensing opportunities.
+
+Analyze:
+- Genre
+- Mood
+- Energy
+- Theme
+- Lyrics
+- Readiness Score
+- Ownership Confidence
+
+Suggest:
+- Artist matches
+- Sync opportunities
+- Restaurant playlists
+- Wedding playlists
+- Event opportunities
+- Commercial opportunities
+
+Output:
+- Licensing Readiness
+- Opportunity Match Score
+- Suggested Markets
+- Recommended Action
+
+====================================================
+AI DJ COMPLACE
+====================================================
+
+AI DJ Complace is a future module, not a Phase 1 priority.
+
+Purpose:
+Contextual music planning for:
+- Restaurants
+- Weddings
+- Birthdays
+- Lounges
+- Corporate events
+- Bachata Night
+- Salsa Night
+- Merengue Night
+
+AI DJ Complace must act as:
+Contextual Event Music Director
+
+Not:
+- Spotify clone
+- Streaming replacement
+- Generic playlist generator
+
+====================================================
+STRICT AI DATA RULES
+====================================================
+
+Do not show fake AI certainty.
+
+Use:
+- Pending Analysis
+- Potential Issue
+- Suggested Action
+- Requires Confirmation
+- Legal Review Recommended
+
+Avoid:
+- Certified Ownership
+- Guaranteed Recovery
+- Legally Verified
+- Final Legal Decision
+
+All AI-generated insights must be treated as assistance, not legal determination.
