@@ -283,6 +283,32 @@ export default function Readiness() {
             </Card>
           </button>
 
+          {/* ── Ownership Confidence entry ── */}
+          <button onClick={() => navigate('/ownership')} className="w-full text-left mb-8">
+            <Card interactive accent="navy" padding="md">
+              <div className="flex items-center gap-3">
+                <span
+                  className="grid place-items-center flex-shrink-0"
+                  style={{ width: 40, height: 40, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-info-soft)', color: 'var(--gv-text-link)' }}
+                >
+                  <Scale size={19} strokeWidth={2.2} aria-hidden />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <p className="font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                      Ownership Confidence
+                    </p>
+                    <Badge tone="navy">Governance</Badge>
+                  </div>
+                  <p style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                    Contributors, splits, signatures and ownership timeline.
+                  </p>
+                </div>
+                <ArrowRight size={17} style={{ color: 'var(--gv-text-muted)', flexShrink: 0 }} aria-hidden />
+              </div>
+            </Card>
+          </button>
+
           {/* ── Readiness dimensions ── */}
           <SectionHeader
             eyebrow="Breakdown"

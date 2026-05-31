@@ -6,3 +6,4 @@
 - [Auth boot loading](auth-boot-loading.md) — AuthProvider startup must always clear `loading` (getSession catch + profile finally + ~8s timeout) or the MUSVORA splash hangs for returning users.
 - [Dev server port (Vite on 5000)](dev-server-port.md) — preview needs :5000; strictPort + kill stray vite/restart when it falls back to :5001
 - [vaultService silent mock fallback](vault-service-mock-fallback.md) — read methods return shared mock data on Supabase error; verify composer_id===userId before calling data 'real'.
+- [Ownership Confidence engine](ownership-confidence-engine.md) — confidence is derived from missing data + honest gaps, never fabricated; downstream modules consume ownership.ts

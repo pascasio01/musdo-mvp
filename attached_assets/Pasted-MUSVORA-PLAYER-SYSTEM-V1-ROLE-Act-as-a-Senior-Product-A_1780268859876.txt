@@ -1,0 +1,236 @@
+MUSVORA PLAYER SYSTEM V1
+
+ROLE:
+
+Act as a Senior Product Architect, Senior Audio Platform Engineer and Native Mobile UX Architect.
+
+MISSION:
+
+Implement the MUSVORA Player System as a governance-focused audio experience.
+
+IMPORTANT:
+
+* Do not turn MUSVORA into Spotify.
+* Do not turn MUSVORA into SoundCloud.
+* Do not redesign existing navigation.
+* Do not rebuild the application.
+* Do not touch Supabase schema unless required.
+* Preserve existing functionality.
+* Mobile-first.
+* Native-grade UX.
+
+====================================================
+PLAYER PHILOSOPHY
+
+The MUSVORA Player is not an entertainment player.
+
+The MUSVORA Player is an Asset Review Player.
+
+Purpose:
+
+* Listen
+* Review
+* Verify
+* Evaluate
+* License
+
+Every playback session must reinforce asset governance.
+
+====================================================
+PLAYER TYPES
+
+1. Preview Player
+
+Purpose:
+
+* Demo listening
+* Marketplace preview
+* Asset review
+
+Features:
+
+* Play
+* Pause
+* Seek
+* Duration
+* Waveform
+* Volume
+
+====================================================
+
+2. Secure Demo Player
+
+Purpose:
+
+Protect creator assets.
+
+Options:
+
+* Stream only
+* Disable download
+* Watermark ready architecture
+* Preview duration limits
+* Full access permissions
+
+====================================================
+
+3. Governance Player
+
+Purpose:
+
+Display asset intelligence while listening.
+
+Display:
+
+* Readiness Score
+* Ownership Confidence
+* Song Passport Status
+* Licensing Status
+
+Example:
+
+Readiness: 91
+
+Ownership: 84
+
+Passport: Active
+
+Licensing: Ready
+
+====================================================
+
+4. Lyrics Review Panel
+
+Purpose:
+
+Review lyrics and composition.
+
+Tabs:
+
+* Audio
+* Lyrics
+* Metadata
+* Ownership
+
+Support:
+
+* Original Lyrics
+* Translated Lyrics
+* AI Translation (Review Recommended)
+
+====================================================
+
+5. Version Comparison Player
+
+Purpose:
+
+Compare versions.
+
+Support:
+
+* Demo V1
+* Demo V2
+* Demo V3
+* Master
+
+Switch instantly between versions.
+
+====================================================
+PLAYER UI
+
+Layout:
+
+Cover Artwork
+
+Song Title
+
+Composer
+
+Play / Pause
+
+Waveform
+
+Current Time
+
+Duration
+
+Governance Status
+
+Readiness
+
+Ownership
+
+Passport
+
+Licensing
+
+====================================================
+MARKETPLACE PLAYER
+
+Artist can:
+
+* Listen
+* Read Lyrics
+* View Metadata
+* View Readiness
+* View Ownership Summary
+* Request License
+
+Do not expose private files.
+
+Do not expose download links.
+
+====================================================
+PLAYER SECURITY
+
+Verify:
+
+* No public storage exposure
+* No direct private file URLs
+* No unrestricted downloads
+* No sensitive metadata leaks
+
+====================================================
+TRANSLATION LAYER
+
+Support:
+
+* Interface Translation
+* Lyrics Translation
+* Marketplace Translation
+
+Languages:
+
+Phase 1:
+
+* English
+* Spanish
+
+Future:
+
+* Portuguese
+* French
+
+Display:
+
+Original Version
+
+Translated Version
+
+Label:
+
+AI Translation - Review Recommended
+
+====================================================
+REPORT
+
+Report:
+
+* Player modules added
+* Existing player preserved or upgraded
+* Security checks completed
+* Translation readiness completed
+* Marketplace compatibility confirmed
+* No Supabase schema changes unless required
+* No Auth changes
+* Build passes

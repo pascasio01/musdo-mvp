@@ -70,6 +70,7 @@ const SongStory   = lazy(() => import('./pages/SongStory'))
 const Readiness   = lazy(() => import('./pages/Readiness'))
 const Scan        = lazy(() => import('./pages/Scan'))
 const Auditor     = lazy(() => import('./pages/Auditor'))
+const Ownership   = lazy(() => import('./pages/Ownership'))
 
 // Auth-required routes
 const Vault          = lazy(() => import('./pages/Vault'))
@@ -169,6 +170,8 @@ export default function App() {
               <Route path="/scan" element={<Scan />} />
               {/* AI Catalog Auditor — reads real Vault data when signed in, sample fallback otherwise */}
               <Route path="/auditor" element={<Auditor />} />
+              {/* Ownership Confidence — derives contributors/splits/signatures from real Vault data */}
+              <Route path="/ownership" element={<Ownership />} />
 
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={
