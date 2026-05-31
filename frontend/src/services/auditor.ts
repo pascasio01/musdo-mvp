@@ -103,9 +103,16 @@ export interface AuditReport {
   legalReviewCount: number
 }
 
+/** Genre/BPM/Key fields that Upload stringifies into the Demo `notes` field. */
+export interface DemoNoteFields {
+  genre?: string
+  bpm?: string
+  key?: string
+}
+
 /** Extract genre/bpm/key that Upload stringifies into the Demo `notes` field. */
-function parseDemoNotes(notes?: string): { genre?: string; bpm?: string; key?: string } {
-  const out: { genre?: string; bpm?: string; key?: string } = {}
+export function parseDemoNotes(notes?: string): DemoNoteFields {
+  const out: DemoNoteFields = {}
   if (!notes) return out
   const g = notes.match(/Genre:\s*([^•]+)/i)
   const b = notes.match(/BPM:\s*([^•]+)/i)

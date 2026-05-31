@@ -20,7 +20,7 @@
  */
 import type { Demo, Lyrics } from '../types'
 import { vaultService } from './vault.service'
-import { auditCatalog, type AuditCheckDef } from './auditor'
+import { auditCatalog, parseDemoNotes, type AuditCheckDef, type DemoNoteFields } from './auditor'
 import { computeOwnership, type OwnershipAsset } from './ownership'
 import { scoreStatus, type ReadinessStatus } from '../data/readiness'
 
@@ -33,11 +33,13 @@ export interface StatusChip {
   tone: ChipTone
 }
 
-export interface ReviewMetadata {
-  genre?: string
-  bpm?: string
-  key?: string
-}
+export type ReviewMetadata = DemoNoteFields
+
+/**
+ * Fallback runtime used by the audio simulation when a demo has no real audio
+ * file (or its metadata can't be read) — review needs a finite timeline to scrub.
+ */
+const SIMULATED_DEMO_DURATION_SEC = 180
 
 export interface ReviewAuditSummary {
   score: number
@@ -68,19 +70,6 @@ export interface ReviewAsset {
 export interface ReviewResult {
   source: ReviewSource
   asset: ReviewAsset
-}
-
-/** Mirror of auditor's note parser (kept local so auditor stays untouched). */
-function parseDemoNotes(notes?: string): ReviewMetadata {
-  const out: ReviewMetadata = {}
-  if (!notes) return out
-  const g = notes.match(/Genre:\s*([^•]+)/i)
-  const b = notes.match(/BPM:\s*([^•]+)/i)
-  const k = notes.match(/Key:\s*([^•]+)/i)
-  if (g && g[1].trim()) out.genre = g[1].trim()
-  if (b && b[1].trim()) out.bpm = b[1].trim()
-  if (k && k[1].trim()) out.key = k[1].trim()
-  return out
 }
 
 function licensingChip(visibility: Demo['visibility']): StatusChip {
@@ -117,7 +106,7 @@ function assembleDemo(demo: Demo, allLyrics: Lyrics[], ownerName: string, source
     kind: 'demo',
     typeLabel: 'Demo',
     audioUrl: demo.demo_url && demo.demo_url !== 'sample' ? demo.demo_url : undefined,
-    durationSec: 180,
+    durationSec: SIMULATED_DEMO_DURATION_SEC,
     createdAt: demo.created_at,
     metadata: parseDemoNotes(demo.notes),
     readinessScore: auditAsset.score,
