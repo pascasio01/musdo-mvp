@@ -257,6 +257,32 @@ export default function Readiness() {
             })}
           </section>
 
+          {/* ── AI Catalog Auditor entry ── */}
+          <button onClick={() => navigate('/auditor')} className="w-full text-left mb-8">
+            <Card interactive accent="gold" padding="md">
+              <div className="flex items-center gap-3">
+                <span
+                  className="grid place-items-center flex-shrink-0"
+                  style={{ width: 40, height: 40, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-gold-soft)', color: 'var(--gv-gold)' }}
+                >
+                  <Sparkles size={19} strokeWidth={2.2} aria-hidden />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <p className="font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                      AI Catalog Auditor
+                    </p>
+                    <Badge tone="gold">AI Core</Badge>
+                  </div>
+                  <p style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                    Audit your real Vault for missing readiness items.
+                  </p>
+                </div>
+                <ArrowRight size={17} style={{ color: 'var(--gv-text-muted)', flexShrink: 0 }} aria-hidden />
+              </div>
+            </Card>
+          </button>
+
           {/* ── Readiness dimensions ── */}
           <SectionHeader
             eyebrow="Breakdown"

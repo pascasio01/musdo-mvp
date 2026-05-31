@@ -1,0 +1,103 @@
+Start next sprint: MUSVORA AI Catalog Auditor V1.
+
+STRICT RULES:
+- Do not redesign the app.
+- Do not rebuild.
+- Do not touch Supabase schema.
+- Do not touch Auth.
+- Do not touch backend business logic unless reading existing Vault data is already supported.
+- Do not create AI song generation.
+- Do not create AI lyrics generation.
+- Do not create legal advice.
+- Do not create fake verified ownership.
+- Do not invent real financial claims.
+
+GOAL:
+Build the first real MUSVORA AI Core module: AI Catalog Auditor.
+
+Purpose:
+Analyze the user's real Vault catalog when available, and identify missing readiness items.
+
+Approved AI behavior:
+- Audit
+- Organize
+- Verify readiness signals
+- Protect
+- Recommend actions
+
+Do NOT replace creators.
+
+MODULE:
+AI Catalog Auditor V1
+
+Inputs:
+- Existing Vault assets if available
+- Uploaded works if available
+- Mock/internal fallback only if no real user catalog exists
+
+Audit checks:
+- Missing title
+- Missing artist
+- Missing composer
+- Missing producer
+- Missing genre
+- Missing BPM
+- Missing key
+- Missing lyrics
+- Missing master
+- Missing demo
+- Missing artwork
+- Missing split sheet
+- Missing contract
+- Missing ISRC
+- Missing ISWC
+- Missing copyright registration
+- Missing licensing status
+- Missing ownership confidence data
+
+Outputs:
+- Issues Found
+- Priority Level: Critical / High / Medium / Low
+- Readiness Impact
+- Recommended Actions
+- Requires Confirmation
+- Legal Review Recommended when contracts/rights are involved
+
+Language rules:
+Use:
+- Potential Issue
+- Suggested Action
+- Pending Analysis
+- Requires Confirmation
+- Legal Review Recommended
+
+Never use:
+- Certified Ownership
+- Guaranteed Recovery
+- Legally Verified
+- Final Legal Decision
+
+UI:
+Create or update an AI Auditor section accessible from Readiness or Scan.
+Use MUSVORA Governance Design System.
+Native mobile-first.
+No demo-template look.
+Clearly label mock/internal fallback data if used.
+
+Integration:
+If /scan exists, connect AI Catalog Auditor output to /scan.
+If /readiness exists, allow Readiness to consume auditor results safely.
+Do not break current Readiness page.
+
+Security:
+Do not expose private file URLs publicly.
+Do not log sensitive contracts, lyrics, or user uploads to console.
+Do not show private user files to other users.
+
+Report:
+- files changed
+- data source used
+- whether real Vault data is connected or mock fallback used
+- audit checks implemented
+- confirmation no Supabase schema/Auth/backend changes unless explicitly required
+- confirmation build passes

@@ -1,0 +1,196 @@
+MUSVORA — NEXT EVOLUTION SPRINT
+
+ROLE:
+
+Act as a Principal Product Architect, Music Rights Infrastructure Engineer and Enterprise UX Architect.
+
+MISSION:
+
+Convert MUSVORA from visual governance concepts into real operational governance features.
+
+STRICT RULES:
+
+* Do not rebuild the app.
+* Do not redesign existing screens.
+* Do not remove functionality.
+* Do not touch Supabase schema unless absolutely required.
+* Do not break Auth.
+* Do not touch unrelated modules.
+* Use existing MUSVORA Design System.
+* Mobile-first.
+* Native-grade UX.
+* No fake legal claims.
+* No fake ownership verification.
+* No fake recovery claims.
+
+====================================================
+PHASE: OWNERSHIP REAL
+
+Build Ownership Confidence V1 using real data.
+
+Features:
+
+* Contributors List
+* Split Percentages
+* Signature Status
+* Ownership Graph
+* Ownership Timeline
+
+Statuses:
+
+* Complete
+* Pending Signature
+* Pending Verification
+* Missing Contributor
+
+Ownership Confidence Score must be calculated from available ownership data.
+
+Do not use random values.
+
+Use:
+“Pending Verification”
+
+Never:
+“Legally Verified Ownership”
+
+====================================================
+PHASE: SONG PASSPORT REAL
+
+Create Song Passport foundation.
+
+Track:
+
+* Creation Date
+* Upload Date
+* Version History
+* Ownership History
+* Registration Status
+* Evidence History
+
+Passport must support:
+
+* Timeline View
+* PDF Export
+* Shareable Reference Page
+
+Do not generate fake registration IDs.
+
+If unavailable:
+
+Use:
+“Pending Registration”
+
+====================================================
+PHASE: RECOVERY CENTER REAL
+
+Build Recovery Center using real catalog analysis.
+
+Detect:
+
+* Missing registrations
+* Missing metadata
+* Ownership gaps
+* Missing contracts
+* Missing split sheets
+
+Output:
+
+* Potential Revenue Opportunities
+* Potential Licensing Opportunities
+* Readiness Blockers
+
+Never use:
+
+* Guaranteed Recovery
+* Guaranteed Revenue
+
+====================================================
+PHASE: MARKETPLACE FOUNDATION
+
+Prepare Marketplace V1.
+
+Eligibility:
+
+Readiness >= 80
+
+Ownership Confidence >= 80
+
+Song Passport Active
+
+Asset Listing Fields:
+
+* Demo
+* Lyrics
+* Genre
+* BPM
+* Key
+* Ownership Summary
+* Readiness Score
+
+Actions:
+
+* Request License
+* Contact Creator
+* Save Asset
+
+Do not implement payments yet.
+
+Do not transfer ownership.
+
+Do not generate legal agreements automatically.
+
+====================================================
+NEGOTIATION ROOM FOUNDATION
+
+Prepare structure only.
+
+Participants:
+
+* Creator
+* Artist
+* Producer
+* Publisher
+
+Store:
+
+* Messages
+* Offers
+* License Requests
+* Timeline
+
+No public visibility.
+
+====================================================
+MUSVORA TRUST RULES
+
+Every governance module must use:
+
+* Pending Verification
+* Requires Confirmation
+* Potential Issue
+* Suggested Action
+* Legal Review Recommended
+
+Never use:
+
+* Certified Ownership
+* Legally Verified
+* Guaranteed Recovery
+* Final Legal Decision
+
+====================================================
+REPORT
+
+Report:
+
+* files changed
+* modules updated
+* real data vs placeholder usage
+* ownership logic added
+* passport logic added
+* recovery logic added
+* marketplace foundation added
+* confirmation build passes
+* confirmation Auth not touched
+* confirmation Supabase not modified unless required
+* confirmation backend business logic preserved

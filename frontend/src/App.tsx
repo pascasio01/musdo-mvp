@@ -69,6 +69,7 @@ const SongStory   = lazy(() => import('./pages/SongStory'))
 // Governance modules (new design system)
 const Readiness   = lazy(() => import('./pages/Readiness'))
 const Scan        = lazy(() => import('./pages/Scan'))
+const Auditor     = lazy(() => import('./pages/Auditor'))
 
 // Auth-required routes
 const Vault          = lazy(() => import('./pages/Vault'))
@@ -166,6 +167,8 @@ export default function App() {
               {/* ── Governance Modules (MUSVORA Readiness, mock data) ── */}
               <Route path="/readiness" element={<Readiness />} />
               <Route path="/scan" element={<Scan />} />
+              {/* AI Catalog Auditor — reads real Vault data when signed in, sample fallback otherwise */}
+              <Route path="/auditor" element={<Auditor />} />
 
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={
