@@ -66,6 +66,7 @@ const SongStory   = lazy(() => import('./pages/SongStory'))
 
 // Governance modules (new design system)
 const Readiness   = lazy(() => import('./pages/Readiness'))
+const Scan        = lazy(() => import('./pages/Scan'))
 
 // Auth-required routes
 const Vault          = lazy(() => import('./pages/Vault'))
@@ -160,6 +161,7 @@ export default function App() {
 
               {/* ── Governance Modules (MUSVORA Readiness, mock data) ── */}
               <Route path="/readiness" element={<Readiness />} />
+              <Route path="/scan" element={<Scan />} />
 
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={
