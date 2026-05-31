@@ -64,6 +64,9 @@ const Market      = lazy(() => import('./pages/Market'))
 const MusicDNA    = lazy(() => import('./pages/MusicDNA'))
 const SongStory   = lazy(() => import('./pages/SongStory'))
 
+// Governance modules (new design system)
+const Readiness   = lazy(() => import('./pages/Readiness'))
+
 // Auth-required routes
 const Vault          = lazy(() => import('./pages/Vault'))
 const Upload         = lazy(() => import('./pages/Upload'))
@@ -154,6 +157,9 @@ export default function App() {
               <Route path="/market" element={<Market />} />
               <Route path="/dna/:id" element={<MusicDNA />} />
               <Route path="/story/:id" element={<SongStory />} />
+
+              {/* ── Governance Modules (MUSVORA Readiness, mock data) ── */}
+              <Route path="/readiness" element={<Readiness />} />
 
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={
