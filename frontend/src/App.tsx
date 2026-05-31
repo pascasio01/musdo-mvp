@@ -71,6 +71,7 @@ const Readiness   = lazy(() => import('./pages/Readiness'))
 const Scan        = lazy(() => import('./pages/Scan'))
 const Auditor     = lazy(() => import('./pages/Auditor'))
 const Ownership   = lazy(() => import('./pages/Ownership'))
+const Review      = lazy(() => import('./pages/Review'))
 
 // Auth-required routes
 const Vault          = lazy(() => import('./pages/Vault'))
@@ -172,6 +173,8 @@ export default function App() {
               <Route path="/auditor" element={<Auditor />} />
               {/* Ownership Confidence — derives contributors/splits/signatures from real Vault data */}
               <Route path="/ownership" element={<Ownership />} />
+              {/* Governance Player — asset review: audio + metadata + ownership + readiness intelligence */}
+              <Route path="/review/:id" element={<Review />} />
 
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={

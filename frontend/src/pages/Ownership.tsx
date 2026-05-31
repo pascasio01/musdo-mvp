@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Sparkles,
   ChevronDown,
+  Play,
   RefreshCw,
   Database,
   Info,
@@ -132,7 +133,7 @@ function ContributorRow({ c }: { c: Contributor }) {
 
 /* ───────────────────────── asset card ───────────────────────── */
 
-function AssetCard({ asset }: { asset: OwnershipAsset }) {
+function AssetCard({ asset, onReview }: { asset: OwnershipAsset; onReview: (id: string) => void }) {
   const [open, setOpen] = useState(false)
   const meta = OWNERSHIP_STATUS_META[asset.status]
   const bandMeta = STATUS_META[asset.band]
@@ -248,6 +249,10 @@ function AssetCard({ asset }: { asset: OwnershipAsset }) {
               </div>
             </div>
           )}
+
+          <Button variant="secondary" size="sm" block className="mt-4" onClick={() => onReview(asset.id)} leadingIcon={<Play size={14} />}>
+            Open in Governance Player
+          </Button>
         </div>
       )}
     </Card>
@@ -322,7 +327,7 @@ export default function Ownership() {
             <div className="flex items-start gap-2.5">
               <Info size={15} style={{ color: 'var(--gv-gold)', flexShrink: 0, marginTop: 2 }} aria-hidden />
               <p style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-secondary)', lineHeight: 'var(--gv-leading-normal)' }}>
-                MUSVORA tracks ownership signals — contributors, splits, signatures and timeline. This is a confidence indicator that <strong style={{ color: 'var(--gv-text)' }}>Requires Confirmation</strong>, not Legally Verified Ownership.
+                MUSVORA tracks ownership signals — contributors, splits, signatures and timeline. This is a confidence indicator that <strong style={{ color: 'var(--gv-text)' }}>Requires Confirmation</strong> and is not a legal determination.
               </p>
             </div>
           </Card>
@@ -413,7 +418,7 @@ export default function Ownership() {
 
               <SectionHeader eyebrow="Catalogue" title="Ownership by work" description="Tap a work to see contributors, splits, signatures, graph and timeline." />
               <div className="grid gap-2.5 mb-2">
-                {report.assets.map(a => <AssetCard key={a.id} asset={a} />)}
+                {report.assets.map(a => <AssetCard key={a.id} asset={a} onReview={id => navigate(`/review/${id}`)} />)}
               </div>
             </>
           )}
