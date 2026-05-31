@@ -91,6 +91,12 @@ export default function Landing() {
 
         {/* Footer — public branding only, no legal identity */}
         <div className="pb-8 text-center">
+          <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-2 mb-4">
+            <button onClick={() => navigate('/privacy')} className="text-[11px] text-zinc-600 hover:text-zinc-300 transition-colors">Privacy</button>
+            <button onClick={() => navigate('/terms')} className="text-[11px] text-zinc-600 hover:text-zinc-300 transition-colors">Terms</button>
+            <button onClick={() => navigate('/security-policy')} className="text-[11px] text-zinc-600 hover:text-zinc-300 transition-colors">Security</button>
+            <button onClick={() => navigate('/legal')} className="text-[11px] text-zinc-600 hover:text-zinc-300 transition-colors">Legal &amp; Policies</button>
+          </div>
           <p className="text-[10px] text-zinc-700 font-mono uppercase tracking-[0.2em]">
             MUSVORA Labs · Human Music Infrastructure
           </p>

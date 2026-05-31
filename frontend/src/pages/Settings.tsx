@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones } from 'lucide-react'
+import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones, Lock, Wifi, Database, KeyRound, ScrollText, AlertTriangle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useAuth } from '../lib/auth'
@@ -72,12 +72,69 @@ export default function Settings() {
           <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Shield size={14} className="text-zinc-600" />
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Security</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Privacy & Security</p>
             </div>
             <div className="p-3 space-y-1">
               <ActionCard label="Active Sessions" desc="Manage where you're logged in" icon={Shield} onClick={() => navigate('/security')} />
-              <ActionCard label="Change Password" desc="Update your account password" icon={Shield} />
-              <ActionCard label="Two-Factor Auth" desc="Coming soon" icon={Shield} />
+              <ActionCard label="Audit Log" desc="Review account activity history" icon={ScrollText} onClick={() => navigate('/audit-log')} />
+              <ActionCard label="Change Password" desc="Update your account password" icon={KeyRound} />
+              <ActionCard label="Two-Factor Auth" desc="Planned — security foundation" icon={Lock} />
+              <ActionCard label="Security Policy" desc="How we protect your assets" icon={Lock} onClick={() => navigate('/security-policy')} />
+            </div>
+
+            <div className="px-3 pb-3">
+              <div className="rounded-xl border border-white/8 p-4" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-3">Security Foundation</p>
+                <div className="space-y-2.5">
+                  <div className="flex items-start gap-2.5">
+                    <Wifi size={14} className="text-zinc-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-zinc-300 text-xs font-semibold">Encrypted in transit</p>
+                      <p className="text-zinc-600 text-[11px] leading-relaxed">Connections use HTTPS/TLS between your device and our services.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Database size={14} className="text-zinc-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-zinc-300 text-xs font-semibold">Encrypted at rest</p>
+                      <p className="text-zinc-600 text-[11px] leading-relaxed">Stored data and uploaded assets are encrypted at rest by our infrastructure providers. MUSVORA does not provide end-to-end encryption.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Lock size={14} className="text-zinc-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-zinc-300 text-xs font-semibold">Role-based access</p>
+                      <p className="text-zinc-600 text-[11px] leading-relaxed">Row-level security and role-based controls keep your data scoped to you. Privileged actions are restricted.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <ScrollText size={14} className="text-zinc-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-zinc-300 text-xs font-semibold">Audit logs</p>
+                      <p className="text-zinc-600 text-[11px] leading-relaxed">Selected security-relevant events may be logged for accountability. Expanded audit history is part of the planned security foundation.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Shield size={14} className="text-zinc-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-zinc-300 text-xs font-semibold">Secure file handling</p>
+                      <p className="text-zinc-600 text-[11px] leading-relaxed">Files are stored with scoped, access-controlled permissions. Automated scanning and validation are planned.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-amber-500/20 p-4 mt-3" style={{ background: 'rgba(245,158,11,0.06)' }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertTriangle size={13} className="text-amber-400 flex-shrink-0" />
+                  <p className="text-amber-400 text-[11px] font-bold uppercase tracking-wider">Before You Upload</p>
+                </div>
+                <ul className="space-y-1.5 text-zinc-500 text-[11px] leading-relaxed list-disc pl-4">
+                  <li>Do not upload works you do not own or are not authorized to manage.</li>
+                  <li>Do not share private contracts outside trusted parties.</li>
+                  <li>Legal review is recommended before signing licenses.</li>
+                </ul>
+              </div>
             </div>
           </div>
 
