@@ -1,0 +1,357 @@
+Actúa como un Principal Product Architect, Senior UI/UX Designer, Native Mobile Engineer (iOS/Android), Systems Architect y Music Industry Infrastructure Specialist.
+
+REGLA ABSOLUTA
+
+NO destruir nada existente.
+
+NO eliminar funcionalidades actuales.
+
+NO rehacer la aplicación desde cero.
+
+NO romper compatibilidad.
+
+NO modificar lógica funcional estable sin justificación.
+
+NO convertir la aplicación en una red social.
+
+NO convertir la aplicación en un clon de Spotify.
+
+Toda mejora debe ser incremental, profesional y compatible con la arquitectura actual.
+
+⸻
+
+NUEVA IDENTIDAD OFICIAL
+
+Nombre principal:
+
+MUSVORA
+
+Definición:
+
+Music Asset Operating System
+
+Misión:
+
+Transformar canciones, composiciones, masters, letras y derechos en activos musicales verificables, protegidos y monetizables.
+
+MUSVORA NO es un reproductor.
+
+MUSVORA NO es una red social.
+
+MUSVORA es infraestructura para activos musicales.
+
+⸻
+
+FILOSOFÍA CENTRAL
+
+Toda obra musical debe pasar por estas capas:
+
+1. Vault
+2. Readiness
+3. Ownership Confidence
+4. Recovery
+5. Passport
+6. Licensing
+
+Nunca invertir este orden.
+
+⸻
+
+NUEVO NÚCLEO DEL SISTEMA
+
+MUSVORA Vault
+
+Objetivo:
+
+Custodia digital profesional.
+
+Funciones:
+
+* Versionado automático
+* Detección de duplicados
+* Fingerprint de audio
+* Historial completo
+* Organización por obra
+
+Cada obra debe contener:
+
+* Audio Master
+* Demo
+* Instrumental
+* Stems
+* Artwork
+* Letra
+* Contratos
+* Split Sheets
+* Metadata
+
+⸻
+
+MUSVORA Readiness Center
+
+Nueva pantalla principal.
+
+Pregunta principal:
+
+“¿Qué tan preparado está este activo para generar ingresos?”
+
+Mostrar:
+
+* Overall Readiness Score
+* Ready for Distribution
+* Ready for Licensing
+* Ready for Copyright
+* Ready for Monetization
+
+Visualización profesional.
+
+Nada de gráficos infantiles.
+
+Estilo Bloomberg + Notion + Linear.
+
+⸻
+
+Ownership Confidence
+
+Nueva capa estratégica.
+
+Mostrar:
+
+* Ownership Confidence Score
+* Contributors Verified
+* Contributors Pending
+* Split Integrity
+* Contract Integrity
+
+Implementar Ownership Graph.
+
+Visualización tipo red profesional.
+
+Mostrar claramente:
+
+* Compositor
+* Productor
+* Publisher
+* Intérprete
+* Porcentajes
+
+⸻
+
+Recovery Center
+
+Motor de oportunidades.
+
+NO prometer dinero.
+
+Utilizar lenguaje legal correcto:
+
+“Potential Revenue Opportunities”
+
+Detectar:
+
+* Metadata incompleta
+* Splits faltantes
+* Contratos ausentes
+* Registros pendientes
+* Inconsistencias
+
+Acción principal:
+
+[FIX NOW]
+
+⸻
+
+NUEVA EXPERIENCIA
+
+Secuencia oficial:
+
+KNOW NOW
+
+UNDERSTAND NOW
+
+FIX NOW
+
+VERIFY NOW
+
+GET PAID
+
+Toda experiencia debe seguir esta lógica.
+
+⸻
+
+MUSVORA AI
+
+La IA NO crea canciones.
+
+La IA NO compone.
+
+La IA NO reemplaza al artista.
+
+La IA funciona como:
+
+AI Auditor
+
+AI Rights Assistant
+
+AI Metadata Assistant
+
+AI Readiness Assistant
+
+Funciones:
+
+* Detectar errores
+* Detectar riesgos
+* Detectar inconsistencias
+* Generar sugerencias
+* Preparar documentos
+
+Nunca tomar decisiones legales automáticamente.
+
+Siempre requerir confirmación humana.
+
+⸻
+
+MUSVORA AI DJ
+
+Nueva capacidad agregada.
+
+Objetivo:
+
+DJ contextual inteligente.
+
+Ejemplos:
+
+* Restaurante
+* Bar
+* Boda
+* Cumpleaños
+* Patio familiar
+* Discoteca
+* Evento corporativo
+
+La IA debe:
+
+* Analizar contexto
+* Crear secuencia musical
+* Ajustar energía
+* Ajustar BPM
+* Ajustar géneros
+
+Ejemplo:
+
+“Cumpleaños infantil”
+
+Resultado:
+
+* Música infantil
+* Juegos
+* Pausas
+* Cierre
+
+Ejemplo:
+
+“Restaurante”
+
+Resultado:
+
+* Música ambiental
+* Volumen sugerido
+* Energía controlada
+
+⸻
+
+DISEÑO VISUAL ELITE
+
+Estética:
+
+Governance Design System
+
+Inspiración:
+
+* Linear
+* Notion
+* Stripe Dashboard
+* Bloomberg
+
+Evitar:
+
+* Neón exagerado
+* Efectos gamer
+* Diseño juvenil
+* Saturación visual
+
+⸻
+
+PALETA
+
+Negro Mate:
+#0A0A0A
+
+Blanco:
+#FFFFFF
+
+Azul Institucional:
+#001F3F
+
+Dorado Sutil:
+#D4AF37
+
+Verde:
+#27AE60
+
+Rojo:
+#E74C3C
+
+Amarillo:
+#F39C12
+
+⸻
+
+TIPOGRAFÍA
+
+Titulares:
+Inter Tight
+o Gotham
+
+Texto:
+Inter
+
+Jerarquía agresiva.
+
+Mucho espacio negativo.
+
+Máxima claridad.
+
+⸻
+
+EXPERIENCIA NATIVA
+
+iOS:
+SwiftUI
+
+Android:
+Jetpack Compose
+
+Objetivos:
+
+* 60 FPS
+* Animaciones fluidas
+* Respuesta háptica
+* Modo oscuro premium
+* Accesibilidad completa
+
+⸻
+
+REGLA FINAL
+
+Antes de añadir cualquier funcionalidad nueva:
+
+Preguntar:
+
+“¿Esta función aumenta la protección, preparación, propiedad o monetización del activo musical?”
+
+Si la respuesta es NO:
+
+No implementarla.
+
+MUSVORA debe sentirse como un banco profesional para activos musicales, no como una aplicación de entretenimiento.
