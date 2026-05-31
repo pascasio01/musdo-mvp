@@ -9,6 +9,7 @@ import {
   Check,
   X,
   Sparkles,
+  ScanLine,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { GovernanceScope, Button, Card, Badge, SectionHeader } from '../components/governance'
@@ -315,7 +316,7 @@ export default function Readiness() {
             paddingTop: 'var(--gv-space-6)',
           }}
         >
-          <div className="max-w-md mx-auto px-5">
+          <div className="max-w-md mx-auto px-5 grid gap-2.5">
             <Button
               variant="primary"
               size="lg"
@@ -325,6 +326,16 @@ export default function Readiness() {
               style={{ letterSpacing: '0.08em' }}
             >
               IMPROVE READINESS
+            </Button>
+            <Button
+              variant="secondary"
+              size="lg"
+              block
+              onClick={() => navigate('/scan')}
+              leadingIcon={<ScanLine size={17} strokeWidth={2.4} />}
+              style={{ letterSpacing: '0.08em' }}
+            >
+              SCAN CATALOG
             </Button>
           </div>
         </div>
