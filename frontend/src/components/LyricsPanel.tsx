@@ -10,7 +10,7 @@ interface LyricsPanelProps {
 }
 
 /**
- * MUSDO Cinematic Lyrics — a quiet, breathable companion to the StudioView.
+ * MUSVORA Cinematic Lyrics — a quiet, breathable companion to the StudioView.
  *
  * Design intent (NOT karaoke, NOT Spotify):
  *  - The player remains the hero. Lyrics live in a collapsed glass panel by

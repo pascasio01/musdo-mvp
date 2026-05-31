@@ -36,11 +36,11 @@ export default function RefundPolicy() {
           <p>The $9.99 verification review fee is non-refundable. This fee covers the review process only and does not guarantee approval.</p>
         </Section>
         <Section title="Marketplace Transactions">
-          <p>Completed license transactions are final. Refunds for marketplace purchases are only considered in cases of fraudulent listings or technical error on MUSDO's part.</p>
+          <p>Completed license transactions are final. Refunds for marketplace purchases are only considered in cases of fraudulent listings or technical error on MUSVORA's part.</p>
         </Section>
         <Section title="How to Request">
-          <p>To request a refund consideration, contact MUSDO Support with your account email, transaction ID, and reason. Requests are reviewed within 5 business days.</p>
-          <p>MUSDO reserves the right to deny refund requests not meeting policy criteria.</p>
+          <p>To request a refund consideration, contact MUSVORA Support with your account email, transaction ID, and reason. Requests are reviewed within 5 business days.</p>
+          <p>MUSVORA reserves the right to deny refund requests not meeting policy criteria.</p>
         </Section>
         <Section title="Billing Note">
           <p>This policy does not override applicable consumer protection laws in your jurisdiction.</p>

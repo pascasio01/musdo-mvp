@@ -78,7 +78,7 @@ export default function Appearance() {
         </button>
 
         <div className="mb-8">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold mb-1">MUSDO</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold mb-1">MUSVORA</p>
           <h1 className="text-white font-black text-3xl">Appearance</h1>
           <p className="text-zinc-600 text-sm mt-1">Make it yours. Every pixel.</p>
         </div>
@@ -161,7 +161,7 @@ export default function Appearance() {
           <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
             <SectionTitle icon={Wind} label="Music Aura" />
             <p className="text-zinc-600 text-xs mb-4 leading-relaxed">
-              When music plays, MUSDO subtly shifts its atmosphere to match the genre, mood, and energy of the song.
+              When music plays, MUSVORA subtly shifts its atmosphere to match the genre, mood, and energy of the song.
             </p>
             <ToggleRow label="Adaptive Music Aura" desc="Shift background mood with the music" value={auraSettings.enabled} onChange={v => updateAuraSettings({ enabled: v })} />
             {auraSettings.enabled && (

@@ -167,7 +167,7 @@ export default function RequestSessionModal({ talent, onClose, onSent }: Request
 
             <div className="rounded-2xl bg-white/5 border border-white/10 px-4 py-3">
               <p className="text-zinc-600 text-[11px] leading-relaxed">
-                Professional collaborations should use written agreements. MUSDO provides connection tools only and does not replace legal, financial or management advice.
+                Professional collaborations should use written agreements. MUSVORA provides connection tools only and does not replace legal, financial or management advice.
               </p>
             </div>
 

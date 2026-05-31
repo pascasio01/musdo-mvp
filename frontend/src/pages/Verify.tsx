@@ -43,7 +43,7 @@ export default function Verify() {
           </div>
           <h2 className="text-white font-black text-3xl mb-2">Application Submitted</h2>
           <p className="text-zinc-500 mb-2 max-w-xs">
-            Your verification request is under review by the MUSDO Team.
+            Your verification request is under review by the MUSVORA Team.
           </p>
           <p className="text-zinc-600 text-xs mb-8 max-w-xs">
             Review typically takes 3–5 business days. You'll receive a notification when complete.
@@ -186,7 +186,7 @@ export default function Verify() {
               {rightsDeclaration && <Check size={12} className="text-black" strokeWidth={3} />}
             </div>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              I declare that I am the rightful owner or authorized rights holder of the content I upload. I understand that MUSDO does not guarantee copyright validity, legal outcomes, or income.
+              I declare that I am the rightful owner or authorized rights holder of the content I upload. I understand that MUSVORA does not guarantee copyright validity, legal outcomes, or income.
             </p>
           </div>
 

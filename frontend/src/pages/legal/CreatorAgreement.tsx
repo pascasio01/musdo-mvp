@@ -29,27 +29,27 @@ export default function CreatorAgreement() {
         </div>
 
         <Section title="1. Creator Eligibility">
-          <p>To publish content on the MUSDO marketplace, creators must complete the verification process and meet minimum eligibility requirements.</p>
+          <p>To publish content on the MUSVORA marketplace, creators must complete the verification process and meet minimum eligibility requirements.</p>
         </Section>
         <Section title="2. Content Ownership">
-          <p>By uploading content, you affirm that you own all rights to that content or have authorization from the rights holder. MUSDO takes no ownership of your content.</p>
+          <p>By uploading content, you affirm that you own all rights to that content or have authorization from the rights holder. MUSVORA takes no ownership of your content.</p>
         </Section>
         <Section title="3. License Grants">
-          <p>When you list a song for licensing on MUSDO, you grant MUSDO a limited, non-exclusive license to display and facilitate the licensing of that song.</p>
-          <p>You control the license types offered (exclusive, non-exclusive, sync, publishing). MUSDO is not a party to the license agreement between creator and buyer.</p>
+          <p>When you list a song for licensing on MUSVORA, you grant MUSVORA a limited, non-exclusive license to display and facilitate the licensing of that song.</p>
+          <p>You control the license types offered (exclusive, non-exclusive, sync, publishing). MUSVORA is not a party to the license agreement between creator and buyer.</p>
         </Section>
         <Section title="4. Revenue Split">
-          <p>Creators receive 90% of marketplace license fees. MUSDO retains 10% as a platform fee, before payment processor fees apply.</p>
+          <p>Creators receive 90% of marketplace license fees. MUSVORA retains 10% as a platform fee, before payment processor fees apply.</p>
           <p>Revenue tracking in the current MVP is for display purposes only. Actual payouts require full payment integration at launch.</p>
         </Section>
         <Section title="5. Human Verification">
-          <p>The Human Verified badge indicates that content was verified as human-created through MUSDO's review process. MUSDO does not warrant the absence of AI assistance in any content.</p>
+          <p>The Human Verified badge indicates that content was verified as human-created through MUSVORA's review process. MUSVORA does not warrant the absence of AI assistance in any content.</p>
         </Section>
         <Section title="6. Content Removal">
-          <p>MUSDO may remove content that violates these terms, applicable law, or third-party rights.</p>
+          <p>MUSVORA may remove content that violates these terms, applicable law, or third-party rights.</p>
         </Section>
         <Section title="7. Disclaimers">
-          <p>MUSDO does not guarantee income, streams, licensing success, copyright validity, or legal protection. Licensing agreements should be reviewed by a qualified attorney.</p>
+          <p>MUSVORA does not guarantee income, streams, licensing success, copyright validity, or legal protection. Licensing agreements should be reviewed by a qualified attorney.</p>
         </Section>
       </div>
     </AppShell>

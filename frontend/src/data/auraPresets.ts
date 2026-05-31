@@ -1,11 +1,11 @@
 import type { CuratedAuraPreset, CuratedAuraPresetId } from '../types/personalization'
 
 /**
- * MUSDO curated aura presets — hand-picked emotional atmospheres the user
+ * MUSVORA curated aura presets — hand-picked emotional atmospheres the user
  * can lock in. Distinct from the auto-detected genre auras in `lib/aura.tsx`:
  * those react to whatever's playing, these are *the user's chosen mood*.
  *
- * Every preset stays inside MUSDO's cinematic design language — low
+ * Every preset stays inside MUSVORA's cinematic design language — low
  * saturation, warm shadows, no neon. If a colour ever feels gamer-RGB or
  * Spotify-green, it does not belong in this list.
  */

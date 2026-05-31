@@ -89,7 +89,7 @@ export function getAIResults(query: string): AIResult[] {
   if (key) return resultSets[key]
   return [
     { type: 'playlist', id: 'default1', title: 'Curated for You', subtitle: 'Based on your feeling', tags: ['personal', 'discovery'], gradient: 'from-violet-900 to-zinc-900' },
-    { type: 'song', id: 'default2', title: 'Feeling Discovered', subtitle: 'MUSDO AI · Emotional Match', tags: ['ai', 'discovery'], gradient: 'from-blue-900 to-zinc-900' },
+    { type: 'song', id: 'default2', title: 'Feeling Discovered', subtitle: 'MUSVORA AI · Emotional Match', tags: ['ai', 'discovery'], gradient: 'from-blue-900 to-zinc-900' },
   ]
 }
 

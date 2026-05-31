@@ -1,0 +1,176 @@
+/* ============================================================================
+   MUSVORA — Governance Design System
+   ----------------------------------------------------------------------------
+   Institutional dark mode for a Music Asset Operating System.
+   Inspiration: Linear · Stripe Dashboard · Notion · Bloomberg.
+
+   SCOPING RULE (gradual migration):
+   These tokens ONLY apply inside an element marked [data-ds="governance"].
+   The existing dark-luxury screens are NOT affected. New MUSVORA modules
+   (Vault, Readiness, Ownership Confidence, Recovery, Passport, AI Auditor,
+   AI DJ) opt in by wrapping their root in the GovernanceScope component.
+
+   Do not delete or restyle existing screens through this file.
+   ========================================================================== */
+
+[data-ds='governance'] {
+  /* ── Brand palette (source of truth) ───────────────────────────── */
+  --gv-black: #0a0a0a;        /* Matte black — app base */
+  --gv-white: #ffffff;
+  --gv-navy: #001f3f;         /* Institutional blue — trust / brand */
+  --gv-gold: #d4af37;         /* Subtle gold — used sparingly, never neon */
+  --gv-green: #27ae60;        /* Positive / verified / ready */
+  --gv-red: #e74c3c;          /* Risk / blocked / error */
+  --gv-yellow: #f39c12;       /* Caution / pending / attention */
+
+  /* ── Surfaces (layered, cool navy-tinted greys) ────────────────── */
+  --gv-bg: #0a0a0a;
+  --gv-surface: #101113;       /* cards on bg */
+  --gv-surface-2: #15171a;     /* nested surfaces */
+  --gv-elevated: #1b1e22;      /* modals / popovers / elevated cards */
+  --gv-inset: #08090a;         /* wells / code / input backgrounds */
+
+  /* ── Navy accent steps (trust tones) ───────────────────────────── */
+  --gv-navy-050: #e6edf5;
+  --gv-navy-300: #5b87b8;
+  --gv-navy-500: #1f4e84;      /* interactive blue (links, focus) */
+  --gv-navy-600: #163c66;
+  --gv-navy-700: #001f3f;      /* brand navy */
+  --gv-navy-soft: rgba(31, 78, 132, 0.14);
+
+  /* ── Gold steps (used for premium / verified-asset accents only) ─ */
+  --gv-gold-soft: rgba(212, 175, 55, 0.12);
+  --gv-gold-dim: #a98a2c;
+
+  /* ── Text (enterprise contrast, accessible) ────────────────────── */
+  --gv-text: rgba(255, 255, 255, 0.95);
+  --gv-text-secondary: rgba(255, 255, 255, 0.66);
+  --gv-text-muted: rgba(255, 255, 255, 0.44);
+  --gv-text-faint: rgba(255, 255, 255, 0.28);
+  --gv-text-inverse: #0a0a0a;
+  --gv-text-link: #6ea3df;
+
+  /* ── Borders / hairlines ───────────────────────────────────────── */
+  --gv-border: rgba(255, 255, 255, 0.09);
+  --gv-border-strong: rgba(255, 255, 255, 0.16);
+  --gv-border-faint: rgba(255, 255, 255, 0.05);
+  --gv-ring: rgba(110, 163, 223, 0.55);   /* focus ring */
+
+  /* ── Semantic status (with soft fills for chips/banners) ───────── */
+  --gv-success: var(--gv-green);
+  --gv-success-soft: rgba(39, 174, 96, 0.13);
+  --gv-danger: var(--gv-red);
+  --gv-danger-soft: rgba(231, 76, 60, 0.13);
+  --gv-warning: var(--gv-yellow);
+  --gv-warning-soft: rgba(243, 156, 18, 0.13);
+  --gv-info: var(--gv-navy-500);
+  --gv-info-soft: var(--gv-navy-soft);
+
+  /* ── Typography ────────────────────────────────────────────────── */
+  --gv-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --gv-font-display: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --gv-font-mono: 'SF Mono', ui-monospace, 'JetBrains Mono', 'Menlo', monospace;
+
+  /* Type scale (rem) — aggressive hierarchy */
+  --gv-text-2xs: 0.6875rem;   /* 11 */
+  --gv-text-xs: 0.75rem;      /* 12 */
+  --gv-text-sm: 0.8125rem;    /* 13 */
+  --gv-text-base: 0.9375rem;  /* 15 */
+  --gv-text-md: 1.0625rem;    /* 17 */
+  --gv-text-lg: 1.25rem;      /* 20 */
+  --gv-text-xl: 1.5rem;       /* 24 */
+  --gv-text-2xl: 1.875rem;    /* 30 */
+  --gv-text-3xl: 2.375rem;    /* 38 */
+  --gv-text-4xl: 3rem;        /* 48 */
+
+  --gv-weight-regular: 400;
+  --gv-weight-medium: 500;
+  --gv-weight-semibold: 600;
+  --gv-weight-bold: 700;
+  --gv-weight-black: 800;
+
+  --gv-leading-tight: 1.15;
+  --gv-leading-snug: 1.35;
+  --gv-leading-normal: 1.55;
+
+  --gv-tracking-tight: -0.02em;
+  --gv-tracking-normal: 0;
+  --gv-tracking-wide: 0.04em;
+  --gv-tracking-caps: 0.14em;   /* uppercase eyebrow labels */
+
+  /* ── Spacing scale (4px base) ──────────────────────────────────── */
+  --gv-space-1: 4px;
+  --gv-space-2: 8px;
+  --gv-space-3: 12px;
+  --gv-space-4: 16px;
+  --gv-space-5: 20px;
+  --gv-space-6: 24px;
+  --gv-space-8: 32px;
+  --gv-space-10: 40px;
+  --gv-space-12: 48px;
+  --gv-space-16: 64px;
+
+  /* ── Radius (tighter, institutional — not playful) ─────────────── */
+  --gv-radius-xs: 4px;
+  --gv-radius-sm: 6px;
+  --gv-radius-md: 8px;
+  --gv-radius-lg: 10px;
+  --gv-radius-xl: 14px;
+  --gv-radius-2xl: 18px;
+  --gv-radius-pill: 999px;
+
+  /* ── Elevation (subtle, enterprise) ────────────────────────────── */
+  --gv-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --gv-shadow-sm: 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+  --gv-shadow-md: 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --gv-shadow-lg: 0 24px 48px -20px rgba(0, 0, 0, 0.7);
+  --gv-shadow-ring: inset 0 0 0 1px var(--gv-border);
+
+  /* ── Motion (60fps targets) ────────────────────────────────────── */
+  --gv-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --gv-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --gv-dur-fast: 120ms;
+  --gv-dur-base: 200ms;
+  --gv-dur-slow: 320ms;
+
+  /* Apply foundation typography within the scope */
+  font-family: var(--gv-font-sans);
+  color: var(--gv-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+}
+
+/* Display headings inside governance scope default to Inter Tight */
+[data-ds='governance'] h1,
+[data-ds='governance'] h2,
+[data-ds='governance'] h3 {
+  font-family: var(--gv-font-display);
+  letter-spacing: var(--gv-tracking-tight);
+  line-height: var(--gv-leading-tight);
+}
+
+/* Honor reduced-motion inside the scope */
+body.reduce-motion [data-ds='governance'] * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ── Foundation utility classes (governance-scoped) ──────────────── */
+[data-ds='governance'] .gv-eyebrow {
+  font-size: var(--gv-text-2xs);
+  font-weight: var(--gv-weight-bold);
+  letter-spacing: var(--gv-tracking-caps);
+  text-transform: uppercase;
+  color: var(--gv-text-muted);
+}
+
+[data-ds='governance'] .gv-mono {
+  font-family: var(--gv-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+[data-ds='governance'] .gv-focusable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--gv-bg), 0 0 0 4px var(--gv-ring);
+}

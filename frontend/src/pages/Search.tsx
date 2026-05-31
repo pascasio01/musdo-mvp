@@ -248,7 +248,7 @@ export default function Search() {
         <div className="flex items-center gap-2 mb-3">
           <Sparkles size={12} style={{ color: 'var(--accent)' }} aria-hidden />
           <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-            MUSDO AI Moods
+            MUSVORA AI Moods
           </p>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-1 px-1">

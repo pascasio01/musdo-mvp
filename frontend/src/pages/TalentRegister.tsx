@@ -72,7 +72,7 @@ export default function TalentRegister() {
             onClick={() => navigate('/talent')}
             className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:opacity-90 transition-opacity"
           >
-            Browse MUSDO Connect
+            Browse MUSVORA Connect
           </button>
           <button
             onClick={() => navigate('/talent-dashboard')}
@@ -94,7 +94,7 @@ export default function TalentRegister() {
         </button>
 
         <div className="mb-6">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSDO Connect</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSVORA Connect</p>
           <h1 className="text-white font-black text-2xl">Register as Talent</h1>
         </div>
 
@@ -305,7 +305,7 @@ export default function TalentRegister() {
 
             <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
               <p className="text-zinc-600 text-[11px] leading-relaxed">
-                By registering, you understand that MUSDO is a connection platform only. We do not guarantee work, payments, or project outcomes. Professional collaborations should use written agreements. Your legal identity will not be displayed publicly.
+                By registering, you understand that MUSVORA is a connection platform only. We do not guarantee work, payments, or project outcomes. Professional collaborations should use written agreements. Your legal identity will not be displayed publicly.
               </p>
             </div>
 

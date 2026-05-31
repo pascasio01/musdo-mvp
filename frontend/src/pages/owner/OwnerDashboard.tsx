@@ -287,7 +287,7 @@ function AITab() {
     setLoading(true)
     setAiResponse(null)
     setTimeout(() => {
-      setAiResponse(`MUSDO AI Analysis: Based on platform data, ${q.toLowerCase().includes('growth') ? 'creator growth is accelerating — 22 new composers joined this week, up 34% from the prior week. Bachata Romántica and Urban Fusion are the top contributing genres. Recommend featuring top 3 new verified composers in the home discovery feed.' : q.toLowerCase().includes('suspicious') ? 'Security scan complete. 1 high-risk login detected (user_4492, 3 countries, 2h window). 12 low-risk flagged logins reviewed and cleared. Recommend immediate session revocation for user_4492.' : 'Analysis complete. Platform metrics are trending positively across all key areas. Recommend expanding verification capacity and preparing for increased marketplace demand.'}`)
+      setAiResponse(`MUSVORA AI Analysis: Based on platform data, ${q.toLowerCase().includes('growth') ? 'creator growth is accelerating — 22 new composers joined this week, up 34% from the prior week. Bachata Romántica and Urban Fusion are the top contributing genres. Recommend featuring top 3 new verified composers in the home discovery feed.' : q.toLowerCase().includes('suspicious') ? 'Security scan complete. 1 high-risk login detected (user_4492, 3 countries, 2h window). 12 low-risk flagged logins reviewed and cleared. Recommend immediate session revocation for user_4492.' : 'Analysis complete. Platform metrics are trending positively across all key areas. Recommend expanding verification capacity and preparing for increased marketplace demand.'}`)
       setLoading(false)
     }, 1400)
   }
@@ -297,7 +297,7 @@ function AITab() {
       <div className="rounded-2xl border border-violet-500/20 p-5" style={{ background: 'rgba(124,58,237,0.08)' }}>
         <div className="flex items-center gap-2 mb-1">
           <Sparkles size={13} className="text-violet-400" aria-hidden />
-          <p className="text-violet-300 text-xs font-bold uppercase tracking-wider">MUSDO AI Command</p>
+          <p className="text-violet-300 text-xs font-bold uppercase tracking-wider">MUSVORA AI Command</p>
         </div>
         <p className="text-muted text-xs mb-4">Ask anything about your platform</p>
         <div className="flex gap-2">
@@ -306,7 +306,7 @@ function AITab() {
             value={aiQuery}
             onChange={e => setAiQuery(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && runAI(aiQuery)}
-            placeholder="Ask MUSDO AI…"
+            placeholder="Ask MUSVORA AI…"
             aria-label="AI query"
             className="flex-1 px-4 py-3 rounded-xl border border-theme text-primary text-sm placeholder-zinc-600 outline-none"
             style={{ background: 'var(--glass-bg)' }}
@@ -406,7 +406,7 @@ export default function OwnerDashboard() {
             <ShieldCheck size={17} className="text-white" aria-hidden />
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-muted">MUSDO</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted">MUSVORA</p>
             <h1 className="text-primary font-black text-xl leading-none">Command Center</h1>
           </div>
         </div>

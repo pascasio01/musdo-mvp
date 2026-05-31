@@ -11,7 +11,7 @@ const storyData = {
     { date: 'Jan 7, 2026', event: 'Lyrics completed. First acoustic demo recorded.' },
     { date: 'Jan 14, 2026', event: 'Studio session — full arrangement built.' },
     { date: 'Jan 20, 2026', event: 'Vocals tracked. Mix started.' },
-    { date: 'Feb 5, 2026', event: 'Song finalized. Uploaded to MUSDO Vault.' },
+    { date: 'Feb 5, 2026', event: 'Song finalized. Uploaded to MUSVORA Vault.' },
     { date: 'Feb 10, 2026', event: 'Published to Marketplace for licensing.' },
   ],
   commentary: 'This song is different from everything I\'d written before. I wanted it to feel like a memory — something you can touch but not hold. The production is intentionally sparse in the first verse, then opens up completely in the bridge. That contrast was intentional.',

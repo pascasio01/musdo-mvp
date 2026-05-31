@@ -46,7 +46,7 @@ export default function Talent() {
     <AppShell>
       <div className="px-5 pt-14 pb-6">
         <div className="mb-5">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSDO</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSVORA</p>
           <h1 className="text-white text-3xl font-black">Connect</h1>
           <p className="text-zinc-600 text-sm mt-1">Find music professionals for your next project.</p>
         </div>
@@ -181,7 +181,7 @@ export default function Talent() {
 
         <div className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-4">
           <p className="text-zinc-600 text-[11px] leading-relaxed text-center">
-            MUSDO is a connection platform only. We are not an employer, booking agency or legal representative. Professional collaborations should use written agreements.
+            MUSVORA is a connection platform only. We are not an employer, booking agency or legal representative. Professional collaborations should use written agreements.
           </p>
         </div>
       </div>

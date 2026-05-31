@@ -87,12 +87,12 @@ function SafeListenPanelImpl({ defaultOpen = false }: Props) {
             />
             <p className="text-[10px] mt-2" style={{ color: 'var(--text-muted)' }}>
               Awareness profiles are previews. Microphone-based detection arrives in a later release —
-              MUSDO will never listen without explicit permission.
+              MUSVORA will never listen without explicit permission.
             </p>
           </div>
 
           <Disclaimer>
-            MUSDO SafeListen helps manage listening comfort but does not replace medical advice or
+            MUSVORA SafeListen helps manage listening comfort but does not replace medical advice or
             device-level hearing protection.
           </Disclaimer>
         </div>

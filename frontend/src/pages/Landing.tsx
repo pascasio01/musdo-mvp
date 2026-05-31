@@ -26,7 +26,7 @@ export default function Landing() {
             <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-[0_4px_20px_-4px_rgba(255,255,255,0.25)]">
               <Music size={16} className="text-black" strokeWidth={2.5} />
             </div>
-            <span className="text-[11px] font-bold tracking-[0.22em] text-zinc-400 uppercase">MUSDO</span>
+            <span className="text-[11px] font-bold tracking-[0.22em] text-zinc-400 uppercase">MUSVORA</span>
           </div>
 
           {/* Headline — tighter leading, refined three-stop gradient on Music */}
@@ -92,7 +92,7 @@ export default function Landing() {
         {/* Footer — public branding only, no legal identity */}
         <div className="pb-8 text-center">
           <p className="text-[10px] text-zinc-700 font-mono uppercase tracking-[0.2em]">
-            MUSDO Labs · Human Music Infrastructure
+            MUSVORA Labs · Human Music Infrastructure
           </p>
         </div>
       </div>

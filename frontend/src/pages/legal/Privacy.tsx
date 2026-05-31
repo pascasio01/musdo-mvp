@@ -45,10 +45,10 @@ export default function Privacy() {
           <p>You may request deletion of your account and associated data. Some data may be retained for legal compliance, dispute resolution, or audit requirements.</p>
         </Section>
         <Section title="6. Third-Party Services">
-          <p>MUSDO may use third-party services for authentication, storage, payments, and analytics. These services have their own privacy policies.</p>
+          <p>MUSVORA may use third-party services for authentication, storage, payments, and analytics. These services have their own privacy policies.</p>
         </Section>
         <Section title="7. Contact">
-          <p>Privacy questions can be directed to MUSDO Support.</p>
+          <p>Privacy questions can be directed to MUSVORA Support.</p>
         </Section>
       </div>
     </AppShell>

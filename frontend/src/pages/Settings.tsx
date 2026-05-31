@@ -133,7 +133,7 @@ export default function Settings() {
         </div>
 
         <p className="text-center text-zinc-800 text-[10px] mt-8 font-mono">
-          MUSDO v1.0 MVP · Human Music Infrastructure
+          MUSVORA v1.0 MVP · Human Music Infrastructure
         </p>
       </div>
     </AppShell>

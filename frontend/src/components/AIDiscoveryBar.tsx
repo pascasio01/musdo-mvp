@@ -68,7 +68,7 @@ export default function AIDiscoveryBar() {
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3">
         <Sparkles size={13} className="text-violet-400" strokeWidth={1.5} />
-        <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">MUSDO AI Discovery</p>
+        <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">MUSVORA AI Discovery</p>
       </div>
 
       <div className={`relative rounded-2xl transition-all duration-300 ${focused ? 'ring-1 ring-white/15' : ''}`}>

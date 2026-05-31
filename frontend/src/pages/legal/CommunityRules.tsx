@@ -25,7 +25,7 @@ export default function CommunityRules() {
         <p className="text-zinc-600 text-xs mb-8">May 2026</p>
 
         <Section title="Respect & Integrity">
-          <p>MUSDO is a professional platform for creators and music lovers. Harassment, hate speech, discrimination, and personal attacks are not tolerated.</p>
+          <p>MUSVORA is a professional platform for creators and music lovers. Harassment, hate speech, discrimination, and personal attacks are not tolerated.</p>
         </Section>
         <Section title="Content Standards">
           <p>Do not upload content you do not own. Do not misrepresent the origin, authorship, or rights status of content.</p>
@@ -38,10 +38,10 @@ export default function CommunityRules() {
           <p>Be honest about licensing terms and content rights. Do not list content for licensing that you do not have rights to license. Fraudulent marketplace activity results in immediate suspension.</p>
         </Section>
         <Section title="Enforcement">
-          <p>MUSDO Team may warn, suspend, or permanently ban accounts for rule violations. Severe violations may be escalated to appropriate authorities.</p>
+          <p>MUSVORA Team may warn, suspend, or permanently ban accounts for rule violations. Severe violations may be escalated to appropriate authorities.</p>
         </Section>
         <Section title="Reporting">
-          <p>Report violations to MUSDO Support. We review all reports and take action where violations are confirmed.</p>
+          <p>Report violations to MUSVORA Support. We review all reports and take action where violations are confirmed.</p>
         </Section>
       </div>
     </AppShell>

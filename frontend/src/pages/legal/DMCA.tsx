@@ -25,13 +25,13 @@ export default function DMCA() {
         <p className="text-zinc-600 text-xs mb-8">Digital Millennium Copyright Act · May 2026</p>
 
         <Section title="Overview">
-          <p>MUSDO respects intellectual property rights and expects users to do the same. We respond to valid DMCA takedown notices in accordance with applicable law.</p>
+          <p>MUSVORA respects intellectual property rights and expects users to do the same. We respond to valid DMCA takedown notices in accordance with applicable law.</p>
         </Section>
         <Section title="Filing a Takedown Notice">
-          <p>To report copyright infringement, provide the following in writing to MUSDO Legal:</p>
+          <p>To report copyright infringement, provide the following in writing to MUSVORA Legal:</p>
           <ul className="list-disc pl-4 space-y-1">
             <li>Identification of the copyrighted work claimed to be infringed</li>
-            <li>Identification of the infringing material and its location on MUSDO</li>
+            <li>Identification of the infringing material and its location on MUSVORA</li>
             <li>Your contact information (name, address, phone, email)</li>
             <li>A statement of good faith belief that the use is unauthorized</li>
             <li>A statement of accuracy under penalty of perjury</li>
@@ -39,13 +39,13 @@ export default function DMCA() {
           </ul>
         </Section>
         <Section title="Counter-Notification">
-          <p>If you believe content was removed in error, you may file a counter-notification with MUSDO Legal containing the required statutory elements.</p>
+          <p>If you believe content was removed in error, you may file a counter-notification with MUSVORA Legal containing the required statutory elements.</p>
         </Section>
         <Section title="Repeat Infringers">
-          <p>MUSDO will terminate accounts of users who are repeat copyright infringers in appropriate circumstances.</p>
+          <p>MUSVORA will terminate accounts of users who are repeat copyright infringers in appropriate circumstances.</p>
         </Section>
         <Section title="Contact">
-          <p>DMCA notices should be sent to MUSDO Legal. Do not send general support queries to the DMCA contact.</p>
+          <p>DMCA notices should be sent to MUSVORA Legal. Do not send general support queries to the DMCA contact.</p>
         </Section>
       </div>
     </AppShell>

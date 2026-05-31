@@ -36,7 +36,7 @@ export default function TalentDashboard() {
 
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold">MUSDO Connect</p>
+            <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold">MUSVORA Connect</p>
             <h1 className="text-white font-black text-2xl">Talent Dashboard</h1>
           </div>
           <button

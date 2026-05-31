@@ -51,7 +51,7 @@ function ListeningAtmospherePanelImpl({ onLaunchOnboarding }: Props) {
         <div>
           <Label icon={Wind}>Listening Atmosphere</Label>
           <p className="text-[12px] mt-1 leading-snug" style={{ color: 'var(--text-muted)' }}>
-            Curated personalization. MUSDO stays cinematic — you choose the temperature.
+            Curated personalization. MUSVORA stays cinematic — you choose the temperature.
           </p>
         </div>
         {onLaunchOnboarding && (

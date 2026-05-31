@@ -224,7 +224,7 @@ export default function TalentProfile() {
 
         <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
           <p className="text-zinc-600 text-[11px] leading-relaxed">
-            Professional collaborations should use written agreements. MUSDO provides connection tools only and does not replace legal, financial or management advice. All payment and delivery terms are agreed directly between parties.
+            Professional collaborations should use written agreements. MUSVORA provides connection tools only and does not replace legal, financial or management advice. All payment and delivery terms are agreed directly between parties.
           </p>
         </div>
       </div>

@@ -21,7 +21,7 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
             <span className="text-xs font-bold uppercase tracking-widest text-violet-400">Song Passport</span>
           </div>
           <span className="text-[10px] font-mono text-zinc-500 bg-white/5 px-2 py-1 rounded-full border border-white/10">
-            MUSDO / 2026
+            MUSVORA / 2026
           </span>
         </div>
         <div className="flex items-start gap-4">
@@ -108,7 +108,7 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
           <QrCode size={40} className="text-violet-400 flex-shrink-0" />
           <div>
             <p className="text-white text-xs font-semibold">Verification QR</p>
-            <p className="text-zinc-500 text-[10px] mt-0.5">Scan to verify on MUSDO Registry</p>
+            <p className="text-zinc-500 text-[10px] mt-0.5">Scan to verify on MUSVORA Registry</p>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function SongPassportCard({ song }: SongPassportCardProps) {
       <div className="px-6 pb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
         <p className="text-center text-[10px] text-zinc-600 font-mono">
-          MUSDO HUMAN MUSIC INFRASTRUCTURE · POWERED BY MUSDO LABS
+          MUSVORA HUMAN MUSIC INFRASTRUCTURE · POWERED BY MUSVORA LABS
         </p>
       </div>
     </div>

@@ -56,7 +56,7 @@ export default function Login() {
           <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center">
             <Music size={16} className="text-black" strokeWidth={2.5} />
           </div>
-          <span className="text-sm font-bold tracking-widest text-zinc-400 uppercase">MUSDO</span>
+          <span className="text-sm font-bold tracking-widest text-zinc-400 uppercase">MUSVORA</span>
         </div>
 
         <h1 className="text-4xl font-black mb-2">Welcome<br />Back.</h1>

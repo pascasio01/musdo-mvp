@@ -49,7 +49,7 @@ export default function SecurityCenter() {
             <Shield size={18} className="text-zinc-400" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">MUSDO</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">MUSVORA</p>
             <h1 className="text-white font-black text-2xl">Security Center</h1>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function SecurityCenter() {
           <div className="flex items-center gap-3">
             <Users size={16} className="text-zinc-600" />
             <div>
-              <p className="text-white text-sm font-semibold">MUSDO Team</p>
+              <p className="text-white text-sm font-semibold">MUSVORA Team</p>
               <p className="text-zinc-600 text-xs">Internal development access only</p>
             </div>
           </div>

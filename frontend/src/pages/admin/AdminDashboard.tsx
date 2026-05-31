@@ -36,7 +36,7 @@ export default function AdminDashboard() {
             <Users size={18} className="text-zinc-400" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">MUSDO</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">MUSVORA</p>
             <h1 className="text-white font-black text-2xl">Admin Panel</h1>
           </div>
         </div>

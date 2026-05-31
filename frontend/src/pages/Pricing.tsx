@@ -119,7 +119,7 @@ export default function Pricing() {
         </button>
 
         <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">MUSDO</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">MUSVORA</p>
           <h1 className="text-white font-black text-4xl mb-3">Plans &<br />Pricing</h1>
           <p className="text-zinc-500 text-sm max-w-xs mx-auto">Choose your path. Listener or creator, we have a plan for every stage.</p>
         </div>
@@ -218,7 +218,7 @@ export default function Pricing() {
           <div className="flex items-center justify-between py-3">
             <div>
               <p className="text-white text-sm font-semibold">Marketplace Commission</p>
-              <p className="text-zinc-600 text-xs mt-0.5">MUSDO 10% · Creator 90%</p>
+              <p className="text-zinc-600 text-xs mt-0.5">MUSVORA 10% · Creator 90%</p>
             </div>
             <span className="text-white font-bold">10%</span>
           </div>

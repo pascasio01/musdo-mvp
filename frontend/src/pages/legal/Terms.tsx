@@ -29,27 +29,27 @@ export default function Terms() {
         </div>
 
         <Section title="1. Acceptance of Terms">
-          <p>By accessing or using MUSDO, you agree to be bound by these Terms of Service. If you do not agree, do not use the platform.</p>
+          <p>By accessing or using MUSVORA, you agree to be bound by these Terms of Service. If you do not agree, do not use the platform.</p>
         </Section>
         <Section title="2. Platform Description">
-          <p>MUSDO is a technology platform designed for music discovery, creator protection, and licensing. MUSDO is not a label, publisher, or legal rights authority.</p>
+          <p>MUSVORA is a technology platform designed for music discovery, creator protection, and licensing. MUSVORA is not a label, publisher, or legal rights authority.</p>
         </Section>
         <Section title="3. User Responsibilities">
           <p>Users are solely responsible for content they upload. By uploading content, you represent that you own or have the rights to that content.</p>
-          <p>You agree not to upload content that infringes on third-party rights, violates applicable law, or violates MUSDO community standards.</p>
+          <p>You agree not to upload content that infringes on third-party rights, violates applicable law, or violates MUSVORA community standards.</p>
         </Section>
         <Section title="4. Content Removal">
-          <p>MUSDO may remove content that violates these Terms, applicable law, or the rights of third parties, without prior notice.</p>
+          <p>MUSVORA may remove content that violates these Terms, applicable law, or the rights of third parties, without prior notice.</p>
         </Section>
         <Section title="5. Limitation of Liability">
-          <p>MUSDO does not guarantee income, success, copyright validity, legal outcomes, or royalty collection. Platform tools are provided as-is during MVP/beta.</p>
-          <p>To the maximum extent permitted by law, MUSDO's liability is limited to the amount paid by the user in the preceding 30 days.</p>
+          <p>MUSVORA does not guarantee income, success, copyright validity, legal outcomes, or royalty collection. Platform tools are provided as-is during MVP/beta.</p>
+          <p>To the maximum extent permitted by law, MUSVORA's liability is limited to the amount paid by the user in the preceding 30 days.</p>
         </Section>
         <Section title="6. Changes to Terms">
-          <p>MUSDO reserves the right to modify these terms at any time. Continued use of the platform constitutes acceptance of updated terms.</p>
+          <p>MUSVORA reserves the right to modify these terms at any time. Continued use of the platform constitutes acceptance of updated terms.</p>
         </Section>
         <Section title="7. Contact">
-          <p>Questions about these terms may be directed to MUSDO Support.</p>
+          <p>Questions about these terms may be directed to MUSVORA Support.</p>
         </Section>
       </div>
     </AppShell>

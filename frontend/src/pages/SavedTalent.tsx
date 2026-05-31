@@ -24,7 +24,7 @@ export default function SavedTalent() {
         </button>
 
         <div className="mb-6">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSDO Connect</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSVORA Connect</p>
           <h1 className="text-white font-black text-2xl">Saved Talent</h1>
           <p className="text-zinc-600 text-sm mt-1">{saved.length} professional{saved.length !== 1 ? 's' : ''} saved.</p>
         </div>

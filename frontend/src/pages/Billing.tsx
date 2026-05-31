@@ -81,7 +81,7 @@ export default function Billing() {
             <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">Refund Request</p>
           </div>
           <p className="text-zinc-500 text-sm mb-4 leading-relaxed">
-            Refund requests are reviewed by the MUSDO Team. See our Refund Policy for eligibility.
+            Refund requests are reviewed by the MUSVORA Team. See our Refund Policy for eligibility.
           </p>
           <button
             onClick={() => navigate('/refund-policy')}

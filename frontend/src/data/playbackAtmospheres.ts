@@ -1,7 +1,7 @@
 import type { PlaybackAtmosphere, PlaybackAtmosphereId } from '../types/personalization'
 
 /**
- * MUSDO Playback Atmospheres — premium spatial vibes.
+ * MUSVORA Playback Atmospheres — premium spatial vibes.
  *
  * MVP: width/depth are mock values surfaced only for the UI and persisted
  * for future DSP wiring (StereoPannerNode + convolver). They do not alter

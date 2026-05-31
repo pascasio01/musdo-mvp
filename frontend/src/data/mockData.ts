@@ -21,14 +21,14 @@ export const mockSongs: Song[] = [
     aura_preset: 'romantic',
     credits: {
       composer: 'Emmanuel Reyes',
-      producer: 'MUSDO Studios',
+      producer: 'MUSVORA Studios',
       arranger: 'Emmanuel Reyes',
       engineer: 'J. Castillo',
       instruments: ['Requinto', 'Bongo', 'Bass', 'Lead Guitar', 'Vocals'],
-      copyright_owner: 'Emmanuel Reyes / MUSDO',
+      copyright_owner: 'Emmanuel Reyes / MUSVORA',
       royalty_split: [
         { name: 'Emmanuel Reyes', percent: 80 },
-        { name: 'MUSDO Publishing', percent: 20 },
+        { name: 'MUSVORA Publishing', percent: 20 },
       ],
     },
     analytics: { plays: 12480, emotional_engagement: 92, avg_listen_time: 198 },
@@ -53,10 +53,10 @@ export const mockSongs: Song[] = [
     aura_preset: 'romantic',
     credits: {
       composer: 'Emmanuel R.',
-      producer: 'MUSDO Studios',
+      producer: 'MUSVORA Studios',
       arranger: 'Emmanuel R.',
       instruments: ['Requinto', 'Bongo', 'Bass', 'Vocals'],
-      copyright_owner: 'Emmanuel R. / MUSDO',
+      copyright_owner: 'Emmanuel R. / MUSVORA',
       royalty_split: [
         { name: 'Emmanuel R.', percent: 100 },
       ],
@@ -83,9 +83,9 @@ export const mockSongs: Song[] = [
     aura_preset: 'romantic',
     credits: {
       composer: 'Emmanuel R.',
-      producer: 'MUSDO Studios',
+      producer: 'MUSVORA Studios',
       instruments: ['Piano', 'Strings', 'Vocals'],
-      copyright_owner: 'Emmanuel R. / MUSDO',
+      copyright_owner: 'Emmanuel R. / MUSVORA',
     },
     analytics: { plays: 5230, emotional_engagement: 81 },
   },
@@ -133,12 +133,12 @@ export const mockSongs: Song[] = [
     aura_preset: 'urban',
     credits: {
       composer: 'Emmanuel Reyes',
-      producer: 'MUSDO Urban Lab',
+      producer: 'MUSVORA Urban Lab',
       instruments: ['Requinto', '808', 'Drums', 'Vocals'],
-      copyright_owner: 'Emmanuel Reyes / MUSDO',
+      copyright_owner: 'Emmanuel Reyes / MUSVORA',
       royalty_split: [
         { name: 'Emmanuel Reyes', percent: 70 },
-        { name: 'MUSDO Urban Lab', percent: 30 },
+        { name: 'MUSVORA Urban Lab', percent: 30 },
       ],
     },
     analytics: { plays: 6710, emotional_engagement: 84 },

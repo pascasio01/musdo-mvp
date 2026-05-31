@@ -14,9 +14,9 @@ interface BadgeConfig {
 
 const BADGE_CONFIG: Record<BadgeType, BadgeConfig> = {
   verified_artist: {
-    label: 'MUSDO Verified Artist',
+    label: 'MUSVORA Verified Artist',
     shortLabel: 'Verified Artist',
-    description: 'Confirms artist identity on MUSDO. This account is linked to a verified artist through our identity review process.',
+    description: 'Confirms artist identity on MUSVORA. This account is linked to a verified artist through our identity review process.',
     color: 'text-blue-300',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-400/25',
@@ -24,7 +24,7 @@ const BADGE_CONFIG: Record<BadgeType, BadgeConfig> = {
     iconPath: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
   },
   verified_composer: {
-    label: 'MUSDO Verified Composer',
+    label: 'MUSVORA Verified Composer',
     shortLabel: 'Verified Composer',
     description: 'Confirms songwriter and composer identity. Shown on composer profiles and Song Passports where authorship is documented.',
     color: 'text-slate-200',
@@ -36,7 +36,7 @@ const BADGE_CONFIG: Record<BadgeType, BadgeConfig> = {
   human_verified: {
     label: 'Human Verified',
     shortLabel: 'Human Verified',
-    description: 'This song passed MUSDO\'s human-creation review. It was verified to be composed and performed by a human creator, not AI-generated.',
+    description: 'This song passed MUSVORA\'s human-creation review. It was verified to be composed and performed by a human creator, not AI-generated.',
     color: 'text-emerald-300',
     bgColor: 'bg-emerald-500/10',
     borderColor: 'border-emerald-400/25',
@@ -46,7 +46,7 @@ const BADGE_CONFIG: Record<BadgeType, BadgeConfig> = {
   verified_rights_holder: {
     label: 'Rights Holder Verified',
     shortLabel: 'Rights Holder',
-    description: 'Confirms this creator has provided proof of rights to license this music. Required to publish songs to the MUSDO licensing marketplace.',
+    description: 'Confirms this creator has provided proof of rights to license this music. Required to publish songs to the MUSVORA licensing marketplace.',
     color: 'text-amber-300',
     bgColor: 'bg-amber-500/10',
     borderColor: 'border-amber-400/25',
@@ -56,7 +56,7 @@ const BADGE_CONFIG: Record<BadgeType, BadgeConfig> = {
   label_verified: {
     label: 'Label Verified',
     shortLabel: 'Label Verified',
-    description: 'Confirms manager, label, or publisher authorization. This account has been verified to represent an authorized music entity on MUSDO.',
+    description: 'Confirms manager, label, or publisher authorization. This account has been verified to represent an authorized music entity on MUSVORA.',
     color: 'text-violet-300',
     bgColor: 'bg-violet-500/10',
     borderColor: 'border-violet-400/25',
@@ -138,7 +138,7 @@ export default function VerificationBadge({
             <p className={`text-xs font-bold ${config.color}`}>{config.label}</p>
           </div>
           <p className="text-zinc-400 text-[11px] leading-relaxed">{config.description}</p>
-          <p className="text-zinc-600 text-[10px] mt-2 font-medium">Verified by MUSDO</p>
+          <p className="text-zinc-600 text-[10px] mt-2 font-medium">Verified by MUSVORA</p>
           <div className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-3 h-3 rotate-45 bg-zinc-900/95 border-r border-b border-white/10" />
         </div>
       )}

@@ -9,7 +9,7 @@ const dnaData = {
   engineers: ['Studio Norte — Mix Engineer'],
   musicians: ['Guitar: Julio Martínez', 'Keys: Ana Díaz', 'Bass: Robert Pérez'],
   vocalChain: ['Neumann U87', 'API 312', 'SSL G-Bus', 'Waves SSL'],
-  recordingStudio: 'MUSDO Studios, Santo Domingo',
+  recordingStudio: 'MUSVORA Studios, Santo Domingo',
   emotionalTags: ['Nostalgia', 'Longing', 'Romance', 'Sensual'],
   instruments: ['Acoustic Guitar', 'Electric Bass', 'Keys', 'Percussion', 'Strings'],
 }

@@ -29,7 +29,7 @@ function LoadingScreen() {
         <div className="absolute inset-0 rounded-full border-2 border-t-white/50 border-l-white/20 border-transparent animate-spin" />
         <span className="sr-only">Loading…</span>
       </div>
-      <p className="text-zinc-700 text-[10px] uppercase tracking-widest font-medium">MUSDO</p>
+      <p className="text-zinc-700 text-[10px] uppercase tracking-widest font-medium">MUSVORA</p>
     </div>
   )
 }

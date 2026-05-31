@@ -52,7 +52,7 @@ export default function TalentRequests() {
         </button>
 
         <div className="mb-6">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSDO Connect</p>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold mb-1">MUSVORA Connect</p>
           <h1 className="text-white font-black text-2xl">My Requests</h1>
           <p className="text-zinc-600 text-sm mt-1">{mockRequests.length} total requests.</p>
         </div>
@@ -134,7 +134,7 @@ export default function TalentRequests() {
 
         <div className="mt-6 rounded-2xl bg-white/5 border border-white/10 p-4">
           <p className="text-zinc-600 text-[11px] leading-relaxed">
-            All payment terms, delivery schedules and agreements are between you and the talent directly. MUSDO does not guarantee work quality, payment or project completion.
+            All payment terms, delivery schedules and agreements are between you and the talent directly. MUSVORA does not guarantee work quality, payment or project completion.
           </p>
         </div>
       </div>

@@ -25,20 +25,20 @@ export default function LicensingDisclaimer() {
         <p className="text-zinc-600 text-xs mb-8">May 2026</p>
 
         <Section title="Platform Role">
-          <p>MUSDO is a technology platform that facilitates connections between creators and licensees. MUSDO is not a music publisher, record label, or legal intermediary.</p>
+          <p>MUSVORA is a technology platform that facilitates connections between creators and licensees. MUSVORA is not a music publisher, record label, or legal intermediary.</p>
         </Section>
         <Section title="License Scope">
-          <p>License agreements on MUSDO are between the creator (rights holder) and the licensee (buyer). MUSDO facilitates but is not a party to these agreements.</p>
-          <p>MUSDO does not verify the legal validity, completeness, or enforceability of any license agreement facilitated through the platform.</p>
+          <p>License agreements on MUSVORA are between the creator (rights holder) and the licensee (buyer). MUSVORA facilitates but is not a party to these agreements.</p>
+          <p>MUSVORA does not verify the legal validity, completeness, or enforceability of any license agreement facilitated through the platform.</p>
         </Section>
         <Section title="No Legal Advice">
-          <p>Nothing on MUSDO constitutes legal advice. Licensing agreements can have significant legal implications. Both creators and licensees are strongly advised to consult a qualified music attorney before executing significant licensing transactions.</p>
+          <p>Nothing on MUSVORA constitutes legal advice. Licensing agreements can have significant legal implications. Both creators and licensees are strongly advised to consult a qualified music attorney before executing significant licensing transactions.</p>
         </Section>
         <Section title="Copyright Validity">
-          <p>MUSDO does not guarantee that listed songs are free of third-party claims. The Human Verified badge confirms human-created content but does not constitute legal copyright certification.</p>
+          <p>MUSVORA does not guarantee that listed songs are free of third-party claims. The Human Verified badge confirms human-created content but does not constitute legal copyright certification.</p>
         </Section>
         <Section title="Dispute Resolution">
-          <p>Licensing disputes are between the creator and licensee. MUSDO may assist in good faith but is not obligated to arbitrate or resolve licensing disputes.</p>
+          <p>Licensing disputes are between the creator and licensee. MUSVORA may assist in good faith but is not obligated to arbitrate or resolve licensing disputes.</p>
         </Section>
       </div>
     </AppShell>

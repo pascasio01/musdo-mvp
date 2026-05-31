@@ -86,7 +86,7 @@ export default function Register() {
           <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center">
             <Music size={16} className="text-black" strokeWidth={2.5} />
           </div>
-          <span className="text-sm font-bold tracking-widest text-zinc-400 uppercase">MUSDO</span>
+          <span className="text-sm font-bold tracking-widest text-zinc-400 uppercase">MUSVORA</span>
         </div>
 
         <div className="flex gap-2 mb-8">
@@ -134,7 +134,7 @@ export default function Register() {
         ) : (
           <>
             <h1 className="text-4xl font-black mb-2">Create<br />Account.</h1>
-            <p className="text-zinc-500 mb-8">Set up your MUSDO profile.</p>
+            <p className="text-zinc-500 mb-8">Set up your MUSVORA profile.</p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="text-xs text-zinc-600 uppercase tracking-wider font-medium block mb-2">Username</label>
@@ -185,7 +185,7 @@ export default function Register() {
                 disabled={loading}
                 className="w-full py-4 mt-2 rounded-2xl bg-white text-black font-bold text-base hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {loading ? 'Creating Account...' : 'Join MUSDO'}
+                {loading ? 'Creating Account...' : 'Join MUSVORA'}
               </button>
             </form>
             <div className="mt-6 text-center">

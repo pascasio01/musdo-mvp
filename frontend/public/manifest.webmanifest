@@ -1,18 +1,18 @@
 {
-  "name": "MUSDO — Human Music Infrastructure",
-  "short_name": "MUSDO",
-  "description": "Discover human-verified music. Protect your demos. License songs through the MUSDO marketplace.",
+  "name": "MUSVORA — Music Asset Operating System",
+  "short_name": "MUSVORA",
+  "description": "Vault, verify, and monetize your music as protected, ownable assets. MUSVORA — the Music Asset Operating System.",
   "id": "/?source=pwa",
   "start_url": "/home?source=pwa",
   "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["music", "entertainment", "lifestyle"],
+  "categories": ["music", "business", "productivity"],
   "prefer_related_applications": false,
   "icons": [
     { "src": "/favicon.svg",          "sizes": "any",     "type": "image/svg+xml", "purpose": "any maskable" },
@@ -22,9 +22,9 @@
     { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Discover",     "short_name": "Home",   "url": "/home",   "description": "Browse human-verified music" },
-    { "name": "Composer Vault","short_name": "Vault", "url": "/vault",  "description": "Open your protected works" },
-    { "name": "Marketplace",  "short_name": "Market", "url": "/market", "description": "License songs from composers" }
+    { "name": "Discover",      "short_name": "Home",   "url": "/home",   "description": "Browse human-verified music" },
+    { "name": "Vault",         "short_name": "Vault",  "url": "/vault",  "description": "Open your protected music assets" },
+    { "name": "Marketplace",   "short_name": "Market", "url": "/market", "description": "License songs from composers" }
   ],
   "screenshots": []
 }
