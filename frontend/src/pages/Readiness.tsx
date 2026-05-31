@@ -217,6 +217,9 @@ export default function Readiness() {
               Your catalogue is collecting, but copyright gaps are holding back full
               monetization. Resolve the flagged items to raise your score.
             </p>
+            <p className="gv-eyebrow mt-4" style={{ color: 'var(--gv-text-faint)' }}>
+              Preview · sample data — connect your catalogue for live readiness
+            </p>
           </section>
 
           {/* ── Status summary: Ready Now / Needs Attention / At Risk ── */}
@@ -321,6 +324,7 @@ export default function Readiness() {
               variant="primary"
               size="lg"
               block
+              onClick={() => navigate('/vault')}
               leadingIcon={<Sparkles size={17} strokeWidth={2.4} />}
               trailingIcon={<ArrowRight size={17} strokeWidth={2.4} />}
               style={{ letterSpacing: '0.08em' }}

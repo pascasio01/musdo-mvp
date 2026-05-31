@@ -1,0 +1,482 @@
+ACT AS:
+Principal Software Architect + Staff Product Designer + Senior Mobile Engineer + Senior Security Engineer + Senior UX Architect + Music Industry Infrastructure Expert.
+
+PROJECT:
+MUSVORA
+
+MISSION:
+Transform the existing MUSVORA application into a native-grade, production-ready Music Asset Operating System.
+
+IMPORTANT:
+This is NOT Spotify.
+This is NOT SoundCloud.
+This is NOT a demo.
+This is NOT a landing page.
+
+MUSVORA is a governance platform for music assets.
+
+ABSOLUTE RULES:
+
+- Do NOT rebuild the app.
+- Do NOT remove existing functionality.
+- Do NOT delete working screens.
+- Do NOT touch Supabase architecture unless required.
+- Do NOT break authentication.
+- Do NOT break routing.
+- Do NOT change backend business logic.
+- Do NOT introduce mock-demo looking experiences.
+- Do NOT create fake data that looks real.
+- Preserve all existing working functionality.
+
+====================================================
+CORE PRODUCT IDENTITY
+====================================================
+
+MUSVORA = Music Asset Operating System
+
+Tagline:
+
+CREATE.
+PROTECT.
+VERIFY.
+LICENSE.
+MONETIZE.
+
+Primary Goal:
+
+Help creators manage, protect, verify and monetize music assets.
+
+The product must feel:
+
+- Institutional
+- Trustworthy
+- Premium
+- Native
+- Fast
+- Secure
+- Professional
+
+Never entertainment-first.
+
+Always governance-first.
+
+====================================================
+VISUAL DESIGN SYSTEM
+====================================================
+
+Design Language:
+
+Governance Design System
+
+Inspiration:
+
+- Stripe
+- Linear
+- Notion
+- Bloomberg
+- Apple Human Interface Guidelines
+
+Avoid:
+
+- Spotify clone
+- Neon gaming UI
+- Crypto UI
+- Dashboard clutter
+- Marketplace template look
+
+Typography:
+
+- Inter
+- Strong hierarchy
+- Executive feel
+
+Colors:
+
+Primary:
+#0A0A0A
+
+Trust Navy:
+#001F3F
+
+Success:
+#27AE60
+
+Warning:
+#F39C12
+
+Critical:
+#E74C3C
+
+Value Accent:
+#D4AF37
+
+Use gold sparingly.
+
+Spacing:
+
+Mobile-first
+Large breathing room
+Native safe areas
+
+====================================================
+NAVIGATION
+====================================================
+
+Bottom Navigation:
+
+Home
+Readiness
+Vault
+Scan
+Profile
+
+Remove Market from primary navigation.
+
+Home must remain accessible.
+
+All routes must remain functional.
+
+====================================================
+HOME
+====================================================
+
+Transform Home into:
+
+MUSVORA Asset Intelligence Center
+
+Primary Modules:
+
+- Overall Readiness Score
+- Ownership Confidence
+- Works At Risk
+- Potential Revenue Opportunities
+- Next Best Action
+
+Do NOT make Featured Songs the primary experience.
+
+Do NOT make Home feel like Spotify.
+
+====================================================
+READINESS CENTER
+====================================================
+
+Route:
+
+/readiness
+
+Sections:
+
+- Distribution Readiness
+- Licensing Readiness
+- Ownership Readiness
+- Copyright Readiness
+- Monetization Readiness
+
+Display:
+
+Overall Readiness Score
+
+Improve Readiness CTA
+
+====================================================
+CATALOG SCAN
+====================================================
+
+Route:
+
+/scan
+
+Purpose:
+
+Analyze music assets.
+
+Scan checks:
+
+- Metadata completeness
+- Ownership status
+- Missing contracts
+- Missing registrations
+- Split sheet status
+- Licensing readiness
+
+If scan is not implemented:
+
+Show professional placeholder.
+
+Title:
+
+Catalog Scan
+
+Subtitle:
+
+Analyze assets, metadata, contracts and readiness.
+
+CTA:
+
+Start Scan
+
+Status:
+
+Coming Soon
+
+====================================================
+VAULT
+====================================================
+
+Vault stores:
+
+- Masters
+- Demos
+- Lyrics
+- Contracts
+- Split Sheets
+- Artwork
+- Metadata
+
+Do NOT change storage architecture.
+
+Improve presentation only if safe.
+
+====================================================
+OWNERSHIP CONFIDENCE
+====================================================
+
+Show:
+
+Ownership Graph
+
+Contributors
+
+Split Status
+
+Ownership Confidence Score
+
+Risk Indicators
+
+Use:
+
+Pending Verification
+
+instead of fake verification claims.
+
+====================================================
+RECOVERY CENTER
+====================================================
+
+Show:
+
+Potential Revenue Opportunities
+
+Missing Registrations
+
+Metadata Gaps
+
+Ownership Issues
+
+Use:
+
+Potential Recovery
+
+Never:
+
+Guaranteed Recovery
+
+====================================================
+SONG PASSPORT
+====================================================
+
+Future-ready architecture.
+
+Must support:
+
+- Asset Timeline
+- Version History
+- Ownership History
+- Registration Status
+
+Do NOT generate fake passport IDs.
+
+====================================================
+AI AUDITOR
+====================================================
+
+Future module.
+
+Purpose:
+
+Detect:
+
+- Metadata issues
+- Ownership risks
+- Missing registrations
+- Catalog inconsistencies
+
+====================================================
+AI DJ
+====================================================
+
+Future module.
+
+Purpose:
+
+Contextual music automation.
+
+Examples:
+
+- Restaurant
+- Wedding
+- Birthday
+- Bachata Night
+- Salsa Night
+- Lounge
+- Corporate Event
+
+Must NOT become the primary product.
+
+====================================================
+PLAYER
+====================================================
+
+Player allowed.
+
+Must be:
+
+- Elegant
+- Native
+- Minimal
+
+Support:
+
+- Preview Demo
+- Preview Track
+- Lyrics
+
+Avoid:
+
+Spotify clone layouts.
+
+====================================================
+UPLOAD
+====================================================
+
+Creators can upload:
+
+- Demo
+- Master
+- Lyrics
+- Artwork
+- Metadata
+
+Future visibility options:
+
+Private
+
+Preview Only
+
+Available for Licensing
+
+Public Listening
+
+====================================================
+LEGAL FOUNDATION
+====================================================
+
+Create or verify:
+
+- Privacy Policy
+- Terms of Service
+- DMCA Policy
+- Copyright Policy
+- User Content Policy
+- Marketplace Disclaimer
+- AI Disclaimer
+- Security Policy
+
+Required statements:
+
+MUSVORA does not provide legal advice.
+
+MUSVORA does not guarantee revenue recovery.
+
+MUSVORA does not determine final legal ownership.
+
+Users are responsible for uploaded content.
+
+Users must own or control uploaded works.
+
+====================================================
+SECURITY FOUNDATION
+====================================================
+
+Implement or verify:
+
+- HTTPS
+- Encrypted in transit
+- Encrypted at rest
+- Secure uploads
+- Protected routes
+- Session security
+- Role access controls
+- Audit logs foundation
+
+Do NOT claim end-to-end encryption unless actually implemented.
+
+====================================================
+NATIVE EXPERIENCE
+====================================================
+
+Must feel:
+
+100% native.
+
+Requirements:
+
+- Safe area support
+- Sticky navigation
+- Smooth transitions
+- Tactile button states
+- Loading states
+- Error states
+- Empty states
+- Accessibility labels
+
+Target:
+
+60fps experience
+
+====================================================
+QUALITY CONTROL
+====================================================
+
+Check:
+
+- Browser console errors
+- React mount errors
+- Broken imports
+- Missing routes
+- Infinite loading
+- Splash screen issues
+- TypeScript errors
+- Runtime errors
+
+Apply only safe fixes.
+
+====================================================
+FINAL OBJECTIVE
+====================================================
+
+MUSVORA must feel like:
+
+The Bloomberg Terminal of Music Assets.
+
+Not a music player.
+
+Not a demo.
+
+Not a startup template.
+
+A real, premium, production-grade platform for creators, composers, producers, publishers and music rights management.
+
+Build for 2035.
+Ship with 2026 standards.
+Preserve all existing functionality.
