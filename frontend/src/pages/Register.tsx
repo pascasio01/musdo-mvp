@@ -5,9 +5,9 @@ import { useAuth } from '../lib/auth'
 import { OAuthButton, oauthErrorMessage, type OAuthProvider } from '../components/auth/OAuthButtons'
 
 const roles = [
-  { value: 'listener', label: 'Listener', desc: 'Discover & playlist' },
-  { value: 'composer', label: 'Composer', desc: 'Create & protect songs' },
-  { value: 'producer', label: 'Producer', desc: 'License & collaborate' },
+  { value: 'listener', label: 'Listener', desc: 'Discover human-verified music' },
+  { value: 'composer', label: 'Composer', desc: 'Vault, protect & monetize your catalog' },
+  { value: 'producer', label: 'Producer', desc: 'License & acquire verified assets' },
 ]
 
 export default function Register() {

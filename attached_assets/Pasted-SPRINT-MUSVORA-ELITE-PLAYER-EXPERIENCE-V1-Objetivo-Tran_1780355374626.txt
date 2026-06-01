@@ -1,0 +1,227 @@
+SPRINT: MUSVORA ELITE PLAYER EXPERIENCE V1
+
+Objetivo:
+Transformar MUSVORA de un dashboard SaaS tradicional a una experiencia híbrida Apple Music + Spotify + Stripe + Notion.
+
+NO rediseñar toda la aplicación.
+NO eliminar módulos existentes.
+NO tocar Supabase.
+NO tocar Auth.
+NO romper rutas existentes.
+
+Mantener:
+
+- Home
+- Readiness
+- Vault
+- Scan
+- Profile
+
+Construir encima de la arquitectura actual.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+PLAYER LAYER
+
+Crear un Mini Player Global persistente.
+
+Comportamiento:
+
+- Visible en toda la aplicación.
+- Fijo en la parte inferior.
+- Compatible con desktop y móvil.
+- No bloquear navegación.
+
+Contenido:
+
+Portada pequeña
+Título
+Artista
+Play/Pause
+Barra de progreso
+
+Estilo:
+
+Institutional Dark
+Apple Music inspired
+Glass subtle
+No neón
+No efectos gamer
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+EXPANDED PLAYER
+
+Al tocar el Mini Player:
+
+Abrir Full Player.
+
+Contenido:
+
+- Artwork grande
+- Song title
+- Artist
+- Timeline
+- Play
+- Pause
+- Next
+- Previous
+
+Añadir:
+
+Lyrics
+Credits
+Ownership
+Licensing
+Readiness
+
+Todo dentro de tabs.
+
+Tabs:
+
+Now Playing
+Lyrics
+Ownership
+Licensing
+Metadata
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+OWNERSHIP PANEL
+
+Mostrar:
+
+Ownership Verified
+
+Ownership Confidence %
+
+Split Sheet Status
+
+Copyright Status
+
+Song Passport Status
+
+Readiness Score
+
+Licensing Availability
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+LICENSING PANEL
+
+Mostrar:
+
+Available For Licensing
+
+Marketplace Status
+
+Pending Requests
+
+Sync Opportunities
+
+Commercial Opportunities
+
+Revenue Opportunities
+
+Mock data permitida.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+LYRICS PANEL
+
+Diseño tipo Apple Music.
+
+Tipografía grande.
+
+Espaciado amplio.
+
+Modo oscuro.
+
+Scroll suave.
+
+Preparado para sincronización futura.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA INTELLIGENCE BAR
+
+Mientras reproduce música.
+
+Mostrar sugerencias:
+
+Ready For Monetization
+
+Ownership Incomplete
+
+Licensing Opportunity Found
+
+Readiness Increased
+
+Solo mensajes discretos.
+
+No popups.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+HOME IMPROVEMENT
+
+Añadir nueva sección:
+
+Continue Listening
+
+Recientes
+
+Favoritos
+
+Recommended Assets
+
+Sin eliminar métricas existentes.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+VISUAL LANGUAGE
+
+Inspiración:
+
+Apple Music
+Spotify
+Stripe Dashboard
+Linear
+Notion
+
+NO usar:
+
+Notas musicales gigantes
+Vinilos
+Micrófonos
+Ecualizadores exagerados
+Glassmorphism excesivo
+Sombras pesadas
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+GOAL
+
+El usuario debe sentir:
+
+"Estoy escuchando música"
+
+y simultáneamente:
+
+"Estoy administrando activos musicales profesionales"
+
+MUSVORA debe sentirse como:
+
+Music Asset Operating System
+
+No como un simple reproductor.
+
+Implementar incrementalmente.
+
+Build debe terminar limpio.
+
+Sin errores TypeScript.
+
+Sin romper navegación existente.
+
+Entregar código listo para producción.

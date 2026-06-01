@@ -87,8 +87,8 @@ const SECTIONS: Section[] = [
     key: 'ai',
     icon: Sparkles,
     eyebrow: 'Module 07',
-    title: 'AI Control Preview',
-    description: 'Configuration for MUSVORA AI modules. AI may only audit, organize, verify, protect and monetize — it never generates songs or lyrics, and never acts as legal counsel.',
+    title: 'Asset Intelligence Control',
+    description: 'Configuration for MUSVORA Asset Intelligence. AI may only audit, organize, verify, protect and monetize — it never generates songs or lyrics, and never acts as legal counsel.',
     status: 'soon',
   },
   {
@@ -161,7 +161,7 @@ export default function OwnerDashboard() {
               <Crown size={20} style={{ color: 'var(--gv-gold)' }} aria-hidden />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="gv-eyebrow" style={{ marginBottom: 4 }}>MUSVORA · Owner Console</p>
+              <p className="gv-eyebrow" style={{ marginBottom: 4 }}>MUSVORA · Founder Console</p>
               <h1
                 className="font-bold leading-tight"
                 style={{
@@ -174,7 +174,7 @@ export default function OwnerDashboard() {
                 Pascasio Emmanuel Reynoso Reyes
               </h1>
               <p className="mt-1" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)' }}>
-                Founder &amp; Creator
+                Founder · Music Asset Operating System
               </p>
               <div className="flex items-center gap-2 mt-3">
                 <Badge tone="navy" variant="outline">OWNER</Badge>
@@ -186,8 +186,8 @@ export default function OwnerDashboard() {
 
         <SectionHeader
           eyebrow="Internal Scaffold"
-          title="Owner Dashboard"
-          description="Owner-only control surface. Modules below are scaffolded and clearly labelled — no live analytics are fabricated and no private user data is exposed."
+          title="Founder Console"
+          description="Command surface for the Music Asset Operating System — governing how the catalogue is created, protected, verified, licensed and monetized. Modules below are scaffolded and clearly labelled: no live analytics are fabricated and no private user data is exposed."
         />
 
         {/* Platform Overview tiles — structure only, awaiting live data */}
@@ -266,7 +266,7 @@ export default function OwnerDashboard() {
           className="text-center mt-10"
           style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}
         >
-          MUSVORA Owner Console · V1 · Internal use only
+          MUSVORA Founder Console · V1 · Internal use only
         </p>
       </div>
     </GovernanceScope>

@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { Shield, Music, Zap, BadgeCheck, ArrowRight } from 'lucide-react'
 
 const features = [
-  { icon: Shield, label: 'Song Passport', desc: 'Proof of ownership' },
-  { icon: Zap, label: 'Licensing', desc: 'Marketplace' },
-  { icon: BadgeCheck, label: 'Verified', desc: 'Human music only' },
+  { icon: Shield, label: 'Protect', desc: 'Vault custody' },
+  { icon: BadgeCheck, label: 'Verify', desc: 'Ownership proof' },
+  { icon: Zap, label: 'Monetize', desc: 'License assets' },
 ] as const
+
+const PILLARS = ['Create', 'Protect', 'Verify', 'License', 'Monetize'] as const
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -26,22 +28,35 @@ export default function Landing() {
             <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shadow-[0_4px_20px_-4px_rgba(255,255,255,0.25)]">
               <Music size={16} className="text-black" strokeWidth={2.5} />
             </div>
-            <span className="text-[11px] font-bold tracking-[0.22em] text-zinc-400 uppercase">MUSVORA</span>
+            <span className="text-[11px] font-bold tracking-[0.22em] text-zinc-400 uppercase">MUSVORA · Music Asset OS</span>
           </div>
 
-          {/* Headline — tighter leading, refined three-stop gradient on Music */}
+          {/* Headline — tighter leading, refined three-stop gradient on Music Assets */}
           <h1 className="text-[3.25rem] font-black leading-[1.02] mt-7 mb-5 tracking-tight">
-            The Human<br />
+            The Operating<br />
+            System for<br />
             <span className="bg-gradient-to-r from-violet-300 via-indigo-300 to-blue-300 bg-clip-text text-transparent">
-              Music
-            </span>
-            <br />Infrastructure.
+              Music Assets
+            </span>.
           </h1>
           <p className="text-zinc-400 text-[15px] leading-relaxed max-w-[22rem]">
-            Where songs are protected, discovered and licensed.
+            Turn songs, masters, lyrics and rights into verifiable, protected and
+            monetizable assets.
             <br className="hidden sm:block" />
-            Built for composers who create for humans.
+            Not a player. Not a social network — infrastructure for music ownership.
           </p>
+
+          {/* Asset lifecycle pillars — reinforced on every entry point */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5">
+            {PILLARS.map((pillar, i) => (
+              <div key={pillar} className="flex items-center gap-2">
+                {i > 0 && <span className="text-zinc-700" aria-hidden>·</span>}
+                <span className="text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-500">
+                  {pillar}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Premium feature cards — layered glass with inner glow halo behind icon */}
@@ -98,7 +113,7 @@ export default function Landing() {
             <button onClick={() => navigate('/legal')} className="text-[11px] text-zinc-600 hover:text-zinc-300 transition-colors">Legal &amp; Policies</button>
           </div>
           <p className="text-[10px] text-zinc-700 font-mono uppercase tracking-[0.2em]">
-            MUSVORA Labs · Human Music Infrastructure
+            MUSVORA Labs · Music Asset Operating System
           </p>
         </div>
       </div>
