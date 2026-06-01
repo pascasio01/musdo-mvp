@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Music, ArrowLeft, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import { useAuth } from '../lib/auth'
-import { GoogleButton, googleAuthErrorMessage } from '../components/auth/GoogleButton'
+import { OAuthButton, oauthErrorMessage, type OAuthProvider } from '../components/auth/OAuthButtons'
 
 const roles = [
   { value: 'listener', label: 'Listener', desc: 'Discover & playlist' },
@@ -12,7 +12,7 @@ const roles = [
 
 export default function Register() {
   const navigate = useNavigate()
-  const { signUp, signInWithGoogle } = useAuth()
+  const { signUp, signInWithGoogle, signInWithApple } = useAuth()
   const [step, setStep] = useState(1)
   const [role, setRole] = useState('composer')
   const [username, setUsername] = useState('')
@@ -20,7 +20,7 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
+  const [oauthBusy, setOauthBusy] = useState<OAuthProvider | null>(null)
   const [error, setError] = useState('')
   const [confirming, setConfirming] = useState(false)
 
@@ -43,20 +43,20 @@ export default function Register() {
     }
   }
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: OAuthProvider) => {
     setError('')
-    setGoogleLoading(true)
-    const { error } = await signInWithGoogle()
+    setOauthBusy(provider)
+    const { error } = provider === 'google' ? await signInWithGoogle() : await signInWithApple()
     if (error) {
-      setError(googleAuthErrorMessage(error.message))
-      setGoogleLoading(false)
+      setError(oauthErrorMessage(error.message, provider))
+      setOauthBusy(null)
       return
     }
-    // Success triggers a full-page redirect to Google; this component unmounts.
+    // Success triggers a full-page redirect to the provider; this component unmounts.
     // If the redirect never happens, fail safe instead of leaving the button stuck.
     setTimeout(() => {
-      setError(googleAuthErrorMessage('redirect failed'))
-      setGoogleLoading(false)
+      setError(oauthErrorMessage('redirect failed', provider))
+      setOauthBusy(null)
     }, 6000)
   }
 
@@ -201,7 +201,7 @@ export default function Register() {
               )}
               <button
                 type="submit"
-                disabled={loading || googleLoading}
+                disabled={loading || oauthBusy !== null}
                 className="w-full py-4 mt-2 rounded-2xl bg-white text-black font-bold text-base hover:opacity-90 transition-opacity disabled:opacity-50"
               >
                 {loading ? 'Creating Account...' : 'Join MUSVORA'}
@@ -214,7 +214,10 @@ export default function Register() {
               <div className="h-px flex-1 bg-white/10" />
             </div>
 
-            <GoogleButton label="Continue with Google" loading={googleLoading} disabled={loading} onClick={handleGoogle} />
+            <div className="space-y-3">
+              <OAuthButton provider="google" label="Continue with Google" loading={oauthBusy === 'google'} disabled={loading || oauthBusy !== null} onClick={() => handleOAuth('google')} />
+              <OAuthButton provider="apple" label="Continue with Apple" loading={oauthBusy === 'apple'} disabled={loading || oauthBusy !== null} onClick={() => handleOAuth('apple')} />
+            </div>
 
             <div className="mt-6 text-center">
               <p className="text-zinc-600 text-sm">

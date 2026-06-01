@@ -84,6 +84,7 @@ interface AuthContextType {
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: Error | null }>
   signInWithGoogle: () => Promise<{ error: Error | null }>
+  signInWithApple: () => Promise<{ error: Error | null }>
   refreshProfile: () => Promise<void>
 }
 
@@ -180,6 +181,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  // Apple OAuth via the existing Supabase client. Same redirect flow as Google:
+  // Supabase performs a full-page redirect to Apple and back to /auth/callback,
+  // so the caller only ever observes the error path here.
+  const signInWithApple = useCallback(async () => {
+    try {
+      const redirectTo = `${window.location.origin}/auth/callback`
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'apple',
+        options: { redirectTo },
+      })
+      return { error }
+    } catch (e) {
+      return { error: e instanceof Error ? e : new Error('Apple sign-in failed') }
+    }
+  }, [])
+
   const refreshProfile = useCallback(async () => {
     if (user) {
       const p = await syncProfile(user)
@@ -189,8 +206,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<AuthContextType>(() => ({
     user, session, profile, loading,
-    signIn, signUp, signOut, resetPassword, signInWithGoogle, refreshProfile,
-  }), [user, session, profile, loading, signIn, signUp, signOut, resetPassword, signInWithGoogle, refreshProfile])
+    signIn, signUp, signOut, resetPassword, signInWithGoogle, signInWithApple, refreshProfile,
+  }), [user, session, profile, loading, signIn, signUp, signOut, resetPassword, signInWithGoogle, signInWithApple, refreshProfile])
 
   return (
     <AuthContext.Provider value={value}>

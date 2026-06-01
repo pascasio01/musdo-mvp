@@ -2,16 +2,16 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Music, Eye, EyeOff, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../lib/auth'
-import { GoogleButton, googleAuthErrorMessage } from '../components/auth/GoogleButton'
+import { OAuthButton, oauthErrorMessage, type OAuthProvider } from '../components/auth/OAuthButtons'
 
 export default function Login() {
   const navigate = useNavigate()
-  const { signIn, signInWithGoogle } = useAuth()
+  const { signIn, signInWithGoogle, signInWithApple } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
+  const [oauthBusy, setOauthBusy] = useState<OAuthProvider | null>(null)
   const [error, setError] = useState('')
 
   const friendlyError = (msg: string): string => {
@@ -42,20 +42,20 @@ export default function Login() {
     }
   }
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: OAuthProvider) => {
     setError('')
-    setGoogleLoading(true)
-    const { error } = await signInWithGoogle()
+    setOauthBusy(provider)
+    const { error } = provider === 'google' ? await signInWithGoogle() : await signInWithApple()
     if (error) {
-      setError(googleAuthErrorMessage(error.message))
-      setGoogleLoading(false)
+      setError(oauthErrorMessage(error.message, provider))
+      setOauthBusy(null)
       return
     }
-    // Success triggers a full-page redirect to Google; this component unmounts.
+    // Success triggers a full-page redirect to the provider; this component unmounts.
     // If the redirect never happens, fail safe instead of leaving the button stuck.
     setTimeout(() => {
-      setError(googleAuthErrorMessage('redirect failed'))
-      setGoogleLoading(false)
+      setError(oauthErrorMessage('redirect failed', provider))
+      setOauthBusy(null)
     }, 6000)
   }
 
@@ -128,7 +128,7 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={loading || googleLoading}
+            disabled={loading || oauthBusy !== null}
             className="w-full py-4 mt-2 rounded-2xl bg-white text-black font-bold text-base hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {loading ? 'Signing in...' : 'Sign In'}
@@ -141,7 +141,10 @@ export default function Login() {
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
-        <GoogleButton label="Continue with Google" loading={googleLoading} disabled={loading} onClick={handleGoogle} />
+        <div className="space-y-3">
+          <OAuthButton provider="google" label="Continue with Google" loading={oauthBusy === 'google'} disabled={loading || oauthBusy !== null} onClick={() => handleOAuth('google')} />
+          <OAuthButton provider="apple" label="Continue with Apple" loading={oauthBusy === 'apple'} disabled={loading || oauthBusy !== null} onClick={() => handleOAuth('apple')} />
+        </div>
 
         <div className="mt-6 text-center">
           <p className="text-zinc-600 text-sm">
