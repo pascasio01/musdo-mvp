@@ -1,0 +1,137 @@
+MUSVORA — PRODUCTION QUALITY DIRECTIVE
+
+IMPORTANT:
+I do not want demo code.
+I do not want prototype UI.
+I do not want fake features.
+I do not want placeholder product logic.
+I do not want template-looking screens.
+
+Everything built inside MUSVORA must be:
+- native-grade
+- professional
+- functional
+- production-ready
+- maintainable
+- secure
+- scalable
+- human-designed
+- senior-engineer quality
+
+STRICT RULES:
+- Do not build fake dashboards.
+- Do not show fake metrics as real.
+- Do not use random mock data unless clearly labeled "Internal Preview".
+- Do not create buttons that do nothing.
+- Do not create routes that lead to broken pages.
+- Do not create UI just to make the app look full.
+- Do not use generic starter-template layouts.
+- Do not use placeholder names like Test Song, Demo User, Sample Data unless clearly marked as Internal Preview.
+- Do not claim verification, ownership, recovery, licensing or revenue unless backed by real data or clearly marked Pending Verification.
+- Do not rebuild from scratch.
+- Do not break existing working features.
+- Do not touch Supabase schema unless required and explained.
+- Do not break Auth.
+- Do not break routing.
+
+QUALITY STANDARD:
+Build like this product will be audited by:
+- Apple App Review
+- Google Play Review
+- investors
+- music publishers
+- attorneys
+- professional composers
+- cybersecurity reviewers
+
+Every screen must have:
+- real purpose
+- clear user action
+- loading state
+- empty state
+- error state
+- accessible labels
+- mobile-first layout
+- native-feeling interactions
+- no visual clutter
+- no broken workflow
+
+DATA RULES:
+Use real user data when available.
+
+If data is not connected yet, use:
+- Internal Preview
+- Pending Integration
+- Coming Soon
+- Pending Verification
+- Requires Confirmation
+
+Never use:
+- Certified Ownership
+- Legally Verified
+- Guaranteed Recovery
+- Final Legal Decision
+- Fake Passport ID
+- Fake Revenue
+
+PRODUCT IDENTITY:
+MUSVORA is a Music Asset Operating System.
+
+Every feature must support one of these:
+- Create
+- Protect
+- Verify
+- License
+- Monetize
+- Discover
+
+If a feature does not support one of those, do not build it.
+
+UI STANDARD:
+Inspired by:
+- Apple
+- Stripe
+- Linear
+- Supabase
+- Vercel
+- Notion
+
+Avoid:
+- demo app look
+- crypto aesthetic
+- gaming UI
+- neon overload
+- Spotify clone
+- SoundCloud clone
+- template SaaS dashboards
+
+IMPLEMENTATION RULE:
+Before coding:
+1. Inspect existing code.
+2. Identify current working behavior.
+3. Explain the smallest safe change.
+4. Implement incrementally.
+5. Run typecheck/build.
+6. Report exact files changed.
+
+REPORT EVERY SPRINT:
+- what was built
+- what is functional
+- what is still pending integration
+- what data is real
+- what data is internal preview
+- files changed
+- Auth untouched or changed with reason
+- Supabase untouched or changed with reason
+- backend untouched or changed with reason
+- build result
+
+FINAL STANDARD:
+Do not make MUSVORA look done.
+Make MUSVORA actually work.
+
+No demo.
+No prototype.
+No fake product.
+
+Production-grade only.
