@@ -56,6 +56,8 @@ const CommunityRules     = lazy(() => import('./pages/legal/CommunityRules'))
 const RiskDisclaimer     = lazy(() => import('./pages/legal/RiskDisclaimer'))
 const UserContentPolicy  = lazy(() => import('./pages/legal/UserContentPolicy'))
 const SecurityPolicy     = lazy(() => import('./pages/legal/SecurityPolicy'))
+const CopyrightPolicy    = lazy(() => import('./pages/legal/CopyrightPolicy'))
+const MarketplaceDisclaimer = lazy(() => import('./pages/legal/MarketplaceDisclaimer'))
 
 // Open app routes
 const Home        = lazy(() => import('./pages/Home'))
@@ -154,6 +156,8 @@ export default function App() {
               <Route path="/risk-disclaimer" element={<RiskDisclaimer />} />
               <Route path="/user-content-policy" element={<UserContentPolicy />} />
               <Route path="/security-policy" element={<SecurityPolicy />} />
+              <Route path="/copyright-policy" element={<CopyrightPolicy />} />
+              <Route path="/marketplace-disclaimer" element={<MarketplaceDisclaimer />} />
 
               {/* ── Open App (mock data, no auth required) ── */}
               <Route path="/home" element={<Home />} />

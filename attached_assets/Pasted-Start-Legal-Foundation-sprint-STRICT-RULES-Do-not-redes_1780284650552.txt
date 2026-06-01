@@ -1,0 +1,80 @@
+Start Legal Foundation sprint.
+
+STRICT RULES:
+- Do not redesign.
+- Do not rebuild.
+- Do not touch Supabase schema.
+- Do not touch Auth.
+- Do not touch backend business logic.
+- Do not remove existing screens.
+- Build incrementally.
+- Legal pages only.
+
+GOAL:
+Add the legal foundation required for MUSVORA before Marketplace, licensing, contracts and payments.
+
+Create or verify pages:
+
+- Terms of Service
+- Privacy Policy
+- DMCA Policy
+- Copyright Policy
+- User Content Policy
+- Marketplace Disclaimer
+- AI Disclaimer
+- Security Policy
+
+Required statements:
+
+- MUSVORA does not provide legal advice.
+- MUSVORA does not guarantee revenue recovery.
+- MUSVORA does not determine final legal ownership.
+- Users are responsible for uploaded content.
+- Users must only upload music, lyrics, contracts, demos, masters and metadata they own or are authorized to manage.
+- MUSVORA may remove disputed or infringing content.
+- MUSVORA may suspend accounts for fraud, infringement, abuse or misuse.
+- Marketplace transactions require explicit license agreements.
+- Buying or licensing a song does not automatically transfer authorship unless a signed written agreement says so.
+- AI features provide suggestions only and require human review.
+- AI Contract Checker does not replace legal counsel.
+- Translation features are for convenience only; original signed language controls.
+
+Privacy requirements:
+
+- Explain what data MUSVORA collects.
+- Explain uploaded files: demos, masters, lyrics, contracts, split sheets, metadata and artwork.
+- Explain how data is used.
+- Explain account deletion/export as planned or available.
+- Do not claim end-to-end encryption unless actually implemented.
+- Use accurate security language:
+  encrypted in transit
+  encrypted at rest
+  access controls
+  secure storage
+  audit logs planned
+
+Security Policy:
+
+- Explain protected routes.
+- Secure uploads.
+- Private asset handling.
+- Role-based access foundation.
+- No false guarantees.
+
+UI requirements:
+
+- Add Legal section inside Profile or Settings.
+- Add links to all legal pages.
+- Keep MUSVORA design language.
+- Mobile-first.
+- Professional wording.
+- No legal overpromising.
+
+REPORT:
+- pages created
+- files changed
+- legal links added
+- confirmation Auth untouched
+- confirmation Supabase untouched
+- confirmation backend untouched
+- build passes

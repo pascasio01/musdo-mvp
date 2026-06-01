@@ -1,14 +1,16 @@
-import { ArrowLeft, ChevronRight, FileText, Shield, AlertTriangle, RefreshCw, Scale, Bot, Users, AlertCircle, FileLock2, Lock } from 'lucide-react'
+import { ArrowLeft, ChevronRight, FileText, Shield, AlertTriangle, RefreshCw, Scale, Bot, Users, AlertCircle, FileLock2, Lock, Copyright, Store } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../../layouts/AppShell'
 
 const legalLinks = [
   { to: '/terms', icon: FileText, label: 'Terms of Service', desc: 'Platform rules and user agreement' },
   { to: '/privacy', icon: Shield, label: 'Privacy Policy', desc: 'How we handle your data' },
-  { to: '/dmca', icon: AlertTriangle, label: 'DMCA / Copyright Policy', desc: 'Copyright infringement reporting' },
+  { to: '/dmca', icon: AlertTriangle, label: 'DMCA Policy', desc: 'Copyright infringement reporting' },
+  { to: '/copyright-policy', icon: Copyright, label: 'Copyright Policy', desc: 'Ownership, infringement, and content removal' },
   { to: '/user-content-policy', icon: FileLock2, label: 'User Content Policy', desc: 'Your responsibilities for uploaded works' },
   { to: '/creator-agreement', icon: Scale, label: 'Creator Agreement', desc: 'Rights, royalties, and licensing terms' },
-  { to: '/licensing-disclaimer', icon: FileText, label: 'Marketplace & Licensing Disclaimer', desc: 'What MUSVORA licenses cover' },
+  { to: '/marketplace-disclaimer', icon: Store, label: 'Marketplace Disclaimer', desc: 'How marketplace transactions and licenses work' },
+  { to: '/licensing-disclaimer', icon: FileText, label: 'Licensing Disclaimer', desc: 'What MUSVORA licenses cover' },
   { to: '/ai-disclaimer', icon: Bot, label: 'AI Disclaimer', desc: 'How AI tools are used on MUSVORA' },
   { to: '/security-policy', icon: Lock, label: 'Security Policy', desc: 'How we protect your assets' },
   { to: '/community-rules', icon: Users, label: 'Community Rules', desc: 'Content standards and conduct' },

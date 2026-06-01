@@ -29,7 +29,8 @@ export default function Privacy() {
         </div>
 
         <Section title="1. Data We Collect">
-          <p>We collect account information (email, username), usage data (streams, actions), uploaded content metadata, and device/session information.</p>
+          <p>We collect account information (email, username), usage data (streams, actions), and device/session information.</p>
+          <p>We also store the files and works you upload, which may include demos, masters, lyrics, contracts, split sheets, metadata and artwork. These uploads are stored so MUSVORA can organize, protect and help you monetize your catalogue.</p>
         </Section>
         <Section title="2. How We Use Data">
           <p>Data is used to provide and improve the platform, process authentication, facilitate licensing, and communicate important updates.</p>
@@ -41,8 +42,9 @@ export default function Privacy() {
         <Section title="4. Data Storage">
           <p>Data is stored via Supabase (PostgreSQL) with row-level security. Audio files and assets are stored in Supabase Storage with access controls.</p>
         </Section>
-        <Section title="5. Data Retention">
+        <Section title="5. Data Retention, Deletion & Export">
           <p>You may request deletion of your account and associated data. Some data may be retained for legal compliance, dispute resolution, or audit requirements.</p>
+          <p>Self-service account export and deletion tools are planned. Until they are available, you may contact MUSVORA Support to request an export or deletion of your data.</p>
         </Section>
         <Section title="6. Third-Party Services">
           <p>MUSVORA may use third-party services for authentication, storage, payments, and analytics. These services have their own privacy policies.</p>

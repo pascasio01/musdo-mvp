@@ -43,6 +43,10 @@ export default function AIDisclaimer() {
         <Section title="No AI Authority">
           <p>No AI system has authority to modify owner permissions, delete platform data, change billing, or take administrative actions on MUSVORA. AI tools are advisory only.</p>
         </Section>
+        <Section title="Suggestions Only — Human Review Required">
+          <p>AI features on MUSVORA provide suggestions only and require human review before any decision is made. AI output is assistance, not a determination, and must always be confirmed by a person.</p>
+          <p>The AI Contract Checker reviews documents to flag potential gaps; it does not replace legal counsel and does not certify that a document is legally valid. Consult a qualified attorney for legal review.</p>
+        </Section>
       </div>
     </AppShell>
   )
