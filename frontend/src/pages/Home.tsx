@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Bell,
+  Search,
   ShieldCheck,
   AlertTriangle,
   Sparkles,
@@ -14,6 +16,7 @@ import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge, Button, SectionHeader } from '../components/governance'
 import { ReadinessRing } from '../components/readiness/ReadinessRing'
 import AssetSections from '../components/home/AssetSections'
+import GlobalSearch from '../components/home/GlobalSearch'
 import { useAuth } from '../lib/auth'
 import {
   STATUS_META,
@@ -96,6 +99,7 @@ function MetricCell({
 
 export default function Home() {
   const navigate = useNavigate()
+  const [searchOpen, setSearchOpen] = useState(false)
   const { profile } = useAuth()
   const displayName = profile?.username ?? 'Emmanuel'
 
@@ -130,6 +134,24 @@ export default function Home() {
                 {greeting()}, {displayName}
               </h1>
             </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              type="button"
+              aria-label="Search music, artists and assets"
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(true)}
+              className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 'var(--gv-radius-md)',
+                background: 'var(--gv-surface-2)',
+                border: '1px solid var(--gv-border)',
+                color: 'var(--gv-text-secondary)',
+              }}
+            >
+              <Search size={18} strokeWidth={1.8} aria-hidden />
+            </button>
             <button
               type="button"
               aria-label="Notifications"
@@ -158,8 +180,11 @@ export default function Home() {
                 }}
               />
             </button>
+            </div>
           </div>
         </header>
+
+        <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
         <div className="px-5 pt-6">
           {/* ── Hero: Overall Readiness Score ── */}
