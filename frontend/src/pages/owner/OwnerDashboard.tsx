@@ -1,137 +1,180 @@
-import { ArrowLeft, LayoutDashboard, Activity, Users, ShieldCheck, ScrollText, Store, Sparkles, Scale, LineChart, Flag, ChevronRight, Crown } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import {
+  ArrowLeft, LayoutDashboard, BrainCircuit, ShieldCheck, FileBadge2,
+  LineChart, Store, Sparkles, Lock, Activity, ChevronRight, Crown,
+} from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { GovernanceScope, Card, Badge, StatTile, SectionHeader } from '../../components/governance'
+import { useAuth } from '../../lib/auth'
+import { loadFounderSnapshot, type FounderSnapshot } from '../../services/founder'
+import { scoreStatus } from '../../data/readiness'
 
 /**
- * MUSVORA Owner Dashboard — V1.
+ * MUSVORA Founder Console.
  *
- * Owner-only console (route /owner, gated by <ProtectedRoute requireOwner>).
- * Built on the MUSVORA Governance Design System. This is an INTERNAL scaffold:
- * it never shows fabricated analytics and never exposes private user data.
- * Every module is honestly labelled (Internal Preview / Pending Integration /
- * Coming Soon) until its real data source is wired in.
+ * Owner-only command surface (route /owner, gated by <ProtectedRoute requireOwner>).
+ * Built on the MUSVORA Governance Design System (Institutional Dark).
+ *
+ * Production rules (see replit.md):
+ *  - Real metrics are computed from the owner's Vault / Ownership signals.
+ *  - Where a live source is not connected, the UI shows an honest
+ *    "Pending Integration" / "Internal Preview" state — never a fabricated number.
+ *  - No private user data is exposed; no legal certainty is asserted.
  */
 
-type Status = 'preview' | 'pending' | 'soon' | 'available'
+type ModuleStatus = 'live' | 'preview' | 'pending'
 
-const STATUS_META: Record<Status, { label: string; tone: 'gold' | 'warning' | 'neutral' | 'success' }> = {
+const STATUS_META: Record<ModuleStatus, { label: string; tone: 'success' | 'gold' | 'warning' }> = {
+  live: { label: 'Live', tone: 'success' },
   preview: { label: 'Internal Preview', tone: 'gold' },
   pending: { label: 'Pending Integration', tone: 'warning' },
-  soon: { label: 'Coming Soon', tone: 'neutral' },
-  available: { label: 'Available', tone: 'success' },
 }
 
-interface Section {
+interface ModuleAction { label: string; path: string }
+
+interface ConsoleModule {
   key: string
   icon: React.ElementType
   eyebrow: string
   title: string
   description: string
-  status: Status
-  action?: { label: string; path: string }
+  status: ModuleStatus
+  /** Short honest detail line — what is live vs pending. */
+  note?: string
+  actions?: ModuleAction[]
 }
 
-const SECTIONS: Section[] = [
-  {
-    key: 'overview',
-    icon: LayoutDashboard,
-    eyebrow: 'Module 01',
-    title: 'Platform Overview',
-    description: 'High-level state of the platform — catalogue volume, creator base and asset readiness. Metrics activate once live data sources are connected.',
-    status: 'preview',
-  },
-  {
-    key: 'health',
-    icon: Activity,
-    eyebrow: 'Module 02',
-    title: 'System Health',
-    description: 'Operational status of core infrastructure (authentication, database, storage, API). Real-time monitoring is being wired in — no figures are estimated here.',
-    status: 'pending',
-  },
-  {
-    key: 'users',
-    icon: Users,
-    eyebrow: 'Module 03',
-    title: 'User Management Preview',
-    description: 'Manage roles, creator verification and account actions. Private user data is never surfaced in this preview.',
-    status: 'preview',
-    action: { label: 'Open Admin Panel', path: '/admin' },
-  },
-  {
-    key: 'security',
-    icon: ShieldCheck,
-    eyebrow: 'Module 04',
-    title: 'Security Center Preview',
-    description: 'Access controls, session policy and protection posture for the platform. Live threat signals are pending integration.',
-    status: 'preview',
-    action: { label: 'Open Security Center', path: '/security' },
-  },
-  {
-    key: 'audit',
-    icon: ScrollText,
-    eyebrow: 'Module 05',
-    title: 'Audit Logs Preview',
-    description: 'Immutable record of privileged and system actions for accountability. Full audit history streaming is being connected.',
-    status: 'preview',
-    action: { label: 'Open Audit Log', path: '/audit-log' },
-  },
-  {
-    key: 'marketplace',
-    icon: Store,
-    eyebrow: 'Module 06',
-    title: 'Marketplace Control Preview',
-    description: 'Oversight of licensing listings, gating rules and marketplace policy. Controls become active in a later phase.',
-    status: 'soon',
-  },
-  {
-    key: 'ai',
-    icon: Sparkles,
-    eyebrow: 'Module 07',
-    title: 'Asset Intelligence Control',
-    description: 'Configuration for MUSVORA Asset Intelligence. AI may only audit, organize, verify, protect and monetize — it never generates songs or lyrics, and never acts as legal counsel.',
-    status: 'soon',
-  },
-  {
-    key: 'legal',
-    icon: Scale,
-    eyebrow: 'Module 08',
-    title: 'Legal Center',
-    description: 'Platform policies, disclaimers and compliance documents. These pages are live and reviewable today.',
-    status: 'available',
-    action: { label: 'Open Legal Center', path: '/legal' },
-  },
-  {
-    key: 'revenue',
-    icon: LineChart,
-    eyebrow: 'Module 09',
-    title: 'Revenue Analytics Preview',
-    description: 'Earnings, payouts and licensing performance. No revenue figures are shown until verified financial data is integrated.',
-    status: 'pending',
-  },
-  {
-    key: 'flags',
-    icon: Flag,
-    eyebrow: 'Module 10',
-    title: 'Feature Flags Preview',
-    description: 'Roll features in or out gradually and gate experimental modules. Toggling becomes available in a later phase.',
-    status: 'soon',
-  },
-]
-
-const OVERVIEW_TILES = [
-  { label: 'Total Assets', hint: 'pending' },
-  { label: 'Verified Creators', hint: 'pending' },
-  { label: 'Readiness Avg', hint: 'pending' },
-  { label: 'Active Licenses', hint: 'pending' },
-]
-
-function StatusBadge({ status }: { status: Status }) {
+function StatusBadge({ status }: { status: ModuleStatus }) {
   const meta = STATUS_META[status]
   return <Badge tone={meta.tone} variant="soft">{meta.label}</Badge>
 }
 
+function buildModules(snap: FounderSnapshot | null): ConsoleModule[] {
+  const confidence = snap ? `${snap.ownershipConfidence}%` : '—'
+  const assets = snap ? String(snap.assetCount) : '—'
+  const isLive = snap?.source === 'vault'
+  const scope = isLive ? 'your Vault' : 'the sample catalogue'
+  return [
+    {
+      key: 'executive',
+      icon: LayoutDashboard,
+      eyebrow: 'Module 01',
+      title: 'Executive Dashboard',
+      description: 'High-level state of the catalogue — assets under management, ownership confidence and works requiring action.',
+      status: snap ? (isLive ? 'live' : 'preview') : 'preview',
+      note: snap
+        ? `${assets} assets · ${confidence} ownership confidence from ${scope}${isLive ? '' : ' (connect your Vault for live figures)'}. Platform-wide users & revenue are Pending Integration.`
+        : 'Loading your catalogue snapshot…',
+      actions: [{ label: 'Open Composer Analytics', path: '/dashboard' }],
+    },
+    {
+      key: 'intelligence',
+      icon: BrainCircuit,
+      eyebrow: 'Module 02',
+      title: 'Asset Intelligence',
+      description: 'Catalogue health signals — readiness bands, ownership confidence and works at risk surfaced for triage.',
+      status: 'live',
+      note: 'Ownership Confidence is live from your Vault. Readiness scoring is an Internal Preview until the readiness engine is connected.',
+      actions: [
+        { label: 'Open Ownership Confidence', path: '/ownership' },
+        { label: 'Open Readiness Center', path: '/readiness' },
+      ],
+    },
+    {
+      key: 'ownership',
+      icon: ShieldCheck,
+      eyebrow: 'Module 03',
+      title: 'Ownership Engine',
+      description: 'Contributors, documented splits, verification and signatures per asset. MUSVORA tracks ownership signals — it never certifies ownership.',
+      status: 'live',
+      note: snap
+        ? `${snap.statusCounts.complete} complete · ${snap.statusCounts.pending_signature} pending signature · ${snap.statusCounts.pending_verification} pending verification · ${snap.statusCounts.missing_contributor} missing contributor.`
+        : 'Computing ownership signals…',
+      actions: [{ label: 'Open Ownership Engine', path: '/ownership' }],
+    },
+    {
+      key: 'passport',
+      icon: FileBadge2,
+      eyebrow: 'Module 04',
+      title: 'Song Passport Engine',
+      description: 'Portable ownership record per work — creation history, ownership timeline, version history and licensing availability.',
+      status: 'preview',
+      note: 'Per-asset Passports open from the Vault. Registration states remain Pending Verification until proofs are filed.',
+      actions: [{ label: 'Open Vault', path: '/vault' }],
+    },
+    {
+      key: 'revenue',
+      icon: LineChart,
+      eyebrow: 'Module 05',
+      title: 'Revenue Engine',
+      description: 'Earnings, payouts and licensing performance across sync, film, TV, YouTube, commercial and playlist opportunities.',
+      status: 'pending',
+      note: 'No verified financial data source is connected. No revenue figures are shown until integrated.',
+    },
+    {
+      key: 'marketplace',
+      icon: Store,
+      eyebrow: 'Module 06',
+      title: 'Marketplace Governance',
+      description: 'Oversight of licensing listings and the eligibility gates that protect the marketplace.',
+      status: 'preview',
+      note: 'Eligibility: Readiness ≥ 80 · Ownership Confidence ≥ 80 · Song Passport Active. Governance controls activate in a later phase.',
+      actions: [{ label: 'Open Marketplace', path: '/market' }],
+    },
+    {
+      key: 'ai',
+      icon: Sparkles,
+      eyebrow: 'Module 07',
+      title: 'AI Command Center',
+      description: 'MUSVORA AI may only audit, organize, verify, protect and monetize — Catalog Auditor, Metadata Assistant, Contract Checker, Licensing Match. It never generates songs or lyrics and never acts as legal counsel.',
+      status: 'preview',
+      note: 'AI Catalog Auditor is live. Metadata Assistant, Contract Checker and Licensing Match are Internal Preview.',
+      actions: [{ label: 'Open AI Catalog Auditor', path: '/auditor' }],
+    },
+    {
+      key: 'security',
+      icon: Lock,
+      eyebrow: 'Module 08',
+      title: 'Security Center',
+      description: 'Access controls, session policy, audit trail and protection posture for the platform.',
+      status: 'preview',
+      note: 'Security Center and Audit Log are reviewable today. Live threat signals are Pending Integration.',
+      actions: [
+        { label: 'Open Security Center', path: '/security' },
+        { label: 'Open Audit Log', path: '/audit-log' },
+      ],
+    },
+    {
+      key: 'system',
+      icon: Activity,
+      eyebrow: 'Module 09',
+      title: 'System Health',
+      description: 'Operational status of core infrastructure — authentication, database, storage, APIs and performance.',
+      status: 'pending',
+      note: 'Real-time monitoring is not connected. No uptime figures are estimated here.',
+    },
+  ]
+}
+
 export default function OwnerDashboard() {
   const navigate = useNavigate()
+  const { user, profile } = useAuth()
+  const [snap, setSnap] = useState<FounderSnapshot | null>(null)
+  const [snapError, setSnapError] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    const ownerName = profile?.username || user?.email?.split('@')[0] || 'You'
+    setSnapError(false)
+    loadFounderSnapshot(user?.id, ownerName)
+      .then(s => { if (active) setSnap(s) })
+      .catch(() => { if (active) setSnapError(true) })
+    return () => { active = false }
+  }, [user?.id, profile?.username, user?.email])
+
+  const modules = buildModules(snap)
+  const confidenceTone = snap ? scoreStatus(snap.ownershipConfidence) : 'attention'
+  const confTileTone = confidenceTone === 'ready' ? 'success' : confidenceTone === 'risk' ? 'danger' : 'warning'
 
   return (
     <GovernanceScope className="min-h-screen" style={{ fontFamily: 'var(--gv-font-sans)' }}>
@@ -161,7 +204,7 @@ export default function OwnerDashboard() {
               <Crown size={20} style={{ color: 'var(--gv-gold)' }} aria-hidden />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="gv-eyebrow" style={{ marginBottom: 4 }}>MUSVORA · Founder Console</p>
+              <p className="gv-eyebrow" style={{ marginBottom: 4 }}>MUSVORA · Music Asset Operating System</p>
               <h1
                 className="font-bold leading-tight"
                 style={{
@@ -178,31 +221,66 @@ export default function OwnerDashboard() {
               </p>
               <div className="flex items-center gap-2 mt-3">
                 <Badge tone="navy" variant="outline">OWNER</Badge>
-                <Badge tone="gold" variant="soft">V1</Badge>
+                <Badge tone="gold" variant="soft">Founder Console</Badge>
               </div>
             </div>
           </div>
         </Card>
 
         <SectionHeader
-          eyebrow="Internal Scaffold"
-          title="Founder Console"
-          description="Command surface for the Music Asset Operating System — governing how the catalogue is created, protected, verified, licensed and monetized. Modules below are scaffolded and clearly labelled: no live analytics are fabricated and no private user data is exposed."
+          eyebrow="Founder Console"
+          title="Command Surface"
+          description="Governing how the catalogue is created, protected, verified, licensed and monetized. Live metrics are computed from your Vault; everything without a connected source is labelled honestly — no analytics are fabricated and no private user data is exposed."
         />
 
-        {/* Platform Overview tiles — structure only, awaiting live data */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          {OVERVIEW_TILES.map(t => (
-            <StatTile key={t.label} label={t.label} value="—" hint={t.hint} tone="neutral" />
-          ))}
+        {/* Executive snapshot — real where data exists */}
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <StatTile
+            label="Catalogue Assets"
+            value={snap ? snap.assetCount : '—'}
+            hint={snap ? (snap.source === 'vault' ? 'in vault' : 'sample') : 'loading'}
+            tone="neutral"
+          />
+          <StatTile
+            label="Ownership Confidence"
+            value={snap ? `${snap.ownershipConfidence}%` : '—'}
+            hint={snap ? 'computed' : 'loading'}
+            tone={snap ? confTileTone : 'neutral'}
+          />
+          <StatTile
+            label="Works Needing Action"
+            value={snap ? snap.worksNeedingAction : '—'}
+            hint={snap ? 'open items' : 'loading'}
+            tone={snap && snap.worksNeedingAction > 0 ? 'warning' : 'neutral'}
+          />
+          <StatTile
+            label="Platform Revenue"
+            value="—"
+            hint="pending"
+            tone="neutral"
+          />
+        </div>
+
+        {/* Honest source line */}
+        <div className="flex items-center gap-2 mb-7">
+          {snapError ? (
+            <Badge tone="warning" variant="soft">Snapshot unavailable · Pending Verification</Badge>
+          ) : snap ? (
+            <Badge tone={snap.source === 'vault' ? 'success' : 'gold'} variant="soft">
+              {snap.source === 'vault' ? 'Live from your Vault' : 'Sample data — connect your Vault'}
+            </Badge>
+          ) : (
+            <Badge tone="neutral" variant="soft">Loading snapshot…</Badge>
+          )}
+          <Badge tone="warning" variant="soft">Users & Revenue · Pending Integration</Badge>
         </div>
 
         {/* Module cards */}
         <div className="flex flex-col gap-3">
-          {SECTIONS.map(section => {
-            const Icon = section.icon
+          {modules.map(mod => {
+            const Icon = mod.icon
             return (
-              <Card key={section.key} elevation="raised" padding="md">
+              <Card key={mod.key} elevation="raised" padding="md">
                 <div className="flex items-start gap-3">
                   <div
                     className="flex items-center justify-center flex-shrink-0"
@@ -219,7 +297,7 @@ export default function OwnerDashboard() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
-                        <p className="gv-eyebrow" style={{ marginBottom: 4 }}>{section.eyebrow}</p>
+                        <p className="gv-eyebrow" style={{ marginBottom: 4 }}>{mod.eyebrow}</p>
                         <h3
                           className="font-bold leading-tight"
                           style={{
@@ -228,11 +306,11 @@ export default function OwnerDashboard() {
                             color: 'var(--gv-text)',
                           }}
                         >
-                          {section.title}
+                          {mod.title}
                         </h3>
                       </div>
                       <div className="flex-shrink-0">
-                        <StatusBadge status={section.status} />
+                        <StatusBadge status={mod.status} />
                       </div>
                     </div>
                     <p
@@ -243,17 +321,34 @@ export default function OwnerDashboard() {
                         lineHeight: 'var(--gv-leading-normal)',
                       }}
                     >
-                      {section.description}
+                      {mod.description}
                     </p>
-                    {section.action && (
-                      <button
-                        onClick={() => navigate(section.action!.path)}
-                        className="gv-focusable inline-flex items-center gap-1 mt-3 font-semibold transition-colors"
-                        style={{ color: 'var(--gv-text-link)', fontSize: 'var(--gv-text-sm)' }}
+                    {mod.note && (
+                      <p
+                        className="mt-2 gv-mono"
+                        style={{
+                          fontSize: 'var(--gv-text-2xs)',
+                          color: 'var(--gv-text-muted)',
+                          lineHeight: 'var(--gv-leading-normal)',
+                        }}
                       >
-                        {section.action.label}
-                        <ChevronRight size={14} aria-hidden />
-                      </button>
+                        {mod.note}
+                      </p>
+                    )}
+                    {mod.actions && mod.actions.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-4 mt-3">
+                        {mod.actions.map(action => (
+                          <button
+                            key={action.path}
+                            onClick={() => navigate(action.path)}
+                            className="gv-focusable inline-flex items-center gap-1 font-semibold transition-colors"
+                            style={{ color: 'var(--gv-text-link)', fontSize: 'var(--gv-text-sm)' }}
+                          >
+                            {action.label}
+                            <ChevronRight size={14} aria-hidden />
+                          </button>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -266,7 +361,7 @@ export default function OwnerDashboard() {
           className="text-center mt-10"
           style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}
         >
-          MUSVORA Founder Console · V1 · Internal use only
+          MUSVORA · Music Asset Operating System · Founder Console · Internal use only
         </p>
       </div>
     </GovernanceScope>
