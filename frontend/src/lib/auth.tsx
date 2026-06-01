@@ -8,7 +8,7 @@ import {
   ReactNode,
 } from 'react'
 import type { User, Session } from '@supabase/supabase-js'
-import { supabase } from './supabase'
+import { supabase, getOAuthProviderAvailability } from './supabase'
 import { db } from '../services/_db'
 import type { Profile, AppRole } from '../types'
 import type { DbProfile } from '../types/database.types'
@@ -170,6 +170,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // so the caller only ever observes the error path here.
   const signInWithGoogle = useCallback(async () => {
     try {
+      const availability = await getOAuthProviderAvailability('google')
+      if (availability !== 'enabled') {
+        return { error: new Error(availability === 'disabled' ? 'provider_disabled' : 'provider_unavailable') }
+      }
       const redirectTo = `${window.location.origin}/auth/callback`
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -186,6 +190,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // so the caller only ever observes the error path here.
   const signInWithApple = useCallback(async () => {
     try {
+      const availability = await getOAuthProviderAvailability('apple')
+      if (availability !== 'enabled') {
+        return { error: new Error(availability === 'disabled' ? 'provider_disabled' : 'provider_unavailable') }
+      }
       const redirectTo = `${window.location.origin}/auth/callback`
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'apple',

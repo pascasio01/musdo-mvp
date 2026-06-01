@@ -36,8 +36,15 @@ function AppleMark() {
 export function oauthErrorMessage(raw: string, provider: OAuthProvider): string {
   const name = PROVIDER_LABEL[provider]
   const m = (raw || '').toLowerCase()
-  if (m.includes('not enabled') || m.includes('unsupported provider') || m.includes('provider is not'))
-    return `${name} Sign-In is not configured yet. Enable the ${name} provider in Supabase Auth settings.`
+  if (m.includes('provider_unavailable'))
+    return `${name} sign-in is temporarily unavailable. Please try again later.`
+  if (
+    m.includes('provider_disabled') ||
+    m.includes('not enabled') ||
+    m.includes('unsupported provider') ||
+    m.includes('provider is not')
+  )
+    return `${name} Sign-In is coming soon.`
   if (m.includes('popup') || m.includes('pop-up') || m.includes('window closed') || m.includes('blocked'))
     return `Your browser blocked the ${name} sign-in window. Allow pop-ups for this site and try again.`
   if (m.includes('redirect') && m.includes('url'))
