@@ -1,1 +1,2 @@
 - [Auth OAuth setup](auth-oauth-setup.md) — Google/Apple use signInWithOAuth→/auth/callback; enabling a provider + redirect URLs are Supabase-dashboard config, NOT code.
+- [Theme system](theme-system.md) — themes inject inline CSS vars on <html>; vars omitted by the next theme leak, so re-assert or fully define them; 'system' resolves via matchMedia.

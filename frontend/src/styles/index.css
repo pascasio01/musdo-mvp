@@ -49,6 +49,16 @@
 
     --overlay: rgba(0,0,0,0.72);
     --overlay-soft: rgba(0,0,0,0.45);
+
+    /* ── Brand + status token layer (Theme System) ──
+       Trust navy & value gold are MUSVORA brand tokens; success/warning/critical
+       are status-only colors. ThemeProvider re-asserts these inline per theme so
+       they never go stale when switching modes. These are the static fallbacks. */
+    --trust-navy: #0D2B52;
+    --value-gold: #D4AF37;
+    --success: #27AE60;
+    --warning: #F39C12;
+    --critical: #E74C3C;
   }
 
   * {

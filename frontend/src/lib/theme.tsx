@@ -1,6 +1,16 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
-export type ThemeId = 'oled' | 'studio' | 'bachata' | 'neon' | 'soft' | 'midnight'
+export type ThemeId =
+  | 'institutional'
+  | 'pure-oled'
+  | 'light-pro'
+  | 'system'
+  | 'oled'
+  | 'studio'
+  | 'bachata'
+  | 'neon'
+  | 'soft'
+  | 'midnight'
 
 export interface ThemeConfig {
   id: ThemeId
@@ -11,7 +21,142 @@ export interface ThemeConfig {
   vars: Record<string, string>
 }
 
+/* Institutional Dark vars are shared with System Auto's dark resolution, so they
+   live in a named const to stay DRY. */
+const institutionalVars: Record<string, string> = {
+  '--bg': '#0F1115',
+  '--surface': '#161A22',
+  '--card': '#1B2029',
+  '--card-elevated': '#222834',
+  '--text': '#F5F7FA',
+  '--text-2': '#A7B0C0',
+  '--accent': '#D4AF37',
+  '--accent-rgb': '212,175,55',
+  '--border': '#262D3A',
+  '--border-soft': 'rgba(255,255,255,0.06)',
+  '--glow-color': 'rgba(212,175,55,0.14)',
+  '--blur': '24px',
+  '--radius': '16px',
+  '--speed': '300ms',
+  '--text-primary': '#F5F7FA',
+  '--text-secondary': '#A7B0C0',
+  '--text-muted': 'rgba(167,176,192,0.7)',
+  '--text-inverse': '#0F1115',
+  '--accent-soft': 'rgba(212,175,55,0.10)',
+  '--shadow': 'rgba(0,0,0,0.55)',
+  '--glass-bg': 'rgba(255,255,255,0.035)',
+  '--glass-bg-medium': 'rgba(255,255,255,0.07)',
+  '--glass-bg-strong': 'rgba(255,255,255,0.11)',
+  '--glass-border': 'rgba(255,255,255,0.08)',
+  '--glass-subtle': 'rgba(255,255,255,0.02)',
+  '--overlay': 'rgba(15,17,21,0.80)',
+  '--overlay-soft': 'rgba(15,17,21,0.5)',
+  '--trust-navy': '#0D2B52',
+  '--value-gold': '#D4AF37',
+  '--success': '#27AE60',
+  '--warning': '#F39C12',
+  '--critical': '#E74C3C',
+}
+
 export const themes: ThemeConfig[] = [
+  {
+    id: 'institutional',
+    name: 'Institutional Dark',
+    description: 'Soft dark institutional — recommended',
+    preview: ['#0F1115', '#D4AF37', '#161A22'],
+    colorScheme: 'dark',
+    vars: institutionalVars,
+  },
+  {
+    id: 'pure-oled',
+    name: 'Pure OLED Dark',
+    description: 'True black, battery-friendly, high contrast',
+    preview: ['#000000', '#D4AF37', '#1F2937'],
+    colorScheme: 'dark',
+    vars: {
+      '--bg': '#000000',
+      '--surface': '#0A0A0A',
+      '--card': '#0F0F0F',
+      '--card-elevated': '#161616',
+      '--text': '#FFFFFF',
+      '--text-2': '#A1A1AA',
+      '--accent': '#D4AF37',
+      '--accent-rgb': '212,175,55',
+      '--border': '#1F2937',
+      '--border-soft': 'rgba(255,255,255,0.05)',
+      '--glow-color': 'rgba(212,175,55,0.16)',
+      '--blur': '24px',
+      '--radius': '16px',
+      '--speed': '300ms',
+      '--text-primary': '#FFFFFF',
+      '--text-secondary': '#A1A1AA',
+      '--text-muted': 'rgba(161,161,170,0.7)',
+      '--text-inverse': '#000000',
+      '--accent-soft': 'rgba(212,175,55,0.10)',
+      '--shadow': 'rgba(0,0,0,0.7)',
+      '--glass-bg': 'rgba(255,255,255,0.03)',
+      '--glass-bg-medium': 'rgba(255,255,255,0.06)',
+      '--glass-bg-strong': 'rgba(255,255,255,0.10)',
+      '--glass-border': 'rgba(255,255,255,0.08)',
+      '--glass-subtle': 'rgba(255,255,255,0.015)',
+      '--overlay': 'rgba(0,0,0,0.88)',
+      '--overlay-soft': 'rgba(0,0,0,0.6)',
+      '--trust-navy': '#0D2B52',
+      '--value-gold': '#D4AF37',
+      '--success': '#27AE60',
+      '--warning': '#F39C12',
+      '--critical': '#E74C3C',
+    },
+  },
+  {
+    id: 'light-pro',
+    name: 'Light Professional',
+    description: 'Clean enterprise light mode',
+    preview: ['#F8FAFC', '#0D2B52', '#E2E8F0'],
+    colorScheme: 'light',
+    vars: {
+      '--bg': '#F8FAFC',
+      '--surface': '#FFFFFF',
+      '--card': '#FFFFFF',
+      '--card-elevated': '#FFFFFF',
+      '--text': '#0F172A',
+      '--text-2': '#64748B',
+      '--accent': '#B88A00',
+      '--accent-rgb': '184,138,0',
+      '--border': '#E2E8F0',
+      '--border-soft': 'rgba(15,23,42,0.06)',
+      '--glow-color': 'rgba(184,138,0,0.12)',
+      '--blur': '20px',
+      '--radius': '16px',
+      '--speed': '280ms',
+      '--text-primary': '#0F172A',
+      '--text-secondary': '#64748B',
+      '--text-muted': '#94A3B8',
+      '--text-inverse': '#FFFFFF',
+      '--accent-soft': 'rgba(184,138,0,0.10)',
+      '--shadow': 'rgba(15,23,42,0.10)',
+      '--glass-bg': 'rgba(15,23,42,0.035)',
+      '--glass-bg-medium': 'rgba(15,23,42,0.06)',
+      '--glass-bg-strong': 'rgba(15,23,42,0.10)',
+      '--glass-border': 'rgba(15,23,42,0.10)',
+      '--glass-subtle': 'rgba(15,23,42,0.02)',
+      '--overlay': 'rgba(15,23,42,0.45)',
+      '--overlay-soft': 'rgba(15,23,42,0.25)',
+      '--trust-navy': '#0D2B52',
+      '--value-gold': '#B88A00',
+      '--success': '#27AE60',
+      '--warning': '#F39C12',
+      '--critical': '#E74C3C',
+    },
+  },
+  {
+    id: 'system',
+    name: 'System Auto',
+    description: 'Follows your device preference',
+    preview: ['#0F1115', '#F8FAFC', '#D4AF37'],
+    colorScheme: 'dark',
+    vars: institutionalVars,
+  },
   {
     id: 'oled',
     name: 'OLED Black',
@@ -246,7 +391,7 @@ export interface ThemeSettings {
 }
 
 const defaultSettings: ThemeSettings = {
-  themeId: 'oled',
+  themeId: 'institutional',
   accentCustom: null,
   blurIntensity: 'medium',
   glowIntensity: 'medium',
@@ -268,11 +413,35 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 const STORAGE_KEY = 'musdo-theme-v1'
 
+function prefersDark(): boolean {
+  return typeof window !== 'undefined'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
+/* Resolves the concrete theme to apply. 'system' follows the device preference,
+   falling back to Institutional Dark (dark) or Light Professional (light). */
+export function resolveTheme(themeId: ThemeId): ThemeConfig {
+  if (themeId === 'system') {
+    const target = prefersDark() ? 'institutional' : 'light-pro'
+    return themes.find(t => t.id === target) ?? themes[0]
+  }
+  return themes.find(t => t.id === themeId) ?? themes[0]
+}
+
 function applyVars(settings: ThemeSettings) {
-  const theme = themes.find(t => t.id === settings.themeId) ?? themes[0]
+  const theme = resolveTheme(settings.themeId)
   const root = document.documentElement
 
   Object.entries(theme.vars).forEach(([k, v]) => root.style.setProperty(k, v))
+
+  // Brand + status tokens are re-asserted on every apply so a value-gold from
+  // Light Professional (#B88A00) never lingers when switching to a dark mode.
+  root.style.setProperty('--trust-navy', theme.vars['--trust-navy'] ?? '#0D2B52')
+  root.style.setProperty('--value-gold', theme.vars['--value-gold'] ?? (theme.colorScheme === 'light' ? '#B88A00' : '#D4AF37'))
+  root.style.setProperty('--success', theme.vars['--success'] ?? '#27AE60')
+  root.style.setProperty('--warning', theme.vars['--warning'] ?? '#F39C12')
+  root.style.setProperty('--critical', theme.vars['--critical'] ?? '#E74C3C')
 
   if (settings.accentCustom) root.style.setProperty('--accent', settings.accentCustom)
 
@@ -318,6 +487,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     applyVars(settings)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
+
+    // When System Auto is active, re-apply if the OS light/dark preference flips.
+    if (settings.themeId !== 'system') return
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const handler = () => applyVars(settings)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
   }, [settings])
 
   const setTheme = (id: ThemeId) => setSettings(p => ({ ...p, themeId: id }))
