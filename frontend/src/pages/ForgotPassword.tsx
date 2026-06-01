@@ -11,6 +11,17 @@ export default function ForgotPassword() {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
 
+  // Surface a readable, actionable message for connectivity failures while keeping
+  // the raw error text in parentheses for debugging. Does not change any flow.
+  const friendlyError = (msg: string): string => {
+    const m = msg.toLowerCase()
+    if (m.includes('load failed') || m.includes('failed to fetch') || m.includes('network') || m.includes('fetch'))
+      return `Couldn't reach the authentication server. Check your connection and try again. (${msg})`
+    if (m.includes('too many requests') || m.includes('rate limit'))
+      return 'Too many attempts. Please wait a few minutes and try again.'
+    return msg
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -18,7 +29,7 @@ export default function ForgotPassword() {
     const { error } = await resetPassword(email)
     setLoading(false)
     if (error) {
-      setError(error.message)
+      setError(friendlyError(error.message))
     } else {
       setSent(true)
     }
