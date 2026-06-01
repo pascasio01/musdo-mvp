@@ -1,0 +1,189 @@
+Perform a full MUSVORA application audit.
+
+STRICT RULES:
+- Do not redesign the app.
+- Do not rebuild.
+- Do not add new features.
+- Do not delete existing screens.
+- Do not touch Supabase schema.
+- Do not touch backend business logic.
+- Do not break Auth.
+- Do not refactor unrelated code.
+- Report first.
+- Apply only tiny safe fixes if clearly necessary.
+
+AUDIT SCOPE:
+
+1. AUTHENTICATION
+Check:
+- Email/password login
+- Create account
+- Forgot password
+- Password reset flow
+- Google Sign-In readiness
+- Session persistence
+- Logout
+- Auth loading fallback
+- Splash screen freeze
+- Redirect URLs
+- Supabase client initialization
+- Missing env variables
+
+2. NAVIGATION
+Check:
+- Home
+- Readiness
+- Vault
+- Scan
+- Profile
+- Settings
+- Legal pages
+- Back buttons
+- Broken links
+- Dead CTAs
+- Mobile bottom nav
+- Protected routes
+
+3. CORE PRODUCT
+Check:
+- Home feels like Asset Intelligence, not Spotify clone
+- Readiness Center works
+- Scan exists or shows Coming Soon
+- Vault upload works
+- AI Catalog Auditor status
+- Ownership Confidence status
+- Governance Player status
+- Marketplace not falsely active
+- AI DJ marked as future
+
+4. DATA INTEGRITY
+Check:
+- No fake legal claims
+- No fake verified ownership
+- No fake passport IDs
+- No fake guaranteed revenue
+- Mock/demo data clearly labeled
+- Real Vault data not confused with preview data
+
+Approved language:
+- Pending Verification
+- Potential Issue
+- Suggested Action
+- Legal Review Recommended
+- Potential Revenue Opportunities
+- Internal Preview
+- Coming Soon
+
+Forbidden language:
+- Certified Ownership
+- Legally Verified
+- Guaranteed Recovery
+- Final Legal Decision
+
+5. LEGAL / PRIVACY
+Check existence and links:
+- Terms of Service
+- Privacy Policy
+- DMCA Policy
+- Copyright Policy
+- User Content Policy
+- Marketplace Disclaimer
+- AI Disclaimer
+- Security Policy
+
+Check required disclaimers:
+- MUSVORA does not provide legal advice.
+- MUSVORA does not guarantee revenue recovery.
+- MUSVORA does not determine final legal ownership.
+- Users are responsible for uploaded content.
+- Users must own or control uploaded assets.
+
+6. SECURITY
+Check:
+- No secrets exposed in frontend
+- No unsafe console logs
+- Private files are not publicly exposed
+- File upload restrictions
+- Protected routes
+- Access control labels
+- Error messages do not leak sensitive info
+- HTTPS assumed for deployment
+- No false end-to-end encryption claim
+
+7. STORAGE / FILES
+Check:
+- Audio upload
+- Lyrics upload
+- Contract upload
+- Artwork upload
+- File size handling
+- Allowed file types
+- Error states
+- Empty states
+- Private/public visibility rules
+
+8. UX / NATIVE FEEL
+Check:
+- Mobile safe areas
+- Sticky bottom nav
+- Loading states
+- Empty states
+- Error states
+- Tap states
+- Accessibility labels
+- Readable contrast
+- No template/demo appearance
+- No confusing buttons
+- No dead workflow
+
+9. PERFORMANCE / CODE QUALITY
+Check:
+- TypeScript errors
+- Build errors
+- Console errors
+- Broken imports
+- Unused routes
+- Dead components
+- Infinite loops
+- Large unnecessary dependencies
+- Vite port stability
+- strictPort behavior
+
+10. PRODUCT ROADMAP ALIGNMENT
+Confirm MUSVORA remains aligned with:
+- Music Asset Operating System
+- Create
+- Protect
+- Verify
+- License
+- Monetize
+
+Not aligned with:
+- Spotify clone
+- SoundCloud clone
+- Social network
+- NFT platform
+- AI song generator
+
+REPORT FORMAT:
+
+1. Critical Issues
+2. High Priority Issues
+3. Medium Priority Issues
+4. Low Priority Issues
+5. Safe Fixes Applied
+6. Risky Fixes Not Applied
+7. Files Reviewed
+8. Files Changed
+9. Recommended Next Sprint
+10. Confirmation:
+   - app loads
+   - auth works or exact auth issue reported
+   - Home works
+   - Readiness works
+   - Vault works
+   - Scan works or Coming Soon
+   - Profile works
+   - Supabase schema untouched
+   - backend untouched
+   - build passes
