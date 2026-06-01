@@ -174,3 +174,67 @@ body.reduce-motion [data-ds='governance'] * {
   outline: none;
   box-shadow: 0 0 0 2px var(--gv-bg), 0 0 0 4px var(--gv-ring);
 }
+
+/* ============================================================================
+   THEME-AWARE TOKENS (Phase 1 theme system)
+   ----------------------------------------------------------------------------
+   The base block above is Institutional Dark — the governance default.
+   These overrides let governance modules follow the active app theme:
+
+     · Institutional Dark → base block (matte black)            [default]
+     · Pure OLED Dark     → html[data-theme='pure-oled']        (true black)
+     · Light Professional → html[data-color-scheme='light']     (enterprise light)
+     · System Auto        → resolves to one of the above via ThemeProvider
+
+   Only surfaces / text / borders adapt. Brand + status accents (navy, gold,
+   success / warning / danger) stay constant so the institutional identity is
+   preserved across every theme. ThemeProvider sets data-theme + data-color-scheme
+   on <html>; these selectors out-specify the base [data-ds='governance'] block.
+   ========================================================================== */
+
+/* ── Pure OLED Dark — true black surfaces ──────────────────────────── */
+html[data-theme='pure-oled'] [data-ds='governance'] {
+  --gv-black: #000000;
+  --gv-bg: #000000;
+  --gv-surface: #060708;
+  --gv-surface-2: #0c0d0f;
+  --gv-elevated: #131417;
+  --gv-inset: #000000;
+  --gv-border: rgba(255, 255, 255, 0.11);
+  --gv-border-strong: rgba(255, 255, 255, 0.2);
+  --gv-border-faint: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Light Professional — enterprise light (Stripe / Linear daylight) ─ */
+html[data-color-scheme='light'] [data-ds='governance'] {
+  --gv-black: #ffffff;
+  --gv-bg: #f4f6fa;
+  --gv-surface: #ffffff;
+  --gv-surface-2: #f1f4f9;
+  --gv-elevated: #ffffff;
+  --gv-inset: #eef1f6;
+
+  --gv-text: rgba(13, 20, 33, 0.95);
+  --gv-text-secondary: rgba(15, 23, 42, 0.64);
+  --gv-text-muted: rgba(15, 23, 42, 0.46);
+  --gv-text-faint: rgba(15, 23, 42, 0.3);
+  --gv-text-inverse: #ffffff;
+  --gv-text-link: #1f4e84;
+
+  --gv-border: rgba(15, 23, 42, 0.1);
+  --gv-border-strong: rgba(15, 23, 42, 0.18);
+  --gv-border-faint: rgba(15, 23, 42, 0.06);
+  --gv-ring: rgba(31, 78, 132, 0.5);
+
+  /* Gold needs a deeper tone to stay legible on light surfaces */
+  --gv-gold: #9a7d28;
+  --gv-gold-soft: rgba(212, 175, 55, 0.16);
+  --gv-navy-soft: rgba(31, 78, 132, 0.1);
+  --gv-info-soft: rgba(31, 78, 132, 0.1);
+
+  /* Lighter elevation for a daylight surface */
+  --gv-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --gv-shadow-sm: 0 2px 6px -2px rgba(15, 23, 42, 0.12);
+  --gv-shadow-md: 0 8px 24px -12px rgba(15, 23, 42, 0.18);
+  --gv-shadow-lg: 0 24px 48px -20px rgba(15, 23, 42, 0.22);
+}

@@ -1,0 +1,295 @@
+MUSVORA — PROFESSIONAL PROFILE SYSTEM V1
+
+ROLE
+
+Act as a Senior Product Architect, UX Designer, Music Industry Platform Specialist and Enterprise Software Engineer.
+
+GOAL
+
+Implement MUSVORA Professional Profile System.
+
+IMPORTANT
+
+- Do not redesign the app.
+- Do not break Auth.
+- Do not touch Supabase schema unless absolutely required.
+- Do not remove existing profile functionality.
+- Build incrementally.
+- Mobile-first.
+- Production-grade quality.
+
+====================================================
+
+PROFILE SYSTEM
+
+====================================================
+
+Allow users to upload:
+
+- Profile Photo (Avatar)
+- Cover Image (optional)
+
+Supported users:
+
+- Composer
+- Artist
+- Producer
+- Publisher
+- Manager
+- Business
+
+====================================================
+
+PROFILE HEADER
+
+====================================================
+
+Display:
+
+Profile Photo
+
+Display Name
+
+Professional Role
+
+Country
+
+Languages
+
+Genres
+
+Verification Status:
+
+- Pending Verification
+- Verified Profile (only if real criteria exist)
+
+Never display fake verification.
+
+====================================================
+
+PROFILE INFORMATION
+
+====================================================
+
+Fields:
+
+- Artistic Name
+- Legal Name (optional/private)
+- Biography
+- Country
+- City
+- Languages
+- Genres
+- Website
+- Instagram
+- TikTok
+- YouTube
+- Spotify
+- Apple Music
+
+====================================================
+
+COMPOSER PROFILE
+
+====================================================
+
+Display:
+
+- Total Works
+- Readiness Average
+- Ownership Confidence Average
+- Active Song Passports
+- Licensing Availability
+
+Show:
+
+Demos
+Lyrics
+Catalog
+
+====================================================
+
+ARTIST PROFILE
+
+====================================================
+
+Display:
+
+- Music Catalog
+- Licensed Works
+- Public Playlists
+- Followers (future)
+
+====================================================
+
+PRODUCER PROFILE
+
+====================================================
+
+Display:
+
+- Projects
+- Genres
+- Collaborations
+
+====================================================
+
+PUBLISHER PROFILE
+
+====================================================
+
+Display:
+
+- Catalog Managed
+- Licensing Activity
+- Rights Administration
+
+====================================================
+
+BUSINESS PROFILE
+
+====================================================
+
+Display:
+
+- Company Logo
+- Company Name
+- Website
+- Licensing Interests
+- Contact Information
+
+====================================================
+
+PROFILE MEDIA
+
+====================================================
+
+Allow:
+
+- Profile Photo
+- Cover Image
+
+Storage:
+
+Secure private/public storage according to current architecture.
+
+Do not expose private files.
+
+====================================================
+
+OWNER PROFILE
+
+====================================================
+
+Internal Role:
+
+OWNER
+
+Identity:
+
+Founder & Creator
+
+Pascasio Emmanuel Reynoso Reyes
+
+Owner profile can display:
+
+- Founder Badge
+- Platform Creator
+
+Do not expose admin controls publicly.
+
+Admin functions remain inside:
+
+/owner
+
+Founder Console
+
+====================================================
+
+PUBLIC PROFILE URL
+
+====================================================
+
+Future-ready structure:
+
+/profile/username
+
+Examples:
+
+/profile/emmanuelreyes
+/profile/musicproducer01
+
+====================================================
+
+PROFILE TABS
+
+====================================================
+
+Overview
+
+Catalog
+
+Licensing
+
+Ownership
+
+About
+
+====================================================
+
+UI REQUIREMENTS
+
+====================================================
+
+Use MUSVORA Design System.
+
+Theme compatible:
+
+- Institutional Dark
+- OLED Dark
+- Light Professional
+- System Auto
+
+Style:
+
+- Professional
+- Clean
+- Enterprise-grade
+- Mobile-first
+
+Avoid:
+
+- Social media look
+- Gaming UI
+- Crypto style
+- Excessive animations
+
+====================================================
+
+SECURITY
+
+====================================================
+
+Never expose:
+
+- Email
+- Password
+- Internal IDs
+- Private legal information
+
+Only show public information approved by the user.
+
+====================================================
+
+REPORT
+
+Provide:
+
+- Files changed
+- Components created
+- Profile sections added
+- Storage approach used
+- Confirmation Auth untouched
+- Confirmation Supabase untouched unless required
+- Confirmation backend untouched unless required
+- Build passes

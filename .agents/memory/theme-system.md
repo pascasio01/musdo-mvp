@@ -19,3 +19,6 @@ Themes live in `frontend/src/lib/theme.tsx`. Each theme is a `ThemeConfig` whose
 
 ## Light mode
 Light themes set `colorScheme: 'light'` → `applyVars` sets `html[data-color-scheme="light"]`, which activates the Tailwind-class override block in `index.css` (sits outside `@layer` so it wins the cascade).
+
+## Governance Design System is theme-aware via token overrides
+`applyVars` also sets `root.dataset.theme = resolvedTheme.id`. Governance `--gv-*` tokens are hardcoded (Institutional Dark) in the base `[data-ds='governance']` block in `governance.css`; theme adaptation is done with MORE-SPECIFIC override blocks that only redefine surfaces/text/borders/shadows: `html[data-theme='pure-oled'] [data-ds='governance']` (true black) and `html[data-color-scheme='light'] [data-ds='governance']` (enterprise light). Brand/status accents (navy, gold, success/warning/danger) stay constant across themes on purpose. **Rule:** when adding a new governance token consumed by primitives, define it in the base block AND ensure light/oled overrides don't leave it visually wrong (gold is deepened to `#9a7d28` in light for legibility). System Auto needs no special case — `applyVars` feeds the resolved theme into both `data-theme` and `data-color-scheme`.

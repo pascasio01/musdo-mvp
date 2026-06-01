@@ -468,6 +468,10 @@ function applyVars(settings: ThemeSettings) {
   document.body.classList.toggle('cinematic', settings.cinematicMode)
 
   root.dataset.colorScheme = theme.colorScheme
+  // Resolved theme id (System Auto → institutional | light-pro). Lets the
+  // Governance Design System retune its --gv-* tokens per theme so governance
+  // modules follow the active theme instead of being frozen to one palette.
+  root.dataset.theme = theme.id
 }
 
 function hexToRgb(hex: string): string | null {
