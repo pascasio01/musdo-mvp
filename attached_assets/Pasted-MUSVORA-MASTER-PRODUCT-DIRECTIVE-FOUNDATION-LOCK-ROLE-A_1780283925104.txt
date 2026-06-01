@@ -1,0 +1,524 @@
+MUSVORA — MASTER PRODUCT DIRECTIVE (FOUNDATION LOCK)
+
+ROLE
+
+Act as:
+- Principal Software Architect
+- Senior Product Strategist
+- Staff Mobile Engineer
+- Enterprise UX Architect
+- Music Rights Infrastructure Specialist
+- Security Engineer
+
+MISSION
+
+Build MUSVORA into the world's leading Music Asset Operating System.
+
+MUSVORA IS NOT:
+
+- Spotify clone
+- SoundCloud clone
+- Social network
+- AI music generator
+- Demo application
+
+MUSVORA IS:
+
+Music Asset Operating System
+
+Purpose:
+
+CREATE
+PROTECT
+VERIFY
+LICENSE
+MONETIZE
+
+====================================================
+NON-NEGOTIABLE RULES
+====================================================
+
+- Preserve existing functionality.
+- Do not rebuild from scratch.
+- Do not break routing.
+- Do not break authentication.
+- Do not touch Supabase schema unless required.
+- Do not remove existing screens.
+- Do not create demo-looking UI.
+- Build incrementally.
+- One sprint at a time.
+- Production-grade quality only.
+
+====================================================
+CORE NAVIGATION
+====================================================
+
+Primary Navigation:
+
+- Home
+- Readiness
+- Vault
+- Scan
+- Profile
+
+Future Navigation:
+
+- Ownership Confidence
+- Song Passport
+- Recovery Center
+- Marketplace
+- Negotiation Room
+- Contracts
+- Payments
+- AI DJ Complace
+
+====================================================
+HOME
+====================================================
+
+Home must be:
+
+MUSVORA Asset Intelligence Center
+
+Display:
+
+- Overall Readiness Score
+- Ownership Confidence
+- Works At Risk
+- Potential Revenue Opportunities
+- Next Best Action
+
+Do NOT make songs or playlists the primary experience.
+
+====================================================
+VAULT
+====================================================
+
+Store:
+
+- Masters
+- Demos
+- Lyrics
+- Contracts
+- Split Sheets
+- Artwork
+- Metadata
+
+Preserve upload architecture.
+
+Improve organization only.
+
+====================================================
+READINESS CENTER
+====================================================
+
+Categories:
+
+- Distribution Readiness
+- Licensing Readiness
+- Ownership Readiness
+- Copyright Readiness
+- Monetization Readiness
+
+Output:
+
+- Readiness Score
+- Issues Found
+- Recommended Actions
+
+====================================================
+SCAN
+====================================================
+
+Purpose:
+
+Catalog Health Analysis
+
+Analyze:
+
+- Missing Metadata
+- Missing Contracts
+- Missing Splits
+- Ownership Risks
+- Registration Gaps
+- Licensing Readiness
+
+CTA:
+
+SCAN MY CATALOG
+
+====================================================
+OWNERSHIP CONFIDENCE
+====================================================
+
+Display:
+
+- Contributors
+- Split Percentages
+- Signature Status
+- Ownership Graph
+- Ownership Confidence Score
+
+Use:
+
+- Pending Verification
+- Requires Confirmation
+
+Never use:
+
+- Certified Ownership
+- Legally Verified
+
+====================================================
+SONG PASSPORT
+====================================================
+
+Support:
+
+- Creation Timeline
+- Version History
+- Ownership History
+- Registration Status
+
+Never generate fake legal IDs.
+
+====================================================
+RECOVERY CENTER
+====================================================
+
+Display:
+
+- Missing Registrations
+- Ownership Gaps
+- Metadata Problems
+- Potential Revenue Opportunities
+
+Never display:
+
+- Guaranteed Recovery
+
+====================================================
+MARKETPLACE
+====================================================
+
+Purpose:
+
+Music Asset Marketplace
+
+Creators upload:
+
+- Demo
+- Lyrics
+- Metadata
+- Ownership Data
+
+Artists can:
+
+- Preview Demo
+- Preview Lyrics
+- Request License
+
+Eligibility:
+
+- Readiness >= 80
+- Ownership Confidence >= 80
+- Song Passport Active
+
+Future:
+
+- Licensing Requests
+- Negotiation Room
+- Contract Tracking
+- Payment Tracking
+
+Licenses DO NOT transfer authorship automatically.
+
+====================================================
+AI SYSTEM
+====================================================
+
+APPROVED AI MODULES ONLY
+
+1. AI Catalog Auditor
+
+Detect:
+
+- Missing Metadata
+- Missing Registrations
+- Ownership Risks
+- Catalog Inconsistencies
+- Readiness Blockers
+
+Output:
+
+- Issues Found
+- Priority Level
+- Suggested Actions
+
+----------------------------------------------------
+
+2. AI Metadata Assistant
+
+Analyze:
+
+- BPM
+- Key
+- Genre
+- Subgenre
+- Mood
+- Language
+- Energy
+
+Suggest:
+
+- Metadata Corrections
+- Missing Metadata
+- Catalog Organization
+
+----------------------------------------------------
+
+3. AI Contract Checker
+
+Purpose:
+
+Document Review Assistance
+
+Check:
+
+- Missing Royalty Clauses
+- Missing Splits
+- Missing Ownership Percentages
+- Missing Terms
+- Missing Territories
+
+Output:
+
+- Potential Issue
+- Risk Level
+- Legal Review Recommended
+
+MUSVORA DOES NOT PROVIDE LEGAL ADVICE.
+
+----------------------------------------------------
+
+4. AI Licensing Match
+
+Analyze:
+
+- Genre
+- Mood
+- Energy
+- Theme
+- Lyrics
+
+Suggest:
+
+- Artist Matches
+- Sync Opportunities
+- Playlist Opportunities
+- Event Opportunities
+- Commercial Opportunities
+
+Output:
+
+- Licensing Readiness
+- Match Score
+- Suggested Markets
+
+====================================================
+AI RESTRICTIONS
+====================================================
+
+DO NOT BUILD:
+
+- AI Song Generator
+- AI Lyrics Generator
+- AI Artist Replacement
+- ChatGPT Clone
+
+AI must:
+
+- Audit
+- Organize
+- Verify
+- Protect
+- Assist
+- Monetize
+
+Never replace creators.
+
+====================================================
+AI DJ COMPLACE
+====================================================
+
+Future Module
+
+Purpose:
+
+Contextual Music Director
+
+Examples:
+
+- Restaurant
+- Wedding
+- Lounge
+- Corporate Event
+- Bachata Night
+- Salsa Night
+
+This is NOT a streaming replacement.
+
+====================================================
+AUTHENTICATION
+====================================================
+
+Support:
+
+- Email
+- Password
+- Google Sign-In
+- Apple Sign-In
+
+Future:
+
+- Microsoft Enterprise Login
+
+Founder Account:
+
+OWNER
+
+Internal Only
+
+Public Display:
+
+Founder
+Pascasio Emmanuel Reynoso Reyes
+
+====================================================
+THEME SYSTEM
+====================================================
+
+Modes:
+
+1. Institutional Dark (Default)
+2. Pure OLED Dark
+3. Light Professional
+4. System Auto
+
+Future:
+
+- Focus Mode
+- Studio Mode
+- Executive Mode
+
+====================================================
+DESIGN SYSTEM
+====================================================
+
+Style:
+
+Institutional Dark Luxury
+
+Typography:
+
+Inter
+
+Colors:
+
+Background:
+#0F1115
+
+Surface:
+#161A22
+
+Border:
+#262D3A
+
+Primary Text:
+#F5F7FA
+
+Secondary Text:
+#A7B0C0
+
+Trust Navy:
+#0D2B52
+
+Success:
+#27AE60
+
+Warning:
+#F39C12
+
+Critical:
+#E74C3C
+
+Value Gold:
+#D4AF37
+
+Rules:
+
+- No neon
+- No gaming UI
+- No crypto aesthetics
+- No template appearance
+- Native-grade mobile UX
+
+====================================================
+LEGAL FOUNDATION
+====================================================
+
+Required:
+
+- Terms of Service
+- Privacy Policy
+- DMCA Policy
+- Copyright Policy
+- User Content Policy
+- Marketplace Disclaimer
+- AI Disclaimer
+- Security Policy
+
+Required Statements:
+
+- MUSVORA does not provide legal advice.
+- MUSVORA does not guarantee revenue recovery.
+- MUSVORA does not determine final legal ownership.
+- Users are responsible for uploaded content.
+- Users must own or control uploaded assets.
+- Marketplace transactions require explicit agreements.
+
+====================================================
+SECURITY FOUNDATION
+====================================================
+
+Implement or verify:
+
+- HTTPS
+- Encrypted in Transit
+- Encrypted at Rest
+- Secure Uploads
+- Protected Routes
+- Audit Log Foundation
+- Role-Based Access
+
+Never claim End-to-End Encryption unless actually implemented.
+
+====================================================
+FINAL OBJECTIVE
+====================================================
+
+Build MUSVORA as the definitive infrastructure platform for music asset governance.
+
+Not another streaming platform.
+
+Not another music app.
+
+A platform where creators:
+
+Create
+Protect
+Verify
+License
+Monetize
+
+with institutional-grade confidence.
