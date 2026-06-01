@@ -2,14 +2,16 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Music, Eye, EyeOff, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../lib/auth'
+import { GoogleButton, googleAuthErrorMessage } from '../components/auth/GoogleButton'
 
 export default function Login() {
   const navigate = useNavigate()
-  const { signIn } = useAuth()
+  const { signIn, signInWithGoogle } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
 
   const friendlyError = (msg: string): string => {
@@ -38,6 +40,23 @@ export default function Login() {
     } else {
       navigate(redirectTo ?? '/home')
     }
+  }
+
+  const handleGoogle = async () => {
+    setError('')
+    setGoogleLoading(true)
+    const { error } = await signInWithGoogle()
+    if (error) {
+      setError(googleAuthErrorMessage(error.message))
+      setGoogleLoading(false)
+      return
+    }
+    // Success triggers a full-page redirect to Google; this component unmounts.
+    // If the redirect never happens, fail safe instead of leaving the button stuck.
+    setTimeout(() => {
+      setError(googleAuthErrorMessage('redirect failed'))
+      setGoogleLoading(false)
+    }, 6000)
   }
 
   return (
@@ -109,12 +128,20 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || googleLoading}
             className="w-full py-4 mt-2 rounded-2xl bg-white text-black font-bold text-base hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
+
+        <div className="flex items-center gap-3 my-6" aria-hidden="true">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="text-xs text-zinc-600 uppercase tracking-wider">or</span>
+          <div className="h-px flex-1 bg-white/10" />
+        </div>
+
+        <GoogleButton label="Continue with Google" loading={googleLoading} disabled={loading} onClick={handleGoogle} />
 
         <div className="mt-6 text-center">
           <p className="text-zinc-600 text-sm">

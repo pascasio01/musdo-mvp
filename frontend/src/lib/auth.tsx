@@ -83,6 +83,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, username: string, role?: string) => Promise<{ error: Error | null; requiresConfirmation: boolean }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: Error | null }>
+  signInWithGoogle: () => Promise<{ error: Error | null }>
   refreshProfile: () => Promise<void>
 }
 
@@ -163,6 +164,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error }
   }, [])
 
+  // Google OAuth via the existing Supabase client. On success Supabase performs a
+  // full-page redirect to Google and back to /auth/callback (handled by AuthCallback),
+  // so the caller only ever observes the error path here.
+  const signInWithGoogle = useCallback(async () => {
+    try {
+      const redirectTo = `${window.location.origin}/auth/callback`
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo },
+      })
+      return { error }
+    } catch (e) {
+      return { error: e instanceof Error ? e : new Error('Google sign-in failed') }
+    }
+  }, [])
+
   const refreshProfile = useCallback(async () => {
     if (user) {
       const p = await syncProfile(user)
@@ -172,8 +189,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<AuthContextType>(() => ({
     user, session, profile, loading,
-    signIn, signUp, signOut, resetPassword, refreshProfile,
-  }), [user, session, profile, loading, signIn, signUp, signOut, resetPassword, refreshProfile])
+    signIn, signUp, signOut, resetPassword, signInWithGoogle, refreshProfile,
+  }), [user, session, profile, loading, signIn, signUp, signOut, resetPassword, signInWithGoogle, refreshProfile])
 
   return (
     <AuthContext.Provider value={value}>
