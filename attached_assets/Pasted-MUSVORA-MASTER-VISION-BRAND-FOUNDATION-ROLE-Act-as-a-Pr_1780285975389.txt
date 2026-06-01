@@ -1,0 +1,330 @@
+MUSVORA — MASTER VISION & BRAND FOUNDATION
+
+ROLE
+
+Act as a Principal Product Architect, Brand Strategist, UX Director, Music Rights Infrastructure Specialist, and Enterprise Software Designer.
+
+MISSION
+
+Build MUSVORA as the world’s most trusted Music Asset Operating System.
+
+MUSVORA is not another streaming app.
+
+MUSVORA is not another Spotify clone.
+
+MUSVORA is not another SoundCloud clone.
+
+MUSVORA is the operating system where music is created, protected, verified, licensed, monetized, discovered, and managed.
+
+====================================================
+
+BRAND IDENTITY
+
+====================================================
+
+Name:
+
+MUSVORA
+
+Primary Positioning:
+
+Music Asset Operating System
+
+Core Promise:
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Secondary Experience:
+
+Discover.
+Listen.
+Connect.
+
+MUSVORA combines:
+
+Music Infrastructure
++
+Music Governance
++
+Music Discovery
+
+====================================================
+
+TWO-LAYER PRODUCT MODEL
+
+====================================================
+
+LAYER 1 — CORE PLATFORM
+
+Music Asset Operating System
+
+Modules:
+
+* Vault
+* Readiness Center
+* Ownership Confidence
+* Song Passport
+* Licensing
+* Marketplace
+* Recovery Center
+* Contracts
+* Payments
+
+Purpose:
+
+Protect and manage music assets.
+
+====================================================
+
+LAYER 2 — MUSIC EXPERIENCE
+
+Music Discovery Layer
+
+Modules:
+
+* Music
+* Discover
+* Playlists
+* Artists
+* Favorites
+* Listening Experience
+
+Purpose:
+
+Discover and enjoy music.
+
+This layer must never overpower the governance layer.
+
+====================================================
+
+USER MODES
+
+====================================================
+
+COMPOSER MODE
+
+Show:
+
+* Vault
+* Readiness
+* Ownership
+* Song Passport
+* Licensing
+
+Goal:
+
+Protect and monetize works.
+
+⸻
+
+ARTIST MODE
+
+Show:
+
+* Marketplace
+* Demos
+* Lyrics
+* Licensing
+* Negotiation Room
+
+Goal:
+
+Find and license music.
+
+⸻
+
+LISTENER MODE
+
+Show:
+
+* Discover
+* Music
+* Artists
+* Playlists
+
+Goal:
+
+Consume music.
+
+⸻
+
+BUSINESS MODE
+
+Show:
+
+* Licensing
+* Contracts
+* Catalog Health
+* Revenue
+* Asset Reports
+
+Goal:
+
+Commercial music management.
+
+====================================================
+
+LOGO SYSTEM
+
+====================================================
+
+Logo Concept:
+
+Geometric M
+
+The M must represent:
+
+1. Audio Wave
+2. Protection Shield
+3. Asset Vault
+
+The logo should communicate:
+
+Music
+Ownership
+Infrastructure
+
+Avoid:
+
+* Music notes
+* Headphones
+* Play buttons
+* Generic streaming symbols
+
+====================================================
+
+APP ICON
+
+====================================================
+
+Premium Version:
+
+Background:
+#0F1115
+
+Symbol:
+Geometric M
+
+Color:
+#D4AF37
+
+⸻
+
+Corporate Version:
+
+Background:
+#0D2B52
+
+Symbol:
+White Geometric M
+
+====================================================
+
+VISUAL DIRECTION
+
+====================================================
+
+Style:
+
+Institutional Dark Luxury
+
+Inspired by:
+
+* Stripe
+* Linear
+* Supabase
+* Apple
+* Bloomberg (simplified)
+
+Avoid:
+
+* Crypto aesthetics
+* Gaming interfaces
+* Excessive glassmorphism
+* Neon effects
+* Spotify-style branding
+
+====================================================
+
+THEME SYSTEM
+
+====================================================
+
+Phase 1:
+
+* Institutional Dark
+* Pure OLED Dark
+* Light Professional
+* System Auto
+
+Future:
+
+* Focus Mode
+* Studio Mode
+* Executive Mode
+
+====================================================
+
+HOME EXPERIENCE
+
+====================================================
+
+Do not open with:
+
+“Listen Music”
+
+Open with:
+
+MUSVORA
+
+Music Asset Operating System
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Discover Music.
+Own Your Future.
+
+====================================================
+
+COMPETITIVE POSITIONING
+
+====================================================
+
+Spotify answers:
+
+“What do I want to listen to?”
+
+MUSVORA answers:
+
+“What do I own, what can I license, and how can I monetize it?”
+
+This distinction must remain visible across the entire product.
+
+====================================================
+
+FINAL OBJECTIVE
+
+====================================================
+
+Build MUSVORA into the definitive platform where creators, artists, publishers, managers, labels and businesses manage music assets with institutional-grade confidence.
+
+MUSVORA
+
+Music Asset Operating System
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Discover Music.
+Own Your Future.
