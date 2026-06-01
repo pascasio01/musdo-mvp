@@ -1,0 +1,551 @@
+MUSVORA — VISION 10/10 MASTER PRODUCT PROMPT
+
+ROLE
+
+Act as a Principal Software Architect, Staff Product Designer, Senior Mobile Engineer, Music Rights Infrastructure Specialist, Enterprise UX Architect and Brand Systems Director.
+
+MISSION
+
+Transform MUSVORA into the world’s leading Music Asset Operating System.
+
+Do NOT build another Spotify.
+
+Do NOT build another SoundCloud.
+
+Do NOT build another music marketplace.
+
+Build the operating system behind music ownership, licensing, verification, monetization and discovery.
+
+====================================================
+
+CORE POSITIONING
+
+====================================================
+
+Brand:
+
+MUSVORA
+
+Category:
+
+Music Asset Operating System
+
+Tagline:
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Secondary Tagline:
+
+Discover Music.
+Own Your Future.
+
+MISSION STATEMENT
+
+MUSVORA is where music becomes a protected, verified, licensable and monetizable asset.
+
+====================================================
+
+PRODUCT PHILOSOPHY
+
+====================================================
+
+Spotify answers:
+
+“What do I want to listen to?”
+
+MUSVORA answers:
+
+“What do I own?”
+“What can I license?”
+“What can I monetize?”
+“What requires attention?”
+
+Every screen must reinforce this philosophy.
+
+====================================================
+
+HOME EXPERIENCE
+
+====================================================
+
+Header:
+
+MUSVORA
+
+Music Asset Operating System
+
+Dynamic greeting:
+
+Good Evening, Emmanuel
+
+Below greeting:
+
+23 Assets
+72% Ready
+3 Require Action
+5 Revenue Opportunities
+
+====================================================
+
+PRIMARY HERO CARD
+
+====================================================
+
+YOUR MUSIC EMPIRE
+
+Display:
+
+* Catalog Health
+* Ownership Status
+* Licensing Pipeline
+* Revenue Opportunities
+* Passport Coverage
+
+CTA:
+
+Open Founder Console
+
+====================================================
+
+PRIMARY NAVIGATION
+
+====================================================
+
+Home
+
+Vault
+
+Passport
+
+Marketplace
+
+Profile
+
+Readiness becomes part of Vault intelligence.
+
+====================================================
+
+FOUNDER CONSOLE
+
+====================================================
+
+Private route.
+
+Visible only to OWNER.
+
+Identity:
+
+Pascasio Emmanuel Reynoso Reyes
+
+Founder & Creator
+
+MUSVORA
+
+Music Asset Operating System
+
+====================================================
+
+FOUNDER CONSOLE MODULES
+
+====================================================
+
+1. Executive Dashboard
+
+* Total Users
+* Active Users
+* Assets
+* Revenue
+* Growth
+* Platform Health
+
+⸻
+
+2. Asset Intelligence
+
+* Readiness Score
+* Ownership Confidence
+* Works At Risk
+* Passport Coverage
+* Revenue Opportunities
+
+⸻
+
+3. Ownership Engine
+
+* Split Sheets
+* Contributor Status
+* Copyright Status
+* Publishing Status
+* Registration Status
+
+⸻
+
+4. Song Passport Engine
+
+* Creation History
+* Ownership Timeline
+* Registration Status
+* Licensing Availability
+* Version History
+
+⸻
+
+5. Marketplace Control
+
+* Active Listings
+* License Requests
+* Negotiations
+* Contracts
+* Payments
+
+⸻
+
+6. Revenue Engine
+
+* Sync Opportunities
+* Film
+* TV
+* YouTube
+* Commercial
+* Playlist Opportunities
+
+⸻
+
+7. Security Center
+
+* Audit Logs
+* Suspicious Activity
+* DMCA Cases
+* Ownership Disputes
+* Moderation Queue
+
+⸻
+
+8. AI Command Center
+
+* AI Catalog Auditor
+* AI Metadata Assistant
+* AI Contract Checker
+* AI Licensing Match
+* Translation AI
+
+⸻
+
+9. System Health
+
+* Authentication
+* Storage
+* APIs
+* Marketplace
+* Performance
+* Error Monitoring
+
+====================================================
+
+VAULT
+
+====================================================
+
+The heart of MUSVORA.
+
+Store:
+
+* Songs
+* Lyrics
+* Demos
+* Masters
+* Contracts
+* Split Sheets
+* Metadata
+* Artwork
+
+Everything organized.
+
+Everything searchable.
+
+Everything protected.
+
+====================================================
+
+SONG PASSPORT
+
+====================================================
+
+Exclusive MUSVORA module.
+
+Display:
+
+Title
+
+Composer
+
+Ownership
+
+Copyright
+
+Publishing
+
+Readiness
+
+Licensing Status
+
+Version History
+
+Passport Status
+
+Never create fake legal IDs.
+
+Use:
+
+Pending Verification
+
+when verification is not complete.
+
+====================================================
+
+MARKETPLACE
+
+====================================================
+
+Music Asset Marketplace
+
+Not a streaming marketplace.
+
+Display:
+
+* Available Assets
+* Ready For Licensing
+* Sync Opportunities
+* Commercial Opportunities
+* Pending Requests
+* Negotiation Rooms
+
+Eligibility:
+
+Readiness ≥ 80
+
+Ownership Confidence ≥ 80
+
+Song Passport Active
+
+====================================================
+
+PLAYER EXPERIENCE
+
+====================================================
+
+Create a global mini-player.
+
+Visible across the platform.
+
+Style:
+
+Apple Music elegance
+Spotify usability
+MUSVORA intelligence
+
+Display:
+
+Artwork
+Song
+Artist
+Progress
+Play/Pause
+
+⸻
+
+Expanded Player
+
+Tabs:
+
+Now Playing
+Lyrics
+Ownership
+Licensing
+Metadata
+
+⸻
+
+MUSVORA Intelligence Bar
+
+Display:
+
+Ready For Licensing
+
+Ownership Verified
+
+Pending Split Sheet
+
+Monetization Opportunity
+
+Never use intrusive popups.
+
+====================================================
+
+USER MODES
+
+====================================================
+
+COMPOSER
+
+* Vault
+* Readiness
+* Passport
+* Ownership
+* Licensing
+
+⸻
+
+ARTIST
+
+* Marketplace
+* Demos
+* Licensing
+* Catalog
+
+⸻
+
+LISTENER
+
+* Discover
+* Music
+* Artists
+* Playlists
+
+⸻
+
+BUSINESS
+
+* Licensing
+* Contracts
+* Revenue
+* Catalog Health
+
+====================================================
+
+AI SYSTEM
+
+====================================================
+
+Approved AI Modules:
+
+* AI Catalog Auditor
+* AI Metadata Assistant
+* AI Contract Checker
+* AI Licensing Match
+
+AI assists creators.
+
+AI never replaces creators.
+
+AI never provides legal advice.
+
+====================================================
+
+THEME SYSTEM
+
+====================================================
+
+Institutional Dark (Default)
+
+Pure OLED
+
+Light Professional
+
+System Auto
+
+Future:
+
+Focus Mode
+
+Studio Mode
+
+Executive Mode
+
+====================================================
+
+BRAND SYSTEM
+
+====================================================
+
+Logo:
+
+Geometric M
+
+Represents:
+
+Music
+Ownership
+Protection
+Vault
+Infrastructure
+
+⸻
+
+App Icon
+
+Background:
+
+#000000
+
+Symbol:
+
+#D4AF37
+
+⸻
+
+Visual Style
+
+Institutional Dark Luxury
+
+Inspired by:
+
+* Apple
+* Stripe
+* Linear
+* Supabase
+* Vercel
+
+Avoid:
+
+* Gaming UI
+* Crypto aesthetics
+* Neon overload
+* Excessive Glassmorphism
+
+====================================================
+
+FINAL GOAL
+
+====================================================
+
+When users see MUSVORA they should think:
+
+“This is where music is protected.”
+
+“This is where music is licensed.”
+
+“This is where music is monetized.”
+
+“This is where music ownership is managed.”
+
+Not:
+
+“This is another music player.”
+
+MUSVORA
+
+Music Asset Operating System
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Discover Music.
+Own Your Future.
