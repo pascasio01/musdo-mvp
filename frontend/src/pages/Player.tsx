@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause,
   SkipBack, SkipForward, Repeat, Shuffle, Shield, FileText,
-  ChevronRight, Sparkles,
+  Disc3, Quote, ShieldCheck, ListMusic,
 } from 'lucide-react'
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
 import { usePlayer } from '../lib/player'
@@ -13,8 +13,21 @@ import LyricsPanel from '../components/LyricsPanel'
 import SafeListenPanel from '../components/audio/SafeListenPanel'
 import AudioTuningPanel from '../components/audio/AudioTuningPanel'
 import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
+import IntelligenceBar from '../components/player/IntelligenceBar'
+import { OwnershipPanel, LicensingPanel } from '../components/player/PlayerPanels'
+import { getIntelligenceSignals } from '../data/assetIntelligence'
 import { getLyricsForSong } from '../data/mockLyrics'
 import { formatDuration } from '../utils/format'
+
+type PlayerTab = 'now' | 'lyrics' | 'ownership' | 'licensing' | 'metadata'
+
+const TABS: { id: PlayerTab; label: string; icon: typeof Disc3 }[] = [
+  { id: 'now', label: 'Now Playing', icon: Disc3 },
+  { id: 'lyrics', label: 'Lyrics', icon: Quote },
+  { id: 'ownership', label: 'Ownership', icon: ShieldCheck },
+  { id: 'licensing', label: 'Licensing', icon: FileText },
+  { id: 'metadata', label: 'Metadata', icon: ListMusic },
+]
 
 function qualityLabel(q?: Song['audio_quality']): string {
   const map: Record<string, string> = {
@@ -52,7 +65,7 @@ export default function Player() {
   } = usePlayer()
 
   const [liked, setLiked] = useState(false)
-  const [showCredits, setShowCredits] = useState(false)
+  const [tab, setTab] = useState<PlayerTab>('now')
 
   const song: Song | undefined = useMemo(
     () => mockSongs.find(s => s.id === id) ?? activeSong ?? mockSongs[0],
@@ -72,6 +85,8 @@ export default function Player() {
     seek(Math.max(0, Math.min(100, pct)))
   }, [seek])
 
+  const signals = useMemo(() => (song ? getIntelligenceSignals(song) : []), [song])
+
   if (!song) {
     return (
       <div
@@ -86,6 +101,7 @@ export default function Player() {
   const total = song.duration ?? duration ?? 0
   const elapsedSec = song.duration ? Math.floor((progress / 100) * song.duration) : Math.floor(elapsed)
   const canRequestLicense = song.licensing_status === 'available'
+  const lyrics = getLyricsForSong(song.id)
 
   return (
     <div
@@ -128,7 +144,7 @@ export default function Player() {
             <ChevronDown size={28} aria-hidden />
           </button>
           <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: 'var(--text-muted)' }}>
-            Now Playing
+            {TABS.find(t => t.id === tab)?.label ?? 'Now Playing'}
           </p>
           <button
             aria-label="More options"
@@ -138,6 +154,8 @@ export default function Player() {
             <MoreHorizontal size={22} aria-hidden />
           </button>
         </div>
+
+        {/* ── Persistent player head (visible across all tabs) ─────── */}
 
         {/* Floating cover art */}
         <div
@@ -250,7 +268,7 @@ export default function Player() {
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-between mb-7">
+        <div className="flex items-center justify-between mb-6">
           <button aria-label="Shuffle" style={{ color: 'var(--text-muted)' }}>
             <Shuffle size={18} strokeWidth={1.5} aria-hidden />
           </button>
@@ -279,53 +297,97 @@ export default function Player() {
           </button>
         </div>
 
-        {/* Action row: Passport + License */}
-        <div className="flex items-stretch gap-2 mb-3">
-          <button
-            onClick={() => navigate(`/passport/${song.id}`)}
-            className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
-            style={{
-              background: 'var(--glass-bg)',
-              borderColor: 'var(--border)',
-              color: 'var(--text-primary)',
-            }}
-          >
-            <Shield size={14} aria-hidden />
-            Song Passport
-          </button>
-          {canRequestLicense ? (
-            <button
-              onClick={() => navigate('/market')}
-              className="flex-1 py-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-transform hover:scale-[1.01]"
-              style={{
-                background: 'var(--accent)',
-                color: 'var(--text-inverse)',
-                boxShadow: '0 8px 24px var(--accent-soft)',
-              }}
-            >
-              <FileText size={14} aria-hidden />
-              Request License
-            </button>
-          ) : (
-            <div
-              className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2"
-              style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)', color: 'var(--text-muted)' }}
-            >
-              {licensingLabel(song.licensing_status)}
-            </div>
-          )}
+        {/* MUSVORA Intelligence Bar — one discrete signal at a time */}
+        <IntelligenceBar signals={signals} active={isPlaying} />
+
+        {/* ── Segmented tab bar ───────────────────────────────────── */}
+        <div
+          className="flex gap-1 mb-5 overflow-x-auto scrollbar-hide -mx-1 px-1"
+          role="tablist"
+          aria-label="Player sections"
+        >
+          {TABS.map(t => {
+            const Icon = t.icon
+            const selected = tab === t.id
+            return (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setTab(t.id)}
+                className="flex items-center gap-1.5 flex-shrink-0 rounded-full px-3 py-2 text-[11px] font-semibold transition-colors"
+                style={{
+                  background: selected ? 'var(--accent-soft)' : 'transparent',
+                  color: selected ? 'var(--text-primary)' : 'var(--text-muted)',
+                  border: `1px solid ${selected ? 'var(--accent)' : 'var(--border-soft)'}`,
+                }}
+              >
+                <Icon size={13} strokeWidth={2.2} aria-hidden />
+                {t.label}
+              </button>
+            )
+          })}
         </div>
 
-        {/* Credits & Analytics expandable */}
-        <CreditsPanel song={song} expanded={showCredits} onToggle={() => setShowCredits(v => !v)} />
+        {/* ── Tab content ─────────────────────────────────────────── */}
 
-        {/* Cinematic lyrics — expandable, time-synced via global player */}
-        <LyricsPanel track={getLyricsForSong(song.id)} elapsed={elapsedSec} />
+        {tab === 'now' && (
+          <div className="grid gap-3">
+            {/* Action row: Passport + License */}
+            <div className="flex items-stretch gap-2">
+              <button
+                onClick={() => navigate(`/passport/${song.id}`)}
+                className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                style={{
+                  background: 'var(--glass-bg)',
+                  borderColor: 'var(--border)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <Shield size={14} aria-hidden />
+                Song Passport
+              </button>
+              {canRequestLicense ? (
+                <button
+                  onClick={() => navigate('/market')}
+                  className="flex-1 py-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-transform hover:scale-[1.01]"
+                  style={{
+                    background: 'var(--accent)',
+                    color: 'var(--text-inverse)',
+                    boxShadow: '0 8px 24px var(--accent-soft)',
+                  }}
+                >
+                  <FileText size={14} aria-hidden />
+                  Request License
+                </button>
+              ) : (
+                <div
+                  className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2"
+                  style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)', color: 'var(--text-muted)' }}
+                >
+                  {licensingLabel(song.licensing_status)}
+                </div>
+              )}
+            </div>
 
-        {/* Audio intelligence — collapsed by default, never overloads the player */}
-        <SafeListenPanel />
-        <AudioTuningPanel />
-        <SpatialListeningPanel />
+            {/* Audio intelligence — collapsed by default, never overloads the player */}
+            <SafeListenPanel />
+            <AudioTuningPanel />
+            <SpatialListeningPanel />
+          </div>
+        )}
+
+        {tab === 'lyrics' && (
+          lyrics
+            ? <LyricsPanel track={lyrics} elapsed={elapsedSec} variant="tab" />
+            : <EmptyState>No lyrics on record for this asset yet.</EmptyState>
+        )}
+
+        {tab === 'ownership' && <OwnershipPanel song={song} />}
+
+        {tab === 'licensing' && <LicensingPanel song={song} />}
+
+        {tab === 'metadata' && <MetadataContent song={song} />}
       </div>
     </div>
   )
@@ -345,6 +407,17 @@ function Chip({ children, subtle }: { children: React.ReactNode; subtle?: boolea
     >
       {children}
     </span>
+  )
+}
+
+function EmptyState({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-2xl border text-center text-xs py-10 px-6"
+      style={{ background: 'var(--glass-bg)', borderColor: 'var(--border-soft)', color: 'var(--text-muted)' }}
+    >
+      {children}
+    </div>
   )
 }
 
@@ -389,92 +462,67 @@ const Waveform = memo(function Waveform({ progress }: { progress: number }) {
   )
 })
 
-interface CreditsPanelProps {
-  song: Song
-  expanded: boolean
-  onToggle: () => void
-}
-
-function CreditsPanel({ song, expanded, onToggle }: CreditsPanelProps) {
+/**
+ * Metadata tab — Credits · Technical · Royalty Split · Analytics, always open.
+ * (Replaces the legacy collapsible "Credits & Analytics" panel, surfaced as a tab.)
+ */
+function MetadataContent({ song }: { song: Song }) {
   const c = song.credits
   const a = song.analytics
-  const hasContent = !!(c || a)
-  if (!hasContent) return null
+  if (!c && !a && !song.bpm) {
+    return <EmptyState>No metadata on record for this asset yet.</EmptyState>
+  }
 
   return (
     <div
-      className="rounded-2xl border overflow-hidden"
-      style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)' }}
+      className="rounded-2xl border p-4 grid gap-3 text-xs"
+      style={{ background: 'var(--glass-bg)', borderColor: 'var(--border-soft)' }}
     >
-      <button
-        onClick={onToggle}
-        aria-expanded={expanded}
-        className="w-full flex items-center gap-2 px-4 py-3 text-left transition-colors"
-      >
-        <Sparkles size={13} style={{ color: 'var(--accent)' }} aria-hidden />
-        <span className="flex-1 text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
-          Credits & Analytics
-        </span>
-        <ChevronRight
-          size={16}
-          aria-hidden
-          style={{
-            color: 'var(--text-muted)',
-            transform: expanded ? 'rotate(90deg)' : 'none',
-            transition: 'transform 200ms ease',
-          }}
-        />
-      </button>
-
-      {expanded && (
-        <div className="px-4 pb-4 pt-1 grid gap-3 text-xs" style={{ borderTop: '1px solid var(--border-soft)' }}>
-          {c && (
-            <Section title="Credits">
-              {c.composer && <Row label="Composer" value={c.composer} />}
-              {c.producer && <Row label="Producer" value={c.producer} />}
-              {c.arranger && <Row label="Arranger" value={c.arranger} />}
-              {c.engineer && <Row label="Engineer" value={c.engineer} />}
-              {c.instruments && c.instruments.length > 0 && (
-                <Row label="Instruments" value={c.instruments.join(' · ')} />
-              )}
-              {c.copyright_owner && <Row label="© Owner" value={c.copyright_owner} />}
-            </Section>
+      {c && (
+        <Section title="Credits">
+          {c.composer && <Row label="Composer" value={c.composer} />}
+          {c.producer && <Row label="Producer" value={c.producer} />}
+          {c.arranger && <Row label="Arranger" value={c.arranger} />}
+          {c.engineer && <Row label="Engineer" value={c.engineer} />}
+          {c.instruments && c.instruments.length > 0 && (
+            <Row label="Instruments" value={c.instruments.join(' · ')} />
           )}
-
-          {song.bpm && (
-            <Section title="Technical">
-              <Row label="BPM" value={String(song.bpm)} />
-              {song.key && <Row label="Key" value={song.key} />}
-              {song.audio_quality && <Row label="Quality" value={qualityLabel(song.audio_quality)} />}
-              {song.licensing_status && <Row label="Licensing" value={licensingLabel(song.licensing_status)} />}
-            </Section>
-          )}
-
-          {c?.royalty_split && c.royalty_split.length > 0 && (
-            <Section title="Royalty Split">
-              {c.royalty_split.map(split => (
-                <Row key={split.name} label={split.name} value={`${split.percent}%`} />
-              ))}
-            </Section>
-          )}
-
-          {a && (
-            <Section title="Analytics">
-              {a.plays != null && <Row label="Plays" value={a.plays.toLocaleString()} />}
-              {a.emotional_engagement != null && (
-                <Row label="Emotional Engagement" value={`${a.emotional_engagement}%`} />
-              )}
-              {a.avg_listen_time != null && (
-                <Row label="Avg Listen" value={formatDuration(a.avg_listen_time)} />
-              )}
-            </Section>
-          )}
-
-          <p className="text-[10px] mt-1" style={{ color: 'var(--text-muted)' }}>
-            Mock metadata for demo purposes. Verification does not guarantee legal copyright registration.
-          </p>
-        </div>
+          {c.copyright_owner && <Row label="© Owner" value={c.copyright_owner} />}
+        </Section>
       )}
+
+      {song.bpm && (
+        <Section title="Technical">
+          <Row label="BPM" value={String(song.bpm)} />
+          {song.key && <Row label="Key" value={song.key} />}
+          {song.audio_quality && <Row label="Quality" value={qualityLabel(song.audio_quality)} />}
+          {song.licensing_status && <Row label="Licensing" value={licensingLabel(song.licensing_status)} />}
+        </Section>
+      )}
+
+      {c?.royalty_split && c.royalty_split.length > 0 && (
+        <Section title="Royalty Split">
+          {c.royalty_split.map(split => (
+            <Row key={split.name} label={split.name} value={`${split.percent}%`} />
+          ))}
+        </Section>
+      )}
+
+      {a && (
+        <Section title="Analytics">
+          {a.plays != null && <Row label="Plays" value={a.plays.toLocaleString()} />}
+          {a.emotional_engagement != null && (
+            <Row label="Emotional Engagement" value={`${a.emotional_engagement}%`} />
+          )}
+          {a.avg_listen_time != null && (
+            <Row label="Avg Listen" value={formatDuration(a.avg_listen_time)} />
+          )}
+        </Section>
+      )}
+
+      <p className="text-[10px] mt-1" style={{ color: 'var(--text-muted)' }}>
+        Mock metadata for demo purposes. Verification does not guarantee legal copyright registration.
+      </p>
     </div>
   )
 }

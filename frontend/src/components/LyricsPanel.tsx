@@ -7,6 +7,12 @@ interface LyricsPanelProps {
   track: LyricsTrack | null
   /** elapsed seconds from the global player */
   elapsed: number
+  /**
+   * 'panel' (default) — collapsible glass companion inside the Now Playing view.
+   * 'tab' — always-open, borderless, full Apple-Music-style lyrics surface for
+   * the dedicated Lyrics tab.
+   */
+  variant?: 'panel' | 'tab'
 }
 
 /**
@@ -21,8 +27,9 @@ interface LyricsPanelProps {
  *  - Aura sync is *very* subtle: only a local box-shadow softness on the panel
  *    itself, scaled by the active line's `intensity`. No global flashes.
  */
-function LyricsPanelImpl({ track, elapsed }: LyricsPanelProps) {
-  const [open, setOpen] = useState(false)
+function LyricsPanelImpl({ track, elapsed, variant = 'panel' }: LyricsPanelProps) {
+  const isTab = variant === 'tab'
+  const [open, setOpen] = useState(isTab)
   const [showTranslation, setShowTranslation] = useState(false)
   const { activeIndex, activeLine, hasSynced } = useLyricsSync(track, elapsed)
 
@@ -30,49 +37,53 @@ function LyricsPanelImpl({ track, elapsed }: LyricsPanelProps) {
 
   return (
     <div
-      className="rounded-2xl border overflow-hidden mt-3 transition-shadow duration-700"
+      className={`overflow-hidden transition-shadow duration-700 ${isTab ? '' : 'rounded-2xl border mt-3'}`}
       style={{
-        background: 'var(--glass-bg)',
-        borderColor: 'var(--border)',
+        background: isTab ? 'transparent' : 'var(--glass-bg)',
+        borderColor: isTab ? 'transparent' : 'var(--border)',
         // Subtle aura coupling: the panel exhales slightly on emotional peaks.
-        boxShadow: open && activeLine
-          ? `0 ${10 + (activeLine.intensity ?? 0.4) * 14}px ${30 + (activeLine.intensity ?? 0.4) * 30}px -18px var(--aura-glow, var(--shadow))`
-          : '0 4px 18px var(--shadow)',
+        boxShadow: isTab
+          ? 'none'
+          : open && activeLine
+            ? `0 ${10 + (activeLine.intensity ?? 0.4) * 14}px ${30 + (activeLine.intensity ?? 0.4) * 30}px -18px var(--aura-glow, var(--shadow))`
+            : '0 4px 18px var(--shadow)',
       }}
     >
-      <button
-        onClick={() => setOpen(v => !v)}
-        aria-expanded={open}
-        aria-label={open ? 'Close lyrics' : 'Open lyrics'}
-        className="w-full flex items-center gap-2 px-4 py-3 text-left"
-      >
-        <Quote size={13} aria-hidden style={{ color: 'var(--accent)' }} />
-        <span className="flex-1 text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
-          Lyrics
-        </span>
-        {hasSynced && (
-          <span
-            className="text-[9px] uppercase tracking-widest font-bold mr-1"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            Synced
+      {!isTab && (
+        <button
+          onClick={() => setOpen(v => !v)}
+          aria-expanded={open}
+          aria-label={open ? 'Close lyrics' : 'Open lyrics'}
+          className="w-full flex items-center gap-2 px-4 py-3 text-left"
+        >
+          <Quote size={13} aria-hidden style={{ color: 'var(--accent)' }} />
+          <span className="flex-1 text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
+            Lyrics
           </span>
-        )}
-        <ChevronRight
-          size={16}
-          aria-hidden
-          style={{
-            color: 'var(--text-muted)',
-            transform: open ? 'rotate(90deg)' : 'none',
-            transition: 'transform 220ms ease',
-          }}
-        />
-      </button>
+          {hasSynced && (
+            <span
+              className="text-[9px] uppercase tracking-widest font-bold mr-1"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Synced
+            </span>
+          )}
+          <ChevronRight
+            size={16}
+            aria-hidden
+            style={{
+              color: 'var(--text-muted)',
+              transform: open ? 'rotate(90deg)' : 'none',
+              transition: 'transform 220ms ease',
+            }}
+          />
+        </button>
+      )}
 
       {open && (
         <div
-          className="px-5 pb-5 pt-1"
-          style={{ borderTop: '1px solid var(--border-soft)' }}
+          className={isTab ? 'pt-1' : 'px-5 pb-5 pt-1'}
+          style={{ borderTop: isTab ? 'none' : '1px solid var(--border-soft)' }}
         >
           {/* Header strip: tags + translation toggle */}
           <div className="flex items-center justify-between gap-3 mt-3 mb-4">

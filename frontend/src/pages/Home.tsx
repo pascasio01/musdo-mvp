@@ -13,6 +13,7 @@ import {
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge, Button, SectionHeader } from '../components/governance'
 import { ReadinessRing } from '../components/readiness/ReadinessRing'
+import AssetSections from '../components/home/AssetSections'
 import { useAuth } from '../lib/auth'
 import {
   STATUS_META,
@@ -273,6 +274,9 @@ export default function Home() {
               </Button>
             </div>
           </Card>
+
+          {/* ── Music-forward asset rows (Continue Listening · Recent · Favorites · Recommended) ── */}
+          <AssetSections />
 
           {/* ── Works At Risk ── */}
           <div className="mt-8">
