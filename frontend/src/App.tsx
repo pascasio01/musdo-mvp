@@ -79,6 +79,8 @@ const Review      = lazy(() => import('./pages/Review'))
 const Vault          = lazy(() => import('./pages/Vault'))
 const Upload         = lazy(() => import('./pages/Upload'))
 const Profile        = lazy(() => import('./pages/Profile'))
+const ProfessionalProfile = lazy(() => import('./pages/profile/ProfessionalProfile'))
+const EditProfessionalProfile = lazy(() => import('./pages/profile/EditProfessionalProfile'))
 const Dashboard      = lazy(() => import('./pages/Dashboard'))
 const Settings       = lazy(() => import('./pages/Settings'))
 const Appearance     = lazy(() => import('./pages/Appearance'))
@@ -194,6 +196,16 @@ export default function App() {
               <Route path="/profile" element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/edit" element={
+                <ProtectedRoute>
+                  <EditProfessionalProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/:username" element={
+                <ProtectedRoute>
+                  <ProfessionalProfile />
                 </ProtectedRoute>
               } />
               <Route path="/dashboard" element={

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Settings, Music, Shield, TrendingUp, LogOut, Plus } from 'lucide-react'
+import { Settings, Music, Shield, TrendingUp, LogOut, Plus, IdCard } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import MusicCard from '../components/MusicCard'
 import { VerificationStatusCard } from '../components/VerificationBadge'
@@ -69,6 +69,14 @@ export default function Profile() {
             Profile
           </span>
           <div className="flex gap-2">
+            <button
+              onClick={() => navigate('/profile/me')}
+              className="w-9 h-9 rounded-2xl border flex items-center justify-center text-secondary hover:text-primary transition-colors backdrop-blur-md"
+              style={{ background: 'var(--glass-bg-medium)', borderColor: 'var(--border-soft)' }}
+              aria-label="Professional profile"
+            >
+              <IdCard size={16} strokeWidth={1.75} aria-hidden />
+            </button>
             <button
               onClick={() => navigate('/dashboard')}
               className="w-9 h-9 rounded-2xl border flex items-center justify-center text-secondary hover:text-primary transition-colors backdrop-blur-md"

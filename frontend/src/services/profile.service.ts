@@ -88,4 +88,24 @@ export const profileService = {
       return { data: null, error: String(e) }
     }
   },
+
+  async uploadCover(userId: string, file: File): Promise<ServiceResult<string>> {
+    try {
+      const ext = file.name.split('.').pop()
+      // Reuse the existing public `avatars` bucket under a `covers/` prefix to
+      // avoid introducing new storage infrastructure.
+      const path = `covers/${userId}.${ext}`
+
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(path, file, { upsert: true })
+
+      if (uploadError) return { data: null, error: uploadError.message }
+
+      const { data } = supabase.storage.from('avatars').getPublicUrl(path)
+      return { data: data.publicUrl, error: null }
+    } catch (e) {
+      return { data: null, error: String(e) }
+    }
+  },
 }
