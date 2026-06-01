@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import { ArrowLeft, BadgeCheck, Clock, MapPin, Pencil, ShieldCheck } from 'lucide-react'
-import { Badge, Button } from '../governance'
+import { ArrowLeft, BadgeCheck, Clock, Crown, MapPin, Pencil, ShieldCheck } from 'lucide-react'
+import { Badge, Button, Wordmark } from '../governance'
 import type { ProfileVerificationState } from '../../types/profile'
 
 interface ProfileHeaderProProps {
@@ -74,6 +74,49 @@ export default function ProfileHeaderPro({
             background: 'linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.45) 100%)',
           }}
         />
+
+        {/* Brand lockup — fills the otherwise-empty hero when no custom cover */}
+        {!coverImageUrl && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              gap: 8,
+              padding: '0 var(--gv-space-5)',
+              pointerEvents: 'none',
+            }}
+          >
+            <Wordmark size="lg" />
+            <span
+              style={{
+                fontSize: 'var(--gv-text-xs)',
+                fontWeight: 600,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: 'var(--gv-gold)',
+              }}
+            >
+              Music Asset Operating System
+            </span>
+            <span
+              style={{
+                fontSize: '10px',
+                fontWeight: 500,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.62)',
+              }}
+            >
+              Create • Protect • Verify • License • Monetize
+            </span>
+          </div>
+        )}
+
         <div
           style={{
             position: 'absolute',
@@ -117,11 +160,17 @@ export default function ProfileHeaderPro({
               overflow: 'hidden',
             }}
           >
-            {!avatarUrl && (
-              <span style={{ fontSize: 'var(--gv-text-2xl)', fontWeight: 700, color: 'var(--gv-text-muted)' }}>
-                {initials}
-              </span>
-            )}
+            {!avatarUrl &&
+              (isOwner ? (
+                // Founder may use a profile photo OR the MUSVORA brand mark.
+                <div style={{ transform: 'scale(1.45)' }}>
+                  <Wordmark size="lg" showText={false} />
+                </div>
+              ) : (
+                <span style={{ fontSize: 'var(--gv-text-2xl)', fontWeight: 700, color: 'var(--gv-text-muted)' }}>
+                  {initials}
+                </span>
+              ))}
           </div>
         </div>
 
@@ -130,7 +179,9 @@ export default function ProfileHeaderPro({
             <h1 style={{ fontSize: 'var(--gv-text-2xl)', fontWeight: 700, color: 'var(--gv-text)', lineHeight: 1.1 }}>
               {displayName}
             </h1>
-            {verification.state === 'verified' ? (
+            {isOwner ? (
+              <Badge tone="gold" icon={<ShieldCheck size={12} />}>Founder Account</Badge>
+            ) : verification.state === 'verified' ? (
               <Badge tone="success" icon={<BadgeCheck size={12} />}>{verification.label}</Badge>
             ) : (
               <Badge tone="warning" icon={<Clock size={12} />}>{verification.label}</Badge>
@@ -144,7 +195,7 @@ export default function ProfileHeaderPro({
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--gv-space-2)', flexWrap: 'wrap', marginTop: 2 }}>
             <Badge tone="navy" variant="outline">{roleLabel}</Badge>
             {isOwner && (
-              <Badge tone="gold" icon={<ShieldCheck size={12} />}>Founder &amp; Creator</Badge>
+              <Badge tone="gold" icon={<Crown size={12} />}>Platform Owner</Badge>
             )}
           </div>
 
@@ -165,9 +216,31 @@ export default function ProfileHeaderPro({
           </div>
 
           {isOwner && isSelf && (
-            <div style={{ marginTop: 'var(--gv-space-3)' }}>
-              <Button variant="secondary" size="sm" leadingIcon={<ShieldCheck size={14} />} onClick={onFounderConsole}>
-                Founder Console
+            <div
+              style={{
+                marginTop: 'var(--gv-space-4)',
+                padding: 'var(--gv-space-4)',
+                borderRadius: 'var(--gv-radius-lg)',
+                border: '1px solid var(--gv-gold-soft)',
+                background:
+                  'linear-gradient(135deg, var(--gv-gold-soft) 0%, var(--gv-navy-soft) 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 'var(--gv-space-3)',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+                <span style={{ fontSize: 'var(--gv-text-sm)', fontWeight: 700, color: 'var(--gv-text)' }}>
+                  Founder Console
+                </span>
+                <span style={{ fontSize: 'var(--gv-text-xs)', color: 'var(--gv-text-secondary)' }}>
+                  Manage the MUSVORA platform, governance &amp; oversight.
+                </span>
+              </div>
+              <Button variant="gold" leadingIcon={<ShieldCheck size={15} />} onClick={onFounderConsole}>
+                Open Console
               </Button>
             </div>
           )}
