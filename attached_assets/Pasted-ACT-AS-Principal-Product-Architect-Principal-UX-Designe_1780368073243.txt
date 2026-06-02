@@ -1,0 +1,223 @@
+ACT AS:
+
+Principal Product Architect
+
+Principal UX Designer
+
+Principal UI Designer
+
+Principal Frontend Engineer
+
+Principal Backend Engineer
+
+Principal Mobile Engineer
+
+Principal Music Industry Strategist
+
+Principal QA Engineer
+
+Principal Accessibility Specialist
+
+Principal Brand Designer
+
+MISSION:
+
+Perform a complete professional audit of MUSVORA before building anything else.
+
+Do not act as a coder.
+
+Act as a multidisciplinary product team.
+
+AUDIT ALL AREAS
+
+1. BRAND
+
+Audit:
+
+* Logo
+* App Icon
+* Wordmark
+* Visual Identity
+* Color System
+* Typography
+* Recognition
+* Memorability
+* Scalability
+
+Questions:
+
+* Does MUSVORA look like a billion-dollar company?
+* Is the logo unique?
+* Is it memorable?
+* Does it communicate music + ownership + intelligence?
+* Does it work in dark mode and light mode?
+* Does it work as app icon, favicon and social avatar?
+
+If not:
+
+Redesign professionally.
+
+2. UX AUDIT
+
+Audit every screen.
+
+Questions:
+
+* Can a new user understand MUSVORA in 30 seconds?
+* Is navigation obvious?
+* Are there duplicate actions?
+* Is there friction?
+* Are users getting lost?
+* Are important actions reachable within 3 taps?
+
+If not:
+
+Simplify.
+
+3. UI AUDIT
+
+Audit:
+
+* Contrast
+* Readability
+* Spacing
+* Typography
+* Touch targets
+* Mobile usability
+* Dark Mode
+* Light Mode
+
+Goal:
+
+Premium.
+Modern.
+Elegant.
+Human.
+
+4. MUSIC PRODUCT AUDIT
+
+Verify:
+
+Can users:
+
+* Discover music?
+* Search music?
+* Listen to music?
+* Save music?
+* Download music?
+* Find artists?
+* Find albums?
+* Find playlists?
+
+Report every missing feature.
+
+5. MUSVORA AI AUDIT
+
+Verify:
+
+* Is AI integrated naturally?
+* Is AI useful?
+* Is AI reducing complexity?
+* Is AI replacing multiple screens?
+
+AI must simplify.
+
+Never complicate.
+
+6. SEARCH AUDIT
+
+Search is mission critical.
+
+Verify:
+
+* Artist search
+* Song search
+* Album search
+* Playlist search
+* Composer search
+* Producer search
+
+Search must work with real data.
+
+No fake results.
+
+No placeholders.
+
+7. PERFORMANCE AUDIT
+
+Verify:
+
+* Load time
+* Search speed
+* Navigation speed
+* Mobile responsiveness
+* Memory usage
+
+Target:
+
+Fast enough to compete with Spotify.
+
+8. ACCESSIBILITY AUDIT
+
+Verify:
+
+* Text readability
+* Contrast ratios
+* Dark mode
+* Light mode
+* Keyboard navigation
+* Screen reader support
+
+9. QUALITY ASSURANCE
+
+Test every button.
+
+Test every route.
+
+Test every screen.
+
+Test every form.
+
+Identify:
+
+* Broken links
+* Dead buttons
+* Empty states
+* Error states
+* Missing states
+
+10. FINAL REPORT
+
+Produce:
+
+A. Strengths
+
+B. Weaknesses
+
+C. Critical Issues
+
+D. Recommended Fixes
+
+E. Priority Order
+
+F. What is already production ready
+
+G. What must be fixed before launch
+
+IMPORTANT
+
+Do not automatically build.
+
+Audit first.
+
+Think like Apple, Spotify, Stripe and Linear.
+
+Be brutally honest.
+
+No fake praise.
+
+No assumptions.
+
+No placeholder validations.
+
+Only verified findings.
