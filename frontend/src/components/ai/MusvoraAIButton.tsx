@@ -17,7 +17,6 @@ import {
   Play,
 } from 'lucide-react'
 import { GovernanceScope, Badge } from '../governance'
-import GlobalSearch from '../home/GlobalSearch'
 import { usePlayer } from '../../lib/player'
 import { useLibrary } from '../../lib/library'
 import { useToast } from '../../lib/toast'
@@ -49,7 +48,6 @@ export default function MusvoraAIButton() {
   const toast = useToast()
 
   const [open, setOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
   const [view, setView] = useState<'home' | 'mood'>('home')
   const panelRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -136,7 +134,8 @@ export default function MusvoraAIButton() {
 
   const onFindMusic = () => {
     setOpen(false)
-    setSearchOpen(true)
+    setView('home')
+    navigate('/search')
   }
 
   const onMood = (mood: string, label: string) => {
@@ -347,8 +346,6 @@ export default function MusvoraAIButton() {
           </div>
         </GovernanceScope>
       )}
-
-      <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }
