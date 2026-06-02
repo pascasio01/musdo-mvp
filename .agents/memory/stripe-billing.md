@@ -1,5 +1,5 @@
 ---
-name: Stripe billing (Sprint F)
+name: Stripe billing
 description: How real Stripe monetization works in MUSVORA — Option B (Supabase Edge Functions), trial + single-subscription rules, and the security model.
 ---
 

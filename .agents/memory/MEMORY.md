@@ -3,6 +3,7 @@
 - [Professional profile](professional-profile.md) — governance profile at /profile/:username; client-stored profile data with private fields MUST use per-user localStorage key; honest verification/metrics only.
 - [MUSVORA player surfaces](player-surfaces.md) — cinematic /player/:id (legacy tokens, sync mock) vs governance /review/:id (DS, async Vault); don't conflate.
 - [Player transport](player-transport.md) — auto-advance centralized via endRef/handleEnd (real 'ended' + sim share one path); pure nextIndex(); shuffle = continuous, repeat-one replays in handleEnd.
+- [Discovery Engine](discovery-engine.md) — Search idle uses lib/discovery.ts lenses (AI/Emotional/Context) over REAL catalogue; empty lenses hidden, counts/BPM real, no fake tags.
 - [Unified Search V1](unified-search.md) — /search tab + pure engine src/lib/search.ts; index only real data, never fabricate/fake-play; albums Pending; song scoring must include credits.
 - [MUSVORA AI unified panel](musvora-ai.md) — one app-wide AI panel; sessions curated by REAL bpm+mood; catalog is now 6 songs (mockData.ts) ALL with genre+mood+bpm+plays; show real count+BPM, never fabricate.
 - [MUSVORA AI nav destination](nav-ai-destination.md) — AI is a CENTERED FIXED bottom-nav tab (Home·Search·AI·Library·Vault), not a FAB; state in lib/aiPanel context; nav button uses data-ds="governance" (GovernanceScope drops button props); Profile dropped from bar.

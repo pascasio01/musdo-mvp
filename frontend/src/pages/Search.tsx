@@ -12,16 +12,15 @@ import {
   Quote,
   PenLine,
   SlidersHorizontal,
-  Sparkles,
   Star,
   Trash2,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Badge } from '../components/governance'
+import DiscoveryExplorer from '../components/discovery/DiscoveryExplorer'
 import { usePlayer } from '../lib/player'
 import { useLibrary } from '../lib/library'
 import { searchAll, suggest, type SearchResults } from '../lib/search'
-import { availableMoods } from '../lib/musvoraAI'
 import type { Song } from '../types'
 
 const RECENT_KEY = 'musdo-recent-searches'
@@ -46,7 +45,7 @@ export default function Search() {
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
   const { playSong } = usePlayer()
-  const { playlists } = useLibrary()
+  const { playlists, favoriteIds, historySongs } = useLibrary()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [query, setQuery] = useState(params.get('q') ?? '')
@@ -92,8 +91,6 @@ export default function Search() {
 
   // Instant (non-debounced) type-ahead suggestions.
   const suggestions = useMemo(() => suggest(query, { playlists }), [query, playlists])
-
-  const moods = useMemo(() => availableMoods().slice(0, 8), [])
 
   const pushRecent = useCallback((term: string) => {
     const t = term.trim()
@@ -224,27 +221,7 @@ export default function Search() {
                 </section>
               )}
 
-              {moods.length > 0 && (
-                <section>
-                  <div className="flex items-center gap-1.5 px-1 mb-2.5">
-                    <Sparkles size={12} style={{ color: 'var(--gv-gold)' }} aria-hidden />
-                    <p className="gv-eyebrow">Explora por mood</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {moods.map(m => (
-                      <button
-                        key={m.mood}
-                        type="button"
-                        onClick={() => setQuery(m.label)}
-                        className="gv-focusable active:scale-95 transition-transform"
-                        style={{ padding: '7px 14px', borderRadius: 'var(--gv-radius-full, 999px)', background: 'var(--gv-surface)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)', fontSize: 'var(--gv-text-2xs)' }}
-                      >
-                        {m.label}
-                      </button>
-                    ))}
-                  </div>
-                </section>
-              )}
+              <DiscoveryExplorer onPlay={play} favoriteIds={favoriteIds} history={historySongs} />
 
               <section>
                 <p className="gv-eyebrow px-1 mb-2.5">Qué puedes buscar</p>
