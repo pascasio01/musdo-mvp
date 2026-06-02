@@ -36,3 +36,8 @@ externalPort = 80
 [[ports]]
 localPort = 5001
 externalPort = 4200
+
+[deployment]
+deploymentTarget = "static"
+build = ["bash", "-c", "cd frontend && npm install && npm run build"]
+publicDir = "frontend/dist"
