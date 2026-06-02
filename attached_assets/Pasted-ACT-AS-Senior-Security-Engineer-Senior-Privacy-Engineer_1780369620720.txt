@@ -1,0 +1,228 @@
+ACT AS:
+
+Senior Security Engineer
+Senior Privacy Engineer
+Senior Compliance Officer
+App Store Compliance Specialist
+Google Play Compliance Specialist
+Music Rights Compliance Specialist
+
+MISSION
+
+Make MUSVORA fully legal, secure and publishable.
+
+====================================================
+
+LEGAL PAGES
+
+Create and verify:
+
+Privacy Policy
+
+Terms of Service
+
+Subscription Terms
+
+Refund Policy
+
+DMCA Policy
+
+Copyright Policy
+
+Community Guidelines
+
+Content Policy
+
+AI Disclaimer
+
+Security Policy
+
+Account Deletion Policy
+
+Data Export Policy
+
+====================================================
+
+PRIVACY
+
+Disclose:
+
+Account Data
+
+Email
+
+Profile Data
+
+Listening History
+
+Search History
+
+Favorites
+
+Playlists
+
+Vault Files
+
+Uploaded Music
+
+Contracts
+
+Metadata
+
+Subscription Data
+
+Device Data
+
+Diagnostics
+
+Prepare:
+
+Apple App Privacy
+
+Google Data Safety
+
+====================================================
+
+SECURITY
+
+Verify:
+
+HTTPS
+
+Supabase RLS
+
+Secure Authentication
+
+Password Reset
+
+JWT Security
+
+API Protection
+
+Rate Limiting
+
+File Upload Validation
+
+Malware Protection
+
+Private Vault Access
+
+No exposed secrets
+
+No service_role keys in frontend
+
+====================================================
+
+COPYRIGHT
+
+Users may upload only content they own or manage legally.
+
+Create:
+
+DMCA Takedown System
+
+Copyright Report System
+
+Counter Notice System
+
+Dispute Workflow
+
+Repeat Infringer Policy
+
+====================================================
+
+SUBSCRIPTIONS
+
+Plans:
+
+Free
+
+Premium
+
+Creator
+
+Support:
+
+15 Day Trial
+
+Apple In-App Purchase
+
+Google Play Billing
+
+Renewal
+
+Cancellation
+
+Refund Rules
+
+Transparent Pricing
+
+====================================================
+
+ACCOUNT MANAGEMENT
+
+Support:
+
+Delete Account
+
+Export My Data
+
+Request Data Removal
+
+Privacy Requests
+
+====================================================
+
+CONTENT MODERATION
+
+Support reports for:
+
+Copyright
+
+Fraud
+
+Impersonation
+
+Spam
+
+Harassment
+
+Abuse
+
+Fake Ownership Claims
+
+====================================================
+
+APP STORE READINESS
+
+Verify:
+
+Apple Guidelines
+
+Google Play Guidelines
+
+Privacy Compliance
+
+Billing Compliance
+
+Copyright Compliance
+
+User Generated Content Compliance
+
+====================================================
+
+FINAL REPORT
+
+Return:
+
+READY
+
+PARTIAL
+
+BLOCKED
+
+List all blockers before launch.
+
+Do not approve release unless all critical items pass.
+
+MUSVORA must be secure, legal, compliant and production ready.

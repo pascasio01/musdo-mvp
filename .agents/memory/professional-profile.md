@@ -18,6 +18,8 @@ Extended professional fields live in localStorage (no Supabase schema change), u
 - Verification: `computeVerification` returns "Verified Profile" ONLY if `verification_status==='approved'` or a real `verified_*` flag is true; else "Pending Verification". Never fabricated.
 - Role-specific overview metrics render `—` + "Pending" hint when not wired to live data (no fake numbers); only genuinely derivable counts (genres/languages length) show live.
 - Non-self `/profile/:username`: never borrow the viewer's role — show neutral "MUSVORA Member" label + a "public preview" disclaimer until a server-side by-username lookup exists.
+- `/profile/me` is INTENTIONAL: ProfessionalProfile treats `username==='me'` as self (isSelf). Do NOT "fix" it as a broken route.
+- Legacy `/profile` page stats are REAL useLibrary counts (Favorites/Playlists/Played), not creator metrics — there is no real Songs/Streams/Licenses source, so never re-add fabricated numbers there.
 
 ## Uploads
 Avatar reuses `profileService.uploadAvatar` (`avatars` bucket); cover uses `profileService.uploadCover` (same bucket, `covers/` prefix — no new infra). Both fall back to a local data-URL when Supabase storage is offline, so upload works in any environment.

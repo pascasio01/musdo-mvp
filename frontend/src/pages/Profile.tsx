@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import { Settings, Music, Shield, TrendingUp, LogOut, Plus, IdCard } from 'lucide-react'
+import { Settings, Music, TrendingUp, LogOut, Plus, IdCard, Heart, ListMusic } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import MusicCard from '../components/MusicCard'
 import { VerificationStatusCard } from '../components/VerificationBadge'
 import CinematicProfileHeader from '../components/identity/CinematicProfileHeader'
 import EmotionalIdentityCard from '../components/identity/EmotionalIdentityCard'
-import FollowButton from '../components/identity/FollowButton'
 import PlaylistCard from '../components/identity/PlaylistCard'
 import { mockSongs, mockProfile } from '../data/mockData'
 import {
@@ -14,12 +13,14 @@ import {
   mockPlaylists,
 } from '../data/identityMock'
 import { useAuth } from '../lib/auth'
+import { useLibrary } from '../lib/library'
 import { useIdentity, maskResonanceForPrivacy } from '../lib/identity'
 import { humanizeRole } from '../utils/format'
 
 export default function Profile() {
   const navigate = useNavigate()
   const { user, profile: authProfile, signOut } = useAuth()
+  const { favoriteSongs, historySongs, playlists } = useLibrary()
   const { privacy, customization } = useIdentity()
 
   const handleSignOut = async () => {
@@ -54,10 +55,11 @@ export default function Profile() {
   // you'd filter visibility !== 'creator_only' here.
   const visiblePlaylists = mockPlaylists
 
+  // Real, per-user counts from the local library store — never fabricated.
   const stats = [
-    { value: '24', label: 'Songs', icon: Music },
-    { value: '12.4K', label: 'Streams', icon: TrendingUp },
-    { value: '8', label: 'Licenses', icon: Shield },
+    { value: String(favoriteSongs.length), label: 'Favorites', icon: Heart },
+    { value: String(playlists.length), label: 'Playlists', icon: ListMusic },
+    { value: String(historySongs.length), label: 'Played', icon: Music },
   ]
 
   return (
@@ -197,6 +199,7 @@ export default function Profile() {
                 <h2 className="text-primary font-bold text-lg leading-tight">Playlists</h2>
               </div>
               <button
+                onClick={() => navigate('/library')}
                 className="w-9 h-9 rounded-2xl border flex items-center justify-center text-secondary hover:text-primary transition-colors"
                 style={{ background: 'var(--glass-bg)', borderColor: 'var(--border-soft)' }}
                 aria-label="Create playlist"
@@ -219,7 +222,10 @@ export default function Profile() {
           <div>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-primary font-bold text-lg">My Songs</h2>
-              <button className="text-muted text-sm hover:text-primary transition-colors">
+              <button
+                onClick={() => navigate('/vault')}
+                className="text-muted text-sm hover:text-primary transition-colors"
+              >
                 See all
               </button>
             </div>
@@ -228,15 +234,6 @@ export default function Profile() {
                 <MusicCard key={song.id} song={song} variant="compact" />
               ))}
             </div>
-          </div>
-
-          {/* Demo: third-party FollowButton (shows resonance language) */}
-          <div className="rounded-2xl border p-4"
-               style={{ background: 'var(--glass-bg)', borderColor: 'var(--border-soft)' }}>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-muted font-bold mb-3">
-              Preview: how others see your follow button
-            </p>
-            <FollowButton userId="self" resonance={mockResonance} />
           </div>
 
           <button

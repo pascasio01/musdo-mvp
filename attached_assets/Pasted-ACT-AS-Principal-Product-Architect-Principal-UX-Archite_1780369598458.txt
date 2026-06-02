@@ -1,0 +1,311 @@
+ACT AS:
+
+Principal Product Architect
+Principal UX Architect
+Principal UI Designer
+Principal Mobile Engineer
+Principal Backend Engineer
+Principal Streaming Engineer
+Principal AI Architect
+Principal Music Platform Architect
+
+MISSION
+
+Transform MUSVORA into a production-ready Music Operating System.
+
+No demos.
+
+No placeholders.
+
+No fake metrics.
+
+No mock functionality.
+
+Everything must work.
+
+====================================================
+
+CORE PRINCIPLE
+
+One App.
+One Search.
+One AI.
+
+Users should never feel lost.
+
+Maximum:
+
+3 taps for important actions.
+
+====================================================
+
+NAVIGATION
+
+Bottom Navigation:
+
+Home
+
+Search
+
+Library
+
+Vault
+
+Profile
+
+MUSVORA AI must be a floating central action button.
+
+Always visible.
+
+====================================================
+
+HOME
+
+Keep only:
+
+Continue Listening
+
+Discover
+
+Trending
+
+For You
+
+MUSVORA AI Suggestions
+
+Reduce visual noise.
+
+====================================================
+
+SEARCH
+
+Unified Search Engine.
+
+Search:
+
+Songs
+
+Artists
+
+Albums
+
+Playlists
+
+Lyrics
+
+Composers
+
+Producers
+
+Mood
+
+BPM
+
+Language
+
+Country
+
+Human Verified
+
+License Status
+
+Copyright Status
+
+Features:
+
+Live Search
+
+Fuzzy Search
+
+Recent Searches
+
+Suggestions
+
+Target:
+
+Under 100ms.
+
+====================================================
+
+STREAMING
+
+Production-ready audio.
+
+Requirements:
+
+Background Playback
+
+Queue
+
+Crossfade
+
+Gapless Playback
+
+Adaptive Quality
+
+Offline Downloads
+
+Lock Screen Controls
+
+CarPlay
+
+Android Auto
+
+====================================================
+
+MUSVORA AI
+
+Central intelligence layer.
+
+Actions:
+
+Find Music
+
+Surprise Me
+
+Driving
+
+Gym
+
+Sleep
+
+Focus
+
+Study
+
+Restaurant
+
+Hotel
+
+Wedding
+
+Birthday
+
+Business
+
+AI must use real catalog data.
+
+====================================================
+
+MUSIC DNA
+
+Every song receives:
+
+Romance
+
+Passion
+
+Energy
+
+Dance
+
+Focus
+
+Elegance
+
+Nostalgia
+
+Sadness
+
+Intensity
+
+Users can search by feeling.
+
+====================================================
+
+MUSIC TWIN
+
+Build user music profile.
+
+Learn:
+
+Genres
+
+Schedules
+
+Energy
+
+Moods
+
+Artists
+
+Habits
+
+Predict future listening behavior.
+
+====================================================
+
+VAULT
+
+Support:
+
+Lyrics
+
+Demos
+
+Masters
+
+Artwork
+
+Contracts
+
+Publishing Files
+
+Metadata
+
+Copyright Files
+
+Version History
+
+====================================================
+
+PROFILE
+
+Display:
+
+Human Verified
+
+Musical Signature
+
+Dominant Moods
+
+Catalog
+
+Followers
+
+Licenses
+
+Revenue
+
+Song Passports
+
+====================================================
+
+PERFORMANCE
+
+Home:
+<1 second
+
+Search:
+<100ms
+
+Navigation:
+<150ms
+
+Smooth 60fps minimum
+
+====================================================
+
+FINAL GOAL
+
+MUSVORA must feel:
+
+More intuitive than Spotify.
+
+More elegant than Apple Music.
+
+More intelligent than YouTube Music.
+
+MUSVORA
+
+The Music Operating System.
