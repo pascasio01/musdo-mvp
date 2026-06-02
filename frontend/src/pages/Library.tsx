@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Search, Heart, Play, History, Disc3, Users, PenLine,
-  ListMusic, Users2, Download, Plus, Trash2, Clock, ChevronRight,
+  ListMusic, Users2, Download, Plus, Trash2, Clock, ChevronRight, Lock,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge, SectionHeader } from '../components/governance'
@@ -10,6 +10,7 @@ import GlobalSearch from '../components/home/GlobalSearch'
 import { useLibrary } from '../lib/library'
 import { usePlayer } from '../lib/player'
 import { useAuth } from '../lib/auth'
+import { usePermissions } from '../lib/usePermissions'
 import { useOffline, formatBytes } from '../lib/offline'
 import DownloadButton from '../components/DownloadButton'
 import type { Song, AppRole } from '../types'
@@ -139,6 +140,8 @@ export default function Library() {
     isFavorite, toggleFavorite, clearHistory, createPlaylist,
   } = useLibrary()
   const { downloads, storage } = useOffline()
+  const { can: canFeature } = usePermissions()
+  const canPlaylists = canFeature('playlists.premium')
   const downloadCount = downloads.length
   const storageUsage = storage.usage
 
@@ -150,6 +153,7 @@ export default function Library() {
   const onFav = (s: Song) => toggleFavorite(s)
 
   const handleCreate = () => {
+    if (!canPlaylists) { navigate('/pricing'); return }
     const title = newPlaylist.trim()
     if (!title) return
     const id = createPlaylist(title)
@@ -306,34 +310,50 @@ export default function Library() {
           {/* 6 — Playlists personales */}
           <section>
             <SectionHeader eyebrow="Yours" title="Playlists personales" actions={<ListMusic size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
-            <div
-              className="flex items-center gap-2 mb-2.5 px-2"
-              style={{ height: 46, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface)', border: '1px solid var(--gv-border)' }}
-            >
-              <ListMusic size={16} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
-              <input
-                value={newPlaylist}
-                onChange={e => setNewPlaylist(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') handleCreate() }}
-                placeholder="Nueva playlist…"
-                aria-label="Nombre de la nueva playlist"
-                className="flex-1 min-w-0 bg-transparent outline-none"
-                style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}
-              />
+            {canPlaylists ? (
+              <div
+                className="flex items-center gap-2 mb-2.5 px-2"
+                style={{ height: 46, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface)', border: '1px solid var(--gv-border)' }}
+              >
+                <ListMusic size={16} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                <input
+                  value={newPlaylist}
+                  onChange={e => setNewPlaylist(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter') handleCreate() }}
+                  placeholder="Nueva playlist…"
+                  aria-label="Nombre de la nueva playlist"
+                  className="flex-1 min-w-0 bg-transparent outline-none"
+                  style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}
+                />
+                <button
+                  type="button"
+                  onClick={handleCreate}
+                  disabled={!newPlaylist.trim()}
+                  aria-label="Crear playlist"
+                  className="gv-focusable inline-flex items-center gap-1 font-semibold active:scale-95 transition-transform disabled:opacity-40"
+                  style={{
+                    height: 32, padding: '0 12px', borderRadius: 'var(--gv-radius-sm)',
+                    background: 'var(--gv-gold)', color: 'var(--gv-navy)', fontSize: 'var(--gv-text-2xs)',
+                  }}
+                >
+                  <Plus size={14} aria-hidden /> Crear
+                </button>
+              </div>
+            ) : (
               <button
                 type="button"
-                onClick={handleCreate}
-                disabled={!newPlaylist.trim()}
-                aria-label="Crear playlist"
-                className="gv-focusable inline-flex items-center gap-1 font-semibold active:scale-95 transition-transform disabled:opacity-40"
-                style={{
-                  height: 32, padding: '0 12px', borderRadius: 'var(--gv-radius-sm)',
-                  background: 'var(--gv-gold)', color: 'var(--gv-navy)', fontSize: 'var(--gv-text-2xs)',
-                }}
+                onClick={() => navigate('/pricing')}
+                className="gv-focusable w-full flex items-center gap-2.5 mb-2.5 px-3 text-left active:scale-[0.99] transition-transform"
+                style={{ height: 46, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface)', border: '1px solid color-mix(in srgb, var(--gv-gold) 30%, var(--gv-border))' }}
+                aria-label="Crear playlists con Premium"
               >
-                <Plus size={14} aria-hidden /> Crear
+                <span className="grid place-items-center" style={{ width: 24, height: 24, borderRadius: 'var(--gv-radius-sm)', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }} aria-hidden>
+                  <Lock size={13} strokeWidth={2.2} />
+                </span>
+                <span className="flex-1 min-w-0 font-medium" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>Crea playlists con Premium</span>
+                <span className="font-semibold" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-gold)' }}>Ver planes</span>
               </button>
-            </div>
+            )}
             {playlists.length > 0 ? (
               <div className="flex flex-col gap-2">
                 {playlists.map((p: LibraryPlaylist) => (

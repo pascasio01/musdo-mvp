@@ -20,11 +20,14 @@ import {
   Compass,
   Gauge,
   Heart,
+  Lock,
 } from 'lucide-react'
 import { GovernanceScope, Badge } from '../governance'
 import { usePlayer } from '../../lib/player'
 import { useLibrary } from '../../lib/library'
 import { useToast } from '../../lib/toast'
+import { usePermissions } from '../../lib/usePermissions'
+import FeatureLock from '../access/FeatureLock'
 import {
   SESSIONS,
   buildSession,
@@ -54,6 +57,8 @@ export default function MusvoraAIButton() {
   const { song, playSong } = usePlayer()
   const { favoriteIds, historySongs, createPlaylist, addToPlaylist } = useLibrary()
   const toast = useToast()
+  const perms = usePermissions()
+  const canPlaylists = perms.can('playlists.premium')
 
   const [open, setOpen] = useState(false)
   const [view, setView] = useState<'home' | 'mood'>('home')
@@ -144,6 +149,15 @@ export default function MusvoraAIButton() {
     setOpen(false)
     setView('home')
     navigate('/search')
+  }
+
+  const onCreatePlaylist = () => {
+    if (!canPlaylists) {
+      close()
+      navigate('/pricing')
+      return
+    }
+    setView('mood')
   }
 
   const onMood = (mood: string, label: string) => {
@@ -300,11 +314,14 @@ export default function MusvoraAIButton() {
                     <div className="grid grid-cols-3 gap-2.5">
                       <QuickAction icon={<Search size={20} strokeWidth={1.8} />} label="Find Music" onClick={onFindMusic} />
                       <QuickAction icon={<Shuffle size={20} strokeWidth={1.8} />} label="Surprise Me" onClick={onSurprise} accent />
-                      <QuickAction icon={<ListPlus size={20} strokeWidth={1.8} />} label="Crear playlist" onClick={() => setView('mood')} />
+                      <QuickAction icon={<ListPlus size={20} strokeWidth={1.8} />} label="Crear playlist" onClick={onCreatePlaylist} locked={!canPlaylists} />
                     </div>
 
+                    {/* Sessions + Advanced — MUSVORA AI advanced (Premium) */}
+                    <div className="mt-6">
+                    <FeatureLock feature="ai.advanced">
                     {/* Sessions */}
-                    <p className="gv-eyebrow mt-6 mb-3">Sesiones · curadas de tu catálogo</p>
+                    <p className="gv-eyebrow mb-3">Sesiones · curadas de tu catálogo</p>
                     <div className="grid grid-cols-2 gap-2.5">
                       {SESSIONS.map(s => {
                         const meta = sessionMeta[s.id]
@@ -342,7 +359,9 @@ export default function MusvoraAIButton() {
                       <AdvAction icon={<BadgeCheck size={18} strokeWidth={1.9} />} label="Human Verified" sub="Solo verificadas" onClick={onVerified} />
                       <AdvAction icon={<Compass size={18} strokeWidth={1.9} />} label="Descubrir" sub="Nuevo para ti" onClick={onDiscover} />
                       <AdvAction icon={<Gauge size={18} strokeWidth={1.9} />} label="By BPM" sub="Por tempo" onClick={onByBpm} />
-                      <AdvAction icon={<Heart size={18} strokeWidth={1.9} />} label="By Emotion" sub="Por mood real" onClick={() => setView('mood')} />
+                      <AdvAction icon={<Heart size={18} strokeWidth={1.9} />} label="By Emotion" sub="Por mood real" onClick={onCreatePlaylist} />
+                    </div>
+                    </FeatureLock>
                     </div>
 
                     {/* Honestly pending — needs data MUSVORA does not collect yet */}
@@ -401,12 +420,12 @@ export default function MusvoraAIButton() {
   )
 }
 
-function QuickAction({ icon, label, onClick, accent }: { icon: React.ReactNode; label: string; onClick: () => void; accent?: boolean }) {
+function QuickAction({ icon, label, onClick, accent, locked }: { icon: React.ReactNode; label: string; onClick: () => void; accent?: boolean; locked?: boolean }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="gv-focusable flex flex-col items-center justify-center gap-2 active:scale-95 transition-transform"
+      className="gv-focusable relative flex flex-col items-center justify-center gap-2 active:scale-95 transition-transform"
       style={{
         background: accent ? 'color-mix(in srgb, var(--gv-gold) 12%, var(--gv-surface))' : 'var(--gv-surface)',
         border: `1px solid ${accent ? 'color-mix(in srgb, var(--gv-gold) 40%, var(--gv-border))' : 'var(--gv-border)'}`,
@@ -416,6 +435,15 @@ function QuickAction({ icon, label, onClick, accent }: { icon: React.ReactNode; 
         color: accent ? 'var(--gv-gold)' : 'var(--gv-text-secondary)',
       }}
     >
+      {locked && (
+        <span
+          className="absolute grid place-items-center"
+          style={{ top: 6, right: 6, width: 18, height: 18, borderRadius: '999px', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }}
+          aria-label="Requiere Premium"
+        >
+          <Lock size={11} strokeWidth={2.2} aria-hidden />
+        </span>
+      )}
       {icon}
       <span className="font-semibold text-center" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text)' }}>{label}</span>
     </button>

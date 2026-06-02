@@ -11,6 +11,7 @@ import { IdentityProvider } from './lib/identity'
 import { LibraryProvider } from './lib/library'
 import { OfflineProvider } from './lib/offline'
 import ProtectedRoute from './components/ProtectedRoute'
+import RequirePlan from './components/access/RequirePlan'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import AuraConnector from './components/AuraConnector'
 import ToastContainer from './components/ToastContainer'
@@ -175,7 +176,13 @@ export default function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/library" element={<Library />} />
               <Route path="/library/playlist/:id" element={<PlaylistDetail />} />
-              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/downloads" element={
+                <ProtectedRoute>
+                  <RequirePlan feature="offline">
+                    <Downloads />
+                  </RequirePlan>
+                </ProtectedRoute>
+              } />
               <Route path="/music-director" element={<MusicDirector />} />
               <Route path="/dj" element={<Navigate to="/music-director" replace />} />
               <Route path="/search" element={<Search />} />
@@ -200,12 +207,16 @@ export default function App() {
               {/* ── Auth-Required ── */}
               <Route path="/vault" element={
                 <ProtectedRoute>
-                  <Vault />
+                  <RequirePlan feature="creator.vault">
+                    <Vault />
+                  </RequirePlan>
                 </ProtectedRoute>
               } />
               <Route path="/upload" element={
                 <ProtectedRoute>
-                  <Upload />
+                  <RequirePlan feature="creator.upload">
+                    <Upload />
+                  </RequirePlan>
                 </ProtectedRoute>
               } />
               <Route path="/profile" element={
@@ -225,7 +236,9 @@ export default function App() {
               } />
               <Route path="/dashboard" element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <RequirePlan feature="creator.dashboard">
+                    <Dashboard />
+                  </RequirePlan>
                 </ProtectedRoute>
               } />
               <Route path="/settings" element={

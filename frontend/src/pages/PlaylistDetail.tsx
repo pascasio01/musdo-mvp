@@ -2,13 +2,14 @@ import { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowLeft, Play, Heart, Trash2, Plus, Check, PenLine, ListMusic, Search as SearchIcon, X,
-  Download, CheckCircle2,
+  Download, CheckCircle2, Lock,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge } from '../components/governance'
 import { useLibrary } from '../lib/library'
 import { usePlayer } from '../lib/player'
 import { useOffline } from '../lib/offline'
+import { usePermissions } from '../lib/usePermissions'
 import DownloadButton from '../components/DownloadButton'
 import { mockSongs } from '../data/mockData'
 import type { Song } from '../types'
@@ -26,6 +27,8 @@ export default function PlaylistDetail() {
     renamePlaylist, deletePlaylist, addToPlaylist, removeFromPlaylist,
   } = useLibrary()
   const { downloadMany, statusFor } = useOffline()
+  const { can: canFeature } = usePermissions()
+  const canOffline = canFeature('offline')
 
   const playlist = getPlaylist(id)
   const [renaming, setRenaming] = useState(false)
@@ -186,13 +189,13 @@ export default function PlaylistDetail() {
               return (
                 <button
                   type="button"
-                  onClick={() => downloadMany(dl)}
-                  disabled={dl.length === 0 || allOffline}
-                  aria-label={allOffline ? 'Playlist disponible offline' : 'Descargar playlist para offline'}
+                  onClick={() => canOffline ? downloadMany(dl) : navigate('/pricing')}
+                  disabled={canOffline && (dl.length === 0 || allOffline)}
+                  aria-label={!canOffline ? 'Descargas offline — disponible en Premium' : allOffline ? 'Playlist disponible offline' : 'Descargar playlist para offline'}
                   className="gv-focusable inline-flex items-center gap-1.5 font-semibold active:scale-[0.99] transition-transform disabled:opacity-40"
-                  style={{ height: 44, padding: '0 16px', borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: allOffline ? 'var(--gv-success)' : 'var(--gv-text)', fontSize: 'var(--gv-text-sm)' }}
+                  style={{ height: 44, padding: '0 16px', borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: `1px solid ${!canOffline ? 'color-mix(in srgb, var(--gv-gold) 30%, var(--gv-border))' : 'var(--gv-border)'}`, color: !canOffline ? 'var(--gv-gold)' : allOffline ? 'var(--gv-success)' : 'var(--gv-text)', fontSize: 'var(--gv-text-sm)' }}
                 >
-                  {allOffline ? <CheckCircle2 size={15} aria-hidden /> : <Download size={15} aria-hidden />} {allOffline ? 'Offline' : 'Descargar'}
+                  {!canOffline ? <Lock size={15} aria-hidden /> : allOffline ? <CheckCircle2 size={15} aria-hidden /> : <Download size={15} aria-hidden />} {!canOffline ? 'Premium' : allOffline ? 'Offline' : 'Descargar'}
                 </button>
               )
             })()}
