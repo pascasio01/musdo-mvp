@@ -1,0 +1,417 @@
+MUSVORA OS 2026 — NEXT GENERATION MUSIC OPERATING SYSTEM
+
+MISSION
+
+Transform MUSVORA from a music application into a complete Music Operating System powered by AI.
+
+Do not build another Spotify.
+
+Do not build another Apple Music.
+
+Do not build another DJ app.
+
+Build a new category.
+
+━━━━━━━━━━━━━━━━━━━━
+
+CORE NAVIGATION
+
+Home
+
+Search
+
+MUSVORA AI
+
+Library
+
+Vault
+
+Requirements:
+
+* MUSVORA AI centered in navigation.
+* Reserved layout space.
+* Never floating.
+* Never overlaps content.
+* Safe area compatible.
+* Dynamic Island compatible.
+* Android compatible.
+* Soft breathing animation.
+* Premium glass effect.
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA AI CORE
+
+The AI is not a feature.
+
+The AI is the operating system.
+
+Capabilities:
+
+* Discover music
+* Recommend tracks
+* Recommend playlists
+* Recommend artists
+* Detect listening patterns
+* Detect emotional states
+* Suggest moods
+* Suggest next songs
+* DJ assistant
+* Creator assistant
+
+Quick actions:
+
+Surprise Me
+
+I Need Energy
+
+I Feel Sad
+
+Focus Mode
+
+Discover Something New
+
+Road Trip
+
+Midnight Drive
+
+Romantic Night
+
+━━━━━━━━━━━━━━━━━━━━
+
+DISCOVERY ENGINE
+
+Replace generic categories:
+
+Pop
+Country
+Latin
+Hip-Hop
+
+With:
+
+Emotional Discovery
+
+Late Night Drives
+
+Heartbreak
+
+Focus
+
+Gym Energy
+
+Sunday Morning
+
+Midnight Bachata
+
+Romantic
+
+Nostalgia
+
+Road Trip
+
+Healing
+
+Motivation
+
+━━━━━━━━━━━━━━━━━━━━
+
+CONTEXTUAL DISCOVERY
+
+Working
+
+Driving
+
+Cooking
+
+Studying
+
+Cleaning
+
+Traveling
+
+Sleeping
+
+Relaxing
+
+━━━━━━━━━━━━━━━━━━━━
+
+SMART AI DISCOVERY
+
+For You Today
+
+Your Next Obsession
+
+Based On Your Week
+
+Music You Might Need
+
+Songs To Improve Your Mood
+
+What You Would Listen To In Another Life
+
+━━━━━━━━━━━━━━━━━━━━
+
+DARK LUXURY GLASS
+
+Background Layers
+
+#07090C
+
+#0B0D12
+
+#10141B
+
+No flat backgrounds.
+
+No visible boxes.
+
+No cheap gradients.
+
+Glass:
+
+backdrop-filter: blur(24px);
+
+background:
+rgba(18,18,18,.65);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.35);
+
+━━━━━━━━━━━━━━━━━━━━
+
+LIVE BACKGROUND
+
+Very subtle.
+
+Maximum intensity:
+
+3%
+
+Use:
+
+* slow particles
+* ambient blur
+* dark gradients
+* atmospheric movement
+
+Never distracting.
+
+━━━━━━━━━━━━━━━━━━━━
+
+PLAYER 2.0
+
+Premium floating glass player.
+
+Features:
+
+* Dynamic waveform
+* Real-time visualizer
+* Smart queue
+* AI recommendations
+* Lyrics sync
+* Multi-language lyrics
+* Audio quality selector
+* Spatial audio ready
+
+Player feels like hardware.
+
+Not a webpage.
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA DJ AI
+
+Waveform-first interface.
+
+Not platter-first.
+
+Features:
+
+* AI Mix Assistant
+* BPM analysis
+* Key analysis
+* Energy analysis
+* Smart Transition Engine
+* Vocal Separation
+* Instrumental Extraction
+* Acapella Mode
+* Karaoke Mode
+
+Mix Styles:
+
+Smooth Blend
+
+Festival Drop
+
+Radio Mix
+
+Bachata Blend
+
+Salsa Blend
+
+House Blend
+
+━━━━━━━━━━━━━━━━━━━━
+
+BACHATA ENGINE
+
+Exclusive MUSVORA feature.
+
+Optimized for:
+
+* Bachata
+* Salsa
+* Merengue
+
+Detect:
+
+* Requinto
+* Bongó
+* Güira
+* Vocal phrasing
+
+Generate natural transitions.
+
+━━━━━━━━━━━━━━━━━━━━
+
+CREATOR STUDIO
+
+Professional creator environment.
+
+Tools:
+
+Lyrics
+
+Publishing
+
+Licensing
+
+Metadata
+
+Cover Art
+
+Stems
+
+Pitch
+
+BPM
+
+Distribution
+
+Analytics
+
+Copyright Tracking
+
+BMI Support
+
+Royalty Dashboard
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSICAL DNA
+
+Create user identity profile.
+
+Example:
+
+82% Bachata
+
+10% Salsa
+
+5% Bolero
+
+3% Other
+
+Track evolution over time.
+
+━━━━━━━━━━━━━━━━━━━━
+
+ACTIVITY CENTER
+
+Replace empty notifications.
+
+Display:
+
+New Releases
+
+Followers
+
+Playlist Activity
+
+Artist Activity
+
+Nearby Events
+
+AI Recommendations
+
+Listening Insights
+
+Never show an empty screen.
+
+━━━━━━━━━━━━━━━━━━━━
+
+MONETIZATION
+
+Free
+
+Premium
+
+Creator Pro
+
+15-day free trial.
+
+Stripe Checkout.
+
+Stripe Customer Portal.
+
+Subscription restore.
+
+Membership status synced with Supabase.
+
+━━━━━━━━━━━━━━━━━━━━
+
+PERFORMANCE
+
+Target:
+
+60–120 FPS
+
+No heavy animations.
+
+No lag.
+
+No content overlap.
+
+No UI clutter.
+
+Production-ready only.
+
+No placeholders.
+
+No demo code.
+
+━━━━━━━━━━━━━━━━━━━━
+
+FINAL GOAL
+
+The user should feel:
+
+“This is not a music app.”
+
+“This is my personal music operating system.”
+
+Target:
+
+Apple polish.
+
+Spotify usability.
+
+Creator power.
+
+AI intelligence.
+
+Unique MUSVORA identity.
