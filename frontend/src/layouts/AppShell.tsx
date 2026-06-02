@@ -1,7 +1,8 @@
 import { ReactNode } from 'react'
 import BottomNav from '../components/BottomNav'
 import PlayerBar from '../components/PlayerBar'
-import MusvoraAIButton from '../components/ai/MusvoraAIButton'
+import MusvoraAIPanel from '../components/ai/MusvoraAIPanel'
+import { AIPanelProvider } from '../lib/aiPanel'
 import { usePlayer } from '../lib/player'
 import { useMusicAura } from '../lib/aura'
 import { useTheme } from '../lib/theme'
@@ -16,6 +17,7 @@ export default function AppShell({ children }: AppShellProps) {
   const { settings } = useTheme()
 
   return (
+    <AIPanelProvider>
     <div
       className="min-h-screen relative overflow-hidden"
       style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
@@ -69,9 +71,10 @@ export default function AppShell({ children }: AppShellProps) {
         {children}
       </main>
 
-      <MusvoraAIButton />
+      <MusvoraAIPanel />
       <PlayerBar />
       <BottomNav />
     </div>
+    </AIPanelProvider>
   )
 }

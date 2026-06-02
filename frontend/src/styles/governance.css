@@ -239,20 +239,21 @@ html[data-color-scheme='light'] [data-ds='governance'] {
   --gv-shadow-lg: 0 24px 48px -20px rgba(15, 23, 42, 0.22);
 }
 
-/* ── MUSVORA AI floating action button — soft breathing gold glow ── */
-@keyframes gvAiFabGlow {
-  0%, 100% {
-    box-shadow: 0 8px 26px color-mix(in srgb, var(--gv-gold) 26%, transparent),
-                0 2px 10px rgba(0, 0, 0, 0.45);
-  }
-  50% {
-    box-shadow: 0 12px 42px color-mix(in srgb, var(--gv-gold) 52%, transparent),
-                0 2px 10px rgba(0, 0, 0, 0.45);
-  }
+/* ── MUSVORA AI nav tab — soft breathing scale + internal light pulse ──
+   The centered AI destination breathes gently and pulses an inner gold glow.
+   Disabled under reduced-motion (media query + the app's .reduce-motion body). */
+@keyframes gvAiBreathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
 }
-.gv-ai-fab {
-  animation: gvAiFabGlow 3.4s ease-in-out infinite;
+@keyframes gvAiPulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.92); }
+  50%      { opacity: 0.7;  transform: scale(1.1); }
 }
+.gv-ai-nav       { animation: gvAiBreathe 3.8s ease-in-out infinite; }
+.gv-ai-nav-pulse { animation: gvAiPulse 3.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .gv-ai-fab { animation: none; }
+  .gv-ai-nav, .gv-ai-nav-pulse { animation: none; }
 }
+.reduce-motion .gv-ai-nav,
+.reduce-motion .gv-ai-nav-pulse { animation: none; }
