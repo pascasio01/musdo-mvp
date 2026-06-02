@@ -3,32 +3,26 @@ import { useNavigate } from 'react-router-dom'
 import {
   Bell,
   Search,
-  ShieldCheck,
-  AlertTriangle,
-  Sparkles,
+  Play,
+  Radio,
+  Library as LibraryIcon,
+  ChevronRight,
   ArrowRight,
-  ArrowUpRight,
-  ScanLine,
-  TrendingUp,
-  Layers,
+  Compass,
+  ShieldCheck,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge, Button, SectionHeader } from '../components/governance'
 import { ReadinessRing } from '../components/readiness/ReadinessRing'
-import AssetSections from '../components/home/AssetSections'
 import GlobalSearch from '../components/home/GlobalSearch'
 import { useAuth } from '../lib/auth'
-import {
-  STATUS_META,
-  scoreStatus,
-} from '../data/readiness'
-import {
-  ASSET_INTELLIGENCE,
-  ASSETS_AT_RISK,
-  REVENUE_OPPORTUNITIES,
-  NEXT_BEST_ACTION,
-  type RevenueOpportunity,
-} from '../data/dashboard'
+import { useLibrary } from '../lib/library'
+import { usePlayer } from '../lib/player'
+import { mockSongs } from '../data/mockData'
+import type { Song } from '../types'
+import { STATUS_META, scoreStatus } from '../data/readiness'
+import { ASSET_INTELLIGENCE } from '../data/dashboard'
+import { readinessScore } from '../data/assetIntelligence'
 
 function greeting() {
   const h = new Date().getHours()
@@ -38,62 +32,119 @@ function greeting() {
   return 'Late-night session'
 }
 
-const POTENTIAL_TONE: Record<RevenueOpportunity['potential'], 'gold' | 'navy' | 'neutral'> = {
-  high: 'gold',
-  medium: 'navy',
-  low: 'neutral',
-}
-
-const POTENTIAL_LABEL: Record<RevenueOpportunity['potential'], string> = {
-  high: 'High potential',
-  medium: 'Medium',
-  low: 'Low',
-}
-
-/** A compact Bloomberg-style metric cell with its own emphasis tone. */
-function MetricCell({
-  label,
-  value,
-  hint,
-  icon,
-  tone = 'neutral',
-}: {
-  label: string
-  value: string
-  hint?: string
-  icon: React.ReactNode
-  tone?: 'neutral' | 'success' | 'warning' | 'danger' | 'gold'
-}) {
-  const color = {
-    neutral: 'var(--gv-text)',
-    success: 'var(--gv-success)',
-    warning: 'var(--gv-warning)',
-    danger: 'var(--gv-danger)',
-    gold: 'var(--gv-gold)',
-  }[tone]
-
+/** A square artwork tile used in the horizontal listening rows. */
+function ArtworkTile({ song, onPlay }: { song: Song; onPlay: (s: Song) => void }) {
   return (
-    <div
-      style={{
-        background: 'var(--gv-surface)',
-        border: '1px solid var(--gv-border)',
-        borderRadius: 'var(--gv-radius-lg)',
-        padding: 'var(--gv-space-4)',
-      }}
+    <button
+      type="button"
+      onClick={() => onPlay(song)}
+      className="group flex-shrink-0 text-left active:opacity-80 transition-opacity"
+      style={{ width: 144 }}
     >
-      <div className="flex items-center gap-1.5 mb-2.5" style={{ color: 'var(--gv-text-muted)' }}>
-        {icon}
-        <span className="gv-eyebrow">{label}</span>
-      </div>
-      <div className="flex items-baseline gap-1.5">
-        <span className="gv-mono font-bold leading-none" style={{ fontSize: 'var(--gv-text-2xl)', color }}>
-          {value}
+      <div
+        className="relative w-full overflow-hidden mb-2"
+        style={{
+          aspectRatio: '1 / 1',
+          borderRadius: 'var(--gv-radius-lg)',
+          background: 'var(--gv-surface-2)',
+          border: '1px solid var(--gv-border)',
+        }}
+      >
+        {song.artwork_url && <img src={song.artwork_url} alt="" className="w-full h-full object-cover" />}
+        <span
+          className="absolute bottom-2 right-2 grid place-items-center rounded-full"
+          style={{ width: 32, height: 32, background: 'var(--gv-gold)', color: 'var(--gv-navy)', boxShadow: 'var(--gv-shadow-md)' }}
+          aria-hidden
+        >
+          <Play size={15} fill="currentColor" style={{ marginLeft: 1 }} />
         </span>
-        {hint && (
-          <span style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>{hint}</span>
-        )}
       </div>
+      <p className="font-semibold truncate" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+        {song.title}
+      </p>
+      <p className="truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+        {song.artist_name}
+      </p>
+    </button>
+  )
+}
+
+function HRow({ songs, onPlay }: { songs: Song[]; onPlay: (s: Song) => void }) {
+  return (
+    <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-1">
+      {songs.map(song => (
+        <ArtworkTile key={song.id} song={song} onPlay={onPlay} />
+      ))}
     </div>
+  )
+}
+
+/** A large, single-tap navigation card — one of the Home primary areas. */
+function AreaCard({
+  icon,
+  eyebrow,
+  title,
+  description,
+  meta,
+  accent,
+  onClick,
+}: {
+  icon: React.ReactNode
+  eyebrow: string
+  title: string
+  description: string
+  meta?: React.ReactNode
+  accent?: 'gold' | 'navy'
+  onClick: () => void
+}) {
+  const ring =
+    accent === 'gold'
+      ? 'var(--gv-gold)'
+      : accent === 'navy'
+      ? 'var(--gv-text-link)'
+      : 'var(--gv-text-secondary)'
+  return (
+    <Card padding="none" accent={accent}>
+      <button
+        type="button"
+        onClick={onClick}
+        className="w-full flex items-center gap-4 text-left active:opacity-70 transition-opacity"
+        style={{ padding: 'var(--gv-space-5)' }}
+      >
+        <span
+          className="grid place-items-center flex-shrink-0"
+          style={{
+            width: 46,
+            height: 46,
+            borderRadius: 'var(--gv-radius-md)',
+            background: 'var(--gv-surface-2)',
+            border: '1px solid var(--gv-border)',
+            color: ring,
+          }}
+          aria-hidden
+        >
+          {icon}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="gv-eyebrow mb-0.5">{eyebrow}</p>
+          <h3 className="font-semibold truncate" style={{ fontSize: 'var(--gv-text-base)', color: 'var(--gv-text)' }}>
+            {title}
+          </h3>
+          <p
+            className="mt-0.5"
+            style={{
+              fontSize: 'var(--gv-text-xs)',
+              color: 'var(--gv-text-secondary)',
+              lineHeight: 'var(--gv-leading-normal)',
+            }}
+          >
+            {description}
+          </p>
+          {meta && <div className="mt-2">{meta}</div>}
+        </div>
+        <ChevronRight size={18} strokeWidth={2} style={{ color: 'var(--gv-text-muted)', flexShrink: 0 }} aria-hidden />
+      </button>
+    </Card>
   )
 }
 
@@ -101,8 +152,22 @@ export default function Home() {
   const navigate = useNavigate()
   const [searchOpen, setSearchOpen] = useState(false)
   const { profile } = useAuth()
+  const { playSong } = usePlayer()
+  const { historySongs, favoriteSongs, playlists } = useLibrary()
   const displayName = profile?.username ?? 'Emmanuel'
 
+  const onPlay = (song: Song) => {
+    playSong(song, mockSongs)
+    navigate(`/player/${song.id}`)
+  }
+
+  // Continue Listening — real, per-user play history (honest empty state below).
+  const continueListening = historySongs.slice(0, 8)
+
+  // Discover — browsable catalogue, surfaced by readiness (highest first).
+  const discover = [...mockSongs].sort((a, b) => readinessScore(b) - readinessScore(a)).slice(0, 8)
+
+  // My Music — catalogue health, consolidated. Full detail lives at /readiness.
   const ai = ASSET_INTELLIGENCE
   const readinessStatus = scoreStatus(ai.readinessScore)
   const readinessMeta = STATUS_META[readinessStatus]
@@ -110,7 +175,7 @@ export default function Home() {
   return (
     <AppShell>
       <GovernanceScope className="min-h-screen">
-        {/* ── Sticky header ── */}
+        {/* ── Sticky header — search always visible ── */}
         <header
           className="sticky top-0 z-30 safe-top"
           style={{
@@ -122,7 +187,7 @@ export default function Home() {
         >
           <div className="flex items-center justify-between gap-3 px-5" style={{ height: 64 }}>
             <div className="min-w-0">
-              <p className="gv-eyebrow">MUSVORA · Asset Intelligence</p>
+              <p className="gv-eyebrow">MUSVORA</p>
               <h1
                 className="font-bold leading-none truncate"
                 style={{
@@ -135,51 +200,51 @@ export default function Home() {
               </h1>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
-            <button
-              type="button"
-              aria-label="Search music, artists and assets"
-              aria-expanded={searchOpen}
-              onClick={() => setSearchOpen(true)}
-              className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 'var(--gv-radius-md)',
-                background: 'var(--gv-surface-2)',
-                border: '1px solid var(--gv-border)',
-                color: 'var(--gv-text-secondary)',
-              }}
-            >
-              <Search size={18} strokeWidth={1.8} aria-hidden />
-            </button>
-            <button
-              type="button"
-              aria-label="Notifications"
-              className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 'var(--gv-radius-md)',
-                background: 'var(--gv-surface-2)',
-                border: '1px solid var(--gv-border)',
-                color: 'var(--gv-text-secondary)',
-                position: 'relative',
-              }}
-            >
-              <Bell size={18} strokeWidth={1.8} aria-hidden />
-              <span
-                aria-hidden
+              <button
+                type="button"
+                aria-label="Search music, artists and assets"
+                aria-expanded={searchOpen}
+                onClick={() => setSearchOpen(true)}
+                className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
                 style={{
-                  position: 'absolute',
-                  top: 9,
-                  right: 9,
-                  width: 6,
-                  height: 6,
-                  borderRadius: '50%',
-                  background: 'var(--gv-gold)',
+                  width: 40,
+                  height: 40,
+                  borderRadius: 'var(--gv-radius-md)',
+                  background: 'var(--gv-surface-2)',
+                  border: '1px solid var(--gv-border)',
+                  color: 'var(--gv-text-secondary)',
                 }}
-              />
-            </button>
+              >
+                <Search size={18} strokeWidth={1.8} aria-hidden />
+              </button>
+              <button
+                type="button"
+                aria-label="Notifications"
+                className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 'var(--gv-radius-md)',
+                  background: 'var(--gv-surface-2)',
+                  border: '1px solid var(--gv-border)',
+                  color: 'var(--gv-text-secondary)',
+                  position: 'relative',
+                }}
+              >
+                <Bell size={18} strokeWidth={1.8} aria-hidden />
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    top: 9,
+                    right: 9,
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    background: 'var(--gv-gold)',
+                  }}
+                />
+              </button>
             </div>
           </div>
         </header>
@@ -187,127 +252,85 @@ export default function Home() {
         <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
         <div className="px-5 pt-6">
-          {/* ── Hero: Overall Readiness Score ── */}
-          <Card padding="lg" accent={readinessMeta.tone === 'danger' ? 'danger' : readinessMeta.tone === 'warning' ? 'warning' : 'success'}>
-            <div className="flex items-center gap-5">
-              <ReadinessRing
-                value={ai.readinessScore}
-                color={readinessMeta.color}
-                size={104}
-                ariaLabel={`Overall readiness score ${ai.readinessScore} out of 100 — ${readinessMeta.label}`}
-              >
-                <span
-                  className="gv-mono font-extrabold leading-none"
-                  style={{ fontSize: 'var(--gv-text-2xl)', color: 'var(--gv-text)' }}
-                >
-                  {ai.readinessScore}
-                </span>
-                <span className="gv-eyebrow mt-0.5">/ 100</span>
-              </ReadinessRing>
-              <div className="min-w-0 flex-1">
-                <p className="gv-eyebrow mb-1.5">Overall Readiness Score</p>
-                <div className="mb-2">
-                  <Badge tone={readinessMeta.tone} variant="outline">
-                    {readinessMeta.label}
-                  </Badge>
-                </div>
-                <p
-                  style={{
-                    fontSize: 'var(--gv-text-sm)',
-                    color: 'var(--gv-text-secondary)',
-                    lineHeight: 'var(--gv-leading-normal)',
-                  }}
-                >
-                  Across {ai.catalogAssets} assets. Copyright gaps are the main drag on monetization.
+          {/* ── 1 · Continue Listening ── */}
+          <section>
+            <SectionHeader eyebrow="Resume" title="Continue Listening" />
+            {continueListening.length > 0 ? (
+              <HRow songs={continueListening} onPlay={onPlay} />
+            ) : (
+              <Card padding="lg">
+                <p style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)', lineHeight: 'var(--gv-leading-normal)' }}>
+                  Aún no has reproducido nada. Tu música reciente aparecerá aquí.
                 </p>
-              </div>
-            </div>
-          </Card>
+                <div className="mt-4">
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    onClick={() => discover[0] && onPlay(discover[0])}
+                    leadingIcon={<Play size={15} fill="currentColor" />}
+                  >
+                    Empezar a escuchar
+                  </Button>
+                </div>
+              </Card>
+            )}
+          </section>
 
-          {/* ── Metric grid ── */}
-          <div className="grid grid-cols-2 gap-2.5 mt-3">
-            <MetricCell
-              label="Ownership Confidence"
-              value={`${ai.ownershipConfidence}%`}
-              hint="verified"
-              tone="neutral"
-              icon={<ShieldCheck size={13} strokeWidth={2} />}
-            />
-            <MetricCell
-              label="Works At Risk"
-              value={String(ai.worksAtRisk)}
-              hint="need action"
-              tone="danger"
-              icon={<AlertTriangle size={13} strokeWidth={2} />}
-            />
-            <MetricCell
-              label="Revenue Opportunities"
-              value={String(ai.revenueOpportunities)}
-              hint="potential"
-              tone="gold"
-              icon={<TrendingUp size={13} strokeWidth={2} />}
-            />
-            <MetricCell
-              label="Catalogue Assets"
-              value={String(ai.catalogAssets)}
-              hint="in vault"
-              tone="neutral"
-              icon={<Layers size={13} strokeWidth={2} />}
-            />
-          </div>
-
-          {/* ── Next Best Action ── */}
-          <Card padding="md" accent="navy" className="mt-3">
-            <div className="flex items-center gap-2 mb-2" style={{ color: 'var(--gv-text-link)' }}>
-              <Sparkles size={14} strokeWidth={2.2} />
-              <span className="gv-eyebrow" style={{ color: 'var(--gv-text-link)' }}>Next Best Action</span>
-            </div>
-            <h3
-              className="font-semibold"
-              style={{ fontSize: 'var(--gv-text-base)', color: 'var(--gv-text)' }}
-            >
-              {NEXT_BEST_ACTION.title}
-            </h3>
-            <p
-              className="mt-1.5"
-              style={{
-                fontSize: 'var(--gv-text-sm)',
-                color: 'var(--gv-text-secondary)',
-                lineHeight: 'var(--gv-leading-normal)',
-              }}
-            >
-              {NEXT_BEST_ACTION.description}
-            </p>
-            <div className="grid grid-cols-2 gap-2.5 mt-4">
-              <Button
-                variant="primary"
-                size="md"
-                block
-                onClick={() => navigate(NEXT_BEST_ACTION.primary.to)}
-                trailingIcon={<ArrowRight size={15} strokeWidth={2.4} />}
-              >
-                {NEXT_BEST_ACTION.primary.label}
-              </Button>
-              <Button
-                variant="secondary"
-                size="md"
-                block
-                onClick={() => navigate(NEXT_BEST_ACTION.secondary.to)}
-                leadingIcon={<ScanLine size={15} strokeWidth={2.4} />}
-              >
-                {NEXT_BEST_ACTION.secondary.label}
-              </Button>
-            </div>
-          </Card>
-
-          {/* ── Music-forward asset rows (Continue Listening · Recent · Favorites · Recommended) ── */}
-          <AssetSections />
-
-          {/* ── Works At Risk ── */}
-          <div className="mt-8">
+          {/* ── 2 · Discover ── */}
+          <section className="mt-8">
             <SectionHeader
-              eyebrow="Protect"
-              title="Works At Risk"
+              eyebrow="For you"
+              title="Discover"
+              description="Catálogo de muestra de MUSVORA, ordenado por preparación."
+              actions={
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(true)}
+                  className="gv-focusable inline-flex items-center gap-1 font-semibold active:scale-95 transition-transform"
+                  style={{ fontSize: 'var(--gv-text-xs)', color: 'var(--gv-text-link)' }}
+                >
+                  Buscar <Search size={13} strokeWidth={2.4} />
+                </button>
+              }
+            />
+            <HRow songs={discover} onPlay={onPlay} />
+          </section>
+
+          {/* ── 3 · AI Music Director ── */}
+          <section className="mt-8">
+            <AreaCard
+              accent="gold"
+              icon={<Radio size={20} strokeWidth={1.9} />}
+              eyebrow="Intelligence"
+              title="AI Music Director"
+              description="Deja que MUSVORA construya el momento — eventos, estados de ánimo y radios."
+              onClick={() => navigate('/dj')}
+            />
+          </section>
+
+          {/* ── 4 · Library ── */}
+          <section className="mt-3">
+            <AreaCard
+              accent="navy"
+              icon={<LibraryIcon size={20} strokeWidth={1.9} />}
+              eyebrow="Saved"
+              title="Tu biblioteca"
+              description="Favoritos, historial y tus playlists, en un solo lugar."
+              meta={
+                <div className="flex items-center gap-2">
+                  <Badge tone="neutral" variant="soft">{favoriteSongs.length} favoritos</Badge>
+                  <Badge tone="neutral" variant="soft">{playlists.length} playlists</Badge>
+                </div>
+              }
+              onClick={() => navigate('/library')}
+            />
+          </section>
+
+          {/* ── 5 · My Music — catalogue health, consolidated ── */}
+          <section className="mt-8">
+            <SectionHeader
+              eyebrow="My Music"
+              title="Tu catálogo"
               actions={
                 <button
                   type="button"
@@ -315,105 +338,47 @@ export default function Home() {
                   className="gv-focusable inline-flex items-center gap-1 font-semibold active:scale-95 transition-transform"
                   style={{ fontSize: 'var(--gv-text-xs)', color: 'var(--gv-text-link)' }}
                 >
-                  View all <ArrowUpRight size={13} strokeWidth={2.4} />
+                  Ver detalle <ArrowRight size={13} strokeWidth={2.4} />
                 </button>
               }
             />
-            <Card padding="none" className="overflow-hidden">
-              {ASSETS_AT_RISK.map((asset, i) => {
-                const meta = STATUS_META[asset.status]
-                return (
-                  <button
-                    key={asset.id}
-                    type="button"
-                    onClick={() => navigate('/readiness')}
-                    className="w-full flex items-center gap-3 text-left active:opacity-70 transition-opacity"
-                    style={{
-                      padding: 'var(--gv-space-4)',
-                      borderTop: i === 0 ? 'none' : '1px solid var(--gv-border-faint)',
-                    }}
-                  >
-                    <span
-                      className="flex-shrink-0"
-                      style={{ width: 8, height: 8, borderRadius: '50%', background: meta.color }}
-                      aria-hidden
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p
-                        className="font-semibold truncate"
-                        style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}
-                      >
-                        {asset.title}
-                      </p>
-                      <p style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
-                        {asset.type}
-                      </p>
-                    </div>
-                    <Badge tone={meta.tone}>{meta.label}</Badge>
-                    <span
-                      className="gv-mono font-bold"
-                      style={{ fontSize: 'var(--gv-text-sm)', color: meta.color }}
-                    >
-                      {asset.score}
-                    </span>
-                  </button>
-                )
-              })}
+            <Card padding="lg" accent={readinessMeta.tone === 'danger' ? 'danger' : readinessMeta.tone === 'warning' ? 'warning' : 'success'}>
+              <button
+                type="button"
+                onClick={() => navigate('/readiness')}
+                className="w-full flex items-center gap-5 text-left active:opacity-70 transition-opacity"
+              >
+                <ReadinessRing
+                  value={ai.readinessScore}
+                  color={readinessMeta.color}
+                  size={92}
+                  ariaLabel={`Overall readiness score ${ai.readinessScore} out of 100 — ${readinessMeta.label}`}
+                >
+                  <span className="gv-mono font-extrabold leading-none" style={{ fontSize: 'var(--gv-text-2xl)', color: 'var(--gv-text)' }}>
+                    {ai.readinessScore}
+                  </span>
+                  <span className="gv-eyebrow mt-0.5">/ 100</span>
+                </ReadinessRing>
+                <div className="min-w-0 flex-1">
+                  <div className="mb-2">
+                    <Badge tone={readinessMeta.tone} variant="outline">{readinessMeta.label}</Badge>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1" style={{ fontSize: 'var(--gv-text-xs)', color: 'var(--gv-text-secondary)' }}>
+                    <span><span className="gv-mono font-bold" style={{ color: 'var(--gv-text)' }}>{ai.catalogAssets}</span> activos</span>
+                    <span><span className="gv-mono font-bold" style={{ color: 'var(--gv-danger)' }}>{ai.worksAtRisk}</span> en riesgo</span>
+                    <span><span className="gv-mono font-bold" style={{ color: 'var(--gv-gold)' }}>{ai.revenueOpportunities}</span> oportunidades</span>
+                  </div>
+                </div>
+                <ChevronRight size={18} strokeWidth={2} style={{ color: 'var(--gv-text-muted)', flexShrink: 0 }} aria-hidden />
+              </button>
             </Card>
-          </div>
-
-          {/* ── Potential Revenue Opportunities ── */}
-          <div className="mt-8">
-            <SectionHeader
-              eyebrow="Recover"
-              title="Potential Revenue Opportunities"
-              description="Surfaced from your catalogue. Illustrative — not a financial guarantee."
-            />
-            <div className="grid gap-2.5">
-              {REVENUE_OPPORTUNITIES.map(op => (
-                <Card key={op.id} padding="none">
-                  <button
-                    type="button"
-                    onClick={() => navigate('/readiness')}
-                    aria-label={`${op.title} — ${POTENTIAL_LABEL[op.potential]}`}
-                    className="w-full text-left flex items-start justify-between gap-3 active:opacity-70 transition-opacity"
-                    style={{ padding: 'var(--gv-space-5)' }}
-                  >
-                    <div className="min-w-0">
-                      <h3
-                        className="font-semibold truncate"
-                        style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}
-                      >
-                        {op.title}
-                      </h3>
-                      <p
-                        className="mt-1"
-                        style={{
-                          fontSize: 'var(--gv-text-xs)',
-                          color: 'var(--gv-text-secondary)',
-                          lineHeight: 'var(--gv-leading-normal)',
-                        }}
-                      >
-                        {op.note}
-                      </p>
-                      <p className="gv-eyebrow mt-2">{op.channel}</p>
-                    </div>
-                    <Badge tone={POTENTIAL_TONE[op.potential]} variant="soft">
-                      {POTENTIAL_LABEL[op.potential]}
-                    </Badge>
-                  </button>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Mock disclaimer ── */}
-          <p
-            className="text-center mt-8"
-            style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-faint)', lineHeight: 'var(--gv-leading-normal)' }}
-          >
-            Illustrative intelligence using internal mock data. Figures are not financial advice or guaranteed earnings.
-          </p>
+            <p
+              className="mt-2"
+              style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-faint)', lineHeight: 'var(--gv-leading-normal)' }}
+            >
+              Inteligencia ilustrativa con datos internos. No es asesoría financiera ni ingresos garantizados.
+            </p>
+          </section>
         </div>
       </GovernanceScope>
     </AppShell>
