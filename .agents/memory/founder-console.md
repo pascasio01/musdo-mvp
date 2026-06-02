@@ -18,3 +18,10 @@ Real metrics come ONLY from `services/founder.ts` → `loadFounderSnapshot(userI
 **Why:** owner directive is production-grade only — no fake metrics, no demo UI, no placeholder business data; use real data or honest Pending Integration / Pending Verification / Internal Preview.
 
 **How to apply:** when wiring a new Founder metric, add it to `loadFounderSnapshot` only if a genuine source exists; otherwise render a pending state. Readiness scoring (`data/readiness.ts`) is MOCK — do not surface it as a real metric.
+
+## Product Evolution (Module 22)
+`lib/evolution.ts` is a governance-only registry surfaced in the owner console: DESIGN_VERSIONS (v1 Dark-Luxury active, v2 Governance DS migrating, v3 reserved — match replit.md reality), EVOLUTION_PRINCIPLES (text), MODERNIZATION_AUDIT (state `manual` = reviewed by hand vs `pending` = needs telemetry not connected).
+
+**Why:** Module 22 mostly needs telemetry MUSVORA does NOT collect (navigation/drop-off/session/adoption/competitor analysis). No analytics pipeline exists.
+
+**How to apply:** keep audit areas `pending` (no fabricated score) until a real event pipeline exists; never claim automated trend/competitor/UX analysis is active.

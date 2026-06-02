@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react'
 import {
   ArrowLeft, LayoutDashboard, BrainCircuit, ShieldCheck, FileBadge2,
   LineChart, Store, Sparkles, Lock, Activity, ChevronRight, Crown,
+  Layers, Compass, ClipboardCheck,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { GovernanceScope, Card, Badge, StatTile, SectionHeader } from '../../components/governance'
 import { useAuth } from '../../lib/auth'
 import { loadFounderSnapshot, type FounderSnapshot } from '../../services/founder'
 import { scoreStatus } from '../../data/readiness'
+import {
+  DESIGN_VERSIONS, EVOLUTION_PRINCIPLES, MODERNIZATION_AUDIT,
+  type VersionStatus, type AuditState,
+} from '../../lib/evolution'
 
 /**
  * MUSVORA Founder Console.
@@ -27,6 +32,17 @@ type ModuleStatus = 'live' | 'preview' | 'pending'
 const STATUS_META: Record<ModuleStatus, { label: string; tone: 'success' | 'gold' | 'warning' }> = {
   live: { label: 'Live', tone: 'success' },
   preview: { label: 'Internal Preview', tone: 'gold' },
+  pending: { label: 'Pending Integration', tone: 'warning' },
+}
+
+const VERSION_TONE: Record<VersionStatus, { label: string; tone: 'success' | 'gold' | 'navy' }> = {
+  active: { label: 'Active', tone: 'success' },
+  migrating: { label: 'Migrating', tone: 'gold' },
+  planned: { label: 'Planned', tone: 'navy' },
+}
+
+const AUDIT_TONE: Record<AuditState, { label: string; tone: 'navy' | 'warning' }> = {
+  manual: { label: 'Manual review', tone: 'navy' },
   pending: { label: 'Pending Integration', tone: 'warning' },
 }
 
@@ -355,6 +371,88 @@ export default function OwnerDashboard() {
               </Card>
             )
           })}
+        </div>
+
+        {/* ── Adaptive Product Evolution (Module 22) — governance, not fabricated metrics ── */}
+        <div className="mt-10">
+          <SectionHeader
+            eyebrow="Adaptive Product Evolution · Evolution over revolution"
+            title="Product Evolution"
+            description="How MUSVORA stays modern without redesigning everything. Design versions are tracked and reversible; trend, competitor and behaviour analysis that need a data pipeline are labelled honestly — no metrics are fabricated."
+          />
+
+          <p className="gv-eyebrow" style={{ margin: '4px 0 8px' }}>Design Versions</p>
+          <div className="flex flex-col gap-3">
+            {DESIGN_VERSIONS.map(v => {
+              const meta = VERSION_TONE[v.status]
+              return (
+                <Card key={v.id} elevation="raised" padding="md">
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex items-center justify-center flex-shrink-0"
+                      style={{ width: 38, height: 38, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)' }}
+                    >
+                      <Layers size={17} style={{ color: 'var(--gv-text-secondary)' }} aria-hidden />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="gv-mono" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>{v.id}</span>
+                          <h3 className="font-bold leading-tight truncate" style={{ fontFamily: 'var(--gv-font-display)', fontSize: 'var(--gv-text-lg)', color: 'var(--gv-text)' }}>{v.name}</h3>
+                        </div>
+                        <Badge tone={meta.tone} variant="soft">{meta.label}</Badge>
+                      </div>
+                      <p className="mt-2" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)', lineHeight: 'var(--gv-leading-normal)' }}>{v.summary}</p>
+                      <p className="mt-2 gv-mono" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)', lineHeight: 'var(--gv-leading-normal)' }}>{v.scope}</p>
+                    </div>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+
+          <p className="gv-eyebrow" style={{ margin: '20px 0 8px' }}>Operating Principles</p>
+          <Card elevation="raised" padding="md">
+            <div className="flex flex-col gap-3">
+              {EVOLUTION_PRINCIPLES.map(p => (
+                <div key={p.title} className="flex items-start gap-3">
+                  <Compass size={15} style={{ color: 'var(--gv-text-muted)', marginTop: 2, flexShrink: 0 }} aria-hidden />
+                  <div className="min-w-0">
+                    <p className="font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>{p.title}</p>
+                    <p className="mt-0.5" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)', lineHeight: 'var(--gv-leading-normal)' }}>{p.rule}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <p className="gv-eyebrow" style={{ margin: '20px 0 8px' }}>Modernization Audit</p>
+          <div className="flex flex-col gap-3">
+            {MODERNIZATION_AUDIT.map(a => {
+              const meta = AUDIT_TONE[a.state]
+              return (
+                <Card key={a.area} elevation="raised" padding="md">
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex items-center justify-center flex-shrink-0"
+                      style={{ width: 38, height: 38, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)' }}
+                    >
+                      <ClipboardCheck size={17} style={{ color: 'var(--gv-text-secondary)' }} aria-hidden />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="font-semibold leading-tight" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>{a.area}</h3>
+                        <Badge tone={meta.tone} variant="soft">{meta.label}</Badge>
+                      </div>
+                      <p className="mt-1.5 gv-mono" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)', lineHeight: 'var(--gv-leading-normal)' }}>
+                        {a.cadence} · {a.detail}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
         </div>
 
         <p
