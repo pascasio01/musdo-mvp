@@ -1,0 +1,447 @@
+PROMPT MAESTRO MUSVORA 10/10 — AUDITORÍA TOTAL + EJECUCIÓN
+
+Actúa como un equipo completo formado por:
+
+* CEO de Spotify
+* VP Product de Apple Music
+* Principal Designer de Apple
+* Principal Engineer de YouTube Music
+* Staff Engineer de Netflix
+* Arquitecto de Sistemas Distribuidos
+* Especialista en UX Cognitiva
+* Director de Branding Global
+
+Tu misión es transformar MUSVORA en una plataforma 10/10 real.
+
+No crear demos.
+
+No crear placeholders.
+
+No crear pantallas falsas.
+
+No crear componentes sin función.
+
+Todo debe funcionar.
+
+⸻
+
+PRINCIPIO SUPREMO
+
+MUSVORA NO ES UNA APP DE STREAMING.
+
+MUSVORA ES:
+
+The Music Operating System
+
+Un sistema operativo musical donde el usuario puede:
+
+* descubrir música
+* escuchar música
+* organizar música
+* proteger música
+* verificar música
+* licenciar música
+* monetizar música
+
+desde una sola plataforma.
+
+⸻
+
+AUDITORÍA AUTOMÁTICA OBLIGATORIA
+
+Antes de modificar cualquier pantalla:
+
+Auditar:
+
+* navegación
+* rendimiento
+* UX
+* accesibilidad
+* responsive
+* backend
+* APIs
+* errores visuales
+* duplicación
+* jerarquía
+* velocidad
+
+Generar reporte.
+
+Corregir automáticamente.
+
+No preguntar.
+
+Ejecutar.
+
+⸻
+
+IDENTIDAD VISUAL DEFINITIVA
+
+Eliminar cualquier apariencia genérica de Spotify.
+
+Crear identidad propia.
+
+Modo:
+
+Dark Luxury
+
+Características:
+
+* OLED Black
+* profundidad real
+* glassmorphism sutil
+* bordes premium
+* animaciones suaves
+* sensación cinematográfica
+
+Inspiración:
+
+Apple
+Porsche
+Bang & Olufsen
+
+No Spotify.
+
+⸻
+
+LOGO DEFINITIVO
+
+Crear sistema completo.
+
+App Icon.
+
+Wordmark.
+
+Splash Screen.
+
+Favicons.
+
+Social Assets.
+
+Concepto:
+
+M formada por:
+
+* ondas musicales
+* nodos conectados
+* flujo de datos
+
+La M debe transmitir:
+
+Music
+Movement
+Memory
+Monetization
+
+Debe funcionar:
+
+* 16x16
+* 32x32
+* 64x64
+* 128x128
+* 1024x1024
+
+Sin perder identidad.
+
+⸻
+
+MUSVORA AI
+
+Convertir MUSVORA AI en el centro absoluto.
+
+No crear una pestaña AI.
+
+La IA ES LA APP.
+
+Botón flotante permanente.
+
+Siempre visible.
+
+Siempre accesible.
+
+⸻
+
+Acciones:
+
+Find Music
+
+Surprise Me
+
+Driving
+
+Focus
+
+Sleep
+
+Gym
+
+Restaurant
+
+Romantic
+
+Party
+
+Work
+
+Study
+
+Create Playlist
+
+Find Similar Songs
+
+Find Similar Artists
+
+Music Discovery
+
+⸻
+
+REGLA UX
+
+Ninguna acción importante puede requerir más de:
+
+3 taps
+
+Máximo.
+
+⸻
+
+BÚSQUEDA UNIVERSAL
+
+Search debe ser la mejor del mercado.
+
+Buscar simultáneamente:
+
+* canciones
+* artistas
+* álbumes
+* playlists
+* letras
+* compositores
+* productores
+* géneros
+* moods
+* BPM
+* idioma
+* país
+* licencias
+* catálogos
+* Human Verified
+
+Todo desde una sola barra.
+
+⸻
+
+RESULTADOS
+
+Agrupar automáticamente:
+
+Top Result
+
+Songs
+
+Artists
+
+Albums
+
+Playlists
+
+Lyrics
+
+Composers
+
+Related Music
+
+Human Verified
+
+⸻
+
+MUSIC DNA
+
+Cada canción debe tener atributos.
+
+No solo género.
+
+Ejemplo:
+
+Romance
+Passion
+Energy
+Focus
+Nostalgia
+Elegance
+Sadness
+Party
+Motivation
+
+La búsqueda debe permitir:
+
+“Romance superior a 90”
+
+“Pasión alta”
+
+“Energía media”
+
+“Nostalgia extrema”
+
+⸻
+
+HOME DEFINITIVO
+
+Mantener solo:
+
+Continue Listening
+
+Discover
+
+For You
+
+Trending
+
+Musvora AI Suggestions
+
+Nada más.
+
+Eliminar ruido.
+
+⸻
+
+PLAYER 10/10
+
+Integrar:
+
+Lyrics
+
+Song DNA
+
+Credits
+
+Contributors
+
+Composers
+
+Events
+
+Artist Profile
+
+Related Music
+
+AI Explanation
+
+⸻
+
+LIBRARY
+
+Simplificar.
+
+Favoritos
+
+Playlists
+
+Descargas
+
+Historial
+
+Artistas Seguidos
+
+Nada más.
+
+⸻
+
+VAULT
+
+Convertirlo en ventaja competitiva.
+
+Demos
+
+Lyrics
+
+Passports
+
+Licenses
+
+Ownership
+
+Royalties
+
+Contracts
+
+Metadata
+
+Publishing
+
+BMI
+
+ASCAP
+
+Copyright
+
+⸻
+
+PERFIL
+
+Perfil humano.
+
+No perfil genérico.
+
+Mostrar:
+
+Human Verified
+
+Musical Signature
+
+Dominant Moods
+
+Genres
+
+Licenses
+
+Streams
+
+Followers
+
+Catalog
+
+Song Passports
+
+⸻
+
+RENDIMIENTO
+
+Objetivos:
+
+Primer render:
+<1 segundo
+
+Cambio pantalla:
+<150 ms
+
+Búsqueda:
+<100 ms
+
+Scroll:
+120 FPS
+
+Animaciones:
+60 FPS mínimo
+
+⸻
+
+LIMPIEZA
+
+Eliminar:
+
+Coming Soon
+
+Pending Integration
+
+Placeholder
+
+Mock
+
+Demo
+
+Fake Data
+
+Lorem Ipsum
+
+Botones sin función

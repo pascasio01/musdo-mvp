@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import {
   ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause,
-  SkipBack, SkipForward, Repeat, Shuffle, Shield, FileText,
+  SkipBack, SkipForward, Repeat, Repeat1, Shuffle, Shield, FileText,
   Disc3, Quote, ShieldCheck, ListMusic,
 } from 'lucide-react'
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
@@ -63,10 +63,12 @@ export default function Player() {
   const {
     song: activeSong, playSong, isPlaying, progress, elapsed, duration,
     seek, togglePlay, skip,
+    shuffle, repeatMode, toggleShuffle, cycleRepeat,
   } = usePlayer()
 
   const { isFavorite, toggleFavorite } = useLibrary()
   const [tab, setTab] = useState<PlayerTab>('now')
+  const [shareCopied, setShareCopied] = useState(false)
 
   const song: Song | undefined = useMemo(
     () => mockSongs.find(s => s.id === id) ?? activeSong ?? mockSongs[0],
@@ -87,6 +89,29 @@ export default function Player() {
   }, [seek])
 
   const signals = useMemo(() => (song ? getIntelligenceSignals(song) : []), [song])
+
+  const handleShare = useCallback(async () => {
+    if (!song) return
+    const url = `${window.location.origin}/player/${song.id}`
+    const data = { title: song.title, text: `${song.title} — ${song.artist_name} · MUSVORA`, url }
+    try {
+      if (typeof navigator !== 'undefined' && navigator.share) {
+        await navigator.share(data)
+        return
+      }
+    } catch (err) {
+      // User cancelled the native share sheet — don't fall back to clipboard.
+      if (err instanceof DOMException && err.name === 'AbortError') return
+      /* share failed for another reason — fall through to clipboard */
+    }
+    try {
+      await navigator.clipboard.writeText(url)
+      setShareCopied(true)
+      window.setTimeout(() => setShareCopied(false), 2000)
+    } catch {
+      /* clipboard unavailable — nothing else to do */
+    }
+  }, [song])
 
   if (!song) {
     return (
@@ -133,6 +158,21 @@ export default function Player() {
         />
       </div>
 
+      {shareCopied && (
+        <div
+          role="status"
+          className="fixed left-1/2 -translate-x-1/2 bottom-24 z-50 px-4 py-2 rounded-full text-xs font-semibold"
+          style={{
+            background: 'var(--surface)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--border)',
+            boxShadow: '0 8px 24px var(--shadow)',
+          }}
+        >
+          Link copied
+        </div>
+      )}
+
       <div className="relative flex flex-col flex-1 max-w-md mx-auto w-full px-6 pt-12 pb-8">
         {/* Top bar */}
         <div className="flex items-center justify-between mb-8">
@@ -148,7 +188,8 @@ export default function Player() {
             {TABS.find(t => t.id === tab)?.label ?? 'Now Playing'}
           </p>
           <button
-            aria-label="More options"
+            onClick={() => navigate(`/passport/${song.id}`)}
+            aria-label="Asset passport"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
           >
@@ -219,9 +260,11 @@ export default function Player() {
               <Heart size={20} fill={song && isFavorite(song.id) ? 'currentColor' : 'none'} aria-hidden />
             </button>
             <button
-              aria-label="Share"
+              onClick={handleShare}
+              aria-label={shareCopied ? 'Link copied' : 'Share'}
+              title={shareCopied ? 'Link copied' : 'Share'}
               className="transition-colors"
-              style={{ color: 'var(--text-muted)' }}
+              style={{ color: shareCopied ? 'var(--accent)' : 'var(--text-muted)' }}
             >
               <Share2 size={18} aria-hidden />
             </button>
@@ -271,8 +314,13 @@ export default function Player() {
 
         {/* Controls */}
         <div className="flex items-center justify-between mb-6">
-          <button aria-label="Shuffle" style={{ color: 'var(--text-muted)' }}>
-            <Shuffle size={18} strokeWidth={1.5} aria-hidden />
+          <button
+            onClick={toggleShuffle}
+            aria-label="Shuffle"
+            aria-pressed={shuffle}
+            style={{ color: shuffle ? 'var(--accent)' : 'var(--text-muted)' }}
+          >
+            <Shuffle size={18} strokeWidth={shuffle ? 2.4 : 1.5} aria-hidden />
           </button>
           <button onClick={() => skip(-1)} aria-label="Previous song" style={{ color: 'var(--text-secondary)' }}>
             <SkipBack size={26} strokeWidth={1.5} aria-hidden />
@@ -294,8 +342,15 @@ export default function Player() {
           <button onClick={() => skip(1)} aria-label="Next song" style={{ color: 'var(--text-secondary)' }}>
             <SkipForward size={26} strokeWidth={1.5} aria-hidden />
           </button>
-          <button aria-label="Repeat" style={{ color: 'var(--text-muted)' }}>
-            <Repeat size={18} strokeWidth={1.5} aria-hidden />
+          <button
+            onClick={cycleRepeat}
+            aria-label={repeatMode === 'one' ? 'Repeat one' : repeatMode === 'all' ? 'Repeat all' : 'Repeat off'}
+            aria-pressed={repeatMode !== 'off'}
+            style={{ color: repeatMode !== 'off' ? 'var(--accent)' : 'var(--text-muted)' }}
+          >
+            {repeatMode === 'one'
+              ? <Repeat1 size={18} strokeWidth={2.4} aria-hidden />
+              : <Repeat size={18} strokeWidth={repeatMode === 'all' ? 2.4 : 1.5} aria-hidden />}
           </button>
         </div>
 

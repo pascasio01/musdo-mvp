@@ -10,6 +10,32 @@ import {
 } from 'react'
 import type { Song } from '../types'
 
+export type RepeatMode = 'off' | 'all' | 'one'
+
+/**
+ * Pure resolver for the next queue index.
+ * Linear mode honors repeat: 'off' stops at the ends, 'all' wraps around.
+ * Shuffle mode always returns a different random index (continuous play).
+ * Returns null when playback should stop.
+ */
+function nextIndex(
+  s: { queue: Song[]; queueIndex: number; shuffle: boolean; repeatMode: RepeatMode },
+  direction: 1 | -1,
+): number | null {
+  const len = s.queue.length
+  if (len === 0) return null
+  if (len === 1) return s.repeatMode === 'all' ? 0 : null
+  if (s.shuffle) {
+    let r = s.queueIndex
+    while (r === s.queueIndex) r = Math.floor(Math.random() * len)
+    return r
+  }
+  const idx = s.queueIndex + direction
+  if (idx >= len) return s.repeatMode === 'all' ? 0 : null
+  if (idx < 0) return s.repeatMode === 'all' ? len - 1 : null
+  return idx
+}
+
 export interface PlayerState {
   song: Song | null
   queue: Song[]
@@ -22,6 +48,8 @@ export interface PlayerState {
   isMuted: boolean
   isLoading: boolean
   hasError: boolean
+  shuffle: boolean
+  repeatMode: RepeatMode
 }
 
 export interface PlayerContextType extends PlayerState {
@@ -32,6 +60,8 @@ export interface PlayerContextType extends PlayerState {
   setVolume: (volume: number) => void
   mute: () => void
   skip: (direction: 1 | -1) => void
+  toggleShuffle: () => void
+  cycleRepeat: () => void
   clearPlayer: () => void
 }
 
@@ -47,6 +77,8 @@ const initialState: PlayerState = {
   isMuted: false,
   isLoading: false,
   hasError: false,
+  shuffle: false,
+  repeatMode: 'off',
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined)
@@ -58,6 +90,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const rafRef = useRef<number | null>(null)
   const simRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const stateRef = useRef<PlayerState>(initialState)
+  const endRef = useRef<() => void>(() => {})
 
   const [state, setStateRaw] = useState<PlayerState>(initialState)
 
@@ -102,13 +135,43 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         elapsed = duration
         clearInterval(simRef.current!)
         simRef.current = null
-        setState({ isPlaying: false, progress: 100, elapsed })
+        setState({ progress: 100, elapsed })
+        endRef.current()
         return
       }
       const progress = (elapsed / duration) * 100
       setState({ progress, elapsed })
     }, SIMULATION_TICK_MS)
   }, [cancelAnimations, setState])
+
+  const handleEnd = useCallback(() => {
+    const s = stateRef.current
+    const replay = () => {
+      const audio = audioRef.current
+      if (audio?.src) {
+        audio.currentTime = 0
+        audio.play()
+          .then(() => { setState({ isPlaying: true, progress: 0, elapsed: 0 }); startRAF(audio) })
+          .catch(() => { setState({ isPlaying: true, progress: 0, elapsed: 0 }); startSimulation(s.duration) })
+      } else {
+        setState({ isPlaying: true, progress: 0, elapsed: 0 })
+        startSimulation(s.duration)
+      }
+    }
+    if (s.repeatMode === 'one') { replay(); return }
+    const ni = nextIndex(s, 1)
+    if (ni === null) {
+      setState({ isPlaying: false, progress: 100, elapsed: s.duration })
+    } else if (ni === s.queueIndex) {
+      replay()
+    } else {
+      setState({ queueIndex: ni })
+    }
+  }, [setState, startRAF, startSimulation])
+
+  useEffect(() => {
+    endRef.current = handleEnd
+  }, [handleEnd])
 
   useEffect(() => {
     const audio = new Audio()
@@ -122,13 +185,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
     audio.addEventListener('ended', () => {
       cancelAnimations()
-      const { queue, queueIndex } = stateRef.current
-      const next = queueIndex + 1
-      if (next < queue.length) {
-        setState({ queueIndex: next })
-      } else {
-        setState({ isPlaying: false, progress: 100, elapsed: stateRef.current.duration })
-      }
+      endRef.current()
     })
 
     audio.addEventListener('error', () => {
@@ -323,11 +380,20 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   }, [setState])
 
   const skip = useCallback((direction: 1 | -1) => {
-    const { queue, queueIndex } = stateRef.current
-    const next = queueIndex + direction
-    if (next >= 0 && next < queue.length) {
-      setState({ queueIndex: next })
+    const ni = nextIndex(stateRef.current, direction)
+    if (ni !== null && ni !== stateRef.current.queueIndex) {
+      setState({ queueIndex: ni })
     }
+  }, [setState])
+
+  const toggleShuffle = useCallback(() => {
+    setState(prev => ({ shuffle: !prev.shuffle }))
+  }, [setState])
+
+  const cycleRepeat = useCallback(() => {
+    setState(prev => ({
+      repeatMode: prev.repeatMode === 'off' ? 'all' : prev.repeatMode === 'all' ? 'one' : 'off',
+    }))
   }, [setState])
 
   const clearPlayer = useCallback(() => {
@@ -421,8 +487,10 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     setVolume,
     mute,
     skip,
+    toggleShuffle,
+    cycleRepeat,
     clearPlayer,
-  }), [state, playSong, togglePlay, seek, setVolume, mute, skip, clearPlayer])
+  }), [state, playSong, togglePlay, seek, setVolume, mute, skip, toggleShuffle, cycleRepeat, clearPlayer])
 
   return (
     <PlayerContext.Provider value={contextValue}>
