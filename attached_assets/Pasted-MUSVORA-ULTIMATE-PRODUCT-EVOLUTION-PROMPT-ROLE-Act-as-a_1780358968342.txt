@@ -1,0 +1,464 @@
+MUSVORA — ULTIMATE PRODUCT EVOLUTION PROMPT
+
+ROLE
+
+Act as a Principal Software Architect, Senior Product Strategist, Staff UX Designer, Music Industry Infrastructure Specialist, Enterprise Systems Engineer and Platform Vision Architect.
+
+MISSION
+
+Build MUSVORA into the world’s first complete Music Asset Operating System.
+
+MUSVORA must combine:
+
+* Streaming
+* Discovery
+* Ownership
+* Licensing
+* Distribution
+* Monetization
+* Music Intelligence
+
+inside a single ecosystem.
+
+IMPORTANT
+
+Do NOT build a Spotify clone.
+
+Do NOT build an Apple Music clone.
+
+Do NOT build a SoundCloud clone.
+
+Study them.
+
+Learn from them.
+
+Then build something better and fundamentally different.
+
+====================================================
+
+CORE POSITIONING
+
+====================================================
+
+Spotify
+
+Listen Music
+
+Apple Music
+
+Listen Music
+
+SoundCloud
+
+Share Music
+
+TuneCore
+
+Distribute Music
+
+Bandcamp
+
+Sell Music
+
+MUSVORA
+
+Create Music
+Protect Music
+Verify Music
+License Music
+Distribute Music
+Monetize Music
+Discover Music
+Listen Music
+
+====================================================
+
+TAGLINE
+
+====================================================
+
+MUSVORA
+
+Music Asset Operating System
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+
+Discover.
+Listen.
+Own Your Future.
+
+====================================================
+
+CORE EXPERIENCE
+
+====================================================
+
+Every user must be able to:
+
+* Listen
+* Discover
+* Follow
+* Create
+* Upload
+* Protect
+* Verify
+* License
+* Monetize
+
+inside MUSVORA.
+
+====================================================
+
+STREAMING EXPERIENCE
+
+====================================================
+
+Must support:
+
+* Music
+* Albums
+* Artists
+* Playlists
+* Favorites
+* History
+* Offline Downloads
+* High Quality Audio
+* Lyrics
+* Recommendations
+
+Inspired by:
+
+Apple Music elegance
+
+Spotify usability
+
+MUSVORA identity
+
+Do NOT copy layouts.
+
+Create original navigation and interactions.
+
+====================================================
+
+DISCOVERY ENGINE
+
+====================================================
+
+Search must be global.
+
+Search:
+
+* Songs
+* Artists
+* Composers
+* Producers
+* Lyrics
+* Albums
+* Playlists
+* Catalog Assets
+* Marketplace Assets
+* Licensing Opportunities
+
+Search should feel instant.
+
+====================================================
+
+OFFLINE MODE
+
+====================================================
+
+Users must be able to:
+
+Download:
+
+* Songs
+* Albums
+* Playlists
+
+Access content without internet.
+
+Display:
+
+Offline Library
+
+Last Sync
+
+Storage Usage
+
+Downloaded Assets
+
+====================================================
+
+SONG PASSPORT
+
+====================================================
+
+Every song has a digital identity.
+
+Display:
+
+* Composer
+* Artist
+* Producer
+* Ownership
+* Copyright
+* Publishing
+* Readiness
+* Licensing
+* History
+
+Song Passport becomes a unique MUSVORA feature.
+
+====================================================
+
+OWNERSHIP ENGINE
+
+====================================================
+
+Display:
+
+Ownership Confidence
+
+Explain score transparently.
+
+Factors:
+
+* Split Sheets
+* Metadata
+* Contributors
+* Registration
+* Verification
+
+Never create fake legal status.
+
+====================================================
+
+LICENSING MARKETPLACE
+
+====================================================
+
+Allow:
+
+Artists
+Brands
+Publishers
+Businesses
+Music Supervisors
+
+to discover and license music.
+
+Requirements:
+
+Readiness ≥ 80
+
+Ownership Confidence ≥ 80
+
+Song Passport Active
+
+====================================================
+
+AI DJ COMPLACE
+
+====================================================
+
+Future Flagship Feature
+
+Purpose:
+
+Create complete musical experiences.
+
+Not just playlists.
+
+Use Cases:
+
+* Weddings
+* Restaurants
+* Hotels
+* Gyms
+* Birthday Parties
+* Corporate Events
+* Bachata Nights
+* Salsa Nights
+* Lounges
+* Road Trips
+
+Example:
+
+User:
+
+“I have a Dominican restaurant.”
+
+AI DJ Complace:
+
+12 PM
+Light Merengue
+
+2 PM
+Soft Bachata
+
+6 PM
+Dinner Session
+
+8 PM
+Romantic Latin Mix
+
+10 PM
+Night Energy Session
+
+The AI becomes a contextual music director.
+
+====================================================
+
+SMART PLAYLISTS
+
+====================================================
+
+Create playlists based on:
+
+* Mood
+* BPM
+* Energy
+* Theme
+* Lyrics
+* Time of Day
+* Event Type
+
+Not just genre.
+
+====================================================
+
+USER MODES
+
+====================================================
+
+Composer
+
+* Vault
+* Ownership
+* Passport
+* Licensing
+
+Artist
+
+* Catalog
+* Audience
+* Marketplace
+* Revenue
+
+Listener
+
+* Music
+* Discovery
+* Playlists
+* Favorites
+
+Business
+
+* Licensing
+* Contracts
+* Catalog Search
+* Commercial Use
+
+====================================================
+
+VAULT
+
+====================================================
+
+Store:
+
+* Lyrics
+* Demos
+* Masters
+* Contracts
+* Metadata
+* Artwork
+* Split Sheets
+
+Everything protected.
+
+Everything organized.
+
+Everything searchable.
+
+====================================================
+
+AI SYSTEM
+
+====================================================
+
+Approved AI Modules:
+
+AI Catalog Auditor
+
+AI Metadata Assistant
+
+AI Contract Checker
+
+AI Licensing Match
+
+AI DJ Complace
+
+AI assists creators.
+
+AI never replaces creators.
+
+====================================================
+
+DESIGN SYSTEM
+
+====================================================
+
+Institutional Dark Luxury
+
+Inspired by:
+
+* Apple
+* Stripe
+* Linear
+* Notion
+* Supabase
+
+Avoid:
+
+* Gaming UI
+* Crypto aesthetics
+* Excessive Glassmorphism
+* Neon overload
+* Visual clutter
+
+====================================================
+
+FINAL GOAL
+
+====================================================
+
+When users open Spotify:
+
+“I want to listen.”
+
+When users open MUSVORA:
+
+“I want to listen.
+
+I want to discover.
+
+I want to create.
+
+I want to protect.
+
+I want to license.
+
+I want to monetize.
+
+I want to grow.”
+
+MUSVORA becomes the complete ecosystem for the life cycle of music.
+
+Not another streaming platform.
+
+The operating system behind music.
