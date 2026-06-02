@@ -10,6 +10,8 @@ import GlobalSearch from '../components/home/GlobalSearch'
 import { useLibrary } from '../lib/library'
 import { usePlayer } from '../lib/player'
 import { useAuth } from '../lib/auth'
+import { useOffline, formatBytes } from '../lib/offline'
+import DownloadButton from '../components/DownloadButton'
 import type { Song, AppRole } from '../types'
 import type { LibraryPlaylist } from '../lib/library'
 
@@ -74,6 +76,7 @@ function SongRow({
           </span>
         </span>
       </button>
+      <DownloadButton song={song} size={36} />
       <button
         type="button"
         onClick={() => onFav(song)}
@@ -135,6 +138,9 @@ export default function Library() {
     favoriteSongs, historySongs, libraryArtists, playlists,
     isFavorite, toggleFavorite, clearHistory, createPlaylist,
   } = useLibrary()
+  const { downloads, storage } = useOffline()
+  const downloadCount = downloads.length
+  const storageUsage = storage.usage
 
   const [searchOpen, setSearchOpen] = useState(false)
   const [newPlaylist, setNewPlaylist] = useState('')
@@ -374,12 +380,32 @@ export default function Library() {
           {/* 8 — Biblioteca descargada */}
           <section>
             <SectionHeader eyebrow="Offline" title="Biblioteca descargada" actions={<Download size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
-            <PendingCard
-              icon={<Download size={18} />}
-              title="Downloaded Library"
-              status="Pending Integration"
-              note="Las descargas offline (último sync, uso de almacenamiento) llegarán con el módulo Offline Mode."
-            />
+            <Card padding="none">
+              <button
+                type="button"
+                onClick={() => navigate('/downloads')}
+                className="w-full flex items-center gap-3 text-left active:opacity-70 transition-opacity"
+                style={{ padding: 'var(--gv-space-3)' }}
+              >
+                <span
+                  className="grid place-items-center flex-shrink-0"
+                  style={{ width: 44, height: 44, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-gold)' }}
+                >
+                  <Download size={18} aria-hidden />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                    Offline Mode
+                  </span>
+                  <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                    {downloadCount > 0
+                      ? `${downloadCount} ${downloadCount === 1 ? 'descarga' : 'descargas'} · ${formatBytes(storageUsage)} usados`
+                      : 'Descarga canciones y playlists para escuchar sin conexión'}
+                  </span>
+                </span>
+                <ChevronRight size={16} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+              </button>
+            </Card>
           </section>
         </div>
       </GovernanceScope>

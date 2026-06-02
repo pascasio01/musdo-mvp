@@ -9,6 +9,7 @@ import { AudioIntelligenceProvider } from './lib/audioIntelligence'
 import { PersonalizationProvider } from './lib/personalization'
 import { IdentityProvider } from './lib/identity'
 import { LibraryProvider } from './lib/library'
+import { OfflineProvider } from './lib/offline'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import AuraConnector from './components/AuraConnector'
@@ -45,6 +46,7 @@ const AuthCallback   = lazy(() => import('./pages/AuthCallback'))
 const Pricing       = lazy(() => import('./pages/Pricing'))
 const Library        = lazy(() => import('./pages/Library'))
 const PlaylistDetail = lazy(() => import('./pages/PlaylistDetail'))
+const Downloads      = lazy(() => import('./pages/Downloads'))
 const AIDJComplace   = lazy(() => import('./pages/AIDJComplace'))
 
 // Legal group (rarely visited — load together)
@@ -118,9 +120,11 @@ const Providers = memo(function Providers({ children }: { children: React.ReactN
                 <PersonalizationProvider>
                   <IdentityProvider>
                     <LibraryProvider>
-                      <AuraConnector />
-                      {children}
-                      <ToastContainer />
+                      <OfflineProvider>
+                        <AuraConnector />
+                        {children}
+                        <ToastContainer />
+                      </OfflineProvider>
                     </LibraryProvider>
                   </IdentityProvider>
                 </PersonalizationProvider>
@@ -171,6 +175,7 @@ export default function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/library" element={<Library />} />
               <Route path="/library/playlist/:id" element={<PlaylistDetail />} />
+              <Route path="/downloads" element={<Downloads />} />
               <Route path="/dj" element={<AIDJComplace />} />
               <Route path="/search" element={<Search />} />
               <Route path="/player/:id" element={<Player />} />

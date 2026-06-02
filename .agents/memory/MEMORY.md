@@ -2,6 +2,7 @@
 - [Theme system](theme-system.md) — themes inject inline CSS vars on <html>; vars omitted by the next theme leak, so re-assert or fully define them; 'system' resolves via matchMedia.
 - [Professional profile](professional-profile.md) — governance profile at /profile/:username; client-stored profile data with private fields MUST use per-user localStorage key; honest verification/metrics only.
 - [MUSVORA player surfaces](player-surfaces.md) — cinematic /player/:id (legacy tokens, sync mock) vs governance /review/:id (DS, async Vault); don't conflate.
+- [Offline downloads](offline-downloads.md) — cross-origin no-CORS audio cached as opaque via SW Cache (musdo-offline-v1); real storage via estimate(); no 206/exact sizes possible; SW runs in dev as /sw.js?dev=1.
 - [AI DJ Complace](ai-dj-complace.md) — /dj data-honesty contract: rank trending by plays only, no claimed labels (no "independent"), unwired modules stay Pending; Albums has no field.
 - [Library data layer](library-data-layer.md) — useLibrary() is the real per-user favorites/history/playlists store (musdo-library-v1:<userId>); ID-based, resolves vs mockSongs; provider sits inside Auth+Player.
 - [Global Search overlay](global-search.md) — shared overlay on Home/Library/Vault/Readiness/DJ; live: Songs/Artists/Playlists/Passports/Lyrics/Composers/Producers; Albums+others Pending; on legacy pages wrap overlay in GovernanceScope; focus-trap excludes tabindex=-1 backdrop.

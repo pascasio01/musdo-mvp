@@ -2,11 +2,14 @@ import { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   ArrowLeft, Play, Heart, Trash2, Plus, Check, PenLine, ListMusic, Search as SearchIcon, X,
+  Download, CheckCircle2,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { GovernanceScope, Card, Badge } from '../components/governance'
 import { useLibrary } from '../lib/library'
 import { usePlayer } from '../lib/player'
+import { useOffline } from '../lib/offline'
+import DownloadButton from '../components/DownloadButton'
 import { mockSongs } from '../data/mockData'
 import type { Song } from '../types'
 
@@ -22,6 +25,7 @@ export default function PlaylistDetail() {
     getPlaylist, resolveSongs, isFavorite, toggleFavorite,
     renamePlaylist, deletePlaylist, addToPlaylist, removeFromPlaylist,
   } = useLibrary()
+  const { downloadMany, statusFor } = useOffline()
 
   const playlist = getPlaylist(id)
   const [renaming, setRenaming] = useState(false)
@@ -176,6 +180,22 @@ export default function PlaylistDetail() {
             >
               {adding ? <X size={15} aria-hidden /> : <Plus size={15} aria-hidden />} {adding ? 'Cerrar' : 'Agregar'}
             </button>
+            {(() => {
+              const dl = songs.filter(s => s.audio_url)
+              const allOffline = dl.length > 0 && dl.every(s => statusFor(s.id) === 'done')
+              return (
+                <button
+                  type="button"
+                  onClick={() => downloadMany(dl)}
+                  disabled={dl.length === 0 || allOffline}
+                  aria-label={allOffline ? 'Playlist disponible offline' : 'Descargar playlist para offline'}
+                  className="gv-focusable inline-flex items-center gap-1.5 font-semibold active:scale-[0.99] transition-transform disabled:opacity-40"
+                  style={{ height: 44, padding: '0 16px', borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: allOffline ? 'var(--gv-success)' : 'var(--gv-text)', fontSize: 'var(--gv-text-sm)' }}
+                >
+                  {allOffline ? <CheckCircle2 size={15} aria-hidden /> : <Download size={15} aria-hidden />} {allOffline ? 'Offline' : 'Descargar'}
+                </button>
+              )
+            })()}
           </div>
 
           {/* Add songs panel */}
@@ -245,6 +265,7 @@ export default function PlaylistDetail() {
                         <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>{s.artist_name} · {s.genre}</span>
                       </span>
                     </button>
+                    <DownloadButton song={s} size={34} />
                     <button
                       type="button"
                       onClick={() => toggleFavorite(s)}

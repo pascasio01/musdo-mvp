@@ -1,0 +1,384 @@
+MUSVORA BRAND EVOLUTION 2026
+
+ROLE
+
+Act as:
+
+Principal Brand Architect
+Senior Product Designer
+Apple Human Interface Specialist
+Music Industry Infrastructure Architect
+
+MISSION
+
+Upgrade MUSVORA visual identity from “music app” to “Music Operating System”.
+
+Do not redesign functionality.
+
+Do not remove existing modules.
+
+Upgrade branding, navigation clarity, visual hierarchy and onboarding.
+
+────────────────────────
+
+LOGO SYSTEM
+
+Current direction is too close to traditional streaming products.
+
+Replace generic music-player visual language.
+
+MUSVORA must visually communicate:
+
+Music
+Ownership
+Verification
+Intelligence
+Infrastructure
+Trust
+
+Create a primary logo based on:
+
+M Symbol built from connected intelligent nodes.
+
+The M should feel:
+
+Modern
+Institutional
+Premium
+Memorable
+
+Avoid:
+
+Music notes
+Headphones
+Play buttons
+Equalizer bars
+Generic streaming icons
+
+Logo must work in:
+
+App Icon
+Web
+Desktop
+Watch
+TV
+
+────────────────────────
+
+BRAND POSITIONING
+
+Old:
+
+Music Streaming Platform
+
+New:
+
+MUSVORA
+
+The Music Operating System
+
+Tagline:
+
+Listen.
+Discover.
+Protect.
+Verify.
+License.
+Monetize.
+
+Alternative:
+
+Music.
+Ownership.
+Intelligence.
+
+────────────────────────
+
+VISUAL LANGUAGE
+
+Design must feel closer to:
+
+Apple
+Stripe
+Linear
+Notion
+Vercel
+
+Avoid visual similarities to:
+
+Spotify
+Audiomack
+SoundCloud
+Deezer
+
+Style:
+
+Institutional Dark Luxury
+
+Modern Minimalism
+
+High Trust Interface
+
+────────────────────────
+
+COLOR SYSTEM
+
+Dark Mode
+
+Background:
+#000000
+
+Surface:
+#0F1115
+
+Borders:
+#1A1D24
+
+Primary Text:
+#FFFFFF
+
+Secondary Text:
+#B8BCC5
+
+Accent:
+#D4AF37
+
+Success:
+#22C55E
+
+Warning:
+#F59E0B
+
+Error:
+#EF4444
+
+────────────────────────
+
+LIGHT MODE
+
+Do not use pure white.
+
+Background:
+#F7F8FA
+
+Cards:
+#FFFFFF
+
+Borders:
+#E5E7EB
+
+Primary Text:
+#111111
+
+Secondary Text:
+#6B7280
+
+Accent:
+#D4AF37
+
+Goal:
+
+Apple-level readability.
+
+────────────────────────
+
+ONBOARDING
+
+Replace generic streaming onboarding.
+
+Screen 1
+
+MUSVORA
+
+The Music Operating System
+
+Listen.
+Discover.
+Protect.
+Verify.
+License.
+Monetize.
+
+Button:
+
+Start Free
+
+────────────────────────
+
+Screen 2
+
+Who are you?
+
+Listener
+
+Artist
+
+Composer
+
+Producer
+
+Business
+
+Founder
+
+One tap only.
+
+────────────────────────
+
+Screen 3
+
+What do you want from music?
+
+Discover Music
+
+Build Playlists
+
+Manage Catalog
+
+Protect Songs
+
+License Music
+
+Generate Revenue
+
+AI configures experience automatically.
+
+────────────────────────
+
+NAVIGATION RULE
+
+Maximum:
+
+3 taps to complete important actions.
+
+Users must never feel lost.
+
+If navigation becomes complex:
+
+Simplify.
+
+Do not add more menus.
+
+────────────────────────
+
+SEARCH
+
+Search icon must always be visible.
+
+Never hidden.
+
+Search must support:
+
+Songs
+
+Artists
+
+Albums
+
+Lyrics
+
+Composers
+
+Producers
+
+Publishers
+
+Mood
+
+BPM
+
+Language
+
+Country
+
+Copyright Status
+
+License Availability
+
+Human Verified
+
+Target response:
+
+Under 100ms
+
+────────────────────────
+
+HOME
+
+Only 5 primary areas.
+
+Continue Listening
+
+Discover
+
+AI Music Director
+
+Library
+
+My Music
+
+Remove visual clutter.
+
+Reduce cognitive load.
+
+────────────────────────
+
+AI BUTTON
+
+Replace traditional “+” button.
+
+Create one central floating action button:
+
+MUSVORA AI
+
+Functions:
+
+Create Playlist
+
+Find Music
+
+Event Planning
+
+Mood Discovery
+
+Radio Creation
+
+Music DNA Search
+
+Business Music Planning
+
+One entry point.
+
+────────────────────────
+
+ACCESSIBILITY
+
+Required:
+
+Perfect readability
+
+Dark Mode optimized
+
+Light Mode optimized
+
+Large text support
+
+Color blind support
+
+High contrast support
+
+OLED optimized
+
+────────────────────────
+
+FINAL GOAL
+
+A user opening MUSVORA for the first time must immediately understand:
+
+This is not another music player.
+
+This is the place where music is listened to, discovered, protected, verified, licensed, monetized and managed.
+
+MUSVORA
+
+The Music Operating System.
