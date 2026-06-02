@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones, Lock, Wifi, Database, KeyRound, ScrollText, AlertTriangle } from 'lucide-react'
+import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones, Lock, Wifi, Database, KeyRound, ScrollText, AlertTriangle, Trash2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useAuth } from '../lib/auth'
@@ -7,15 +7,31 @@ import { Toggle, ActionCard } from '../components/ui'
 import SafeListenPanel from '../components/audio/SafeListenPanel'
 import AudioTuningPanel from '../components/audio/AudioTuningPanel'
 import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
+import { deleteAccountData } from '../lib/deleteAccount'
 
 export default function Settings() {
   const navigate = useNavigate()
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
   const [notifications, setNotifications] = useState(true)
   const [emailNotifs, setEmailNotifs] = useState(false)
   const [privateProfile, setPrivateProfile] = useState(false)
   const [creatorVisible, setCreatorVisible] = useState(true)
   const [marketVisible, setMarketVisible] = useState(true)
+  const [showDelete, setShowDelete] = useState(false)
+  const [confirmText, setConfirmText] = useState('')
+  const [deleting, setDeleting] = useState(false)
+
+  const handleDeleteAccount = async () => {
+    if (!user || confirmText !== 'DELETE') return
+    setDeleting(true)
+    try {
+      await deleteAccountData(user.id)
+    } finally {
+      setDeleting(false)
+      setShowDelete(false)
+      navigate('/')
+    }
+  }
 
   return (
     <AppShell>
@@ -164,6 +180,27 @@ export default function Settings() {
               <ActionCard label="Payout Settings" desc="Revenue destination (coming soon)" icon={Mic2} />
             </div>
           </div>
+
+          <div className="rounded-2xl border border-red-500/15 overflow-hidden" style={{ background: 'rgba(239,68,68,0.05)' }}>
+            <div className="px-5 pt-5 pb-1 flex items-center gap-2">
+              <Trash2 size={14} className="text-red-400/70" />
+              <p className="text-[10px] font-bold uppercase tracking-widest text-red-400/70">Danger Zone</p>
+            </div>
+            <div className="p-3">
+              <button
+                onClick={() => { setConfirmText(''); setShowDelete(true) }}
+                className="w-full flex items-center gap-3 p-3 rounded-xl text-left transition-colors hover:bg-red-500/8"
+              >
+                <div className="w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center flex-shrink-0">
+                  <Trash2 size={15} className="text-red-400" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-red-300 text-sm font-semibold">Delete Account</p>
+                  <p className="text-zinc-600 text-[11px] mt-0.5">Erase your device data and request account deletion</p>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="mt-6 space-y-3">
@@ -193,6 +230,55 @@ export default function Settings() {
           MUSVORA v1.0 MVP · Human Music Infrastructure
         </p>
       </div>
+
+      {showDelete && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-5"
+          style={{ background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(4px)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Delete account confirmation"
+        >
+          <div className="w-full max-w-sm rounded-2xl border border-red-500/20 p-6" style={{ background: 'var(--card, #121214)' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle size={18} className="text-red-400" />
+              <h2 className="text-white font-bold text-lg">Delete account</h2>
+            </div>
+            <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+              This signs you out, erases all MUSVORA data stored on this device, and requests deletion of the account data you own (profile, playlists, settings, identity).
+            </p>
+            <p className="text-zinc-500 text-xs leading-relaxed mb-3">
+              Removing your login credential itself requires support and is not instant. This cannot be undone.
+            </p>
+            <label className="block text-zinc-500 text-xs mb-2">
+              Type <span className="text-zinc-300 font-mono font-bold">DELETE</span> to confirm
+            </label>
+            <input
+              value={confirmText}
+              onChange={e => setConfirmText(e.target.value)}
+              autoFocus
+              className="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-red-500/40 mb-4"
+              placeholder="DELETE"
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowDelete(false)}
+                disabled={deleting}
+                className="flex-1 py-3 rounded-xl border border-white/10 text-zinc-300 text-sm font-semibold hover:bg-white/5 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={confirmText !== 'DELETE' || deleting}
+                className="flex-1 py-3 rounded-xl bg-red-500/90 text-white text-sm font-bold hover:bg-red-500 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {deleting ? 'Deleting…' : 'Delete forever'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </AppShell>
   )
 }

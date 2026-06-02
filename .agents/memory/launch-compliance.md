@@ -14,7 +14,8 @@ description: What is verified-secure vs. the real blockers gating App Store / Go
 - Three LOW "unsafe-formatstring" are internal `console.log(\`...${x}\`)` in StorageService.ts / useLocalStorage.ts — negligible.
 
 # Real launch BLOCKERS (must build, honest gaps)
-- **In-app Account Deletion + Data Export are MISSING.** Apple Guideline 5.1.1(v) requires in-app account deletion; GDPR/Google require export + deletion. `Settings.tsx` / `lib/auth` have no delete/export. This is the #1 launch blocker.
+- **In-app Account Deletion: DONE for web beta (best-effort).** `lib/deleteAccount.ts` + Settings Danger Zone: deletes user-owned RLS rows, wipes `musdo-*` local/cache, signs out. CANNOT erase the auth credential (no service_role backend) — copy says "requests deletion", not "deleted". For full Apple 5.1.1(v) / GDPR compliance a privileged backend delete is still required.
+- **Data Export is still MISSING.** GDPR/Google require user-initiated export; not built yet.
 - **DMCA / copyright reporting is a STATIC policy page only** (`legal/DMCA.tsx`) — no submission form, no counter-notice flow, no repeat-infringer automation. Content moderation reports (impersonation, fraud, fake-ownership) have no intake.
 - **No malware/file scanning on uploads** — only 50MB size cap + `accept="audio/*|image/*"`. SecurityPolicy.tsx lists scanning as "planned".
 - Legal pages exist (14 in `src/pages/legal/`) but are marked **Draft/MVP**; missing dedicated Subscription Terms, Account Deletion Policy, Data Export Policy; Security Policy lacks breach-notification specifics. All need real business entity/contact/jurisdiction (do not fabricate — ask Pascasio).

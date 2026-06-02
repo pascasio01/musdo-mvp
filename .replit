@@ -39,5 +39,5 @@ externalPort = 4200
 
 [deployment]
 deploymentTarget = "static"
-build = ["bash", "-c", "cd frontend && npm install && npm run build"]
+build = ["bash", "-c", "cd frontend && npm install && npm run build && cp dist/index.html dist/404.html"]
 publicDir = "frontend/dist"
