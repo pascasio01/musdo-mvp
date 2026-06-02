@@ -1,0 +1,15 @@
+# Supabase project config (Edge Functions).
+#
+# The Stripe webhook must NOT require a Supabase JWT — Stripe authenticates with
+# its own signature header, verified inside the function. The other two
+# functions verify the user's access token manually (getUserFromRequest), so we
+# disable the gateway JWT check for them too and enforce auth in code.
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.customer-portal]
+verify_jwt = false

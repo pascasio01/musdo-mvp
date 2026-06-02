@@ -88,6 +88,46 @@ export interface DbAuditLog {
   created_at: string
 }
 
+export type SubscriptionPlan = 'free' | 'premium' | 'creator_pro'
+
+export type SubscriptionStatus =
+  | 'inactive'
+  | 'trialing'
+  | 'active'
+  | 'past_due'
+  | 'canceled'
+  | 'incomplete'
+  | 'incomplete_expired'
+  | 'unpaid'
+  | 'paused'
+
+export interface DbSubscription {
+  user_id: string
+  stripe_customer_id: string | null
+  stripe_subscription_id: string | null
+  plan: SubscriptionPlan
+  status: SubscriptionStatus
+  trial_end: string | null
+  current_period_end: string | null
+  cancel_at_period_end: boolean
+  trial_used: boolean
+  created_at: string
+  updated_at: string | null
+}
+
+export interface DbBillingInvoice {
+  id: string
+  user_id: string
+  amount_total: number
+  currency: string
+  status: string | null
+  plan: string | null
+  hosted_invoice_url: string | null
+  invoice_pdf: string | null
+  period_start: string | null
+  created_at: string
+}
+
 /**
  * Marks every property whose type includes `null` as optional.
  * Mirrors Postgres semantics: nullable columns can be omitted on INSERT
@@ -139,6 +179,19 @@ export interface Database {
       audit_logs: {
         Row: DbAuditLog
         Insert: NullableOptional<Omit<DbAuditLog, 'id' | 'created_at'>>
+        Update: Record<string, never>
+        Relationships: []
+      }
+      subscriptions: {
+        Row: DbSubscription
+        // Client is read-only (RLS denies writes); types kept for completeness.
+        Insert: NullableOptional<Omit<DbSubscription, 'created_at' | 'updated_at'>>
+        Update: Partial<Omit<DbSubscription, 'user_id' | 'created_at'>>
+        Relationships: []
+      }
+      billing_invoices: {
+        Row: DbBillingInvoice
+        Insert: NullableOptional<DbBillingInvoice>
         Update: Record<string, never>
         Relationships: []
       }

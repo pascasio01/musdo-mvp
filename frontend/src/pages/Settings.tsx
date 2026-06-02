@@ -3,15 +3,24 @@ import { ArrowLeft, Bell, Shield, Eye, Mic2, Palette, LogOut, Headphones, Lock, 
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useAuth } from '../lib/auth'
+import { useSubscription } from '../lib/useSubscription'
+import type { SubscriptionPlan } from '../types/database.types'
 import { Toggle, ActionCard } from '../components/ui'
 import SafeListenPanel from '../components/audio/SafeListenPanel'
 import AudioTuningPanel from '../components/audio/AudioTuningPanel'
 import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
 import { deleteAccountData } from '../lib/deleteAccount'
 
+const PLAN_LABEL: Record<SubscriptionPlan, string> = {
+  free: 'Free',
+  premium: 'Premium',
+  creator_pro: 'Creator Pro',
+}
+
 export default function Settings() {
   const navigate = useNavigate()
   const { signOut, user } = useAuth()
+  const sub = useSubscription()
   const [notifications, setNotifications] = useState(true)
   const [emailNotifs, setEmailNotifs] = useState(false)
   const [privateProfile, setPrivateProfile] = useState(false)
@@ -206,10 +215,15 @@ export default function Settings() {
         <div className="mt-6 space-y-3">
           <button
             onClick={() => navigate('/pricing')}
-            className="w-full py-4 rounded-2xl border border-violet-500/20 text-violet-400 font-semibold text-sm hover:bg-violet-500/8 transition-colors"
+            className="w-full py-4 rounded-2xl border border-violet-500/20 text-violet-400 font-semibold text-sm hover:bg-violet-500/8 transition-colors flex items-center justify-between px-5"
             style={{ background: 'rgba(124,58,237,0.08)' }}
           >
-            Manage Subscription
+            <span>Manage Subscription</span>
+            {!sub.loading && (
+              <span className="text-[11px] font-bold text-violet-300 bg-violet-500/15 border border-violet-500/20 rounded-full px-2.5 py-0.5">
+                {PLAN_LABEL[sub.plan]}{sub.isTrialing ? ' · Trial' : ''}
+              </span>
+            )}
           </button>
           <button
             onClick={() => navigate('/legal')}
