@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Search, Play, Heart, Flame, Disc3, Sparkles, Activity, ShieldCheck,
-  Users, Radio, Building2, Download, MapPin,
+  Users, Radio, Building2, Download, MapPin, Compass, TrendingUp,
   Heart as HeartIcon, Utensils, Hotel, Dumbbell, Car, Cake, PartyPopper,
 } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
@@ -15,6 +15,7 @@ import {
   trending, availableGenres, byGenre, availableMoods, byMood, moodLabel,
   BPM_RANGES, byBpmRange, humanVerified, topArtists, plays,
 } from '../lib/djCurator'
+import { freshForYou, yourGenres, moreLikeGenre, PENDING_TREND_FACETS } from '../lib/trends'
 import type { Song, AppRole } from '../types'
 
 /**
@@ -120,6 +121,7 @@ function TrackRow({ song, context, rank, showPlays }: { song: Song; context: Son
 export default function AIDJComplace() {
   const navigate = useNavigate()
   const { profile } = useAuth()
+  const { historySongs } = useLibrary()
   const [searchOpen, setSearchOpen] = useState(false)
 
   const mode = MODE_LABEL[(profile?.role as AppRole) ?? 'listener'] ?? 'Listener'
@@ -129,6 +131,16 @@ export default function AIDJComplace() {
   const trendingSongs = useMemo(() => trending(6), [])
   const verified = useMemo(() => humanVerified(8), [])
   const artists = useMemo(() => topArtists(8), [])
+
+  // Personal trend layer — derived strictly from the user's REAL play history.
+  const fresh = useMemo(() => freshForYou(historySongs, 6), [historySongs])
+  const leanGenres = useMemo(() => yourGenres(historySongs), [historySongs])
+  const topGenrePick = leanGenres[0]?.value
+  const moreLike = useMemo(
+    () => (topGenrePick ? moreLikeGenre(historySongs, topGenrePick, 6) : []),
+    [historySongs, topGenrePick],
+  )
+  const hasHistory = historySongs.length > 0
 
   const [genre, setGenre] = useState(genres[0] ?? '')
   const [mood, setMood] = useState(moods[0] ?? '')
@@ -184,6 +196,49 @@ export default function AIDJComplace() {
           <p style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)', lineHeight: 1.55 }}>
             No es un generador de playlists. Diseña experiencias musicales completas a partir de tu catálogo real.
           </p>
+
+          {/* For You — adapts to the user's REAL play history (no fabrication) */}
+          <section>
+            <SectionHeader
+              eyebrow="Adapts to your real listening"
+              title="For You"
+              actions={<Compass size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />}
+            />
+
+            {hasHistory && moreLike.length > 0 && (
+              <div className="mb-4">
+                <p className="mb-1.5" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-secondary)', fontWeight: 600 }}>
+                  Because you've been into {topGenrePick}
+                </p>
+                <div className="flex flex-col gap-0.5">
+                  {moreLike.map(s => <TrackRow key={s.id} song={s} context={moreLike} />)}
+                </div>
+              </div>
+            )}
+
+            <div>
+              <p className="mb-1.5" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-secondary)', fontWeight: 600 }}>
+                Fresh for you · not in your history
+              </p>
+              {fresh.length > 0 ? (
+                <div className="flex flex-col gap-0.5">
+                  {fresh.map(s => <TrackRow key={s.id} song={s} context={fresh} />)}
+                </div>
+              ) : (
+                <Card padding="md">
+                  <p style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                    You've played everything in the catalogue — new arrivals will surface here as they're added.
+                  </p>
+                </Card>
+              )}
+            </div>
+
+            {!hasHistory && (
+              <p className="mt-2" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)', lineHeight: 1.5 }}>
+                Play a few tracks and this section adapts to your taste — surfacing more of what you gravitate to.
+              </p>
+            )}
+          </section>
 
           {/* Trending Now (real plays) */}
           <section>
@@ -274,6 +329,29 @@ export default function AIDJComplace() {
                     </span>
                   </span>
                 </button>
+              ))}
+            </div>
+          </section>
+
+          {/* Trend facets that need live cross-user data — honest roadmap, never faked */}
+          <section>
+            <SectionHeader eyebrow="Roadmap · needs live data" title="More Trending Soon" />
+            <div className="flex flex-col gap-2">
+              {PENDING_TREND_FACETS.map(({ title, note }) => (
+                <Card key={title} padding="md">
+                  <div className="flex items-start gap-3">
+                    <span className="grid place-items-center flex-shrink-0" style={{ width: 38, height: 38, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)' }}>
+                      <TrendingUp size={17} aria-hidden />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>{title}</span>
+                        <Badge tone="warning" variant="soft">Pending Integration</Badge>
+                      </div>
+                      <p className="mt-1" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)', lineHeight: 1.5 }}>{note}</p>
+                    </div>
+                  </div>
+                </Card>
               ))}
             </div>
           </section>
