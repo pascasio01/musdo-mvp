@@ -17,7 +17,7 @@ interface GlobalSearchProps {
 
 /**
  * MUSVORA Global Search — overlay launched from app headers (Home, Library,
- * Vault, Readiness, AI DJ Complace).
+ * Vault, Readiness, MUSVORA AI · Music Director).
  *
  * Searches live data the rest of the app already uses: Songs, Artists, Lyrics
  * (from mockLyrics), Composers & Producers (from song credits), the user's

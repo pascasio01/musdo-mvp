@@ -18,7 +18,7 @@ interface GovernanceScopeProps {
  * dark-luxury screens that do NOT use this wrapper are unaffected.
  *
  * Future modules (Vault, Readiness, Ownership Confidence, Recovery, Passport,
- * AI Auditor, AI DJ) should wrap their root in this component.
+ * AI Auditor, Music Director) should wrap their root in this component.
  */
 export function GovernanceScope({
   children,

@@ -8,7 +8,7 @@
    These tokens ONLY apply inside an element marked [data-ds="governance"].
    The existing dark-luxury screens are NOT affected. New MUSVORA modules
    (Vault, Readiness, Ownership Confidence, Recovery, Passport, AI Auditor,
-   AI DJ) opt in by wrapping their root in the GovernanceScope component.
+   Music Director) opt in by wrapping their root in the GovernanceScope component.
 
    Do not delete or restyle existing screens through this file.
    ========================================================================== */
@@ -237,4 +237,22 @@ html[data-color-scheme='light'] [data-ds='governance'] {
   --gv-shadow-sm: 0 2px 6px -2px rgba(15, 23, 42, 0.12);
   --gv-shadow-md: 0 8px 24px -12px rgba(15, 23, 42, 0.18);
   --gv-shadow-lg: 0 24px 48px -20px rgba(15, 23, 42, 0.22);
+}
+
+/* ── MUSVORA AI floating action button — soft breathing gold glow ── */
+@keyframes gvAiFabGlow {
+  0%, 100% {
+    box-shadow: 0 8px 26px color-mix(in srgb, var(--gv-gold) 26%, transparent),
+                0 2px 10px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow: 0 12px 42px color-mix(in srgb, var(--gv-gold) 52%, transparent),
+                0 2px 10px rgba(0, 0, 0, 0.45);
+  }
+}
+.gv-ai-fab {
+  animation: gvAiFabGlow 3.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gv-ai-fab { animation: none; }
 }

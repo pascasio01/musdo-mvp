@@ -15,6 +15,11 @@ import {
   CalendarClock,
   ChevronLeft,
   Play,
+  TrendingUp,
+  BadgeCheck,
+  Compass,
+  Gauge,
+  Heart,
 } from 'lucide-react'
 import { GovernanceScope, Badge } from '../governance'
 import { usePlayer } from '../../lib/player'
@@ -26,6 +31,9 @@ import {
   surpriseMe,
   availableMoods,
   songsByMood,
+  trendingSongs,
+  humanVerifiedSongs,
+  freshSongs,
   type SessionId,
   type BuiltSession,
 } from '../../lib/musvoraAI'
@@ -151,12 +159,36 @@ export default function MusvoraAIButton() {
     navigate(`/library/playlist/${plId}`)
   }
 
+  const onTrending = () => {
+    const list = trendingSongs()
+    if (!list.length) { toast.info('Aún no hay catálogo'); return }
+    playQueue(list, `Top Trending · por reproducciones reales`)
+  }
+
+  const onVerified = () => {
+    const list = humanVerifiedSongs()
+    if (!list.length) { toast.info('Aún no hay música human-verified'); return }
+    playQueue(list, `Human Verified · ${list.length} pistas`)
+  }
+
+  const onDiscover = () => {
+    const list = freshSongs(ctx)
+    if (!list.length) { toast.info('Aún no hay catálogo'); return }
+    playQueue(list, `Descubrir · ${list.length} pistas nuevas para ti`)
+  }
+
+  const onByBpm = () => {
+    setOpen(false)
+    setView('home')
+    navigate('/music-director')
+  }
+
   const moods = availableMoods()
   const fabBottom = song ? 158 : 92
 
   return (
     <>
-      {/* ── Floating central button (aligned to the mobile column) ── */}
+      {/* ── Floating MUSVORA AI button (centered above the bottom nav) ── */}
       <div className="fixed inset-x-0 z-40 pointer-events-none max-w-md mx-auto" style={{ bottom: 0 }}>
         <button
           ref={fabRef}
@@ -165,18 +197,21 @@ export default function MusvoraAIButton() {
           aria-haspopup="dialog"
           aria-expanded={open}
           onClick={() => setOpen(true)}
-          className="gv-focusable pointer-events-auto absolute right-4 grid place-items-center active:scale-95 transition-transform"
+          className="gv-ai-fab gv-focusable pointer-events-auto absolute left-1/2 grid place-items-center"
           style={{
             bottom: fabBottom,
-            width: 56,
-            height: 56,
+            transform: 'translateX(-50%)',
+            width: 66,
+            height: 66,
             borderRadius: '50%',
-            background: 'var(--gv-gold)',
-            color: 'var(--gv-navy)',
-            boxShadow: '0 8px 28px color-mix(in srgb, var(--gv-gold) 38%, transparent), 0 2px 8px rgba(0,0,0,0.4)',
+            background:
+              'linear-gradient(155deg, color-mix(in srgb, var(--gv-gold) 24%, rgba(12,12,14,0.74)), rgba(10,10,12,0.7))',
+            border: '1px solid color-mix(in srgb, var(--gv-gold) 50%, transparent)',
+            backdropFilter: 'blur(16px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(16px) saturate(160%)',
           }}
         >
-          <Sparkles size={24} strokeWidth={2} aria-hidden />
+          <AILogoMark size={34} />
         </button>
       </div>
 
@@ -184,7 +219,7 @@ export default function MusvoraAIButton() {
       {open && (
         <GovernanceScope>
           <div
-            className="fixed inset-0 z-50 flex items-end justify-center"
+            className="fixed inset-0 z-50 flex items-stretch justify-center"
             role="dialog"
             aria-modal="true"
             aria-label="MUSVORA AI"
@@ -202,11 +237,9 @@ export default function MusvoraAIButton() {
               className="relative w-full max-w-md safe-bottom"
               style={{
                 background: 'var(--gv-bg)',
-                borderTop: '1px solid var(--gv-border)',
-                borderTopLeftRadius: 'var(--gv-radius-xl, 20px)',
-                borderTopRightRadius: 'var(--gv-radius-xl, 20px)',
-                boxShadow: '0 -12px 40px rgba(0,0,0,0.5)',
-                maxHeight: '82vh',
+                boxShadow: '0 0 60px rgba(0,0,0,0.6)',
+                height: '100dvh',
+                maxHeight: '100dvh',
                 overflowY: 'auto',
               }}
             >
@@ -302,8 +335,26 @@ export default function MusvoraAIButton() {
                       })}
                     </div>
 
+                    {/* Advanced — real catalogue actions only */}
+                    <p className="gv-eyebrow mt-7 mb-3">Avanzado</p>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      <AdvAction icon={<TrendingUp size={18} strokeWidth={1.9} />} label="Top Trending" sub="Por reproducciones" onClick={onTrending} />
+                      <AdvAction icon={<BadgeCheck size={18} strokeWidth={1.9} />} label="Human Verified" sub="Solo verificadas" onClick={onVerified} />
+                      <AdvAction icon={<Compass size={18} strokeWidth={1.9} />} label="Descubrir" sub="Nuevo para ti" onClick={onDiscover} />
+                      <AdvAction icon={<Gauge size={18} strokeWidth={1.9} />} label="By BPM" sub="Por tempo" onClick={onByBpm} />
+                      <AdvAction icon={<Heart size={18} strokeWidth={1.9} />} label="By Emotion" sub="Por mood real" onClick={() => setView('mood')} />
+                    </div>
+
+                    {/* Honestly pending — needs data MUSVORA does not collect yet */}
+                    <p className="gv-eyebrow mt-7 mb-3">Pronto · requiere más datos</p>
+                    <div className="flex flex-wrap gap-2">
+                      <PendingChip label="Music Twin" />
+                      <PendingChip label="Around Me" />
+                      <PendingChip label="By Language" />
+                    </div>
+
                     <p className="mt-5" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-faint)', lineHeight: 'var(--gv-leading-normal)' }}>
-                      Las sesiones se construyen solo con tu catálogo real (tempo y mood). MUSVORA AI organiza música — no la genera.
+                      Las sesiones se construyen solo con tu catálogo real (tempo y mood). MUSVORA AI organiza música — no la genera. Music Twin, Around Me y By Language llegarán cuando exista la señal real que necesitan.
                     </p>
                   </>
                 ) : (
@@ -368,5 +419,71 @@ function QuickAction({ icon, label, onClick, accent }: { icon: React.ReactNode; 
       {icon}
       <span className="font-semibold text-center" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text)' }}>{label}</span>
     </button>
+  )
+}
+
+function AdvAction({ icon, label, sub, onClick }: { icon: React.ReactNode; label: string; sub: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="gv-focusable flex items-center gap-3 text-left active:opacity-70 transition-opacity"
+      style={{
+        background: 'var(--gv-surface)',
+        border: '1px solid var(--gv-border)',
+        borderRadius: 'var(--gv-radius-lg)',
+        padding: 'var(--gv-space-3)',
+      }}
+    >
+      <span
+        className="grid place-items-center flex-shrink-0"
+        style={{ width: 36, height: 36, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }}
+        aria-hidden
+      >
+        {icon}
+      </span>
+      <span className="min-w-0">
+        <span className="block font-semibold truncate" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>{label}</span>
+        <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>{sub}</span>
+      </span>
+    </button>
+  )
+}
+
+function PendingChip({ label }: { label: string }) {
+  return (
+    <span
+      className="inline-flex items-center gap-1.5"
+      style={{
+        background: 'var(--gv-surface)',
+        border: '1px dashed var(--gv-border)',
+        borderRadius: '999px',
+        padding: '6px 12px',
+        fontSize: 'var(--gv-text-2xs)',
+        color: 'var(--gv-text-muted)',
+      }}
+    >
+      {label}
+      <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gv-text-faint)' }}>Pronto</span>
+    </span>
+  )
+}
+
+function AILogoMark({ size = 34 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      aria-hidden
+      className="flex-shrink-0"
+      style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.55))' }}
+    >
+      <path
+        d="M14 45 V19 L23 19 L32 33 L41 19 L50 19 V45 H43.5 V30 L34 44 H30 L20.5 30 V45 Z"
+        fill="#fff"
+      />
+      <rect x="14" y="49.5" width="36" height="3" rx="1.5" fill="var(--gv-gold, #D4AF37)" />
+    </svg>
   )
 }

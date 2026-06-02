@@ -19,7 +19,7 @@ import { freshForYou, yourGenres, moreLikeGenre, PENDING_TREND_FACETS } from '..
 import type { Song, AppRole } from '../types'
 
 /**
- * AI DJ Complace — your personal Music Director (Phase 1).
+ * MUSVORA AI · Music Director — your personal Music Director (Phase 1).
  *
  * Real modules are driven strictly by the live catalogue + the user's own
  * library: Trending (real play counts), Best by Genre / Mood / BPM, Human
@@ -118,7 +118,7 @@ function TrackRow({ song, context, rank, showPlays }: { song: Song; context: Son
   )
 }
 
-export default function AIDJComplace() {
+export default function MusicDirector() {
   const navigate = useNavigate()
   const { profile } = useAuth()
   const { historySongs } = useLibrary()
@@ -165,7 +165,7 @@ export default function AIDJComplace() {
         >
           <div className="flex items-center justify-between gap-3 px-5" style={{ height: 64 }}>
             <div className="min-w-0">
-              <p className="gv-eyebrow">MUSVORA · AI DJ Complace</p>
+              <p className="gv-eyebrow">MUSVORA AI · Your Music Director</p>
               <h1
                 className="font-bold leading-none truncate"
                 style={{ fontFamily: 'var(--gv-font-display)', fontSize: 'var(--gv-text-lg)', color: 'var(--gv-text)' }}

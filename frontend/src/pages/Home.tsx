@@ -301,10 +301,10 @@ export default function Home() {
             <AreaCard
               accent="gold"
               icon={<Radio size={20} strokeWidth={1.9} />}
-              eyebrow="Intelligence"
-              title="AI Music Director"
-              description="Deja que MUSVORA construya el momento — eventos, estados de ánimo y radios."
-              onClick={() => navigate('/dj')}
+              eyebrow="Your Music Director"
+              title="MUSVORA AI"
+              description="Recomendado para ti según lo que escuchas — sesiones, moods y tendencias reales de tu catálogo."
+              onClick={() => navigate('/music-director')}
             />
           </section>
 

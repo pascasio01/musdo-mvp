@@ -2,7 +2,7 @@
  * MUSVORA Governance Design System — component foundation.
  *
  * Import these primitives in NEW modules (Vault, Readiness, Ownership
- * Confidence, Recovery, Passport, AI Auditor, AI DJ). Wrap module roots in
+ * Confidence, Recovery, Passport, AI Auditor, Music Director). Wrap module roots in
  * <GovernanceScope> to activate the institutional token theme.
  *
  * Existing dark-luxury screens are intentionally left untouched.

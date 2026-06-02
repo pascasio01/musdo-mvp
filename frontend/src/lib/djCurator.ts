@@ -2,7 +2,7 @@ import { mockSongs } from '../data/mockData'
 import type { Song } from '../types'
 
 /**
- * AI DJ Complace — real catalogue curation layer.
+ * MUSVORA AI · Music Director — real catalogue curation layer.
  *
  * Every selector here derives strictly from real catalogue fields already present
  * on the songs (genre, mood, bpm, human_verified, analytics.plays, credits).

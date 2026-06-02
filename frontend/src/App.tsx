@@ -47,7 +47,7 @@ const Pricing       = lazy(() => import('./pages/Pricing'))
 const Library        = lazy(() => import('./pages/Library'))
 const PlaylistDetail = lazy(() => import('./pages/PlaylistDetail'))
 const Downloads      = lazy(() => import('./pages/Downloads'))
-const AIDJComplace   = lazy(() => import('./pages/AIDJComplace'))
+const MusicDirector  = lazy(() => import('./pages/MusicDirector'))
 
 // Legal group (rarely visited — load together)
 const Legal              = lazy(() => import('./pages/legal/Legal'))
@@ -176,7 +176,8 @@ export default function App() {
               <Route path="/library" element={<Library />} />
               <Route path="/library/playlist/:id" element={<PlaylistDetail />} />
               <Route path="/downloads" element={<Downloads />} />
-              <Route path="/dj" element={<AIDJComplace />} />
+              <Route path="/music-director" element={<MusicDirector />} />
+              <Route path="/dj" element={<Navigate to="/music-director" replace />} />
               <Route path="/search" element={<Search />} />
               <Route path="/player/:id" element={<Player />} />
               <Route path="/studio/:id" element={<Player />} />

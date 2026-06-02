@@ -165,4 +165,25 @@ export function songsByMood(mood: string, catalog: Song[] = mockSongs): Song[] {
   return catalog.filter(s => String(s.mood) === mood)
 }
 
+function playsOf(song: Song): number {
+  return song.analytics?.plays ?? 0
+}
+
+/** Real trending — ordered strictly by genuine play counts, highest first. */
+export function trendingSongs(catalog: Song[] = mockSongs): Song[] {
+  return [...catalog].sort((a, b) => playsOf(b) - playsOf(a) || a.id.localeCompare(b.id))
+}
+
+/** Only human-verified tracks (real flag), in trending order. */
+export function humanVerifiedSongs(catalog: Song[] = mockSongs): Song[] {
+  return trendingSongs(catalog).filter(s => s.human_verified)
+}
+
+/** Fresh for you — real tracks you have not played yet (falls back to full catalogue). */
+export function freshSongs(ctx: AIContext = {}, catalog: Song[] = mockSongs): Song[] {
+  const played = ctx.historyIds ?? new Set<string>()
+  const fresh = catalog.filter(s => !played.has(s.id))
+  return trendingSongs(fresh.length ? fresh : catalog)
+}
+
 export { moodLabel }
