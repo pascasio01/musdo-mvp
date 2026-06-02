@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import BottomNav from '../components/BottomNav'
 import PlayerBar from '../components/PlayerBar'
+import MusvoraAIButton from '../components/ai/MusvoraAIButton'
 import { usePlayer } from '../lib/player'
 import { useMusicAura } from '../lib/aura'
 import { useTheme } from '../lib/theme'
@@ -68,6 +69,7 @@ export default function AppShell({ children }: AppShellProps) {
         {children}
       </main>
 
+      <MusvoraAIButton />
       <PlayerBar />
       <BottomNav />
     </div>

@@ -2,6 +2,7 @@
 - [Theme system](theme-system.md) — themes inject inline CSS vars on <html>; vars omitted by the next theme leak, so re-assert or fully define them; 'system' resolves via matchMedia.
 - [Professional profile](professional-profile.md) — governance profile at /profile/:username; client-stored profile data with private fields MUST use per-user localStorage key; honest verification/metrics only.
 - [MUSVORA player surfaces](player-surfaces.md) — cinematic /player/:id (legacy tokens, sync mock) vs governance /review/:id (DS, async Vault); don't conflate.
+- [MUSVORA AI central FAB](musvora-ai.md) — single app-wide gold FAB→unified panel; sessions curated by REAL bpm+mood only (genre unused, ~6/39 have mood); show real count+BPM, never fabricate.
 - [Offline downloads](offline-downloads.md) — cross-origin no-CORS audio cached as opaque via SW Cache (musdo-offline-v1); real storage via estimate(); no 206/exact sizes possible; SW runs in dev as /sw.js?dev=1.
 - [Home IA](home-information-architecture.md) — Home is 5 calm areas (Continue Listening real history · Discover · AI Music Director · Library · My Music); intelligence detail moved to /readiness, NOT deleted — don't re-add the dense dashboard.
 - [AI DJ Complace](ai-dj-complace.md) — /dj data-honesty contract: rank trending by plays only, no claimed labels (no "independent"), unwired modules stay Pending; Albums has no field.
