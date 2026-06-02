@@ -1,10 +1,11 @@
 import { memo } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { Home, Library as LibraryIcon, Shield, ScanLine, User } from 'lucide-react'
+import { Home, Library as LibraryIcon, Radio, Shield, ScanLine, User } from 'lucide-react'
 
 const navItems = [
   { to: '/home', icon: Home, label: 'Home' },
   { to: '/library', icon: LibraryIcon, label: 'Library' },
+  { to: '/dj', icon: Radio, label: 'AI DJ' },
   { to: '/vault', icon: Shield, label: 'Vault' },
   { to: '/scan', icon: ScanLine, label: 'Scan' },
   { to: '/profile', icon: User, label: 'Profile' },

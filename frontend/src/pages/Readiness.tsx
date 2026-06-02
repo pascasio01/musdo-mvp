@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -11,9 +12,11 @@ import {
   X,
   Sparkles,
   ScanLine,
+  Search,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { GovernanceScope, Button, Card, Badge, SectionHeader } from '../components/governance'
+import GlobalSearch from '../components/home/GlobalSearch'
 import { ReadinessRing } from '../components/readiness/ReadinessRing'
 import {
   OVERALL_READINESS,
@@ -147,6 +150,7 @@ function DimensionCard({ dim }: { dim: ReadinessDimension }) {
 
 export default function Readiness() {
   const navigate = useNavigate()
+  const [searchOpen, setSearchOpen] = useState(false)
   const overallStatus = scoreStatus(OVERALL_READINESS)
   const overallMeta = STATUS_META[overallStatus]
 
@@ -172,7 +176,7 @@ export default function Readiness() {
             >
               <ArrowLeft size={21} />
             </button>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="gv-eyebrow">MUSVORA</p>
               <h1
                 className="font-bold leading-none truncate"
@@ -181,8 +185,20 @@ export default function Readiness() {
                 Readiness Center
               </h1>
             </div>
+            <button
+              type="button"
+              aria-label="Search music, artists and assets"
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(true)}
+              className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
+              style={{ width: 38, height: 38, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)' }}
+            >
+              <Search size={18} strokeWidth={1.8} aria-hidden />
+            </button>
           </div>
         </header>
+
+        <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
         <div className="px-5">
           {/* ── Overall Readiness Score ── */}

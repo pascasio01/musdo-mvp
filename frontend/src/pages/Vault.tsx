@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Plus, Shield, Music, FileText, Lock, Unlock, Eye, MoreVertical } from 'lucide-react'
+import { Plus, Shield, Music, FileText, Lock, Unlock, Eye, MoreVertical, Search } from 'lucide-react'
 import AppShell from '../layouts/AppShell'
 import { mockDemos } from '../data/mockData'
 import { useNavigate } from 'react-router-dom'
+import { GovernanceScope } from '../components/governance'
+import GlobalSearch from '../components/home/GlobalSearch'
 
 const tabs = ['Demos', 'Lyrics', 'Passports']
 
@@ -20,6 +22,7 @@ const statCards = [
 
 export default function Vault() {
   const [activeTab, setActiveTab] = useState('Demos')
+  const [searchOpen, setSearchOpen] = useState(false)
   const navigate = useNavigate()
   const demos = mockDemos
 
@@ -33,14 +36,25 @@ export default function Vault() {
             <p className="text-muted text-xs uppercase tracking-widest font-semibold">Composer</p>
             <h1 className="text-primary text-3xl font-black">Vault</h1>
           </div>
-          <button
-            className="w-10 h-10 rounded-2xl flex items-center justify-center hover:opacity-90 transition-opacity"
-            style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
-            aria-label="Upload new"
-            onClick={() => navigate('/upload')}
-          >
-            <Plus size={20} strokeWidth={2.5} aria-hidden />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              className="w-10 h-10 rounded-2xl flex items-center justify-center hover:opacity-90 transition-opacity"
+              style={{ background: 'var(--surface)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
+              aria-label="Search music, artists and assets"
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search size={18} strokeWidth={2} aria-hidden />
+            </button>
+            <button
+              className="w-10 h-10 rounded-2xl flex items-center justify-center hover:opacity-90 transition-opacity"
+              style={{ background: 'var(--text-primary)', color: 'var(--text-inverse)' }}
+              aria-label="Upload new"
+              onClick={() => navigate('/upload')}
+            >
+              <Plus size={20} strokeWidth={2.5} aria-hidden />
+            </button>
+          </div>
         </div>
         <p className="text-muted text-sm mb-8">Secure your music. Protect your rights.</p>
 
@@ -194,6 +208,10 @@ export default function Vault() {
           </div>
         )}
       </div>
+
+      <GovernanceScope>
+        <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+      </GovernanceScope>
     </AppShell>
   )
 }

@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search as SearchIcon, X, Play, User, Music2, ArrowRight, Clock, ListMusic, ShieldCheck } from 'lucide-react'
+import { Search as SearchIcon, X, Play, User, Music2, ArrowRight, Clock, ListMusic, ShieldCheck, Quote, PenLine, SlidersHorizontal } from 'lucide-react'
 import { mockSongs } from '../../data/mockData'
+import { mockLyrics } from '../../data/mockLyrics'
 import { usePlayer } from '../../lib/player'
 import { useLibrary } from '../../lib/library'
+import { allComposers, allProducers } from '../../lib/djCurator'
 import { Badge } from '../governance'
 import type { Song } from '../../types'
 import type { LibraryPlaylist } from '../../lib/library'
@@ -14,25 +16,37 @@ interface GlobalSearchProps {
 }
 
 /**
- * MUSVORA Global Search — overlay launched from the Home header.
+ * MUSVORA Global Search — overlay launched from app headers (Home, Library,
+ * Vault, Readiness, AI DJ Complace).
  *
- * Searches live data the rest of the app already uses: Songs + Artists from the
- * catalogue, the user's personal Playlists, and Song Passports. Categories that
- * are not yet indexed (Composers, Lyrics, Demos, Vault Assets, Marketplace,
- * Licensing) are surfaced honestly as "Pending Integration" — never fabricated.
+ * Searches live data the rest of the app already uses: Songs, Artists, Lyrics
+ * (from mockLyrics), Composers & Producers (from song credits), the user's
+ * personal Playlists, and Song Passports. Categories that are not yet indexed
+ * (Albums, Demos, Vault Assets, Marketplace, Licensing) are surfaced honestly
+ * as "Pending Integration" — never fabricated.
  *
  * The overlay stops above the mini player + bottom nav so playback stays
  * visible and usable. Closes via X, backdrop tap, or Escape.
  */
 
 const PENDING_CATEGORIES = [
-  'Composers', 'Lyrics', 'Demos', 'Vault Assets', 'Marketplace', 'Licensing',
+  'Albums', 'Demos', 'Vault Assets', 'Marketplace', 'Licensing',
 ] as const
 
 interface ArtistHit {
   name: string
   count: number
   verified: boolean
+}
+
+interface LyricHit {
+  song: Song
+  snippet: string
+}
+
+interface CreditHit {
+  name: string
+  tracks: number
 }
 
 export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
@@ -112,8 +126,11 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
     return () => window.clearTimeout(t)
   }, [query])
 
-  const { songs, artists, playlistHits, passports } = useMemo(() => {
-    const empty = { songs: [] as Song[], artists: [] as ArtistHit[], playlistHits: [] as LibraryPlaylist[], passports: [] as Song[] }
+  const { songs, artists, playlistHits, passports, lyrics, composers, producers } = useMemo(() => {
+    const empty = {
+      songs: [] as Song[], artists: [] as ArtistHit[], playlistHits: [] as LibraryPlaylist[],
+      passports: [] as Song[], lyrics: [] as LyricHit[], composers: [] as CreditHit[], producers: [] as CreditHit[],
+    }
     if (!debounced) return empty
     try {
       const songHits = mockSongs.filter(s => {
@@ -130,11 +147,31 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
         else artistMap.set(s.artist_name, { name: s.artist_name, count: 1, verified: !!s.human_verified })
       }
       const plHits = playlists.filter(p => p.title.toLowerCase().includes(debounced)).slice(0, 4)
+
+      // Lyrics — real, from mockLyrics. Snippet shows the first matching line.
+      const lyricHits: LyricHit[] = []
+      for (const lt of Object.values(mockLyrics)) {
+        const plain = (lt.plain ?? '').toLowerCase()
+        const inPlain = plain.includes(debounced)
+        const line = lt.synced?.find(l => l.text.toLowerCase().includes(debounced))
+        if (!inPlain && !line) continue
+        const song = mockSongs.find(s => s.id === lt.song_id)
+        if (!song) continue
+        const snippet = line?.text ?? (lt.plain ?? '').split('\n').find(l => l.toLowerCase().includes(debounced)) ?? lt.plain?.split('\n')[0] ?? ''
+        lyricHits.push({ song, snippet })
+      }
+
+      const composerHits = allComposers().filter(c => c.name.toLowerCase().includes(debounced)).slice(0, 4)
+      const producerHits = allProducers().filter(c => c.name.toLowerCase().includes(debounced)).slice(0, 4)
+
       return {
         songs: songHits.slice(0, 6),
         artists: Array.from(artistMap.values()).slice(0, 4),
         playlistHits: plHits,
         passports: songHits.slice(0, 4),
+        lyrics: lyricHits.slice(0, 4),
+        composers: composerHits,
+        producers: producerHits,
       }
     } catch {
       return empty
@@ -145,6 +182,7 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
 
   const hasQuery = debounced.length > 0
   const hasHits = songs.length > 0 || artists.length > 0 || playlistHits.length > 0
+    || lyrics.length > 0 || composers.length > 0 || producers.length > 0
   const noResults = hasQuery && !loading && !error && !hasHits
   const bottomGap = nowPlaying ? 156 : 88
 
@@ -267,6 +305,9 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
                 <Badge tone="success" variant="soft">Artists · Live</Badge>
                 <Badge tone="success" variant="soft">Playlists · Live</Badge>
                 <Badge tone="success" variant="soft">Passports · Live</Badge>
+                <Badge tone="success" variant="soft">Lyrics · Live</Badge>
+                <Badge tone="success" variant="soft">Composers · Live</Badge>
+                <Badge tone="success" variant="soft">Producers · Live</Badge>
                 {PENDING_CATEGORIES.map(c => (
                   <Badge key={c} tone="warning" variant="soft">{c} · Pending Integration</Badge>
                 ))}
@@ -398,6 +439,102 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
                           </span>
                           <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
                             Passport · {s.artist_name}
+                          </span>
+                        </span>
+                        <ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {lyrics.length > 0 && (
+                <section>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Lyrics</p>
+                  <div className="flex flex-col gap-1.5">
+                    {lyrics.map(({ song, snippet }) => (
+                      <button
+                        key={`ly-${song.id}`}
+                        onClick={() => openSong(song)}
+                        className="gv-focusable flex items-center gap-3 px-2 py-2 text-left active:scale-[0.99] transition-transform"
+                        style={{ borderRadius: 'var(--gv-radius-md)' }}
+                      >
+                        <span
+                          className="grid place-items-center flex-shrink-0"
+                          style={{ width: 36, height: 36, borderRadius: 'var(--gv-radius-sm)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)' }}
+                        >
+                          <Quote size={16} aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)', fontStyle: 'italic' }}>
+                            “{snippet}”
+                          </span>
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                            {song.title} · {song.artist_name}
+                          </span>
+                        </span>
+                        <Play size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {composers.length > 0 && (
+                <section>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Composers</p>
+                  <div className="flex flex-col gap-1.5">
+                    {composers.map(c => (
+                      <button
+                        key={`cp-${c.name}`}
+                        onClick={() => openArtist(c.name)}
+                        className="gv-focusable flex items-center gap-3 px-2 py-2 text-left active:scale-[0.99] transition-transform"
+                        style={{ borderRadius: 'var(--gv-radius-md)' }}
+                      >
+                        <span
+                          className="grid place-items-center flex-shrink-0"
+                          style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)' }}
+                        >
+                          <PenLine size={16} aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                            {c.name}
+                          </span>
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                            Composer · {c.tracks} {c.tracks === 1 ? 'credit' : 'credits'}
+                          </span>
+                        </span>
+                        <ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {producers.length > 0 && (
+                <section>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Producers</p>
+                  <div className="flex flex-col gap-1.5">
+                    {producers.map(c => (
+                      <button
+                        key={`pr-${c.name}`}
+                        onClick={() => openArtist(c.name)}
+                        className="gv-focusable flex items-center gap-3 px-2 py-2 text-left active:scale-[0.99] transition-transform"
+                        style={{ borderRadius: 'var(--gv-radius-md)' }}
+                      >
+                        <span
+                          className="grid place-items-center flex-shrink-0"
+                          style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-secondary)' }}
+                        >
+                          <SlidersHorizontal size={16} aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                            {c.name}
+                          </span>
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                            Producer · {c.tracks} {c.tracks === 1 ? 'credit' : 'credits'}
                           </span>
                         </span>
                         <ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
