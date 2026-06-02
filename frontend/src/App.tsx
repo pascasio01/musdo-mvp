@@ -8,6 +8,7 @@ import { ToastProvider } from './lib/toast'
 import { AudioIntelligenceProvider } from './lib/audioIntelligence'
 import { PersonalizationProvider } from './lib/personalization'
 import { IdentityProvider } from './lib/identity'
+import { LibraryProvider } from './lib/library'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import AuraConnector from './components/AuraConnector'
@@ -42,6 +43,8 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
 const ResetPassword  = lazy(() => import('./pages/ResetPassword'))
 const AuthCallback   = lazy(() => import('./pages/AuthCallback'))
 const Pricing       = lazy(() => import('./pages/Pricing'))
+const Library        = lazy(() => import('./pages/Library'))
+const PlaylistDetail = lazy(() => import('./pages/PlaylistDetail'))
 
 // Legal group (rarely visited — load together)
 const Legal              = lazy(() => import('./pages/legal/Legal'))
@@ -113,9 +116,11 @@ const Providers = memo(function Providers({ children }: { children: React.ReactN
               <AudioIntelligenceProvider>
                 <PersonalizationProvider>
                   <IdentityProvider>
-                    <AuraConnector />
-                    {children}
-                    <ToastContainer />
+                    <LibraryProvider>
+                      <AuraConnector />
+                      {children}
+                      <ToastContainer />
+                    </LibraryProvider>
                   </IdentityProvider>
                 </PersonalizationProvider>
               </AudioIntelligenceProvider>
@@ -163,6 +168,8 @@ export default function App() {
 
               {/* ── Open App (mock data, no auth required) ── */}
               <Route path="/home" element={<Home />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/library/playlist/:id" element={<PlaylistDetail />} />
               <Route path="/search" element={<Search />} />
               <Route path="/player/:id" element={<Player />} />
               <Route path="/studio/:id" element={<Player />} />

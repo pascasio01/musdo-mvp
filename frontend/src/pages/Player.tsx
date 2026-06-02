@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
 import { usePlayer } from '../lib/player'
+import { useLibrary } from '../lib/library'
 import { mockSongs } from '../data/mockData'
 import type { Song, LicensingStatus } from '../types'
 import VerificationBadge, { VerificationBadgeRow } from '../components/VerificationBadge'
@@ -64,7 +65,7 @@ export default function Player() {
     seek, togglePlay, skip,
   } = usePlayer()
 
-  const [liked, setLiked] = useState(false)
+  const { isFavorite, toggleFavorite } = useLibrary()
   const [tab, setTab] = useState<PlayerTab>('now')
 
   const song: Song | undefined = useMemo(
@@ -209,12 +210,13 @@ export default function Player() {
           </div>
           <div className="flex items-center gap-3 ml-4">
             <button
-              onClick={() => setLiked(v => !v)}
-              aria-label={liked ? 'Unlike' : 'Like'}
+              onClick={() => song && toggleFavorite(song)}
+              aria-label={song && isFavorite(song.id) ? 'Remove from favorites' : 'Add to favorites'}
+              aria-pressed={!!song && isFavorite(song.id)}
               className="transition-colors"
-              style={{ color: liked ? 'var(--accent)' : 'var(--text-muted)' }}
+              style={{ color: song && isFavorite(song.id) ? 'var(--accent)' : 'var(--text-muted)' }}
             >
-              <Heart size={20} fill={liked ? 'currentColor' : 'none'} aria-hidden />
+              <Heart size={20} fill={song && isFavorite(song.id) ? 'currentColor' : 'none'} aria-hidden />
             </button>
             <button
               aria-label="Share"

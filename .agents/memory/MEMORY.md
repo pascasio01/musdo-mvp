@@ -2,5 +2,6 @@
 - [Theme system](theme-system.md) — themes inject inline CSS vars on <html>; vars omitted by the next theme leak, so re-assert or fully define them; 'system' resolves via matchMedia.
 - [Professional profile](professional-profile.md) — governance profile at /profile/:username; client-stored profile data with private fields MUST use per-user localStorage key; honest verification/metrics only.
 - [MUSVORA player surfaces](player-surfaces.md) — cinematic /player/:id (legacy tokens, sync mock) vs governance /review/:id (DS, async Vault); don't conflate.
+- [Library data layer](library-data-layer.md) — useLibrary() is the real per-user favorites/history/playlists store (musdo-library-v1:<userId>); ID-based, resolves vs mockSongs; provider sits inside Auth+Player.
 - [Global Search overlay](global-search.md) — Home-header search; Songs/Artists live from catalogue, other categories Pending Integration; modal focus-trap must exclude tabindex=-1 backdrop.
 - [Founder Console](founder-console.md) — owner-only /owner console (requireOwner via VITE_OWNER_EMAIL); real metrics ONLY from loadFounderSnapshot/Vault, everything else honest Pending Integration.

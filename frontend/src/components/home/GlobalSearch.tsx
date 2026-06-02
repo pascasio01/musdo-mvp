@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search as SearchIcon, X, Play, User, Music2, ArrowRight, Clock } from 'lucide-react'
+import { Search as SearchIcon, X, Play, User, Music2, ArrowRight, Clock, ListMusic, ShieldCheck } from 'lucide-react'
 import { mockSongs } from '../../data/mockData'
 import { usePlayer } from '../../lib/player'
+import { useLibrary } from '../../lib/library'
 import { Badge } from '../governance'
 import type { Song } from '../../types'
+import type { LibraryPlaylist } from '../../lib/library'
 
 interface GlobalSearchProps {
   open: boolean
@@ -14,10 +16,10 @@ interface GlobalSearchProps {
 /**
  * MUSVORA Global Search — overlay launched from the Home header.
  *
- * Searches the live catalogue (Songs + Artists) the rest of the app already
- * uses. Categories that are not yet indexed (Composers, Lyrics, Demos, Vault
- * Assets, Marketplace, Licensing) are surfaced honestly as "Pending
- * Integration" — never fabricated as real results.
+ * Searches live data the rest of the app already uses: Songs + Artists from the
+ * catalogue, the user's personal Playlists, and Song Passports. Categories that
+ * are not yet indexed (Composers, Lyrics, Demos, Vault Assets, Marketplace,
+ * Licensing) are surfaced honestly as "Pending Integration" — never fabricated.
  *
  * The overlay stops above the mini player + bottom nav so playback stays
  * visible and usable. Closes via X, backdrop tap, or Escape.
@@ -36,6 +38,7 @@ interface ArtistHit {
 export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
   const navigate = useNavigate()
   const { song: nowPlaying, playSong } = usePlayer()
+  const { playlists } = useLibrary()
   const inputRef = useRef<HTMLInputElement>(null)
   const rootRef = useRef<HTMLDivElement>(null)
   const restoreFocusRef = useRef<HTMLElement | null>(null)
@@ -109,8 +112,9 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
     return () => window.clearTimeout(t)
   }, [query])
 
-  const { songs, artists } = useMemo(() => {
-    if (!debounced) return { songs: [] as Song[], artists: [] as ArtistHit[] }
+  const { songs, artists, playlistHits, passports } = useMemo(() => {
+    const empty = { songs: [] as Song[], artists: [] as ArtistHit[], playlistHits: [] as LibraryPlaylist[], passports: [] as Song[] }
+    if (!debounced) return empty
     try {
       const songHits = mockSongs.filter(s => {
         const hay = [s.title, s.artist_name, s.genre, String(s.mood ?? ''), s.key ?? '']
@@ -125,16 +129,23 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
         if (existing) existing.count += 1
         else artistMap.set(s.artist_name, { name: s.artist_name, count: 1, verified: !!s.human_verified })
       }
-      return { songs: songHits.slice(0, 6), artists: Array.from(artistMap.values()).slice(0, 4) }
+      const plHits = playlists.filter(p => p.title.toLowerCase().includes(debounced)).slice(0, 4)
+      return {
+        songs: songHits.slice(0, 6),
+        artists: Array.from(artistMap.values()).slice(0, 4),
+        playlistHits: plHits,
+        passports: songHits.slice(0, 4),
+      }
     } catch {
-      return { songs: [] as Song[], artists: [] as ArtistHit[] }
+      return empty
     }
-  }, [debounced])
+  }, [debounced, playlists])
 
   if (!open) return null
 
   const hasQuery = debounced.length > 0
-  const noResults = hasQuery && !loading && !error && songs.length === 0 && artists.length === 0
+  const hasHits = songs.length > 0 || artists.length > 0 || playlistHits.length > 0
+  const noResults = hasQuery && !loading && !error && !hasHits
   const bottomGap = nowPlaying ? 156 : 88
 
   const openSong = (s: Song) => {
@@ -148,6 +159,14 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
   }
   const openArtist = (name: string) => {
     navigate(`/search?q=${encodeURIComponent(name)}`)
+    onClose()
+  }
+  const openPlaylist = (id: string) => {
+    navigate(`/library/playlist/${id}`)
+    onClose()
+  }
+  const openPassport = (s: Song) => {
+    navigate(`/passport/${s.id}`)
     onClose()
   }
 
@@ -246,6 +265,8 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
               <div className="flex flex-wrap gap-2">
                 <Badge tone="success" variant="soft">Songs · Live</Badge>
                 <Badge tone="success" variant="soft">Artists · Live</Badge>
+                <Badge tone="success" variant="soft">Playlists · Live</Badge>
+                <Badge tone="success" variant="soft">Passports · Live</Badge>
                 {PENDING_CATEGORIES.map(c => (
                   <Badge key={c} tone="warning" variant="soft">{c} · Pending Integration</Badge>
                 ))}
@@ -254,7 +275,7 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
           )}
 
           {/* Live results */}
-          {hasQuery && !loading && !error && (songs.length > 0 || artists.length > 0) && (
+          {hasQuery && !loading && !error && hasHits && (
             <div className="flex flex-col gap-5">
               {artists.length > 0 && (
                 <section>
@@ -316,6 +337,70 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
                           </span>
                         </span>
                         <Play size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {playlistHits.length > 0 && (
+                <section>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Playlists</p>
+                  <div className="flex flex-col gap-1.5">
+                    {playlistHits.map(p => (
+                      <button
+                        key={p.id}
+                        onClick={() => openPlaylist(p.id)}
+                        className="gv-focusable flex items-center gap-3 px-2 py-2 text-left active:scale-[0.99] transition-transform"
+                        style={{ borderRadius: 'var(--gv-radius-md)' }}
+                      >
+                        <span
+                          className="grid place-items-center flex-shrink-0"
+                          style={{ width: 36, height: 36, borderRadius: 'var(--gv-radius-sm)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-gold)' }}
+                        >
+                          <ListMusic size={16} aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                            {p.title}
+                          </span>
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                            {p.songIds.length} {p.songIds.length === 1 ? 'track' : 'tracks'}
+                          </span>
+                        </span>
+                        <ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {passports.length > 0 && (
+                <section>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Song Passports</p>
+                  <div className="flex flex-col gap-1.5">
+                    {passports.map(s => (
+                      <button
+                        key={`pp-${s.id}`}
+                        onClick={() => openPassport(s)}
+                        className="gv-focusable flex items-center gap-3 px-2 py-2 text-left active:scale-[0.99] transition-transform"
+                        style={{ borderRadius: 'var(--gv-radius-md)' }}
+                      >
+                        <span
+                          className="grid place-items-center flex-shrink-0"
+                          style={{ width: 36, height: 36, borderRadius: 'var(--gv-radius-sm)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-text-link)' }}
+                        >
+                          <ShieldCheck size={16} aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                            {s.title}
+                          </span>
+                          <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
+                            Passport · {s.artist_name}
+                          </span>
+                        </span>
+                        <ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
                       </button>
                     ))}
                   </div>

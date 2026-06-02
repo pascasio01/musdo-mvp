@@ -1,0 +1,453 @@
+MUSVORA — AI DJ COMPLACE PRO MASTER PROMPT
+
+ROLE
+
+Act as a Principal AI Architect, Senior Music Intelligence Engineer, Professional DJ Systems Designer, Music Discovery Specialist and Product Innovation Director.
+
+MISSION
+
+Build AI DJ Complace as the world’s most advanced AI-powered Music Director.
+
+IMPORTANT
+
+AI DJ Complace is NOT:
+
+* A playlist generator
+* A random recommendation engine
+* A Spotify clone
+* A DJ replacement
+
+AI DJ Complace IS:
+
+An intelligent music director that designs complete music experiences.
+
+====================================================
+
+CORE CONCEPT
+
+====================================================
+
+AI DJ Complace
+
+Your Personal Music Director
+
+Purpose:
+
+Help users discover, organize, schedule and experience music effortlessly.
+
+The system should automatically create the perfect musical environment for:
+
+* Individuals
+* Families
+* Restaurants
+* Hotels
+* Gyms
+* Businesses
+* Parties
+* Weddings
+* Events
+
+====================================================
+
+AI DJ COMPLACE MODULES
+
+====================================================
+
+1. TRENDING NOW
+
+Display:
+
+🔥 Trending Right Now
+
+Top Bachatas
+
+Top Salsa
+
+Top Reggaetón
+
+Top Dembow
+
+Top Pop Latino
+
+Top Independent Artists
+
+Top Human Verified Songs
+
+Explain:
+
+Why Trending
+
+* Stream Growth
+* Playlist Additions
+* User Engagement
+* Momentum Score
+
+====================================================
+
+2. BEST BY GENRE
+
+====================================================
+
+Examples:
+
+Best Bachatas Right Now
+
+Best Salsa This Week
+
+Best Merengue Today
+
+Best Reggaetón For Driving
+
+Best Romantic Music
+
+Best Independent Artists
+
+Updated continuously.
+
+====================================================
+
+3. BEST BY MOOD
+
+====================================================
+
+Generate experiences for:
+
+* Motivation
+* Relaxation
+* Focus
+* Study
+* Romance
+* Reflection
+* Workout
+* Road Trip
+* Night Drive
+* Family Time
+
+Example:
+
+Night Drive Mode
+
+Build a complete energy curve.
+
+====================================================
+
+4. BEST BY LOCATION
+
+====================================================
+
+Examples:
+
+Most Loved Songs In New York
+
+Trending Music In Dominican Republic
+
+Top Latin Music In Miami
+
+Top Independent Music In Texas
+
+Top Bachatas In Santiago
+
+====================================================
+
+5. SMART EVENT PLANNER
+
+====================================================
+
+User Input:
+
+Wedding
+
+AI asks:
+
+* Country
+* Guests
+* Age Range
+* Duration
+* Music Style
+
+Generate:
+
+Reception
+
+Dinner
+
+Family Session
+
+Dance Floor
+
+Peak Energy
+
+Closing Session
+
+Music flows automatically.
+
+====================================================
+
+6. RESTAURANT MODE
+
+====================================================
+
+Example:
+
+Dominican Restaurant
+
+Generate:
+
+12 PM
+Soft Merengue
+
+2 PM
+Classic Bachata
+
+5 PM
+Dinner Session
+
+8 PM
+Romantic Latin Mix
+
+10 PM
+Night Energy
+
+====================================================
+
+7. HOTEL MODE
+
+====================================================
+
+Generate:
+
+Lobby
+
+Pool
+
+Sunset
+
+Dinner
+
+Night Lounge
+
+====================================================
+
+8. GYM MODE
+
+====================================================
+
+Generate:
+
+Warm Up
+
+Workout
+
+Peak Energy
+
+Cooldown
+
+====================================================
+
+9. PARTY MODE
+
+====================================================
+
+Generate:
+
+Opening Session
+
+Warm Up
+
+Main Event
+
+Dance Floor
+
+Peak Energy
+
+Closing Session
+
+====================================================
+
+10. SMART MIXING ENGINE
+
+====================================================
+
+Automatically manage:
+
+* BPM transitions
+* Energy transitions
+* Genre transitions
+* Smooth crossfades
+* Crowd retention
+
+Avoid:
+
+Abrupt changes
+
+Dead silence
+
+Energy crashes
+
+====================================================
+
+11. ADAPTIVE INTELLIGENCE
+
+====================================================
+
+Learn from:
+
+* Skips
+* Likes
+* Saves
+* Replays
+* Playlist Adds
+* Listening Duration
+
+Continuously optimize recommendations.
+
+====================================================
+
+12. HUMAN VERIFIED MUSIC
+
+====================================================
+
+Exclusive MUSVORA Feature
+
+Display:
+
+Best Human Verified Songs
+
+Best Human Verified Bachatas
+
+Best Human Verified Salsa
+
+Best Independent Composers
+
+Best Emerging Artists
+
+====================================================
+
+13. COMPOSER DISCOVERY
+
+====================================================
+
+Allow discovery by:
+
+Composer
+
+Producer
+
+Writer
+
+Publisher
+
+Mood
+
+Theme
+
+BPM
+
+Language
+
+Lyrics
+
+This connects directly to:
+
+Song Passport
+
+Ownership Engine
+
+Licensing Marketplace
+
+====================================================
+
+14. BUSINESS MODE
+
+====================================================
+
+Target:
+
+Restaurants
+
+Hotels
+
+Bars
+
+Lounges
+
+Retail Stores
+
+Salons
+
+Corporate Offices
+
+Allow businesses to run AI DJ Complace all day automatically.
+
+====================================================
+
+15. OFFLINE INTELLIGENCE
+
+====================================================
+
+Allow:
+
+Downloaded playlists
+
+Downloaded sessions
+
+Downloaded events
+
+Downloaded favorites
+
+Continue working without internet.
+
+====================================================
+
+DESIGN SYSTEM
+
+====================================================
+
+Institutional Dark Luxury
+
+Inspired by:
+
+Apple Music
+Spotify
+Stripe
+Linear
+Notion
+
+Clean.
+
+Elegant.
+
+Minimal.
+
+Professional.
+
+====================================================
+
+SUCCESS METRIC
+
+====================================================
+
+When a user opens Spotify:
+
+“What should I listen to?”
+
+When a user opens AI DJ Complace:
+
+“What experience do I want to create?”
+
+FINAL OBJECTIVE
+
+Create the most intelligent music discovery and music planning system ever integrated into a Music Asset Operating System.
+
+MUSVORA
+
+Music Asset Operating System
+
+Create.
+Protect.
+Verify.
+License.
+Monetize.
+Discover.
+Listen.
+Experience.
