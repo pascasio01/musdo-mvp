@@ -48,6 +48,16 @@ Deno.serve(async (req) => {
         metadata: { supabase_user_id: user.id },
       });
       customerId = customer.id;
+    } else if (user.email) {
+      // Reuse an existing customer (e.g. from a prior cancelled subscription).
+      // Keep its email current so Stripe's automatic payment receipts (enabled
+      // in the Dashboard, see supabase/README.md) reach the member's real inbox
+      // if they changed their account email since the customer was created.
+      try {
+        await stripe.customers.update(customerId, { email: user.email });
+      } catch (_e) {
+        // Non-fatal: receipts still send to the customer's existing email.
+      }
     }
 
     // Persist the mapping BEFORE checkout so webhooks can always resolve the

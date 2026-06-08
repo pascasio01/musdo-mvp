@@ -22,3 +22,17 @@ only its "use real Stripe price IDs" rule was borrowed.
 
 ## Deploy / secrets (user action, see `supabase/README.md`)
 Secrets live ONLY as Supabase function secrets, never in the frontend: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_PREMIUM`, `STRIPE_PRICE_CREATOR_PRO`, optional `APP_URL` (success/cancel/return origin fallback). `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` auto-injected. Until the user creates Stripe prices + sets secrets + deploys functions + registers the webhook, checkout will error with a toast (honest, no fake "live" claim).
+
+## Receipt emails (after each payment)
+Member payment receipts use **Stripe's native automatic receipts**, NOT a custom
+email. There is no pure-code way to force Stripe to email a receipt that bypasses
+the account-level Dashboard switch (Settings → Customer emails → "Successful
+payments"), and it's per-mode (test receipts never actually deliver). So this is
+a documented one-time setup step (supabase/README.md step 6), not code.
+- Code's only job: keep the Stripe customer email current so receipts reach the
+  right inbox — `create-checkout` sets it on customer creation and refreshes it
+  when an existing customer re-subscribes.
+- Renewals are covered automatically by Stripe (same invoice.payment_succeeded
+  events already subscribed); no extra webhook wiring.
+- A branded/self-sent receipt from the webhook is the documented alternative but
+  needs an email provider (Resend) + secret — deliberately NOT added.

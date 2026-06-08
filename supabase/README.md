@@ -63,6 +63,37 @@ Subscribe to at least:
 Copy the endpoint's signing secret into `STRIPE_WEBHOOK_SECRET` (step 3) and
 redeploy `stripe-webhook` if you set it afterwards.
 
+### 6. Enable automatic receipt emails (required for member receipts)
+Members should receive a receipt by email after **each** successful charge
+(first payment and every renewal). Stripe sends these natively — there is no
+pure-code switch that bypasses the account-level setting, so this is configured
+once in the Dashboard:
+
+1. Stripe Dashboard → **Settings → Customer emails**.
+2. Turn on **"Successful payments"** (emails a receipt after each successful
+   charge). Optionally also turn on **"Email finalized invoices to customers"**.
+3. Do this in **test mode first**, then again in **live mode** — the toggles are
+   per-mode, and Stripe does not actually deliver receipt emails in test mode
+   (test receipts only appear in the Dashboard).
+
+Notes:
+- Receipts use the **real invoice amount** straight from Stripe — nothing is
+  fabricated by MUSVORA.
+- The receipt is sent to the **Stripe customer's email**. `create-checkout`
+  sets that email on customer creation and refreshes it when an existing
+  customer starts a new subscription, so it tracks the member's account email.
+  Members can also update it anytime via **Manage in Stripe** on the Billing page.
+- This relies on the same `invoice.payment_succeeded` / `invoice.paid` events you
+  already subscribed to in step 5; no extra webhook wiring is needed.
+- Opt-out: receipts are transactional, but a member can change or remove their
+  billing email through the Customer Portal.
+
+If you would rather send a branded receipt from your own infrastructure instead
+of Stripe's native email, do it from the `invoice.paid` /
+`invoice.payment_succeeded` branch of `stripe-webhook` using the invoice's real
+`amount_paid` and `hosted_invoice_url` — but that requires adding an email
+provider (e.g. Resend) and its secret, which this project does not yet include.
+
 ## Going live
 Swap the test keys/prices for live ones (`sk_live_…`, live `price_…`), update the
 secrets, and redeploy. No frontend changes are required — the client only ever

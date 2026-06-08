@@ -314,6 +314,11 @@ export default function Billing() {
           )}
         </div>
 
+        <p className="text-zinc-600 text-xs mb-6 px-1 leading-relaxed">
+          Stripe emails you a receipt automatically after each successful payment, sent to your billing
+          email and showing the real amount charged. Update your billing email anytime via Manage in Stripe.
+        </p>
+
         <div className="rounded-2xl bg-white/5 border border-white/10 p-5 mb-4">
           <div className="flex items-center gap-2 mb-4">
             <RefreshCw size={16} className="text-zinc-500" />
