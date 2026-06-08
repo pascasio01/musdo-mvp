@@ -74,6 +74,7 @@ const SongPassport = lazy(() => import('./pages/SongPassport'))
 const Market      = lazy(() => import('./pages/Market'))
 const MusicDNA    = lazy(() => import('./pages/MusicDNA'))
 const SongStory   = lazy(() => import('./pages/SongStory'))
+const Drive       = lazy(() => import('./pages/Drive'))
 
 // Governance modules (new design system)
 const Readiness   = lazy(() => import('./pages/Readiness'))
@@ -185,6 +186,7 @@ export default function App() {
               } />
               <Route path="/music-director" element={<MusicDirector />} />
               <Route path="/dj" element={<Navigate to="/music-director" replace />} />
+              <Route path="/drive" element={<Drive />} />
               <Route path="/search" element={<Search />} />
               <Route path="/player/:id" element={<Player />} />
               <Route path="/studio/:id" element={<Player />} />

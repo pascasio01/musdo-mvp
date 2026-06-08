@@ -309,6 +309,18 @@ export default function Home() {
             />
           </section>
 
+          {/* ── 3b · MUSVORA Drive — the living catalogue ── */}
+          <section className="mt-3">
+            <AreaCard
+              accent="gold"
+              icon={<Radio size={20} strokeWidth={1.9} />}
+              eyebrow="Catálogo vivo"
+              title="MUSVORA Drive"
+              description="Nuevos lanzamientos y tendencias por género — el catálogo vivo de MUSVORA."
+              onClick={() => navigate('/drive')}
+            />
+          </section>
+
           {/* ── 4 · Library ── */}
           <section className="mt-3">
             <AreaCard
