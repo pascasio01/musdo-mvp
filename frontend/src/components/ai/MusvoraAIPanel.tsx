@@ -42,6 +42,7 @@ import {
   type BuiltSession,
 } from '../../lib/musvoraAI'
 import type { Song } from '../../types'
+import { MDLS } from '../../lib/mdls'
 
 const SESSION_ICON: Record<SessionId, React.ReactNode> = {
   sleep: <Moon size={20} strokeWidth={1.8} />,
@@ -148,7 +149,7 @@ export default function MusvoraAIPanel() {
 
   const onSurprise = () => {
     const list = surpriseMe(ctx)
-    playQueue(list, `Surprise Me · ${list.length} pistas`)
+    playQueue(list, `Take Me Somewhere · ${list.length} pistas`)
   }
 
   const onFindMusic = () => {
@@ -174,14 +175,14 @@ export default function MusvoraAIPanel() {
     const plId = createPlaylist(`MUSVORA · ${label}`)
     songs.forEach(s => addToPlaylist(plId, s.id))
     close()
-    toast.success(`Playlist creada · ${label} (${songs.length})`)
+    toast.success(`Sound Journey creado · ${label} (${songs.length})`)
     navigate(`/library/playlist/${plId}`)
   }
 
   const onTrending = () => {
     const list = trendingSongs()
     if (!list.length) { toast.info('Aún no hay catálogo'); return }
-    playQueue(list, `Top Trending · por reproducciones reales`)
+    playQueue(list, `Rising Now · por reproducciones reales`)
   }
 
   const onVerified = () => {
@@ -193,7 +194,7 @@ export default function MusvoraAIPanel() {
   const onDiscover = () => {
     const list = freshSongs(ctx)
     if (!list.length) { toast.info('Aún no hay catálogo'); return }
-    playQueue(list, `Descubrir · ${list.length} pistas nuevas para ti`)
+    playQueue(list, `Explorar · ${list.length} pistas nuevas para ti`)
   }
 
   const onByBpm = () => {
@@ -259,7 +260,7 @@ export default function MusvoraAIPanel() {
               <div className="min-w-0">
                 <p className="gv-eyebrow">MUSVORA AI</p>
                 <p className="font-bold leading-none truncate" style={{ fontSize: 'var(--gv-text-base)', color: 'var(--gv-text)' }}>
-                  {view === 'mood' ? 'Crear playlist por mood' : '¿Qué quieres escuchar?'}
+                  {view === 'mood' ? MDLS.ai.createSoundJourney : '¿Qué quieres escuchar?'}
                 </p>
               </div>
             </div>
@@ -287,9 +288,9 @@ export default function MusvoraAIPanel() {
               <>
                 {/* Quick actions */}
                 <div className="grid grid-cols-3 gap-2.5">
-                  <QuickAction icon={<Search size={20} strokeWidth={1.8} />} label="Find Music" onClick={onFindMusic} />
-                  <QuickAction icon={<Shuffle size={20} strokeWidth={1.8} />} label="Surprise Me" onClick={onSurprise} accent />
-                  <QuickAction icon={<ListPlus size={20} strokeWidth={1.8} />} label="Crear playlist" onClick={onCreatePlaylist} locked={!canPlaylists} />
+                  <QuickAction icon={<Search size={20} strokeWidth={1.8} />} label={MDLS.ai.findMySound} onClick={onFindMusic} />
+                  <QuickAction icon={<Shuffle size={20} strokeWidth={1.8} />} label={MDLS.ai.takeMeSomewhere} onClick={onSurprise} accent />
+                  <QuickAction icon={<ListPlus size={20} strokeWidth={1.8} />} label={MDLS.ai.createSoundJourneyShort} onClick={onCreatePlaylist} locked={!canPlaylists} />
                 </div>
 
                 {/* Sessions + Advanced — MUSVORA AI advanced (Premium) */}
@@ -333,11 +334,11 @@ export default function MusvoraAIPanel() {
                 {/* Advanced — real catalogue actions only */}
                 <p className="gv-eyebrow mt-7 mb-3">Avanzado</p>
                 <div className="grid grid-cols-2 gap-2.5">
-                  <AdvAction icon={<TrendingUp size={18} strokeWidth={1.9} />} label="Top Trending" sub="Por reproducciones" onClick={onTrending} />
+                  <AdvAction icon={<TrendingUp size={18} strokeWidth={1.9} />} label={MDLS.ai.risingNow} sub="Por reproducciones" onClick={onTrending} />
                   <AdvAction icon={<BadgeCheck size={18} strokeWidth={1.9} />} label="Human Verified" sub="Solo verificadas" onClick={onVerified} />
-                  <AdvAction icon={<Compass size={18} strokeWidth={1.9} />} label="Descubrir" sub="Nuevo para ti" onClick={onDiscover} />
-                  <AdvAction icon={<Gauge size={18} strokeWidth={1.9} />} label="By BPM" sub="Por tempo" onClick={onByBpm} />
-                  <AdvAction icon={<Heart size={18} strokeWidth={1.9} />} label="By Emotion" sub="Por mood real" onClick={onCreatePlaylist} />
+                  <AdvAction icon={<Compass size={18} strokeWidth={1.9} />} label={MDLS.ai.explore} sub="Nuevo para ti" onClick={onDiscover} />
+                  <AdvAction icon={<Gauge size={18} strokeWidth={1.9} />} label={MDLS.ai.byTempo} sub="Por tempo" onClick={onByBpm} />
+                  <AdvAction icon={<Heart size={18} strokeWidth={1.9} />} label={MDLS.ai.byFeeling} sub="Por mood real" onClick={onCreatePlaylist} />
                 </div>
                 </FeatureLock>
                 </div>

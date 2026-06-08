@@ -13,6 +13,7 @@ import { usePermissions } from '../lib/usePermissions'
 import DownloadButton from '../components/DownloadButton'
 import { mockSongs } from '../data/mockData'
 import type { Song } from '../types'
+import { MDLS } from '../lib/mdls'
 
 /**
  * MUSVORA Playlist Detail — view, play, curate a real personal playlist.
@@ -54,7 +55,7 @@ export default function PlaylistDetail() {
         <GovernanceScope className="min-h-screen">
           <div className="px-5 pt-16 flex flex-col items-center gap-4 text-center">
             <ListMusic size={32} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
-            <p style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)' }}>Playlist no encontrada.</p>
+            <p style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text-secondary)' }}>Colección no encontrada.</p>
             <button
               type="button"
               onClick={() => navigate('/library')}
@@ -107,10 +108,10 @@ export default function PlaylistDetail() {
             >
               <ArrowLeft size={18} aria-hidden />
             </button>
-            <p className="gv-eyebrow flex-1 text-center truncate">Personal Playlist</p>
+            <p className="gv-eyebrow flex-1 text-center truncate">{MDLS.personalCollection}</p>
             <button
               type="button"
-              aria-label="Delete playlist"
+              aria-label="Delete collection"
               onClick={handleDelete}
               className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
               style={{ width: 40, height: 40, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', border: '1px solid var(--gv-border)', color: 'var(--gv-danger)' }}

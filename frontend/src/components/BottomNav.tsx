@@ -6,15 +6,16 @@ import LockBadge from './access/LockBadge'
 import { useAIPanel } from '../lib/aiPanel'
 import { useTheme } from '../lib/theme'
 import type { Feature } from '../lib/access'
+import { MDLS } from '../lib/mdls'
 
 const leftItems = [
-  { to: '/home', icon: Home, label: 'Home' },
-  { to: '/search', icon: SearchIcon, label: 'Search' },
+  { to: '/home', icon: Home, label: MDLS.nav.home },
+  { to: '/search', icon: SearchIcon, label: MDLS.nav.search },
 ]
 
 const rightItems: { to: string; icon: typeof Home; label: string; feature?: Feature }[] = [
-  { to: '/library', icon: LibraryIcon, label: 'Library' },
-  { to: '/vault', icon: Shield, label: 'Vault', feature: 'creator.vault' },
+  { to: '/library', icon: LibraryIcon, label: MDLS.nav.library },
+  { to: '/vault', icon: Shield, label: MDLS.nav.vault, feature: 'creator.vault' },
 ]
 
 function NavItem({ to, icon: Icon, label, active, feature }: { to: string; icon: typeof Home; label: string; active: boolean; feature?: Feature }) {
@@ -124,7 +125,7 @@ function BottomNav() {
             className="text-[10px] font-semibold tracking-wide"
             style={{ color: open ? 'var(--gv-gold)' : 'var(--text-muted)' }}
           >
-            AI
+            {MDLS.nav.ai}
           </span>
         </button>
 

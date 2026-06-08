@@ -17,6 +17,7 @@ import {
 } from '../lib/djCurator'
 import { freshForYou, yourGenres, moreLikeGenre, PENDING_TREND_FACETS } from '../lib/trends'
 import type { Song, AppRole } from '../types'
+import { MDLS } from '../lib/mdls'
 
 /**
  * MUSVORA AI · Music Director — your personal Music Director (Phase 1).
@@ -201,7 +202,7 @@ export default function MusicDirector() {
           <section>
             <SectionHeader
               eyebrow="Adapts to your real listening"
-              title="For You"
+              title={MDLS.dj.curatedForYou}
               actions={<Compass size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />}
             />
 
@@ -244,7 +245,7 @@ export default function MusicDirector() {
           <section>
             <SectionHeader
               eyebrow="Ranked by catalogue plays · Internal Preview"
-              title="Trending Now"
+              title={MDLS.dj.risingNow}
               actions={<Flame size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />}
             />
             <div className="flex flex-col gap-0.5">
@@ -256,7 +257,7 @@ export default function MusicDirector() {
 
           {/* Best by Genre */}
           <section>
-            <SectionHeader eyebrow="Catalogue" title="Best by Genre" actions={<Disc3 size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Catalogue" title={MDLS.dj.genreLeaders} actions={<Disc3 size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-1.5">
               {genres.map(g => <Chip key={g} active={g === genre} onClick={() => setGenre(g)}>{g}</Chip>)}
             </div>
@@ -267,7 +268,7 @@ export default function MusicDirector() {
 
           {/* Best by Mood */}
           <section>
-            <SectionHeader eyebrow="Experience" title="Best by Mood" actions={<Sparkles size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Experience" title={MDLS.dj.byFeeling} actions={<Sparkles size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-1.5">
               {moods.map(m => <Chip key={m} active={m === mood} onClick={() => setMood(m)}>{moodLabel(m)}</Chip>)}
             </div>
@@ -278,7 +279,7 @@ export default function MusicDirector() {
 
           {/* Best by BPM */}
           <section>
-            <SectionHeader eyebrow="Energy" title="Best by BPM" actions={<Activity size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Energy" title={MDLS.dj.byTempo} actions={<Activity size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-1.5">
               {BPM_RANGES.map(r => <Chip key={r.id} active={r.id === bpmId} onClick={() => setBpmId(r.id)}>{r.label}</Chip>)}
             </div>
@@ -309,7 +310,7 @@ export default function MusicDirector() {
 
           {/* Top Artists by Plays */}
           <section>
-            <SectionHeader eyebrow="People" title="Top Artists by Plays" actions={<Users size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="People" title={MDLS.dj.mostHeardArtists} actions={<Users size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <div className="flex flex-col gap-0.5">
               {artists.map(a => (
                 <button
@@ -335,7 +336,7 @@ export default function MusicDirector() {
 
           {/* Trend facets that need live cross-user data — honest roadmap, never faked */}
           <section>
-            <SectionHeader eyebrow="Roadmap · needs live data" title="More Trending Soon" />
+            <SectionHeader eyebrow="Roadmap · needs live data" title={MDLS.dj.moreRisingSoon} />
             <div className="flex flex-col gap-2">
               {PENDING_TREND_FACETS.map(({ title, note }) => (
                 <Card key={title} padding="md">
@@ -358,7 +359,7 @@ export default function MusicDirector() {
 
           {/* Experience Modes — architecture prepared, no fictional results */}
           <section>
-            <SectionHeader eyebrow="Smart Event Planner" title="Experience Modes" actions={<PartyPopper size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Smart Event Planner" title={MDLS.dj.experiences} actions={<PartyPopper size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <div className="grid grid-cols-2 gap-2.5">
               {EXPERIENCE_MODES.map(({ icon: Icon, title, note }) => (
                 <Card key={title} padding="md">

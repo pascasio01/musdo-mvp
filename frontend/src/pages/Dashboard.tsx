@@ -1,11 +1,12 @@
 import { ArrowLeft, TrendingUp, DollarSign, Music, Shield, BarChart3, Eye } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
+import { MDLS } from '../lib/mdls'
 
 const stats = [
-  { label: 'Total Streams', value: '12,412', change: '+18%', icon: TrendingUp, color: 'text-green-400', bg: 'bg-green-900/20 border-green-500/20' },
-  { label: 'Revenue', value: '$1,847', change: '+12%', icon: DollarSign, color: 'text-amber-400', bg: 'bg-amber-900/20 border-amber-500/20' },
-  { label: 'Active Songs', value: '24', change: '+2', icon: Music, color: 'text-violet-400', bg: 'bg-violet-900/20 border-violet-500/20' },
+  { label: MDLS.studio.totalListens, value: '12,412', change: '+18%', icon: TrendingUp, color: 'text-green-400', bg: 'bg-green-900/20 border-green-500/20' },
+  { label: MDLS.studio.earnings, value: '$1,847', change: '+12%', icon: DollarSign, color: 'text-amber-400', bg: 'bg-amber-900/20 border-amber-500/20' },
+  { label: MDLS.studio.liveSongs, value: '24', change: '+2', icon: Music, color: 'text-violet-400', bg: 'bg-violet-900/20 border-violet-500/20' },
   { label: 'Licenses Sold', value: '8', change: '+3', icon: Shield, color: 'text-blue-400', bg: 'bg-blue-900/20 border-blue-500/20' },
 ]
 
@@ -18,7 +19,7 @@ const topSongs = [
 
 const recentActivity = [
   { type: 'license', text: 'License request for Midnight Bachata', time: '2h ago', color: 'text-amber-400' },
-  { type: 'stream', text: 'Broken Halo reached 3,000 streams', time: '5h ago', color: 'text-green-400' },
+  { type: 'stream', text: 'Broken Halo reached 3,000 listens', time: '5h ago', color: 'text-green-400' },
   { type: 'passport', text: 'Song Passport issued for Salgo a la Calle', time: '1d ago', color: 'text-blue-400' },
   { type: 'sale', text: 'Non-exclusive license sold — $149', time: '2d ago', color: 'text-violet-400' },
 ]
@@ -34,8 +35,8 @@ export default function Dashboard() {
             <ArrowLeft size={22} />
           </button>
           <div>
-            <h1 className="text-white font-black text-2xl">Dashboard</h1>
-            <p className="text-zinc-600 text-xs">Composer Analytics</p>
+            <h1 className="text-white font-black text-2xl">{MDLS.studio.title}</h1>
+            <p className="text-zinc-600 text-xs">{MDLS.studio.insights}</p>
           </div>
         </div>
 
@@ -53,14 +54,14 @@ export default function Dashboard() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-white font-bold text-lg mb-4">Top Performing Songs</h2>
+          <h2 className="text-white font-bold text-lg mb-4">{MDLS.studio.yourStrongestSongs}</h2>
           <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
             {topSongs.map((song, i) => (
               <div key={song.title} className={`flex items-center gap-3 px-4 py-3.5 ${i < topSongs.length - 1 ? 'border-b border-white/5' : ''}`}>
                 <span className="text-zinc-700 font-bold text-sm w-5">{i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-sm font-semibold truncate">{song.title}</p>
-                  <p className="text-zinc-600 text-xs">{song.streams} streams</p>
+                  <p className="text-zinc-600 text-xs">{song.streams} listens</p>
                 </div>
                 <div className="text-right">
                   <p className="text-white text-sm font-bold">{song.revenue}</p>
@@ -72,7 +73,7 @@ export default function Dashboard() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-white font-bold text-lg mb-4">Stream Analytics</h2>
+          <h2 className="text-white font-bold text-lg mb-4">{MDLS.studio.listeningInsights}</h2>
           <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -95,7 +96,7 @@ export default function Dashboard() {
         </div>
 
         <div className="mb-6">
-          <h2 className="text-white font-bold text-lg mb-4">Recent Activity</h2>
+          <h2 className="text-white font-bold text-lg mb-4">{MDLS.studio.whatsHappening}</h2>
           <div className="space-y-3">
             {recentActivity.map((item, i) => (
               <div key={i} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-3.5 flex items-center gap-3">

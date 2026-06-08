@@ -17,6 +17,7 @@ import { ReadinessRing } from '../components/readiness/ReadinessRing'
 import GlobalSearch from '../components/home/GlobalSearch'
 import { useAuth } from '../lib/auth'
 import { useLibrary } from '../lib/library'
+import { MDLS } from '../lib/mdls'
 import { usePlayer } from '../lib/player'
 import { mockSongs } from '../data/mockData'
 import type { Song } from '../types'
@@ -219,7 +220,7 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                aria-label="Notifications"
+                aria-label={MDLS.signals.title}
                 className="gv-focusable grid place-items-center flex-shrink-0 active:scale-95 transition-transform"
                 style={{
                   width: 40,
@@ -254,7 +255,7 @@ export default function Home() {
         <div className="px-5 pt-6">
           {/* ── 1 · Continue Listening ── */}
           <section>
-            <SectionHeader eyebrow="Resume" title="Continue Listening" />
+            <SectionHeader eyebrow="Resume" title={MDLS.discovery.continueListening} />
             {continueListening.length > 0 ? (
               <HRow songs={continueListening} onPlay={onPlay} />
             ) : (
@@ -279,8 +280,8 @@ export default function Home() {
           {/* ── 2 · Discover ── */}
           <section className="mt-8">
             <SectionHeader
-              eyebrow="For you"
-              title="Discover"
+              eyebrow={MDLS.curatedForYou}
+              title={MDLS.discovery.explore}
               description="Catálogo de muestra de MUSVORA, ordenado por preparación."
               actions={
                 <button
@@ -314,12 +315,12 @@ export default function Home() {
               accent="navy"
               icon={<LibraryIcon size={20} strokeWidth={1.9} />}
               eyebrow="Saved"
-              title="Tu biblioteca"
-              description="Favoritos, historial y tus playlists, en un solo lugar."
+              title={MDLS.library.title}
+              description="Favoritos, historial y tus colecciones, en un solo lugar."
               meta={
                 <div className="flex items-center gap-2">
                   <Badge tone="neutral" variant="soft">{favoriteSongs.length} favoritos</Badge>
-                  <Badge tone="neutral" variant="soft">{playlists.length} playlists</Badge>
+                  <Badge tone="neutral" variant="soft">{playlists.length} colecciones</Badge>
                 </div>
               }
               onClick={() => navigate('/library')}

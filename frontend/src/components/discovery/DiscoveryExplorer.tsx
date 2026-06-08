@@ -26,6 +26,7 @@ import {
 import { SectionHeader } from '../governance'
 import { buildDiscovery, type BuiltLens } from '../../lib/discovery'
 import type { Song } from '../../types'
+import { MDLS } from '../../lib/mdls'
 
 const ICONS: Record<string, LucideIcon> = {
   Shuffle, Sparkle, CalendarDays, Compass,
@@ -144,7 +145,7 @@ export default function DiscoveryExplorer({ onPlay, favoriteIds, history }: Disc
         <section>
           <SectionHeader
             eyebrow="MUSVORA AI"
-            title="AI Picks"
+            title={MDLS.discovery.musvoraPicks}
             description="Curado en vivo desde tu catálogo y lo que escuchas — sin invención."
           />
           <LensGrid lenses={discovery.ai} onPlay={onPlay} />
@@ -153,14 +154,14 @@ export default function DiscoveryExplorer({ onPlay, favoriteIds, history }: Disc
 
       {discovery.emotion.length > 0 && (
         <section>
-          <SectionHeader eyebrow="Cómo te sientes" title="Emotional Discovery" />
+          <SectionHeader eyebrow="Cómo te sientes" title={MDLS.discovery.byFeeling} />
           <LensGrid lenses={discovery.emotion} onPlay={onPlay} />
         </section>
       )}
 
       {discovery.context.length > 0 && (
         <section>
-          <SectionHeader eyebrow="Para tu momento" title="Context Discovery" />
+          <SectionHeader eyebrow="Para tu momento" title={MDLS.discovery.forYourMoment} />
           <LensGrid lenses={discovery.context} onPlay={onPlay} />
         </section>
       )}

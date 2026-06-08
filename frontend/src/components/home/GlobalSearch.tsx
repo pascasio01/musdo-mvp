@@ -9,6 +9,7 @@ import { allComposers, allProducers } from '../../lib/djCurator'
 import { Badge } from '../governance'
 import type { Song } from '../../types'
 import type { LibraryPlaylist } from '../../lib/library'
+import { MDLS } from '../../lib/mdls'
 
 interface GlobalSearchProps {
   open: boolean
@@ -303,7 +304,7 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
               <div className="flex flex-wrap gap-2">
                 <Badge tone="success" variant="soft">Songs · Live</Badge>
                 <Badge tone="success" variant="soft">Artists · Live</Badge>
-                <Badge tone="success" variant="soft">Playlists · Live</Badge>
+                <Badge tone="success" variant="soft">{MDLS.collections} · Live</Badge>
                 <Badge tone="success" variant="soft">Passports · Live</Badge>
                 <Badge tone="success" variant="soft">Lyrics · Live</Badge>
                 <Badge tone="success" variant="soft">Composers · Live</Badge>
@@ -386,7 +387,7 @@ export default function GlobalSearch({ open, onClose }: GlobalSearchProps) {
 
               {playlistHits.length > 0 && (
                 <section>
-                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>Playlists</p>
+                  <p className="gv-eyebrow px-1" style={{ marginBottom: 8 }}>{MDLS.collections}</p>
                   <div className="flex flex-col gap-1.5">
                     {playlistHits.map(p => (
                       <button

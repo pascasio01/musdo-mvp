@@ -22,12 +22,13 @@ import { usePlayer } from '../lib/player'
 import { useLibrary } from '../lib/library'
 import { searchAll, suggest, type SearchResults } from '../lib/search'
 import type { Song } from '../types'
+import { MDLS } from '../lib/mdls'
 
 const RECENT_KEY = 'musdo-recent-searches'
 const MAX_RECENT = 8
 const DEBOUNCE_MS = 200
 
-const LIVE_CATEGORIES = ['Songs', 'Artists', 'Playlists', 'Lyrics', 'Composers', 'Producers'] as const
+const LIVE_CATEGORIES = ['Songs', 'Artists', 'Collections', 'Lyrics', 'Composers', 'Producers'] as const
 const PENDING_CATEGORIES = ['Albums', 'Demos', 'Marketplace', 'Licensing'] as const
 
 function loadRecent(): string[] {
@@ -254,7 +255,7 @@ export default function Search() {
             <div className="flex flex-col gap-6 pt-1">
               {results.topResult && (
                 <section>
-                  <p className="gv-eyebrow px-1 mb-2">Top result</p>
+                  <p className="gv-eyebrow px-1 mb-2">{MDLS.perfectMatch}</p>
                   <button
                     type="button"
                     onClick={onTopResult}
@@ -308,7 +309,7 @@ export default function Search() {
               )}
 
               {results.playlists.length > 0 && (
-                <Group title="Playlists">
+                <Group title={MDLS.collections}>
                   {results.playlists.map(p => (
                     <RowButton key={p.id} onClick={() => navigate(`/library/playlist/${p.id}`)} icon={<ListMusic size={16} style={{ color: 'var(--gv-gold)' }} aria-hidden />}
                       title={p.title} subtitle={`${p.songIds.length} ${p.songIds.length === 1 ? 'track' : 'tracks'}`} trailing={<ArrowRight size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
@@ -344,7 +345,7 @@ export default function Search() {
               )}
 
               {results.similar.length > 0 && (
-                <Group title="Similar Music">
+                <Group title={MDLS.similarVibes}>
                   {results.similar.map(s => (
                     <RowButton key={`sm-${s.id}`} onClick={() => play(s, results.similar)} artwork={s}
                       title={s.title} subtitle={`${s.artist_name} · ${s.genre}`} trailing={<Play size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />

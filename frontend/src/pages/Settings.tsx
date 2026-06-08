@@ -10,6 +10,7 @@ import SafeListenPanel from '../components/audio/SafeListenPanel'
 import AudioTuningPanel from '../components/audio/AudioTuningPanel'
 import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
 import { deleteAccountData } from '../lib/deleteAccount'
+import { MDLS } from '../lib/mdls'
 
 const PLAN_LABEL: Record<SubscriptionPlan, string> = {
   free: 'Free',
@@ -74,11 +75,11 @@ export default function Settings() {
           <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Bell size={14} className="text-zinc-600" />
-              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Notifications</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">{MDLS.signals.title}</p>
             </div>
             <div className="px-5 pb-2">
-              <Toggle label="Push Notifications" desc="License requests, streams, activity" value={notifications} onChange={setNotifications} />
-              <Toggle label="Email Notifications" desc="Weekly summary, billing alerts" value={emailNotifs} onChange={setEmailNotifs} />
+              <Toggle label={MDLS.signals.push} desc="License requests, listens, activity" value={notifications} onChange={setNotifications} />
+              <Toggle label={MDLS.signals.email} desc="Weekly summary, billing alerts" value={emailNotifs} onChange={setEmailNotifs} />
             </div>
           </div>
 

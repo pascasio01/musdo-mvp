@@ -5,6 +5,7 @@ import { mockDemos } from '../data/mockData'
 import { useNavigate } from 'react-router-dom'
 import { GovernanceScope } from '../components/governance'
 import GlobalSearch from '../components/home/GlobalSearch'
+import { MDLS } from '../lib/mdls'
 
 const tabs = ['Demos', 'Lyrics', 'Passports']
 
@@ -34,7 +35,7 @@ export default function Vault() {
         <div className="flex items-center justify-between mb-2">
           <div>
             <p className="text-muted text-xs uppercase tracking-widest font-semibold">Composer</p>
-            <h1 className="text-primary text-3xl font-black">Vault</h1>
+            <h1 className="text-primary text-3xl font-black">{MDLS.brand.vault}</h1>
           </div>
           <div className="flex items-center gap-2">
             <button

@@ -16,6 +16,7 @@ import DownloadButton from '../components/DownloadButton'
 import LockBadge from '../components/access/LockBadge'
 import type { Song, AppRole } from '../types'
 import type { LibraryPlaylist } from '../lib/library'
+import { MDLS } from '../lib/mdls'
 
 /**
  * MUSVORA Library — the creator's real music library.
@@ -179,12 +180,12 @@ export default function Library() {
         >
           <div className="flex items-center justify-between gap-3 px-5" style={{ height: 64 }}>
             <div className="min-w-0">
-              <p className="gv-eyebrow">MUSVORA · Library</p>
+              <p className="gv-eyebrow">{MDLS.library.eyebrow}</p>
               <h1
                 className="font-bold leading-none truncate"
                 style={{ fontFamily: 'var(--gv-font-display)', fontSize: 'var(--gv-text-lg)', color: 'var(--gv-text)' }}
               >
-                Your Library
+                {MDLS.library.title}
               </h1>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -211,7 +212,7 @@ export default function Library() {
         <div className="px-5 pt-6 pb-4 flex flex-col gap-8">
           {/* 1 — Favoritos */}
           <section>
-            <SectionHeader eyebrow="Saved" title="Favoritos" actions={<Heart size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Saved" title={MDLS.library.loved} actions={<Heart size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             {favoriteSongs.length > 0 ? (
               <div className="flex flex-col gap-0.5">
                 {favoriteSongs.slice(0, 12).map(s => (
@@ -227,7 +228,7 @@ export default function Library() {
           <section>
             <SectionHeader
               eyebrow="Recent"
-              title="Historial"
+              title={MDLS.library.echoes}
               actions={
                 historySongs.length > 0 ? (
                   <button
@@ -310,7 +311,7 @@ export default function Library() {
 
           {/* 6 — Playlists personales */}
           <section>
-            <SectionHeader eyebrow="Yours" title="Playlists personales" actions={<ListMusic size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Yours" title={MDLS.library.yourCollections} actions={<ListMusic size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             {canPlaylists ? (
               <div
                 className="flex items-center gap-2 mb-2.5 px-2"
@@ -321,8 +322,8 @@ export default function Library() {
                   value={newPlaylist}
                   onChange={e => setNewPlaylist(e.target.value)}
                   onKeyDown={e => { if (e.key === 'Enter') handleCreate() }}
-                  placeholder="Nueva playlist…"
-                  aria-label="Nombre de la nueva playlist"
+                  placeholder="Nueva colección…"
+                  aria-label="Nombre de la nueva colección"
                   className="flex-1 min-w-0 bg-transparent outline-none"
                   style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}
                 />
@@ -330,7 +331,7 @@ export default function Library() {
                   type="button"
                   onClick={handleCreate}
                   disabled={!newPlaylist.trim()}
-                  aria-label="Crear playlist"
+                  aria-label="Crear colección"
                   className="gv-focusable inline-flex items-center gap-1 font-semibold active:scale-95 transition-transform disabled:opacity-40"
                   style={{
                     height: 32, padding: '0 12px', borderRadius: 'var(--gv-radius-sm)',
@@ -346,12 +347,12 @@ export default function Library() {
                 onClick={() => navigate('/pricing')}
                 className="gv-focusable w-full flex items-center gap-2.5 mb-2.5 px-3 text-left active:scale-[0.99] transition-transform"
                 style={{ height: 46, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface)', border: '1px solid color-mix(in srgb, var(--gv-gold) 30%, var(--gv-border))' }}
-                aria-label="Crear playlists con Premium"
+                aria-label="Crear colecciones con Premium"
               >
                 <span className="grid place-items-center" style={{ width: 24, height: 24, borderRadius: 'var(--gv-radius-sm)', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }} aria-hidden>
                   <Lock size={13} strokeWidth={2.2} />
                 </span>
-                <span className="flex-1 min-w-0 font-medium" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>Crea playlists con Premium</span>
+                <span className="flex-1 min-w-0 font-medium" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>Crea colecciones con Premium</span>
                 <span className="font-semibold" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-gold)' }}>Ver planes</span>
               </button>
             )}
@@ -383,16 +384,16 @@ export default function Library() {
                 ))}
               </div>
             ) : (
-              <EmptyState icon={<ListMusic size={16} />} text="Crea tu primera playlist arriba. Podrás agregar canciones de tu catálogo." />
+              <EmptyState icon={<ListMusic size={16} />} text="Crea tu primera colección arriba. Podrás agregar canciones de tu catálogo." />
             )}
           </section>
 
           {/* 7 — Playlists colaborativas */}
           <section>
-            <SectionHeader eyebrow="Shared" title="Playlists colaborativas" actions={<Users2 size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Shared" title={MDLS.library.sharedCollections} actions={<Users2 size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <PendingCard
               icon={<Users2 size={18} />}
-              title="Collaborative Playlists"
+              title="Shared Collections"
               status="Pending Integration"
               note="La colaboración en tiempo real requiere backend multiusuario. Llegará en un sprint dedicado."
             />
@@ -400,7 +401,7 @@ export default function Library() {
 
           {/* 8 — Biblioteca descargada */}
           <section>
-            <SectionHeader eyebrow="Offline" title="Biblioteca descargada" actions={<Download size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
+            <SectionHeader eyebrow="Offline" title={MDLS.library.onYourDevice} actions={<Download size={15} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />} />
             <Card padding="none">
               <button
                 type="button"
@@ -424,7 +425,7 @@ export default function Library() {
                   <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
                     {downloadCount > 0
                       ? `${downloadCount} ${downloadCount === 1 ? 'descarga' : 'descargas'} · ${formatBytes(storageUsage)} usados`
-                      : 'Descarga canciones y playlists para escuchar sin conexión'}
+                      : 'Descarga canciones y colecciones para escuchar sin conexión'}
                   </span>
                 </span>
                 <ChevronRight size={16} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
