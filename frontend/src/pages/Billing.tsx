@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowLeft, CreditCard, Receipt, RefreshCw, ExternalLink, Loader2 } from 'lucide-react'
+import { ArrowLeft, CreditCard, Receipt, RefreshCw, ExternalLink, Loader2, Download } from 'lucide-react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useAuth } from '../lib/auth'
@@ -48,6 +48,35 @@ function fmtAmount(cents: number, currency: string): string {
   }
 }
 
+// A finalized invoice always carries a hosted receipt and/or PDF. Prefer the
+// hosted page (it offers both view + download), fall back to the raw PDF.
+function receiptUrl(inv: DbBillingInvoice): string | null {
+  return inv.hosted_invoice_url || inv.invoice_pdf || null
+}
+
+// Wrap a CSV cell, escaping quotes and forcing text so spreadsheets don't
+// mangle values. Returns an empty quoted string for null/undefined.
+function csvCell(value: string | number | null | undefined): string {
+  const s = value == null ? '' : String(value)
+  return `"${s.replace(/"/g, '""')}"`
+}
+
+function buildInvoiceCsv(invoices: DbBillingInvoice[]): string {
+  const header = [
+    'Invoice ID', 'Date', 'Plan', 'Amount', 'Currency', 'Status', 'Receipt URL',
+  ]
+  const rows = invoices.map(inv => [
+    csvCell(inv.id),
+    csvCell(inv.created_at ? new Date(inv.created_at).toISOString().slice(0, 10) : ''),
+    csvCell(inv.plan && inv.plan in PLAN_LABEL ? PLAN_LABEL[inv.plan as SubscriptionPlan] : 'Subscription'),
+    csvCell(((inv.amount_total ?? 0) / 100).toFixed(2)),
+    csvCell((inv.currency ?? 'usd').toUpperCase()),
+    csvCell(inv.status ?? 'pending'),
+    csvCell(receiptUrl(inv) ?? ''),
+  ].join(','))
+  return [header.map(csvCell).join(','), ...rows].join('\r\n')
+}
+
 export default function Billing() {
   const navigate = useNavigate()
   const { user } = useAuth()
@@ -57,6 +86,7 @@ export default function Billing() {
   const [invoices, setInvoices] = useState<DbBillingInvoice[]>([])
   const [invoicesLoading, setInvoicesLoading] = useState(true)
   const [portalBusy, setPortalBusy] = useState(false)
+  const [exportBusy, setExportBusy] = useState(false)
 
   // Returning from Stripe Checkout: confirm + pull fresh state.
   useEffect(() => {
@@ -97,6 +127,52 @@ export default function Billing() {
         : 'Could not open billing. Please try again.')
       setPortalBusy(false)
     }
+  }
+
+  const exportCsv = async () => {
+    if (!user || exportBusy) return
+    setExportBusy(true)
+    // Export the FULL history, not just the page slice shown above. Page in
+    // chunks so users with long histories get a complete file.
+    const all: DbBillingInvoice[] = []
+    const PAGE = 1000
+    let from = 0
+    let failed = false
+    for (;;) {
+      const { data, error } = await supabase
+        .from('billing_invoices')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .range(from, from + PAGE - 1)
+      if (error) { failed = true; break }
+      const batch = (data as DbBillingInvoice[] | null) ?? []
+      all.push(...batch)
+      if (batch.length < PAGE) break
+      from += PAGE
+    }
+    if (failed) {
+      toast.error('Could not export payment history. Please try again.')
+      setExportBusy(false)
+      return
+    }
+    if (all.length === 0) {
+      toast.error('No payment history to export yet.')
+      setExportBusy(false)
+      return
+    }
+    const csv = buildInvoiceCsv(all)
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `musvora-payment-history-${new Date().toISOString().slice(0, 10)}.csv`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    toast.success(`Exported ${all.length} ${all.length === 1 ? 'invoice' : 'invoices'}.`)
+    setExportBusy(false)
   }
 
   const plan = sub.plan
@@ -177,6 +253,15 @@ export default function Billing() {
           <div className="px-5 pt-5 pb-3 flex items-center gap-2 border-b border-white/5">
             <Receipt size={16} className="text-zinc-500" />
             <p className="text-xs font-bold uppercase tracking-widest text-zinc-500">Payment History</p>
+            {invoices.length > 0 && (
+              <button
+                onClick={exportCsv}
+                disabled={exportBusy}
+                className="ml-auto flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors disabled:opacity-60"
+              >
+                {exportBusy ? <Loader2 size={12} className="animate-spin" /> : <Download size={12} />} Export CSV
+              </button>
+            )}
           </div>
           {invoicesLoading ? (
             <div className="px-5 py-8 flex items-center justify-center">
@@ -192,6 +277,7 @@ export default function Billing() {
               const planName = inv.plan && inv.plan in PLAN_LABEL
                 ? PLAN_LABEL[inv.plan as SubscriptionPlan]
                 : 'Subscription'
+              const receipt = receiptUrl(inv)
               const row = (
                 <>
                   <div className="flex-1">
@@ -204,13 +290,15 @@ export default function Billing() {
                       {inv.status ?? 'pending'}
                     </p>
                   </div>
-                  {inv.hosted_invoice_url && <ExternalLink size={14} className="text-zinc-700" />}
+                  {receipt
+                    ? <ExternalLink size={14} className="text-zinc-700" />
+                    : <span className="text-zinc-700 text-[10px] uppercase tracking-wide">No receipt</span>}
                 </>
               )
-              return inv.hosted_invoice_url ? (
+              return receipt ? (
                 <a
                   key={inv.id}
-                  href={inv.hosted_invoice_url}
+                  href={receipt}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-5 py-4 border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors"

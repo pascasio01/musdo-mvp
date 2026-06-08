@@ -81,6 +81,16 @@ async function recordInvoice(invoice: Stripe.Invoice): Promise<void> {
 
   const priceId = invoice.lines.data[0]?.price?.id ?? null;
 
+  // The receipt links (hosted_invoice_url / invoice_pdf) are only populated once
+  // an invoice is finalized. Different events for the same invoice can arrive
+  // with or without them, so never let a later event with null links clobber a
+  // value we already captured — fall back to what we have on record.
+  const { data: existing } = await supabaseAdmin
+    .from("billing_invoices")
+    .select("hosted_invoice_url, invoice_pdf")
+    .eq("id", invoice.id)
+    .maybeSingle();
+
   await supabaseAdmin.from("billing_invoices").upsert(
     {
       id: invoice.id,
@@ -89,8 +99,8 @@ async function recordInvoice(invoice: Stripe.Invoice): Promise<void> {
       currency: invoice.currency ?? "usd",
       status: invoice.status ?? null,
       plan: planForPriceId(priceId),
-      hosted_invoice_url: invoice.hosted_invoice_url ?? null,
-      invoice_pdf: invoice.invoice_pdf ?? null,
+      hosted_invoice_url: invoice.hosted_invoice_url ?? existing?.hosted_invoice_url ?? null,
+      invoice_pdf: invoice.invoice_pdf ?? existing?.invoice_pdf ?? null,
       period_start: toIso(invoice.period_start),
       created_at: toIso(invoice.created) ?? new Date().toISOString(),
     },
