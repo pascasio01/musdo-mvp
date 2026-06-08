@@ -14,6 +14,7 @@ import {
 } from '../data/identityMock'
 import { useAuth } from '../lib/auth'
 import { useLibrary } from '../lib/library'
+import LockBadge from '../components/access/LockBadge'
 import { useIdentity, maskResonanceForPrivacy } from '../lib/identity'
 import { humanizeRole } from '../utils/format'
 
@@ -81,11 +82,12 @@ export default function Profile() {
             </button>
             <button
               onClick={() => navigate('/dashboard')}
-              className="w-9 h-9 rounded-2xl border flex items-center justify-center text-secondary hover:text-primary transition-colors backdrop-blur-md"
+              className="relative w-9 h-9 rounded-2xl border flex items-center justify-center text-secondary hover:text-primary transition-colors backdrop-blur-md"
               style={{ background: 'var(--glass-bg-medium)', borderColor: 'var(--border-soft)' }}
               aria-label="Analytics dashboard"
             >
               <TrendingUp size={16} strokeWidth={1.75} aria-hidden />
+              <LockBadge feature="creator.dashboard" variant="dot" className="absolute -top-1.5 -right-1.5" />
             </button>
             <button
               onClick={() => navigate('/settings')}
@@ -224,9 +226,10 @@ export default function Profile() {
               <h2 className="text-primary font-bold text-lg">My Songs</h2>
               <button
                 onClick={() => navigate('/vault')}
-                className="text-muted text-sm hover:text-primary transition-colors"
+                className="text-muted text-sm hover:text-primary transition-colors inline-flex items-center gap-1.5"
               >
                 See all
+                <LockBadge feature="creator.vault" />
               </button>
             </div>
             <div className="space-y-1">

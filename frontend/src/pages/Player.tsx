@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
   ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause,
   SkipBack, SkipForward, Repeat, Repeat1, Shuffle, Shield, FileText,
-  Disc3, Quote, ShieldCheck, ListMusic,
+  Disc3, Quote, ShieldCheck, ListMusic, Dna, BookOpen,
 } from 'lucide-react'
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
 import { usePlayer } from '../lib/player'
@@ -16,6 +16,7 @@ import AudioTuningPanel from '../components/audio/AudioTuningPanel'
 import SpatialListeningPanel from '../components/audio/SpatialListeningPanel'
 import IntelligenceBar from '../components/player/IntelligenceBar'
 import { OwnershipPanel, LicensingPanel } from '../components/player/PlayerPanels'
+import LockBadge from '../components/access/LockBadge'
 import { getIntelligenceSignals } from '../data/assetIntelligence'
 import { getLyricsForSong } from '../data/mockLyrics'
 import { formatDuration } from '../utils/format'
@@ -416,6 +417,7 @@ export default function Player() {
                 >
                   <FileText size={14} aria-hidden />
                   Request License
+                  <LockBadge feature="creator.marketplace" />
                 </button>
               ) : (
                 <div
@@ -425,6 +427,28 @@ export default function Player() {
                   {licensingLabel(song.licensing_status)}
                 </div>
               )}
+            </div>
+
+            {/* Creator insights — Music DNA + Song Story (Creator Pro) */}
+            <div className="flex items-stretch gap-2">
+              <button
+                onClick={() => navigate(`/dna/${song.id}`)}
+                className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+              >
+                <Dna size={14} aria-hidden />
+                Music DNA
+                <LockBadge feature="creator.insights" />
+              </button>
+              <button
+                onClick={() => navigate(`/story/${song.id}`)}
+                className="flex-1 py-3 rounded-2xl border text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+              >
+                <BookOpen size={14} aria-hidden />
+                Song Story
+                <LockBadge feature="creator.insights" />
+              </button>
             </div>
 
             {/* Audio intelligence — collapsed by default, never overloads the player */}

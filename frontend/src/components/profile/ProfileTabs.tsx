@@ -1,5 +1,6 @@
 import { Card, StatTile, SectionHeader, Button, Badge } from '../governance'
 import { ExternalLink, FolderOpen, Globe, Plus } from 'lucide-react'
+import LockBadge from '../access/LockBadge'
 import type { ProfileTabKey, ProfessionalProfileData, ProfessionalRole } from '../../types/profile'
 import { getRoleStats, getSocialLinks, professionalRoleLabels } from '../../lib/professionalProfile'
 
@@ -155,7 +156,7 @@ export function ProfilePanel({ active, ...props }: PanelProps & { active: Profil
       <EmptyState
         title="No public works yet"
         body="Published works, demos and lyrics appear here once added to the Vault and marked public."
-        action={isSelf ? <Button variant="gold" size="sm" leadingIcon={<Plus size={14} />} onClick={onUpload}>Add Work</Button> : undefined}
+        action={isSelf ? <span className="inline-flex items-center gap-1.5"><Button variant="gold" size="sm" leadingIcon={<Plus size={14} />} onClick={onUpload}>Add Work</Button><LockBadge feature="creator.upload" /></span> : undefined}
       />
     )
   }

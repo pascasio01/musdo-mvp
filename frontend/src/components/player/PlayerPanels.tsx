@@ -4,6 +4,7 @@ import {
   ArrowRight, FileText, Radio, Megaphone, Inbox, Target,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import LockBadge from '../access/LockBadge'
 import type { Song } from '../../types'
 import {
   getOwnershipInsight, getLicensingInsight,
@@ -234,6 +235,7 @@ function LicensingPanelImpl({ song }: { song: Song }) {
       >
         <FileText size={14} aria-hidden />
         {l.available ? 'Open Licensing Marketplace' : 'List this asset in the Marketplace'}
+        <LockBadge feature="creator.marketplace" />
       </button>
 
       <PanelDisclaimer>

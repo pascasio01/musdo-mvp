@@ -13,6 +13,7 @@ import { useAuth } from '../lib/auth'
 import { usePermissions } from '../lib/usePermissions'
 import { useOffline, formatBytes } from '../lib/offline'
 import DownloadButton from '../components/DownloadButton'
+import LockBadge from '../components/access/LockBadge'
 import type { Song, AppRole } from '../types'
 import type { LibraryPlaylist } from '../lib/library'
 
@@ -414,8 +415,11 @@ export default function Library() {
                   <Download size={18} aria-hidden />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
-                    Offline Mode
+                  <span className="flex items-center gap-2">
+                    <span className="truncate font-semibold" style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)' }}>
+                      Offline Mode
+                    </span>
+                    <LockBadge feature="offline" />
                   </span>
                   <span className="block truncate" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-muted)' }}>
                     {downloadCount > 0

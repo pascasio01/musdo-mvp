@@ -2,20 +2,22 @@ import { memo } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Home, Search as SearchIcon, Library as LibraryIcon, Shield } from 'lucide-react'
 import AILogoMark from './ai/AILogoMark'
+import LockBadge from './access/LockBadge'
 import { useAIPanel } from '../lib/aiPanel'
 import { useTheme } from '../lib/theme'
+import type { Feature } from '../lib/access'
 
 const leftItems = [
   { to: '/home', icon: Home, label: 'Home' },
   { to: '/search', icon: SearchIcon, label: 'Search' },
 ]
 
-const rightItems = [
+const rightItems: { to: string; icon: typeof Home; label: string; feature?: Feature }[] = [
   { to: '/library', icon: LibraryIcon, label: 'Library' },
-  { to: '/vault', icon: Shield, label: 'Vault' },
+  { to: '/vault', icon: Shield, label: 'Vault', feature: 'creator.vault' },
 ]
 
-function NavItem({ to, icon: Icon, label, active }: { to: string; icon: typeof Home; label: string; active: boolean }) {
+function NavItem({ to, icon: Icon, label, active, feature }: { to: string; icon: typeof Home; label: string; active: boolean; feature?: Feature }) {
   return (
     <NavLink
       to={to}
@@ -23,12 +25,17 @@ function NavItem({ to, icon: Icon, label, active }: { to: string; icon: typeof H
       aria-current={active ? 'page' : undefined}
       className="flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all duration-[var(--speed,300ms)] relative flex-1"
     >
-      <Icon
-        size={22}
-        aria-hidden
-        style={{ color: active ? 'var(--text-primary)' : 'var(--text-muted)' }}
-        strokeWidth={active ? 2.5 : 1.5}
-      />
+      <span className="relative grid place-items-center">
+        <Icon
+          size={22}
+          aria-hidden
+          style={{ color: active ? 'var(--text-primary)' : 'var(--text-muted)' }}
+          strokeWidth={active ? 2.5 : 1.5}
+        />
+        {feature && (
+          <LockBadge feature={feature} variant="dot" className="absolute -top-1.5 -right-2.5" />
+        )}
+      </span>
       <span
         className="text-[10px] font-medium tracking-wide"
         style={{ color: active ? 'var(--text-primary)' : 'var(--text-muted)' }}
