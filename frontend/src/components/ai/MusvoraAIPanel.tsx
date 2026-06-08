@@ -7,6 +7,9 @@ import {
   Shuffle,
   ListPlus,
   Moon,
+  MoonStar,
+  Coffee,
+  HeartCrack,
   BookOpen,
   Target,
   UtensilsCrossed,
@@ -46,12 +49,15 @@ import { MDLS } from '../../lib/mdls'
 
 const SESSION_ICON: Record<SessionId, React.ReactNode> = {
   sleep: <Moon size={20} strokeWidth={1.8} />,
+  sunday: <Coffee size={20} strokeWidth={1.8} />,
+  heartbreak: <HeartCrack size={20} strokeWidth={1.8} />,
   study: <BookOpen size={20} strokeWidth={1.8} />,
   focus: <Target size={20} strokeWidth={1.8} />,
   restaurant: <UtensilsCrossed size={20} strokeWidth={1.8} />,
+  event: <CalendarClock size={20} strokeWidth={1.8} />,
+  night: <MoonStar size={20} strokeWidth={1.8} />,
   driving: <Car size={20} strokeWidth={1.8} />,
   gym: <Dumbbell size={20} strokeWidth={1.8} />,
-  event: <CalendarClock size={20} strokeWidth={1.8} />,
 }
 
 /**
@@ -144,7 +150,7 @@ export default function MusvoraAIPanel() {
 
   const onSession = (id: SessionId) => {
     const built = sessionMeta[id]
-    playQueue(built.tracks, `${built.label} Session · ${built.tracks.length} pistas`)
+    playQueue(built.tracks, `${built.label} · Sound Journey · ${built.tracks.length} pistas`)
   }
 
   const onSurprise = () => {
@@ -287,6 +293,7 @@ export default function MusvoraAIPanel() {
             {view === 'home' ? (
               <>
                 {/* Quick actions */}
+                <p className="gv-eyebrow mb-3">Acciones rápidas</p>
                 <div className="grid grid-cols-3 gap-2.5">
                   <QuickAction icon={<Search size={20} strokeWidth={1.8} />} label={MDLS.ai.findMySound} onClick={onFindMusic} />
                   <QuickAction icon={<Shuffle size={20} strokeWidth={1.8} />} label={MDLS.ai.takeMeSomewhere} onClick={onSurprise} accent />
@@ -296,8 +303,8 @@ export default function MusvoraAIPanel() {
                 {/* Sessions + Advanced — MUSVORA AI advanced (Premium) */}
                 <div className="mt-6">
                 <FeatureLock feature="ai.advanced">
-                {/* Sessions */}
-                <p className="gv-eyebrow mb-3">Sesiones · curadas de tu catálogo</p>
+                {/* Sound Journeys — MUSVORA AI's signature listening experiences */}
+                <p className="gv-eyebrow mb-3">{MDLS.soundJourneys} · curados de tu catálogo</p>
                 <div className="grid grid-cols-2 gap-2.5">
                   {SESSIONS.map(s => {
                     const meta = sessionMeta[s.id]
@@ -346,13 +353,15 @@ export default function MusvoraAIPanel() {
                 {/* Honestly pending — needs data MUSVORA does not collect yet */}
                 <p className="gv-eyebrow mt-7 mb-3">Pronto · requiere más datos</p>
                 <div className="flex flex-wrap gap-2">
+                  <PendingChip label="Tu Music DNA" />
+                  <PendingChip label="Discovery Emocional" />
                   <PendingChip label="Music Twin" />
                   <PendingChip label="Around Me" />
                   <PendingChip label="By Language" />
                 </div>
 
                 <p className="mt-5" style={{ fontSize: 'var(--gv-text-2xs)', color: 'var(--gv-text-faint)', lineHeight: 'var(--gv-leading-normal)' }}>
-                  Las sesiones se construyen solo con tu catálogo real (tempo y mood). MUSVORA AI organiza música — no la genera. Music Twin, Around Me y By Language llegarán cuando exista la señal real que necesitan.
+                  Los Sound Journeys se construyen solo con tu catálogo real (tempo y mood). MUSVORA AI organiza música — no la genera. Tu Music DNA, Discovery Emocional y el resto llegarán cuando exista la señal real que necesitan.
                 </p>
               </>
             ) : (

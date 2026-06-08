@@ -8,7 +8,15 @@ description: How the single app-wide AI entry point works and the honesty constr
 The single AI entry point is one full-screen panel (`ai/MusvoraAIPanel.tsx`), NOT a chatbot.
 It is opened from the CENTERED bottom-nav AI tab (see `nav-ai-destination.md`) — the old
 floating FAB is gone. Panel offers: Find Music (reuses GlobalSearch), Surprise Me (shuffle),
-Create Playlist by mood, and 7 context Sessions (Sleep/Study/Focus/Restaurant/Driving/Gym/Event).
+Create Playlist by mood, and the **Sound Journeys** grid (the session engine, now emotion+context).
+
+## Sound Journeys = the session engine (don't conflate the names)
+- Code identifiers stay `SessionId` / `SESSIONS` / `buildSession`; the USER-FACING concept is "Sound Journeys" (MUSVORA AI's signature). UI labels (Relax, Sunday Morning, Heartbreak Recovery, Focus Session, Road Trip, Night Drive, Need Energy…) differ from the code `id`s (sleep/sunday/heartbreak/focus/driving/night/gym…). Keep that mapping — labels are display copy, ids are persistence/logic.
+- `SESSION_ICON` is `Record<SessionId, ReactNode>`, so adding any new SessionId FORCES adding an icon (TS-enforced) — a good guardrail, not a bug.
+- Sound Journeys live behind `<FeatureLock feature="ai.advanced">` (Premium). Do NOT move them out of the lock without an explicit monetization decision.
+
+## "Music DNA" ambiguity (IMPORTANT)
+- The existing `/dna/:id` page (`pages/MusicDNA.tsx`) is a **per-song credits/DNA view** (producers, instruments, vocal chain) with STATIC data — it is NOT the personal listening-identity "Musical DNA" (genre %, listening patterns) from the master prompt. The personal one does NOT exist yet → it's an honest "Pronto" chip ("Tu Music DNA"). Never mark the per-song page as pending, and never claim the personal one exists.
 
 ## Honesty contract (non-negotiable — see replit.md AI rules)
 - Sessions are built ONLY from real song fields. In this catalogue **every song has `bpm` and `genre`; only ~6/39 have `mood`** — so selection keys on **tempo (bpm) + mood-as-bonus + favorites/history affinity + human_verified tie-break**. Genre is NOT used in scoring, so copy must say "tempo y mood", never claim genre curation.

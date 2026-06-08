@@ -20,6 +20,9 @@ export type SessionId =
   | 'driving'
   | 'gym'
   | 'event'
+  | 'heartbreak'
+  | 'night'
+  | 'sunday'
 
 type Order = 'asc' | 'desc' | 'arc'
 
@@ -38,15 +41,24 @@ interface SessionConfig {
   size: number
 }
 
-/** Ordered for display in the panel: calm → energetic. */
+/**
+ * Sound Journeys — MUSVORA AI's signature listening experiences.
+ *
+ * Each journey is an AI-curated queue built ONLY from the live catalogue (tempo,
+ * mood, plus the user's real favorites/history). Emotion + context journeys sit
+ * alongside the activity ones; ordered for display calm → energetic.
+ */
 export const SESSIONS: SessionConfig[] = [
-  { id: 'sleep',      label: 'Sleep',      tagline: 'Lo más suave de tu catálogo',      center: 90,  tightness: 1.2, moods: ['acoustic', 'emotional', 'sad', 'romantic', 'nostalgic'], order: 'asc',  size: 10 },
-  { id: 'study',      label: 'Study',      tagline: 'Tempo bajo para concentrarte',     center: 100, tightness: 1.0, moods: ['acoustic', 'emotional', 'nostalgic', 'cinematic'],         order: 'asc',  size: 12 },
-  { id: 'focus',      label: 'Focus',      tagline: 'Flujo constante, sin distracción',  center: 105, tightness: 1.0, moods: ['acoustic', 'cinematic', 'emotional'],                     order: 'asc',  size: 12 },
-  { id: 'restaurant', label: 'Restaurant', tagline: 'Ambiente elegante y romántico',     center: 112, tightness: 0.9, moods: ['romantic', 'late_night', 'acoustic', 'nostalgic'],        order: 'asc',  size: 14 },
-  { id: 'driving',    label: 'Driving',    tagline: 'Ritmo medio para la carretera',     center: 122, tightness: 0.9, moods: ['late_night', 'energetic', 'street', 'romantic'],         order: 'asc',  size: 14 },
-  { id: 'gym',        label: 'Gym',        tagline: 'Lo más enérgico, primero',          center: 132, tightness: 1.1, moods: ['energetic', 'street'],                                    order: 'desc', size: 12 },
-  { id: 'event',      label: 'Event',      tagline: 'Sube al pico y baja suave',          center: 115, tightness: 0.5, moods: [],                                                         order: 'arc',  size: 16 },
+  { id: 'sleep',      label: 'Relax',              tagline: 'Lo más suave de tu catálogo',       center: 90,  tightness: 1.2, moods: ['acoustic', 'emotional', 'sad', 'romantic', 'nostalgic'], order: 'asc',  size: 10 },
+  { id: 'sunday',     label: 'Sunday Morning',     tagline: 'Mañana lenta, café y calma',         center: 92,  tightness: 1.1, moods: ['acoustic', 'romantic', 'nostalgic', 'emotional'],       order: 'asc',  size: 12 },
+  { id: 'heartbreak', label: 'Heartbreak Recovery', tagline: 'Para sanar, a tu propio ritmo',      center: 96,  tightness: 1.0, moods: ['sad', 'emotional', 'amargue', 'romantic', 'nostalgic'], order: 'asc',  size: 12 },
+  { id: 'study',      label: 'Study',              tagline: 'Tempo bajo para concentrarte',       center: 100, tightness: 1.0, moods: ['acoustic', 'emotional', 'nostalgic', 'cinematic'],       order: 'asc',  size: 12 },
+  { id: 'focus',      label: 'Focus Session',      tagline: 'Flujo constante, sin distracción',   center: 105, tightness: 1.0, moods: ['acoustic', 'cinematic', 'emotional'],                   order: 'asc',  size: 12 },
+  { id: 'restaurant', label: 'Restaurant',         tagline: 'Ambiente elegante y romántico',      center: 112, tightness: 0.9, moods: ['romantic', 'late_night', 'acoustic', 'nostalgic'],      order: 'asc',  size: 14 },
+  { id: 'event',      label: 'Event',              tagline: 'Sube al pico y baja suave',           center: 115, tightness: 0.5, moods: [],                                                       order: 'arc',  size: 16 },
+  { id: 'night',      label: 'Night Drive',        tagline: 'Carretera de medianoche',            center: 120, tightness: 0.9, moods: ['late_night', 'romantic', 'street', 'emotional'],        order: 'asc',  size: 14 },
+  { id: 'driving',    label: 'Road Trip',          tagline: 'Ritmo medio para la carretera',      center: 122, tightness: 0.9, moods: ['late_night', 'energetic', 'street', 'romantic'],       order: 'asc',  size: 14 },
+  { id: 'gym',        label: 'Need Energy',        tagline: 'Lo más enérgico, primero',           center: 132, tightness: 1.1, moods: ['energetic', 'street'],                                  order: 'desc', size: 12 },
 ]
 
 export interface BuiltSession {
