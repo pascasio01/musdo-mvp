@@ -30,6 +30,10 @@ export interface SubscriptionView {
 
 const ENTITLED: SubscriptionStatus[] = ['active', 'trialing', 'past_due']
 
+/** Monotonic per-process suffix so each realtime channel gets a unique topic. */
+let realtimeChannelSeq = 0
+const realtimeNonce = () => `${Date.now().toString(36)}${(realtimeChannelSeq++).toString(36)}`
+
 /**
  * Reads the signed-in user's membership row from Supabase (RLS-scoped to self)
  * and keeps it fresh via realtime + an explicit refresh (used after returning
@@ -64,8 +68,16 @@ export function useSubscription(): SubscriptionView {
   // Realtime: reflect webhook-driven changes (trial end, upgrade, cancel) live.
   useEffect(() => {
     if (!user) return
+    // Supabase's RealtimeClient.channel(topic) RETURNS an existing channel when
+    // one with the same topic is still registered. If the effect re-runs (React
+    // StrictMode double-mount in dev, or a new `user` identity) before the prior
+    // channel finishes its async unsubscribe, a fixed topic would hand back the
+    // already-subscribed channel and `.on('postgres_changes', ...)` throws
+    // "cannot add postgres_changes callbacks after subscribe()". A per-instance
+    // unique topic guarantees a fresh channel every time, so listeners are always
+    // registered before subscribe(). Cleanup still removes it.
     const channel = supabase
-      .channel(`subscription:${user.id}`)
+      .channel(`subscription:${user.id}:${realtimeNonce()}`)
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'subscriptions', filter: `user_id=eq.${user.id}` },
