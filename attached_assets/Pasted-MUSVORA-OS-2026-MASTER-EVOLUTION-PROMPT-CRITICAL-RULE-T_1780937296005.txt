@@ -1,0 +1,674 @@
+MUSVORA OS 2026 — MASTER EVOLUTION PROMPT
+
+CRITICAL RULE
+
+This is NOT a redesign.
+
+This is NOT a prototype.
+
+This is NOT a concept.
+
+This is NOT a demo.
+
+This is a production-grade evolution of the existing MUSVORA platform.
+
+Preserve all existing functionality.
+
+Preserve all working integrations.
+
+Preserve navigation architecture.
+
+Preserve authentication.
+
+Preserve subscriptions.
+
+Preserve Supabase.
+
+Preserve Stripe.
+
+Preserve existing AI functionality.
+
+Add improvements incrementally without breaking anything.
+
+━━━━━━━━━━━━━━━━━━━━
+
+PRODUCT IDENTITY
+
+MUSVORA is not a streaming application.
+
+MUSVORA is a Music Operating System.
+
+Spotify helps users listen.
+
+Apple Music helps users listen.
+
+MUSVORA helps users:
+
+Listen
+Discover
+Organize
+Create
+Protect
+Verify
+License
+Monetize
+Manage
+
+Music.
+
+━━━━━━━━━━━━━━━━━━━━
+
+DESIGN PRINCIPLE
+
+Powerful inside.
+
+Simple outside.
+
+The user must understand the application within 30 seconds.
+
+If a feature requires explanation:
+
+Simplify it.
+
+Move it to advanced settings.
+
+Hide complexity.
+
+━━━━━━━━━━━━━━━━━━━━
+
+OFFICIAL NAVIGATION
+
+Home
+
+Search
+
+AI
+
+Universe
+
+Vault
+
+Requirements:
+
+* Fixed navigation
+* Safe area support
+* Dynamic Island support
+* Android support
+* No overlap
+* No floating navigation elements
+* AI centered
+* Consistent spacing
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA AI CORE
+
+The AI is not a feature.
+
+The AI is the center of the operating system.
+
+Capabilities:
+
+Discover music
+
+Build playlists
+
+Create Sound Journeys
+
+Recommend artists
+
+Recommend moods
+
+Recommend sessions
+
+Analyze Music DNA
+
+Generate listening experiences
+
+Quick Actions:
+
+Discover Something New
+
+Need Energy
+
+Focus Mode
+
+Night Drive
+
+Heartbreak Recovery
+
+Relax
+
+Road Trip
+
+Surprise Me
+
+━━━━━━━━━━━━━━━━━━━━
+
+DISCOVERY ENGINE
+
+Prioritize:
+
+Emotion
+
+Context
+
+Energy
+
+Mood
+
+Behavior
+
+Before genre.
+
+Sections:
+
+For You
+
+Your Next Obsession
+
+Based On Your Week
+
+Discover Something New
+
+Emotional Discovery
+
+Heartbroken
+
+Romantic
+
+Midnight
+
+Nostalgia
+
+Focus
+
+Motivation
+
+Energy
+
+Relax
+
+Context Discovery
+
+Driving
+
+Working
+
+Cooking
+
+Cleaning
+
+Gym
+
+Travel
+
+Sunday Morning
+
+Rain And Coffee
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSICAL DNA™
+
+Create a persistent identity system.
+
+Analyze:
+
+Genres
+
+Artists
+
+Energy preferences
+
+Listening patterns
+
+Time preferences
+
+Session behavior
+
+Mood affinity
+
+Examples:
+
+78% Bachata
+
+12% Salsa
+
+6% Bolero
+
+4% Other
+
+Music DNA must evolve automatically.
+
+━━━━━━━━━━━━━━━━━━━━
+
+SOUND JOURNEYS™
+
+AI-generated listening experiences.
+
+Examples:
+
+Midnight Drive
+
+Heartbreak Recovery
+
+Sunday Morning
+
+Ocean Escape
+
+Dominican Sunset
+
+Focus Session
+
+After Work Reset
+
+Road Trip
+
+Collections remain user-created.
+
+Sound Journeys remain AI-created.
+
+Never merge both concepts.
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA DRIVE™
+
+Transform the phone into a smart music hub.
+
+Features:
+
+Car Mode
+
+Bluetooth
+
+Android Auto ready
+
+CarPlay ready
+
+Smart Folders
+
+Offline Playback
+
+Automatic Continuation
+
+DJ Auto Flow
+
+Mood-based playback
+
+Energy curves
+
+Driving-safe interface
+
+Large controls
+
+Minimal distraction
+
+━━━━━━━━━━━━━━━━━━━━
+
+CREATOR VAULT™
+
+Professional creator environment.
+
+Store:
+
+Demos
+
+Masters
+
+Stems
+
+Lyrics
+
+Passports
+
+Licenses
+
+Contracts
+
+Publishing Assets
+
+Secure.
+
+Private.
+
+Professional.
+
+━━━━━━━━━━━━━━━━━━━━
+
+CREATOR STUDIO™
+
+Professional workspace.
+
+Features:
+
+Upload
+
+Distribution
+
+Licensing
+
+Metadata
+
+Publishing
+
+Analytics
+
+Royalty Dashboard
+
+Copyright Dashboard
+
+Revenue Tracking
+
+Catalog Health
+
+Professional UI.
+
+Separate from consumer experience.
+
+━━━━━━━━━━━━━━━━━━━━
+
+DARK LUXURY GLASS SYSTEM
+
+Do not copy Spotify.
+
+Do not copy Apple Music.
+
+Create MUSVORA identity.
+
+Theme 1:
+
+MIDNIGHT GLASS™
+
+Official theme.
+
+Colors:
+
+#07090C
+
+#0B0D12
+
+#10141B
+
+#182033
+
+Theme 2:
+
+OCEAN GLASS™
+
+Colors:
+
+#0D1726
+
+#132238
+
+#1B2F4C
+
+#243A5A
+
+Accents:
+
+#4DA3FF
+
+#6EB8FF
+
+Theme 3:
+
+IVORY GLASS™
+
+Colors:
+
+#F8F6F2
+
+#F3EFE8
+
+#ECE6DC
+
+#E4DCCD
+
+━━━━━━━━━━━━━━━━━━━━
+
+GLASS SYSTEM
+
+Use premium subtle glass.
+
+Never exaggerated.
+
+backdrop-filter: blur(30px)
+
+background:
+rgba(15,18,25,.55)
+
+border:
+1px solid rgba(255,255,255,.08)
+
+Soft shadows.
+
+Soft reflections.
+
+Deep layering.
+
+No neon.
+
+No gaming effects.
+
+No visual noise.
+
+━━━━━━━━━━━━━━━━━━━━
+
+MUSVORA BRAND SYSTEM
+
+Create a completely original brand identity.
+
+Requirements:
+
+Unique logo system.
+
+Unique iconography.
+
+Unique visual language.
+
+Unique loading animations.
+
+Unique transitions.
+
+Unique empty states.
+
+Unique AI visual identity.
+
+Avoid similarities to:
+
+Spotify
+
+Apple Music
+
+YouTube Music
+
+SoundCloud
+
+Audiomack
+
+Deezer
+
+Tidal
+
+Logo must feel:
+
+Elegant
+
+Timeless
+
+Premium
+
+Recognizable
+
+Scalable
+
+Memorable
+
+Works on:
+
+App icon
+
+Mobile
+
+Desktop
+
+Marketing
+
+Social media
+
+Creator tools
+
+Splash screen
+
+Favicon
+
+━━━━━━━━━━━━━━━━━━━━
+
+ACTIVITY CENTER
+
+Replace empty notifications.
+
+Display:
+
+New releases
+
+Artist activity
+
+Playlist activity
+
+Follower activity
+
+Nearby events
+
+AI insights
+
+Listening insights
+
+Never show dead screens.
+
+━━━━━━━━━━━━━━━━━━━━
+
+PERFORMANCE
+
+Production quality only.
+
+Requirements:
+
+60 FPS minimum
+
+120 FPS preferred
+
+Lazy loading
+
+Code splitting
+
+GPU acceleration
+
+Fast search
+
+Fast navigation
+
+Fast startup
+
+Target:
+
+Feels faster than Spotify.
+
+━━━━━━━━━━━━━━━━━━━━
+
+SEARCH
+
+Single intelligent search.
+
+Search:
+
+Artists
+
+Songs
+
+Albums
+
+Lyrics
+
+Moods
+
+Contexts
+
+Languages
+
+BPM
+
+Creators
+
+Licenses
+
+Passports
+
+Human Verified
+
+Results must feel instant.
+
+━━━━━━━━━━━━━━━━━━━━
+
+HUMAN VERIFIED™
+
+Verification layer.
+
+Human Verified Artist
+
+Human Verified Song
+
+Verified Composer
+
+Verified Producer
+
+Verified Catalog
+
+Verified Identity
+
+Verified Ownership
+
+Verified Publishing
+
+━━━━━━━━━━━━━━━━━━━━
+
+FINAL EXPERIENCE
+
+When users open MUSVORA they should feel:
+
+This is not another music app.
+
+This is my personal music operating system.
+
+Everything must be:
+
+Elegant.
+
+Modern.
+
+Human.
+
+Simple.
+
+Fast.
+
+Beautiful.
+
+Premium.
+
+Production-ready.
+
+No placeholders.
+
+No prototypes.
+
+No demos.
+
+No generic components.
+
+No copied patterns.
+
+Everything must reinforce a unique MUSVORA identity.
