@@ -56,7 +56,7 @@ export default function Settings() {
         <h1 className="text-white font-black text-3xl mb-8">Settings</h1>
 
         <div className="space-y-4">
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Palette size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Appearance</p>
@@ -71,7 +71,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Bell size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Notifications</p>
@@ -82,7 +82,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Eye size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Privacy</p>
@@ -94,7 +94,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Shield size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Privacy & Security</p>
@@ -163,7 +163,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Headphones size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Audio</p>
@@ -178,7 +178,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: 'var(--card, rgba(255,255,255,0.04))' }}>
+          <div className="rounded-2xl overflow-hidden glass-luxe">
             <div className="px-5 pt-5 pb-1 flex items-center gap-2">
               <Mic2 size={14} className="text-zinc-600" />
               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Creator</p>

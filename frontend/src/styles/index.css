@@ -17,7 +17,7 @@
     --border: rgba(255,255,255,0.08);
     --border-soft: rgba(255,255,255,0.06);
     --glow-color: rgba(124,58,237,0.14);
-    --blur: 24px;
+    --blur: 30px;
     --radius: 18px;
     --speed: 300ms;
     --font-scale: 1;
@@ -46,6 +46,25 @@
     --glass-bg-strong: rgba(255,255,255,0.12);
     --glass-border: rgba(255,255,255,0.08);
     --glass-subtle: rgba(255,255,255,0.025);
+
+    /* ── Dark Luxury Glass System 2026 ──────────────────────────────
+       Premium frosted glass: deep blur, internal reflection (top highlight),
+       soft layered shadows and a faint inner ring for layered depth.
+       Used app-wide via .glass-luxe and the governance .gv-glass twin. */
+    --blur-luxe: 34px;
+    --glass-luxe-bg: rgba(255,255,255,0.05);
+    --glass-luxe-bg-strong: rgba(255,255,255,0.08);
+    --glass-luxe-border: rgba(255,255,255,0.10);
+    --glass-highlight: rgba(255,255,255,0.12);   /* top internal reflection */
+    --glass-sheen: rgba(255,255,255,0.06);       /* diagonal reflection */
+    --glass-inner-ring: rgba(255,255,255,0.05);
+    --glass-shadow: 0 12px 40px -16px rgba(0,0,0,0.75);
+    --glass-shadow-lg: 0 24px 60px -20px rgba(0,0,0,0.82);
+
+    /* Very subtle ambient background tints (Music OS depth) */
+    --ambient-1: rgba(124,58,237,0.10);   /* violet */
+    --ambient-2: rgba(37,99,235,0.08);    /* blue */
+    --ambient-3: rgba(212,175,55,0.045);  /* gold whisper */
 
     --overlay: rgba(0,0,0,0.72);
     --overlay-soft: rgba(0,0,0,0.45);
@@ -172,17 +191,45 @@
   /* Glass composable */
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(var(--blur, 24px));
-    -webkit-backdrop-filter: blur(var(--blur, 24px));
+    backdrop-filter: blur(var(--blur, 30px)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur, 30px)) saturate(140%);
     border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 0 var(--glass-highlight);
   }
 
   .glass-strong {
     background: var(--glass-bg-medium);
-    backdrop-filter: blur(var(--blur, 24px));
-    -webkit-backdrop-filter: blur(var(--blur, 24px));
+    backdrop-filter: blur(var(--blur, 30px)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur, 30px)) saturate(140%);
     border: 1px solid var(--glass-bg-strong);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-highlight);
   }
+
+  /* ── Dark Luxury Glass 2026 — premium frosted surface ───────────── */
+  .glass-luxe {
+    position: relative;
+    background: var(--glass-luxe-bg);
+    backdrop-filter: blur(var(--blur-luxe, 34px)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--blur-luxe, 34px)) saturate(150%);
+    border: 1px solid var(--glass-luxe-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-highlight), inset 0 0 0 1px var(--glass-inner-ring);
+    isolation: isolate;
+  }
+  .glass-luxe-strong { background: var(--glass-luxe-bg-strong); }
+  /* Internal reflection: a soft diagonal sheen + top light fall-off. */
+  .glass-luxe::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(180deg, var(--glass-sheen) 0%, transparent 38%),
+      linear-gradient(125deg, transparent 55%, var(--glass-sheen) 100%);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glass-luxe > * { position: relative; z-index: 1; }
 
   /* Aura */
   .aura-bg { background: var(--aura-primary, transparent); }
@@ -244,6 +291,16 @@
   50%       { transform: translateY(-6px); }
 }
 
+/* Ultra-subtle ambient drift for the Music-OS background depth layer. */
+@keyframes ambient-drift-a {
+  0%, 100% { transform: translate3d(-4%, -2%, 0) scale(1); opacity: 0.9; }
+  50%       { transform: translate3d(4%, 3%, 0) scale(1.12); opacity: 1; }
+}
+@keyframes ambient-drift-b {
+  0%, 100% { transform: translate3d(3%, 2%, 0) scale(1.05); opacity: 0.8; }
+  50%       { transform: translate3d(-3%, -3%, 0) scale(1); opacity: 1; }
+}
+
 @keyframes shimmer {
   from { background-position: -200% center; }
   to   { background-position: 200% center; }
@@ -293,6 +350,19 @@ html[data-color-scheme="light"] .hover\:text-zinc-300:hover {
 
 html[data-color-scheme="light"] .hover\:text-zinc-400:hover {
   color: var(--text-secondary);
+}
+
+/* ── Glass-luxe light-theme legibility overrides ──
+   The luxe/legacy glass tokens are tuned for dark mode (white-on-dark). In light
+   theme they would render near-invisible, so re-tune them to a frosted-white panel
+   with a dark hairline + soft light-mode shadow. */
+html[data-color-scheme="light"] {
+  --glass-luxe-bg: rgba(255,255,255,0.66);
+  --glass-luxe-bg-strong: rgba(255,255,255,0.82);
+  --glass-luxe-border: rgba(0,0,0,0.08);
+  --glass-highlight: rgba(255,255,255,0.85);
+  --glass-shadow: 0 12px 40px -16px rgba(15,23,42,0.16);
+  --glass-shadow-lg: 0 24px 60px -20px rgba(15,23,42,0.20);
 }
 
 /* ── Background adaptations ── */

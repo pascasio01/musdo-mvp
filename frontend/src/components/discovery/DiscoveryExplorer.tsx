@@ -58,11 +58,13 @@ function LensCard({ lens, onPlay }: { lens: BuiltLens; onPlay: (song: Song, queu
       onClick={() => lens.tracks[0] && onPlay(lens.tracks[0], lens.tracks)}
       className="gv-focusable group relative overflow-hidden text-left active:scale-[0.98] transition-transform"
       style={{
-        background: 'var(--gv-surface)',
-        border: '1px solid var(--gv-border)',
+        background: 'var(--gv-glass-bg)',
+        backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        border: '1px solid var(--gv-glass-border)',
         borderRadius: 'var(--gv-radius-lg)',
         padding: 'var(--gv-space-4)',
-        boxShadow: 'var(--gv-shadow-sm)',
+        boxShadow: 'var(--gv-shadow-md), inset 0 1px 0 0 var(--gv-glass-highlight)',
         minHeight: 124,
       }}
       aria-label={`${lens.label} — ${metaOf(lens)}. ${lens.blurb}`}

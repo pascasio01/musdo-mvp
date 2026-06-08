@@ -22,6 +22,45 @@ export default function AppShell({ children }: AppShellProps) {
       className="min-h-screen relative overflow-hidden"
       style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
     >
+      {/* Dark Luxury ambient depth — always-on, ultra-subtle Music-OS background.
+          Two soft radial fields drift slowly behind all content (motion gated by
+          reduce-motion + ambientAnimation), giving layered depth under the glass. */}
+      <div className="fixed inset-0 pointer-events-none -z-0" aria-hidden>
+        <div
+          className="absolute -top-[20%] -right-[15%] w-[520px] h-[520px] rounded-full will-change-transform"
+          style={{
+            background: 'radial-gradient(circle at center, var(--ambient-1) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation:
+              settings.ambientAnimation && !settings.reduceMotion
+                ? 'ambient-drift-a 22s ease-in-out infinite'
+                : 'none',
+          }}
+        />
+        <div
+          className="absolute top-[35%] -left-[20%] w-[460px] h-[460px] rounded-full will-change-transform"
+          style={{
+            background: 'radial-gradient(circle at center, var(--ambient-2) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation:
+              settings.ambientAnimation && !settings.reduceMotion
+                ? 'ambient-drift-b 26s ease-in-out infinite'
+                : 'none',
+          }}
+        />
+        <div
+          className="absolute bottom-[-10%] right-[5%] w-[380px] h-[380px] rounded-full will-change-transform"
+          style={{
+            background: 'radial-gradient(circle at center, var(--ambient-3) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+            animation:
+              settings.ambientAnimation && !settings.reduceMotion
+                ? 'ambient-drift-a 30s ease-in-out infinite 4s'
+                : 'none',
+          }}
+        />
+      </div>
+
       {auraSettings.enabled && !settings.reduceMotion && (
         <>
           <div

@@ -101,8 +101,7 @@ export default function Vault() {
               return (
                 <div
                   key={demo.id}
-                  className="rounded-2xl border border-theme p-4"
-                  style={{ background: 'var(--glass-bg)' }}
+                  className="rounded-2xl border border-theme p-4 glass-luxe"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -150,8 +149,7 @@ export default function Vault() {
             {['Midnight Bachata', 'Broken Halo', 'Noches Sin Ti', 'Salgo a la Calle', 'Sabor a Miel', 'Tu Recuerdo', 'Lluvia de Amor'].map((title, i) => (
               <div
                 key={title}
-                className="rounded-2xl border border-theme p-4 flex items-center gap-3"
-                style={{ background: 'var(--glass-bg)' }}
+                className="rounded-2xl border border-theme p-4 flex items-center gap-3 glass-luxe"
               >
                 <div
                   className="w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0"
@@ -182,8 +180,7 @@ export default function Vault() {
             {['Midnight Bachata', 'Broken Halo', 'Salgo a la Calle', 'Sabor a Miel', 'Noches Sin Ti'].map((title, i) => (
               <div
                 key={title}
-                className="rounded-2xl border border-theme p-4 flex items-center gap-3 cursor-pointer transition-colors"
-                style={{ background: 'var(--glass-bg)' }}
+                className="rounded-2xl border border-theme p-4 flex items-center gap-3 cursor-pointer transition-colors glass-luxe"
                 onClick={() => navigate(`/passport/${i + 1}`)}
                 role="button"
                 tabIndex={0}

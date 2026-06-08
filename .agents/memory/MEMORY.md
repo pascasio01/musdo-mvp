@@ -1,5 +1,6 @@
 - [Auth OAuth setup](auth-oauth-setup.md) — Google/Apple use signInWithOAuth→/auth/callback; enabling a provider + redirect URLs are Supabase-dashboard config, NOT code.
 - [Theme system](theme-system.md) — themes inject inline CSS vars on <html>; vars omitted by the next theme leak, so re-assert or fully define them; 'system' resolves via matchMedia.
+- [Glass system](glass-system.md) — luxe/legacy glass = translucent + backdrop blur + inset-highlight reflection; NEW global glass tokens MUST get a light-mode override or they vanish in light theme.
 - [Professional profile](professional-profile.md) — governance profile at /profile/:username; client-stored profile data with private fields MUST use per-user localStorage key; honest verification/metrics only.
 - [MUSVORA player surfaces](player-surfaces.md) — cinematic /player/:id (legacy tokens, sync mock) vs governance /review/:id (DS, async Vault); don't conflate.
 - [Player transport](player-transport.md) — auto-advance centralized via endRef/handleEnd (real 'ended' + sim share one path); pure nextIndex(); shuffle = continuous, repeat-one replays in handleEnd.

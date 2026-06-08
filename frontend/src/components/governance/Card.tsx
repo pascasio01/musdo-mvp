@@ -20,9 +20,9 @@ const paddingMap = {
 }
 
 const elevationMap = {
-  flat: 'none',
-  raised: 'var(--gv-shadow-sm)',
-  floating: 'var(--gv-shadow-md)',
+  flat: 'inset 0 1px 0 0 var(--gv-glass-highlight)',
+  raised: 'var(--gv-shadow-sm), inset 0 1px 0 0 var(--gv-glass-highlight)',
+  floating: 'var(--gv-glass-shadow), inset 0 1px 0 0 var(--gv-glass-highlight)',
 }
 
 const accentMap = {
@@ -49,8 +49,10 @@ export function Card({
     <div
       className={`relative ${interactive ? 'gv-focusable cursor-pointer transition-all' : ''} ${className}`}
       style={{
-        background: 'var(--gv-surface)',
-        border: '1px solid var(--gv-border)',
+        background: 'var(--gv-glass-bg)',
+        backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        border: '1px solid var(--gv-glass-border)',
         borderRadius: 'var(--gv-radius-xl)',
         padding: paddingMap[padding],
         boxShadow: elevationMap[elevation],

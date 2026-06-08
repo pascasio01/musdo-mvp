@@ -175,6 +175,53 @@ body.reduce-motion [data-ds='governance'] * {
   box-shadow: 0 0 0 2px var(--gv-bg), 0 0 0 4px var(--gv-ring);
 }
 
+/* ── Dark Luxury Glass 2026 (governance twin) ─────────────────────────
+   Premium frosted surface for governance modules: translucent navy-tinted
+   glass, deep blur, internal reflection + soft layered shadow. Pairs with
+   the legacy .glass-luxe so the whole app shares one glass language. */
+[data-ds='governance'] {
+  --gv-glass-bg: rgba(255, 255, 255, 0.045);
+  --gv-glass-bg-strong: rgba(255, 255, 255, 0.07);
+  --gv-glass-border: rgba(255, 255, 255, 0.10);
+  --gv-glass-highlight: rgba(255, 255, 255, 0.10);
+  --gv-glass-sheen: rgba(255, 255, 255, 0.05);
+  --gv-glass-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.75);
+  --gv-blur-luxe: 34px;
+}
+[data-ds='governance'] .gv-glass {
+  position: relative;
+  background: var(--gv-glass-bg);
+  backdrop-filter: blur(var(--gv-blur-luxe)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--gv-blur-luxe)) saturate(150%);
+  border: 1px solid var(--gv-glass-border);
+  box-shadow: var(--gv-glass-shadow), inset 0 1px 0 0 var(--gv-glass-highlight);
+  isolation: isolate;
+}
+[data-ds='governance'] .gv-glass-strong { background: var(--gv-glass-bg-strong); }
+[data-ds='governance'] .gv-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, var(--gv-glass-sheen) 0%, transparent 40%),
+    linear-gradient(125deg, transparent 58%, var(--gv-glass-sheen) 100%);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-ds='governance'] .gv-glass > * { position: relative; z-index: 1; }
+
+/* Light Professional: glass reads as bright frosted white, not dark. */
+html[data-color-scheme='light'] [data-ds='governance'] {
+  --gv-glass-bg: rgba(255, 255, 255, 0.62);
+  --gv-glass-bg-strong: rgba(255, 255, 255, 0.78);
+  --gv-glass-border: rgba(15, 23, 42, 0.10);
+  --gv-glass-highlight: rgba(255, 255, 255, 0.65);
+  --gv-glass-sheen: rgba(255, 255, 255, 0.45);
+  --gv-glass-shadow: 0 12px 40px -18px rgba(15, 23, 42, 0.22);
+}
+
 /* ============================================================================
    THEME-AWARE TOKENS (Phase 1 theme system)
    ----------------------------------------------------------------------------

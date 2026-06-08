@@ -62,7 +62,9 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-theme text-white flex flex-col px-6 py-10 max-w-md mx-auto">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] right-[-20%] w-[400px] h-[400px] rounded-full bg-violet-900/15 blur-[100px]" />
+        <div className="absolute top-[-20%] right-[-20%] w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: 'var(--ambient-1)' }} />
+        <div className="absolute bottom-[-15%] left-[-15%] w-[360px] h-[360px] rounded-full blur-[110px]" style={{ background: 'var(--ambient-2)' }} />
+        <div className="absolute top-[40%] left-[20%] w-[260px] h-[260px] rounded-full blur-[120px]" style={{ background: 'var(--ambient-3)' }} />
       </div>
 
       <div className="relative">
@@ -90,7 +92,7 @@ export default function Login() {
               onChange={e => setEmail(e.target.value)}
               placeholder="you@email.com"
               required
-              className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 focus:bg-white/8 transition-all"
+              className="w-full p-4 rounded-2xl bg-white/5 backdrop-blur-2xl border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 focus:bg-white/8 transition-all"
             />
           </div>
 
@@ -108,7 +110,7 @@ export default function Login() {
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full p-4 pr-12 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 focus:bg-white/8 transition-all"
+                className="w-full p-4 pr-12 rounded-2xl bg-white/5 backdrop-blur-2xl border border-white/10 text-white placeholder-zinc-700 outline-none focus:border-white/25 focus:bg-white/8 transition-all"
               />
               <button
                 type="button"

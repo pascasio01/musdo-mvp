@@ -308,10 +308,13 @@ export default function MusvoraAIPanel() {
                         onClick={() => onSession(s.id)}
                         className="gv-focusable text-left active:opacity-70 transition-opacity"
                         style={{
-                          background: 'var(--gv-surface)',
-                          border: '1px solid var(--gv-border)',
+                          background: 'var(--gv-glass-bg)',
+                          backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+                          WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+                          border: '1px solid var(--gv-glass-border)',
                           borderRadius: 'var(--gv-radius-lg)',
                           padding: 'var(--gv-space-4)',
+                          boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)',
                         }}
                       >
                         <span className="grid place-items-center mb-2.5" style={{ width: 40, height: 40, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }} aria-hidden>
@@ -362,10 +365,13 @@ export default function MusvoraAIPanel() {
                         onClick={() => onMood(m.mood, m.label)}
                         className="gv-focusable w-full flex items-center gap-3 text-left active:opacity-70 transition-opacity"
                         style={{
-                          background: 'var(--gv-surface)',
-                          border: '1px solid var(--gv-border)',
+                          background: 'var(--gv-glass-bg)',
+                          backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+                          WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+                          border: '1px solid var(--gv-glass-border)',
                           borderRadius: 'var(--gv-radius-lg)',
                           padding: 'var(--gv-space-4)',
+                          boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)',
                         }}
                       >
                         <span className="grid place-items-center flex-shrink-0" style={{ width: 38, height: 38, borderRadius: 'var(--gv-radius-md)', background: 'var(--gv-surface-2)', color: 'var(--gv-gold)' }} aria-hidden>
@@ -400,11 +406,14 @@ function QuickAction({ icon, label, onClick, accent, locked }: { icon: React.Rea
       onClick={onClick}
       className="gv-focusable relative flex flex-col items-center justify-center gap-2 active:scale-95 transition-transform"
       style={{
-        background: accent ? 'color-mix(in srgb, var(--gv-gold) 12%, var(--gv-surface))' : 'var(--gv-surface)',
-        border: `1px solid ${accent ? 'color-mix(in srgb, var(--gv-gold) 40%, var(--gv-border))' : 'var(--gv-border)'}`,
+        background: accent ? 'color-mix(in srgb, var(--gv-gold) 12%, var(--gv-glass-bg))' : 'var(--gv-glass-bg)',
+        backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        border: `1px solid ${accent ? 'color-mix(in srgb, var(--gv-gold) 40%, var(--gv-glass-border))' : 'var(--gv-glass-border)'}`,
         borderRadius: 'var(--gv-radius-lg)',
         padding: 'var(--gv-space-4) var(--gv-space-2)',
         minHeight: 84,
+        boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)',
         color: accent ? 'var(--gv-gold)' : 'var(--gv-text-secondary)',
       }}
     >
@@ -430,10 +439,13 @@ function AdvAction({ icon, label, sub, onClick }: { icon: React.ReactNode; label
       onClick={onClick}
       className="gv-focusable flex items-center gap-3 text-left active:opacity-70 transition-opacity"
       style={{
-        background: 'var(--gv-surface)',
-        border: '1px solid var(--gv-border)',
+        background: 'var(--gv-glass-bg)',
+        backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+        border: '1px solid var(--gv-glass-border)',
         borderRadius: 'var(--gv-radius-lg)',
         padding: 'var(--gv-space-3)',
+        boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)',
       }}
     >
       <span

@@ -71,7 +71,7 @@ export function GlassCard({ children, className = '', onClick, hover = false, pa
     <div
       onClick={onClick}
       className={`rounded-[var(--radius,18px)] border border-theme transition-colors duration-[var(--speed,300ms)] ${hover ? 'hover:bg-glass-medium cursor-pointer' : ''} ${padding ? 'p-5' : ''} ${className}`}
-      style={{ background: 'var(--glass-bg)' }}
+      style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(var(--blur, 30px)) saturate(140%)', WebkitBackdropFilter: 'blur(var(--blur, 30px)) saturate(140%)', boxShadow: 'inset 0 1px 0 0 var(--glass-highlight)' }}
     >
       {children}
     </div>

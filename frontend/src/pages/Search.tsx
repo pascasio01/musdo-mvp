@@ -137,9 +137,11 @@ export default function Search() {
             style={{
               height: 52,
               borderRadius: 'var(--gv-radius-lg)',
-              background: 'var(--gv-surface)',
-              border: '1px solid var(--gv-border)',
-              boxShadow: 'var(--gv-shadow-md)',
+              background: 'var(--gv-glass-bg)',
+              backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+              WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)',
+              border: '1px solid var(--gv-glass-border)',
+              boxShadow: 'var(--gv-shadow-md), inset 0 1px 0 0 var(--gv-glass-highlight)',
             }}
           >
             <SearchIcon size={18} style={{ color: 'var(--gv-text-muted)' }} aria-hidden />
@@ -257,7 +259,7 @@ export default function Search() {
                     type="button"
                     onClick={onTopResult}
                     className="gv-focusable w-full flex items-center gap-3.5 text-left active:scale-[0.99] transition-transform"
-                    style={{ background: 'var(--gv-surface)', border: '1px solid var(--gv-border)', borderRadius: 'var(--gv-radius-lg)', padding: 'var(--gv-space-4)' }}
+                    style={{ background: 'var(--gv-glass-bg)', backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)', WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)', border: '1px solid var(--gv-glass-border)', borderRadius: 'var(--gv-radius-lg)', padding: 'var(--gv-space-4)', boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)' }}
                   >
                     {results.topResult.kind === 'song' ? (
                       <>
@@ -359,7 +361,7 @@ export default function Search() {
             <div className="flex flex-col gap-6 pt-1">
               <section>
                 <p className="gv-eyebrow px-1 mb-2">Not yet available</p>
-                <div style={{ background: 'var(--gv-surface)', border: '1px solid var(--gv-border)', borderRadius: 'var(--gv-radius-lg)', padding: 'var(--gv-space-5)' }}>
+                <div style={{ background: 'var(--gv-glass-bg)', backdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)', WebkitBackdropFilter: 'blur(var(--gv-blur-luxe, 34px)) saturate(150%)', border: '1px solid var(--gv-glass-border)', borderRadius: 'var(--gv-radius-lg)', padding: 'var(--gv-space-5)', boxShadow: 'inset 0 1px 0 0 var(--gv-glass-highlight)' }}>
                   <p style={{ fontSize: 'var(--gv-text-sm)', color: 'var(--gv-text)', fontWeight: 600 }}>
                     “{q}” no está disponible para reproducción todavía
                   </p>
