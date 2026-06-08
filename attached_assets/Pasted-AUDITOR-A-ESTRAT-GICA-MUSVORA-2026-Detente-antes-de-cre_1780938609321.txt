@@ -1,0 +1,181 @@
+AUDITORÍA ESTRATÉGICA MUSVORA 2026
+
+Detente antes de crear más módulos internos.
+
+Prioridad absoluta: experiencia real del usuario final.
+
+No quiero más pantallas técnicas, dashboards de sistema, ownership engine, security center ni módulos internos hasta completar el flujo completo del usuario.
+
+Necesito construir y probar los siguientes sistemas reales:
+
+1. USER EXPERIENCE COMPLETA
+
+Crear modo usuario real completamente funcional:
+
+• Home
+• Search
+• Library
+• Collections
+• Sound Journeys
+• Profile
+• Settings
+
+Todo navegable y conectado.
+
+2. USER PROFILE
+
+Crear perfil real del usuario con:
+
+• Foto
+• Nombre
+• Username
+• Seguidores
+• Siguiendo
+• Playlists
+• Colecciones
+• Historial
+• Descargas
+• Favoritos
+• Configuración rápida
+
+3. SETTINGS CENTER
+
+Agregar:
+
+• Español
+• English
+• Português
+• Français
+
+Cambio instantáneo de idioma.
+
+Temas:
+
+• Midnight Glass
+• Ocean Glass
+• Ivory Glass
+
+Opcional:
+• Auto Theme
+
+Configuración:
+
+• Calidad de audio
+• Descargas
+• Notificaciones
+• Privacidad
+• Car Mode
+• Accesibilidad
+
+4. MUSVORA DRIVE
+
+Nueva función estratégica.
+
+No copiar Spotify.
+
+Crear experiencia para:
+
+• DJs
+• Productores
+• Conductores
+• Coleccionistas
+
+Sección:
+
+MUSVORA DRIVE
+
+Mostrar automáticamente:
+
+• Nuevos Lanzamientos
+• Bachata Nueva
+• Salsa Nueva
+• Merengue Nuevo
+• Dembow Nuevo
+• Regional Mexicano
+• Top Latino
+• Top USA
+• Tendencias TikTok
+• Tendencias Locales
+
+Actualización automática.
+
+Sin necesidad de USB.
+
+La aplicación se convierte en el catálogo vivo.
+
+5. CHECKOUT REAL
+
+Resolver completamente:
+
+Could not open checkout
+
+Validar:
+
+• Stripe
+• Checkout Session
+• Productos
+• Suscripciones
+• Trial
+• Webhooks
+
+Necesito comprar como usuario real.
+
+6. TEST MODE
+
+Crear botón:
+
+ENTER AS USER
+
+Que permita probar la plataforma completa como usuario normal.
+
+Necesito verificar:
+
+• Reproducción
+• Búsqueda
+• Favoritos
+• Playlists
+• Colecciones
+• Sound Journeys
+• Perfil
+• Configuración
+• Checkout
+
+7. FOUNDER CENTER
+
+Mantener Founder Console pero agregar:
+
+• Usuarios activos
+• Nuevas canciones
+• Nuevas licencias
+• Ingresos
+• Tendencias
+• Recomendaciones IA
+
+8. AI EVOLUTION CENTER
+
+La IA debe analizar tendencias y sugerir mejoras.
+
+No inventar datos.
+
+Todo dato inexistente debe marcarse:
+
+Pending Integration
+
+Nunca generar métricas falsas.
+
+REGLAS
+
+• No romper nada existente.
+• No eliminar nada existente.
+• Evolución incremental.
+• Producción real.
+• Sin demos.
+• Sin placeholders.
+• Sin datos inventados.
+• Mobile first.
+• iOS quality.
+• Glass premium elegante.
+• Interfaz simple, rápida y adictiva.
+• Experiencia superior a Spotify en simplicidad y descubrimiento.
+
+Comienza por USER EXPERIENCE COMPLETA + PROFILE + SETTINGS + MUSVORA DRIVE.
