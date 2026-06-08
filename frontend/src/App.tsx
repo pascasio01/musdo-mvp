@@ -190,9 +190,21 @@ export default function App() {
               <Route path="/studio/:id" element={<Player />} />
               <Route path="/song/:id" element={<Player />} />
               <Route path="/passport/:id" element={<SongPassport />} />
-              <Route path="/market" element={<Market />} />
-              <Route path="/dna/:id" element={<MusicDNA />} />
-              <Route path="/story/:id" element={<SongStory />} />
+              <Route path="/market" element={
+                <RequirePlan feature="creator.marketplace">
+                  <Market />
+                </RequirePlan>
+              } />
+              <Route path="/dna/:id" element={
+                <RequirePlan feature="creator.insights">
+                  <MusicDNA />
+                </RequirePlan>
+              } />
+              <Route path="/story/:id" element={
+                <RequirePlan feature="creator.insights">
+                  <SongStory />
+                </RequirePlan>
+              } />
 
               {/* ── Governance Modules (MUSVORA Readiness, mock data) ── */}
               <Route path="/readiness" element={<Readiness />} />

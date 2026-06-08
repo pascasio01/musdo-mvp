@@ -12,6 +12,12 @@ surface asks `usePermissions().can(feature)` — never check plan/status strings
 **Why:** scattered plan checks drift and leak access. One matrix + one hook keeps the client
 and the DB ranking identical.
 
+Route gates live in `App.tsx` via `RequirePlan feature=...`: `offline`→/downloads,
+`creator.vault`→/vault, `creator.upload`→/upload, `creator.dashboard`→/dashboard,
+`creator.marketplace`→/market, `creator.insights`→/dna/:id + /story/:id (Music DNA & Song
+Story). Auth-required pages nest `RequirePlan` inside `ProtectedRoute` (login first, then plan);
+open viewing routes (market/dna/story) use `RequirePlan` standalone (anon → free → Paywall).
+
 ## Entitlement (effective plan)
 `usePermissions` derives effective plan from `useSubscription`, which treats ONLY
 `active | trialing | past_due` as entitled. So a trial counts as its paid plan, and an

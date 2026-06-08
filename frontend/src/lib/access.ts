@@ -47,6 +47,7 @@ export type Feature =
   | 'creator.dashboard'   // creator dashboard
   | 'creator.analytics'   // analytics & revenue tracking
   | 'creator.marketplace' // licensing marketplace (list assets)
+  | 'creator.insights'    // Music DNA & Song Story
 
 export const FEATURE_MATRIX: Record<Feature, Plan> = {
   'ai.advanced': 'premium',
@@ -58,6 +59,7 @@ export const FEATURE_MATRIX: Record<Feature, Plan> = {
   'creator.dashboard': 'creator_pro',
   'creator.analytics': 'creator_pro',
   'creator.marketplace': 'creator_pro',
+  'creator.insights': 'creator_pro',
 }
 
 export const FEATURE_LABEL: Record<Feature, string> = {
@@ -70,6 +72,7 @@ export const FEATURE_LABEL: Record<Feature, string> = {
   'creator.dashboard': 'Creator Dashboard',
   'creator.analytics': 'Analytics & Revenue',
   'creator.marketplace': 'Licensing Marketplace',
+  'creator.insights': 'Music DNA & Song Story',
 }
 
 export function requiredPlanFor(feature: Feature): Plan {
