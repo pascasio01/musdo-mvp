@@ -1,11 +1,21 @@
 import { useState } from 'react'
-import { ArrowLeft, Palette, Zap, Eye, Wind } from 'lucide-react'
+import { ArrowLeft, Palette, Zap, Eye, Wind, Lock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import AppShell from '../layouts/AppShell'
 import { useTheme, themes, type ThemeId } from '../lib/theme'
 import { useMusicAura, type AuraSettings } from '../lib/aura'
+import { usePermissions } from '../lib/usePermissions'
 import ListeningAtmospherePanel from '../components/personalization/ListeningAtmospherePanel'
 import EmotionalOnboarding from '../components/onboarding/EmotionalOnboarding'
+
+/**
+ * Themes that are part of MUSVORA Premium ("Advanced themes"). The base
+ * enterprise themes (Institutional, Pure OLED, Light Professional, System Auto)
+ * stay free; the expressive / cinematic palettes are a paid benefit.
+ */
+const PREMIUM_THEME_IDS = new Set<ThemeId>([
+  'oled', 'studio', 'bachata', 'neon', 'soft', 'midnight',
+])
 
 function SectionTitle({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
   return (
@@ -16,18 +26,30 @@ function SectionTitle({ icon: Icon, label }: { icon: React.ElementType; label: s
   )
 }
 
-function ToggleRow({ label, desc, value, onChange }: { label: string; desc?: string; value: boolean; onChange: (v: boolean) => void }) {
+function ToggleRow({ label, desc, value, onChange, locked, onLockedClick }: { label: string; desc?: string; value: boolean; onChange: (v: boolean) => void; locked?: boolean; onLockedClick?: () => void }) {
+  // When locked behind Premium, the toggle never activates — tapping it routes
+  // to the honest upsell instead, and the switch reads as Off.
+  const effectiveValue = locked ? false : value
   return (
     <div className="flex items-center justify-between py-3.5 border-b border-white/5 last:border-0">
       <div>
-        <p className="text-white text-sm font-medium">{label}</p>
+        <div className="flex items-center gap-2">
+          <p className="text-white text-sm font-medium">{label}</p>
+          {locked && (
+            <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide leading-none text-amber-300/90 bg-amber-400/10 border border-amber-400/30">
+              <Lock size={8} strokeWidth={2.5} aria-hidden />
+              Premium
+            </span>
+          )}
+        </div>
         {desc && <p className="text-zinc-600 text-xs mt-0.5">{desc}</p>}
       </div>
       <button
-        onClick={() => onChange(!value)}
-        className={`w-11 h-6 rounded-full relative transition-colors duration-200 ${value ? 'bg-white' : 'bg-white/15'}`}
+        onClick={() => (locked ? onLockedClick?.() : onChange(!value))}
+        aria-label={locked ? `${label} — Premium feature` : label}
+        className={`w-11 h-6 rounded-full relative transition-colors duration-200 ${effectiveValue ? 'bg-white' : 'bg-white/15'}`}
       >
-        <div className={`absolute top-1 w-4 h-4 rounded-full bg-theme transition-all duration-200 ${value ? 'left-6' : 'left-1'}`} />
+        <div className={`absolute top-1 w-4 h-4 rounded-full bg-theme transition-all duration-200 ${effectiveValue ? 'left-6' : 'left-1'}`} />
       </button>
     </div>
   )
@@ -67,7 +89,14 @@ export default function Appearance() {
   const navigate = useNavigate()
   const { settings, currentTheme, setTheme, updateSettings } = useTheme()
   const { auraSettings, updateAuraSettings } = useMusicAura()
+  const perms = usePermissions()
   const [onboardingOpen, setOnboardingOpen] = useState(false)
+
+  // Advanced themes + Cinematic Mode are Premium benefits. While entitlement
+  // loads we treat them as unlocked so a paying member never sees a flash of
+  // locks; once loaded, free users get the lock + honest upsell.
+  const premiumUnlocked = perms.loading || perms.can('player.premium')
+  const goToPricing = () => navigate('/pricing')
 
   return (
     <AppShell>
@@ -93,28 +122,44 @@ export default function Appearance() {
           <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
             <SectionTitle icon={Palette} label="Theme" />
             <div className="grid grid-cols-2 gap-3">
-              {themes.map(theme => (
-                <button
-                  key={theme.id}
-                  onClick={() => setTheme(theme.id as ThemeId)}
-                  className={`p-4 rounded-xl border text-left transition-all ${
-                    currentTheme.id === theme.id
-                      ? 'border-white/30 bg-white/8'
-                      : 'border-white/8 bg-white/3 hover:border-white/15'
-                  }`}
-                >
-                  <div className="flex gap-1.5 mb-3">
-                    {theme.preview.map((color, i) => (
-                      <div key={i} className="w-4 h-4 rounded-full border border-white/10" style={{ background: color }} />
-                    ))}
-                  </div>
-                  <p className="text-white text-xs font-bold">{theme.name}</p>
-                  <p className="text-zinc-600 text-[10px] mt-0.5 leading-tight">{theme.description}</p>
-                  {currentTheme.id === theme.id && (
-                    <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white" />
-                  )}
-                </button>
-              ))}
+              {themes.map(theme => {
+                const locked = !premiumUnlocked && PREMIUM_THEME_IDS.has(theme.id as ThemeId)
+                const isActive = currentTheme.id === theme.id
+                return (
+                  <button
+                    key={theme.id}
+                    onClick={() => (locked ? goToPricing() : setTheme(theme.id as ThemeId))}
+                    aria-label={locked ? `${theme.name} — Premium theme` : theme.name}
+                    className={`relative p-4 rounded-xl border text-left transition-all ${
+                      isActive
+                        ? 'border-white/30 bg-white/8'
+                        : 'border-white/8 bg-white/3 hover:border-white/15'
+                    }`}
+                  >
+                    {locked && (
+                      <span
+                        className="absolute top-2.5 right-2.5 grid place-items-center rounded-full text-amber-300/90 bg-amber-400/10 border border-amber-400/30"
+                        style={{ width: 18, height: 18 }}
+                        aria-hidden
+                      >
+                        <Lock size={9} strokeWidth={2.5} />
+                      </span>
+                    )}
+                    <div className={`flex gap-1.5 mb-3 ${locked ? 'opacity-60' : ''}`}>
+                      {theme.preview.map((color, i) => (
+                        <div key={i} className="w-4 h-4 rounded-full border border-white/10" style={{ background: color }} />
+                      ))}
+                    </div>
+                    <p className="text-white text-xs font-bold">{theme.name}</p>
+                    <p className="text-zinc-600 text-[10px] mt-0.5 leading-tight">
+                      {locked ? 'Premium theme' : theme.description}
+                    </p>
+                    {isActive && (
+                      <div className="mt-2 w-1.5 h-1.5 rounded-full bg-white" />
+                    )}
+                  </button>
+                )
+              })}
             </div>
           </div>
 
@@ -154,7 +199,7 @@ export default function Appearance() {
             <SectionTitle icon={Zap} label="Motion & Animation" />
             <TriPicker label="Motion Speed" options={['reduced', 'normal', 'expressive']} value={settings.motionIntensity} onChange={v => updateSettings({ motionIntensity: v as 'reduced' | 'normal' | 'expressive' })} />
             <ToggleRow label="Ambient Animation" desc="Subtle breathing effects on UI" value={settings.ambientAnimation} onChange={v => updateSettings({ ambientAnimation: v })} />
-            <ToggleRow label="Cinematic Mode" desc="Edge lighting and depth effects" value={settings.cinematicMode} onChange={v => updateSettings({ cinematicMode: v })} />
+            <ToggleRow label="Cinematic Mode" desc="Edge lighting and depth effects" value={settings.cinematicMode} onChange={v => updateSettings({ cinematicMode: v })} locked={!premiumUnlocked} onLockedClick={goToPricing} />
             <ToggleRow label="Reduce Motion" desc="Minimize all movement (accessibility)" value={settings.reduceMotion} onChange={v => updateSettings({ reduceMotion: v })} />
           </div>
 

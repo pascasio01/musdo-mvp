@@ -3,10 +3,12 @@ import {
   ChevronDown, Heart, Share2, MoreHorizontal, Play, Pause,
   SkipBack, SkipForward, Repeat, Repeat1, Shuffle, Shield, FileText,
   Disc3, Quote, ShieldCheck, ListMusic, Dna, BookOpen,
+  Lock, Headphones, Sparkles, ArrowRight,
 } from 'lucide-react'
 import { useEffect, useState, useMemo, useCallback, memo } from 'react'
 import { usePlayer } from '../lib/player'
 import { useLibrary } from '../lib/library'
+import { usePermissions } from '../lib/usePermissions'
 import { mockSongs } from '../data/mockData'
 import type { Song, LicensingStatus } from '../types'
 import VerificationBadge, { VerificationBadgeRow } from '../components/VerificationBadge'
@@ -68,6 +70,11 @@ export default function Player() {
   } = usePlayer()
 
   const { isFavorite, toggleFavorite } = useLibrary()
+  const perms = usePermissions()
+  // Deep Listening (SafeListen · Audio Tuning · Spatial) is a Premium benefit.
+  // While entitlement loads we treat it as unlocked to avoid flashing an upsell
+  // at a paying member; once loaded, free users see the honest upsell instead.
+  const deepListenUnlocked = perms.loading || perms.can('player.premium')
   const [tab, setTab] = useState<PlayerTab>('now')
   const [shareCopied, setShareCopied] = useState(false)
 
@@ -451,10 +458,18 @@ export default function Player() {
               </button>
             </div>
 
-            {/* Audio intelligence — collapsed by default, never overloads the player */}
-            <SafeListenPanel />
-            <AudioTuningPanel />
-            <SpatialListeningPanel />
+            {/* Audio intelligence — collapsed by default, never overloads the
+                player. Deep Listening is a Premium benefit; free users get an
+                honest upsell instead of locked-but-visible controls. */}
+            {deepListenUnlocked ? (
+              <>
+                <SafeListenPanel />
+                <AudioTuningPanel />
+                <SpatialListeningPanel />
+              </>
+            ) : (
+              <DeepListeningUpsell onUpgrade={() => navigate('/pricing')} />
+            )}
           </div>
         )}
 
@@ -498,6 +513,77 @@ function EmptyState({ children }: { children: React.ReactNode }) {
       style={{ background: 'var(--glass-bg)', borderColor: 'var(--border-soft)', color: 'var(--text-muted)' }}
     >
       {children}
+    </div>
+  )
+}
+
+/**
+ * Honest Premium upsell shown to free users in place of the Deep Listening
+ * panels (SafeListen · Audio Tuning · Spatial). Styled with legacy dark-luxury
+ * tokens so the cinematic player stays visually intact, and routes to the real
+ * pricing page where checkout lives — no fake "coming soon".
+ */
+function DeepListeningUpsell({ onUpgrade }: { onUpgrade: () => void }) {
+  const features = [
+    { icon: ShieldCheck, label: 'SafeListen — protect your hearing' },
+    { icon: ListMusic, label: 'Audio Tuning — Smart EQ & presets' },
+    { icon: Headphones, label: 'Spatial Listening — width & depth' },
+  ]
+  return (
+    <div
+      className="rounded-2xl border overflow-hidden mt-3"
+      style={{ background: 'var(--glass-bg)', borderColor: 'var(--border)' }}
+    >
+      <div className="px-5 py-5">
+        <div className="flex items-center gap-2 mb-3">
+          <span
+            className="grid place-items-center rounded-xl"
+            style={{
+              width: 34, height: 34,
+              background: 'color-mix(in srgb, var(--accent) 16%, transparent)',
+              color: 'var(--accent)',
+            }}
+            aria-hidden
+          >
+            <Lock size={15} strokeWidth={2} />
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: 'var(--accent)' }}>
+              Premium
+            </p>
+            <p className="text-sm font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
+              Deep Listening Mode
+            </p>
+          </div>
+        </div>
+        <p className="text-[12px] leading-snug mb-4" style={{ color: 'var(--text-muted)' }}>
+          The cinematic premium player — SafeListen, Audio Tuning and Spatial audio — is part of MUSVORA Premium.
+        </p>
+        <div className="space-y-2 mb-4">
+          {features.map(f => {
+            const Icon = f.icon
+            return (
+              <div key={f.label} className="flex items-center gap-2.5">
+                <Icon size={13} aria-hidden style={{ color: 'var(--text-secondary)' }} />
+                <span className="text-[12px]" style={{ color: 'var(--text-secondary)' }}>{f.label}</span>
+              </div>
+            )
+          })}
+        </div>
+        <button
+          onClick={onUpgrade}
+          className="w-full py-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-transform hover:scale-[1.01]"
+          style={{
+            background: 'var(--accent)',
+            color: 'var(--text-inverse)',
+            boxShadow: '0 8px 24px var(--accent-soft)',
+          }}
+        >
+          <Sparkles size={14} aria-hidden />
+          View plans
+          <ArrowRight size={14} aria-hidden />
+        </button>
+      </div>
     </div>
   )
 }

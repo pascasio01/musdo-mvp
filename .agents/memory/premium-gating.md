@@ -33,6 +33,18 @@ check(has_min_plan)` policies that AND on top of existing owner policies — gat
 while leaving SELECT/DELETE open. Guarded by `to_regclass` AND an existing-policy check so they
 never lock a table that has no owner policy (enabling RLS on a policy-less table denies everyone).
 
+## `player.premium` surfaces (in-page gates, all UX-only/client-side)
+- Player.tsx Deep Listening panels (SafeListen/Audio Tuning/Spatial) render only when
+  `can('player.premium')`; free users get an inline legacy-styled upsell → /pricing.
+- Appearance.tsx Cinematic Mode toggle + "advanced" themes are gated. Convention: BASE
+  enterprise themes (institutional, pure-oled, light-pro, system) stay FREE; expressive/
+  cinematic palettes (oled, studio, bachata, neon, soft, midnight) are Premium.
+- Pattern for both: treat `perms.loading` as UNLOCKED so paying members never flash a lock
+  (same as LockBadge/FeatureLock). Gating is at the CONTROL only — the theme layer
+  (theme.tsx) is entitlement-unaware, so a downgraded user's saved cinematic/theme *effect*
+  can still apply even though the toggle reads Off. Non-destructive by choice; no settings wiped.
+- "Ad-free" promise has NO ad surface in the app — nothing to gate yet.
+
 ## Known client-only limits (cannot be server-enforced as built)
 - **MUSVORA AI** is 100% client-side (`lib/musvoraAI.ts`) — no server to enforce; `ai.advanced`
   gate is UX only.
